@@ -1,0 +1,9 @@
+logs/*
+!logs/.gitkeep
+ssh/*
+!ssh/.gitkeep
+php/logs/*.log
+mariadb/data/*
+!mariadb/data/.gitkeep
+solr_data/*
+!solr_data/.gitkeep

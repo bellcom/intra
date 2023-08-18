@@ -1,0 +1,47 @@
+ {#  #}
+ {% set selectedPageBackgroundColor = content.field_page_banner_bgcolor['#items'].getString() %}
+ {% set selectedPageBannerLayout = content.field_page_banner_layout['#items'].getString() %}
+<div class="page-banner-wrapper" style="{% if paragraph.field_page_banner_bgimage.value %} background:linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({{ file_url(paragraph.field_page_banner_bgimage.entity.fileuri) }}); background-size: cover;
+{% elseif selectedPageBackgroundColor == 'black' %}background-color: #212529
+ {% elseif selectedPageBackgroundColor == 'green' %}background-color: #344E41
+{% elseif selectedPageBackgroundColor == 'sand' %} background-color: #DAD7CD;
+ {% elseif selectedPageBackgroundColor == 'blue' %}background-color: #22223B;
+{% elseif selectedPageBackgroundColor == 'grey' %}background-color: #343A40;{% endif %}">
+  <div class="page-banner__inner-wrapper {% if selectedPageBannerLayout == 'image_left' %}page-banner-image-left {% endif %}">
+    <div class="page-banner__content-wrapper">
+      {% if paragraph.field_page_banner_prefix is not empty %}
+      <div class="page-banner__prefix" data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true">
+        {% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'blue', 'green', 'grey']  %}
+        {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "white" } %}
+        {% else %}
+        {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "#344E41" } %}
+        {% endif %}
+        <span style="{% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'blue', 'green', 'grey'] %}color: white; {% endif %}">
+          {{ content.field_page_banner_prefix }}
+        </span>
+      </div>
+      {% endif %}
+      <h2 data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="500" style="{% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'blue', 'green', 'grey'] %}color: white; {% endif %}">{{ content.field_page_banner_heading }}</h2>
+      <div data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="1000" style="{% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'blue', 'green', 'grey'] %}color: white; {% endif %}" class="page-banner__body">
+        {{ content.field_page_banner_body }}
+      </div>
+      {% if paragraph.field_page_banner_link is not empty %}
+      <div class="page-banner__cta" data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="1500">
+        <a class="page-banner__cta_button" href="{{ paragraph.field_page_banner_link.0.url }}" style="{% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'grey', 'blue', 'green'] %}background-color: white; color: black; {% endif %}">
+          <span>{{ paragraph.field_page_banner_link.0.title }}</span>
+          {% if paragraph.field_page_banner_bgimage.value is not empty or selectedPageBackgroundColor in ['black', 'blue', 'green', 'grey'] %}
+          {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "black" } %}
+          {% else %}
+          {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "white" } %}
+          {% endif %}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% if paragraph.field_page_banner_image is not empty %}
+    <div data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="1500" class="page-banner__image" style="{% if selectedPageBannerLayout == 'image_left' %}justify-content: flex-start; {% endif %}">
+    <img src="{{ file_url(paragraph.field_page_banner_image.entity.fileuri) }}"  alt="{{ paragraph.field_page_banner_image.alt }}" title="{{ paragraph.field_page_banner_image.title }}" />
+    </div>
+    {% endif %}
+  </div>
+</div>

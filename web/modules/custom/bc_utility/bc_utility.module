@@ -1,0 +1,137 @@
+<?php
+
+use Drupal\bc_utility\Controller\OldContentNotity;
+use Drupal\bc_utility\Plugin\Widgets\LinkWidgetValidators;
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\search_api\Query\QueryInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Session\AccountInterface;
+
+
+
+/**
+ * @file
+ * Implementing custom hook functions
+ */
+function bc_utility_cron()
+{
+  $run = FALSE;
+  $last_start = \Drupal::keyValue('bc_utility_cron')->get('last_start');
+  if (empty($last_start)) {
+    $run = TRUE;
+  } else {
+    $oneMonthAgoTs = strtotime("-1 months");
+    // If last run was 30 day ago or more.
+    if ($last_start <= $oneMonthAgoTs) {
+      $run = TRUE;
+    }
+  }
+
+  if ($run) {
+    Drupal::logger('bc_utility')->info("bc utility cron run");
+    \Drupal::keyValue('bc_utility_cron')->set('last_start', time());
+    OldContentNotity::handler();
+  }
+}
+
+function bc_utility_mail($key, &$message, $params)
+{
+  if ($key === 'old_article')
+  {
+    if (isset($params['headers']))
+    {
+      $message['headers'] = array_merge($message['headers'], $params['headers']);
+    }
+
+    $message['from'] = $params['from'];
+    $message['subject'] = t($params['subject']);
+    $message['body'][] = new FormattableMarkup($params['body'], []);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ *
+ * Hide External link block if Internal links are exists
+ */
+function bc_utility_block_access($block, $operation, $account) {
+  if ($operation == 'view') {
+    if ($block->get('id') == 'indholdfield_ext_links'){
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if($node && $node->hasField('field_link_til_andet_indhold')) {
+        if (!empty($node->field_link_til_andet_indhold->getValue())) {
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+  return AccessResult::neutral();
+}
+
+function bc_utility_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context) {
+  if (isset($element['uri'])) {
+    $element['uri']['#type'] = 'textfield';
+    $element['uri']['#element_validate'] = [[LinkWidgetValidators::class, 'validateUriElement']];
+  }
+}
+
+
+function bc_utility_search_api_query_alter(QueryInterface &$query)
+{
+  $user = Drupal::currentUser();
+  $language = Drupal::languageManager()->getCurrentLanguage();
+  $database = Database::getConnection();
+  $index = $query->getIndex();
+
+  if (!empty($index)) {
+    $server = $index->get('server');
+  }
+
+  if (empty($index) || empty($server)) {
+    return;
+  }
+
+  $originalKeys = $query->getOriginalKeys() ?? '';
+  $lowerOriginalKeys = mb_strtolower($originalKeys);
+  $keywords = trim($lowerOriginalKeys);
+
+  if (!empty($keywords)) {
+    if (!preg_match('/^[a-zA-Z0-9\s-]+$/', $keywords) || strlen($keywords) < 3 || strlen($keywords) > 30) {
+      return;
+    }
+
+      $database->insert('popular_search')->fields([
+          's_name' => $server,
+          'i_name' => $index->id(),
+          'timestamp' => \Drupal::time()->getRequestTime(),
+          'numfound' => $query->getResults()->getResultCount(),
+          'uid' => $user->id(),
+          'sid' => session_id(),
+          'keywords' => $keywords,
+          'filters' => '',
+          'sort' => '',
+          'language' => $language->getId(),
+      ])->execute();
+
+  }
+
+}
+
+/**
+ * Convert user name to full name on ringsted portal
+ *
+ * @param $name
+ * @param \Drupal\Core\Session\AccountInterface $account
+ *
+ * @return void
+ */
+function bc_utility_user_format_name_alter(&$name, AccountInterface $account) {
+  $teamName = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  if ($teamName == 'fds_portal_ringsted_theme') {
+    if (!empty($account->field_full_name) && !empty($account->field_full_name->value)) {
+      $name = $account->field_full_name->value;
+    }
+  }
+}

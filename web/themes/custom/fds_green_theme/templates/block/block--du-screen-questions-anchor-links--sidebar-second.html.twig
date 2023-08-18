@@ -1,0 +1,31 @@
+{%
+  set classes = [
+  'block',
+  'block--du-screen-questions-anchor-links--sidebar-second',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('h4') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+    {{ content }}
+
+    <p>Klik på en af vores genvejsknapper og hop hurtigt hen til det som er relevant for dig.</p>
+
+    <ul class="">
+    {% set i = 1 %}
+      {% for link in content['#relatedCategoriesLinks'] %}
+        <li class="">
+          <a href="#{{ link.anchorId }}" class="button button-color-{{i}}">{{ link.name }}</a>
+        </li>
+        {% set i = i + 1 %}
+      {% endfor %}
+    </ul>
+  {% endblock %}
+</div>

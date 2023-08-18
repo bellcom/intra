@@ -1,0 +1,76 @@
+id: faxekommune_d7_paragraph_accordion_items
+label: Faxekommune D7 Paragraph Accordion Items
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+source:
+  plugin: d7_paragraphs_item
+  bundle: afsnit_paragraphs
+  track_changes: true
+process:
+  field_os2web_accordion_item_head: field_afsnit_overskrift
+  migrate_paragraph_simple_text:
+    plugin: migration_lookup
+    migration:
+      - faxekommune_d7_paragraph_simple_text
+    source: item_id
+    no_stub: true
+  migrate_paragraph_files:
+    plugin: migration_lookup
+    migration:
+      - faxekommune_d7_paragraph_files
+    source: item_id
+    no_stub: true
+  field_os2web_accordion_item_ref:
+    plugin: sub_process
+    source:
+      - '@migrate_paragraph_simple_text'
+      - '@migrate_paragraph_files'
+    process:
+      target_id: '0'
+      target_revision_id: '1'
+#  migrate_paragraph_accordion_item:
+#    plugin: migration_lookup
+#    migration:
+#      - faxekommune_d7_paragraph_simple_text
+#      - faxekommune_d7_paragraph_files
+#    source: item_id
+#    no_stub: true
+#  field_os2web_accordion_item_ref:
+#    plugin: sub_process
+#    source:
+#      - '@migrate_paragraph_accordion_item'
+#    process:
+#      target_id: '0'
+#      target_revision_id: '1'
+
+#  field_os2web_accordion_item_ref:
+#    plugin: sub_process
+#    source: item_id
+#    process:
+#      target_id:
+#        - plugin: migration_lookup
+#          migration:
+#            - faxekommune_d7_paragraph_simple_text
+#            - faxekommune_d7_paragraph_files
+#          source: value
+#        - plugin: extract
+#          index:
+#            - 0
+#      target_revision_id:
+#        - plugin: migration_lookup
+#          migration:
+#            - faxekommune_d7_paragraph_simple_text
+#            - faxekommune_d7_paragraph_files
+#          source: value
+#        - plugin: extract
+#          index:
+#            - 1
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_accordion_item
+migration_dependencies:
+  required: {}
+  optional:
+    - faxekommune_d7_paragraph_files
+    - faxekommune_d7_paragraph_simple_text

@@ -1,0 +1,111 @@
+// |--------------------------------------------------------------------------
+// | Contact form.
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .paragraph--type--os2web-contact-form
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin paragraph--type--os2web-contact-form-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.paragraph--type--os2web-contact-form {
+
+  .form-input,
+  .form-email,
+  .form-select {
+    max-width: none;
+  }
+
+  .form-actions {
+    text-align: right;
+  }
+
+  #edit-preview {
+    display: none;
+  }
+
+  .form-submit {
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 30px;
+
+    &, &:hover, &:focus {
+      font-weight: $font-weight-bold;
+
+      color: #fff;
+      background-color: $color-orange-004;
+    }
+  }
+
+}
+
+.os2web-contact {
+  .box__heading {
+    color: $color-black;
+    background-color: $color-base-001;
+    padding: 40px 10px;
+    @include media-breakpoint-up(sm) {
+    padding: 40px 20px;
+    }
+    @include media-breakpoint-up(md) {
+      padding: 40px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

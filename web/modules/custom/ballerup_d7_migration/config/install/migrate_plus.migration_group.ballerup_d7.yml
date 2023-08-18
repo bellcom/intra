@@ -1,0 +1,11 @@
+langcode: da
+status: true
+dependencies:
+  enforced:
+    module:
+      - ballerup_d7_migration
+id: ballerup_d7
+label: 'Ballerup D7 Content'
+description: 'Ballerup.dk D7 content import'
+source_type: 'Ballerup.dk Database'
+module: null

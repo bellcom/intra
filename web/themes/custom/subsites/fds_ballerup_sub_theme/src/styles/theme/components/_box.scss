@@ -1,0 +1,177 @@
+// |--------------------------------------------------------------------------
+// | Box
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .box
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin box-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.box {
+  margin-bottom: $grid-gutter-width / 2;
+
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(27, 27, 29, .2);
+  background-color: #fff;
+
+  table {
+    width: 100%;
+  }
+
+  a {
+    position: initial;
+
+    padding-right: initial;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  // Issue fix: on the right sidebar we have a box inside a box.
+  .box {
+    margin-left: -30px;
+    margin-right: -30px;
+  }
+}
+.box__heading {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.box__body {
+  padding: 30px;
+}
+
+.banner__actions {
+  margin-bottom: 0;
+}
+
+// Variants.
+.box--primary {
+  color: #fff;
+  background-color: $background_color__secondary;
+}
+
+.box--section-link {
+  display: flex;
+
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 58px;
+  margin-bottom: $grid-gutter-width;
+
+  .box__body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    > a {
+      position: relative;
+
+      padding-right: 12px;
+
+      line-height: 1.2;
+      font-weight: $font-weight-bold;
+
+      &:after {
+        display: inline-block;
+        position: absolute;
+
+        top: 50%;
+        right: 0;
+
+        margin-top: -10px;
+
+        font-family: FontAwesome;
+        content: $fa-var-angle-right;
+
+        color: $color-link;
+      }
+    }
+  }
+
+  a {
+    display: block;
+
+    text-decoration: none;
+  }
+
+  ul {
+    margin: 0 0 5px 0;
+
+    li {
+      list-style: none;
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    a {
+      font-size: $small-text;
+    }
+  }
+
+  hr {
+    margin-left: -30px;
+    margin-right: -30px;
+
+    border-color: #f5f7f8;
+    border-top-width: 2px;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

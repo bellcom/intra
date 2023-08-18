@@ -1,0 +1,44 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+{% set timestamp = node.field_os2web_m_start_date.date|date('U') %}
+<div {{ attributes.addClass(classes) }}>
+  <h1>{{ label }}</h1>
+  <div class="fields-inline">
+    <div class="field">
+      {% if timestamp %}
+        {{ timestamp | format_date('long') }}
+      {% endif %}
+    </div>
+  </div>
+
+  {{ content.field_os2web_m_location }}
+
+  <br>
+
+  {{ content.field_os2web_m_partic }}
+  {{ content.field_os2web_m_partic_cancel }}
+
+  {{ content.body }}
+
+  {% if (content.field_os2web_m_bps['open']) or (content.field_os2web_m_bps['closed']) %}
+    {% if (content.field_os2web_m_bps['open']) %}
+      <br>
+      <h2> Åben dagsorden </h2>
+      {{ content.field_os2web_m_bps['open'] }}
+    {% endif %}
+    {% if (content.field_os2web_m_bps['closed']) %}
+      <h2> Lukket dagsorden </h2>
+      {{ content.field_os2web_m_bps['closed'] }}
+    {% endif %}
+
+  {% else %}
+    {{ content.field_os2web_m_bps }}
+  {% endif %}
+</div>

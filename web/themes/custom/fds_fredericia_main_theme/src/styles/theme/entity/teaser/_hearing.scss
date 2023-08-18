@@ -1,0 +1,196 @@
+// |--------------------------------------------------------------------------
+// | Meeting
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-teaser--os2web-hearings-hearing-case
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-teaser--os2web-hearings-hearing-case-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+
+
+.entity-teaser--os2web-hearings-hearing-case {
+  display: flex;
+
+  margin: 1rem 0;
+
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+
+  box-shadow: $box-shadow;
+
+  .icon {
+    transform: rotate(180deg);
+  }
+
+  .field--name-field-os2web-hearings-heading {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+    }
+  }
+}
+a.entity-teaser--os2web-hearings-hearing-case {
+
+  &, &:hover, &:focus, &:active, &:visited {
+    text-decoration: none;
+
+    color: $color-text;
+  }
+
+  &:focus {
+    outline-color: $color-orange-004;
+  }
+}
+
+.entity-teaser--os2web-hearings-hearing-case__date {
+  display: flex;
+
+  padding: 1.5px 10px;
+
+  flex-basis: 80px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+
+  font-weight: $font-weight-bold;
+  font-size: $large-font-size;
+  line-height: 1.8rem;
+  text-align: center;
+
+  color: #fff;
+  background-color: $color-blue-001;
+}
+.entity-teaser--os2web-hearings-hearing-case__date__title {
+  display: block;
+
+  text-transform: uppercase;
+  font-size: $small-font-size;
+}
+.entity-teaser--os2web-hearings-hearing-case__date__month {
+  display: block;
+
+  text-transform: uppercase;
+}
+.entity-teaser--os2web-hearings-hearing-case__date__date {
+  display: block;
+
+  font-size: $base-font-size;
+}
+
+.entity-teaser--os2web-hearings-hearing-case__content {
+  display: flex;
+
+  padding: 15px 25px;
+
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+
+  .field--name-field-os2web-m-type {
+    font-weight: $font-weight-bold;
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+    }
+  }
+}
+
+.entity-teaser--os2web-hearings-hearing-case__actions {
+  display: flex;
+
+  padding: 0 ($grid-gutter-width / 2);
+
+  align-items: center;
+  text-align: center;
+
+  .icon {
+    font-size: 2.5rem;
+
+    color: #00335b;
+  }
+
+  a {
+    padding: 20px;
+  }
+}
+
+#views-exposed-form-os2web-hearings-os2web-hearings-embed-search-tender-category {
+  background: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  .form--inline {
+    .form-group {
+      .form-select {
+        border-radius: 0px;
+        color: white;
+        font-weight: 700;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' /%3E%3C/svg%3E");
+        background-color: $background_color__default;
+        min-width: 230px !important;
+
+        &:focus {
+          outline: 2px solid #747474 !important;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

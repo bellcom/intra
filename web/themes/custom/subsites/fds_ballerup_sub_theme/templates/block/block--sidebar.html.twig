@@ -1,0 +1,22 @@
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'block-show'
+  ]
+%}
+{% set sidemenu =  content['#attributes']['block'] == 'primaernavigation_right_sidebar' %}
+{% set count =  content['#items']|length %}
+{% if not sidemenu or (sidemenu and count > 0) %}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('h4') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>
+{% endif %}

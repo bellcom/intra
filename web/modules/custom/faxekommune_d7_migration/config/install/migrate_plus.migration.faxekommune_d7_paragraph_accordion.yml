@@ -1,0 +1,37 @@
+id: faxekommune_d7_paragraph_accordion
+label: Faxekommune D7 Paragraph Accordion
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+source:
+  plugin: d7_node
+  node_type: os2web_base_contentpage
+  track_changes: true
+process:
+  field_os2web_accordion_reference:
+    plugin: sub_process
+    source: field_afsnit_paragraphs
+    process:
+      target_id:
+        - plugin: migration_lookup
+          migration:
+            - faxekommune_d7_paragraph_accordion_items
+          source: value
+        - plugin: extract
+          index:
+            - 0
+      target_revision_id:
+        - plugin: migration_lookup
+          migration:
+            - faxekommune_d7_paragraph_accordion_items
+          source: value
+        - plugin: extract
+          index:
+            - 1
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_accordion
+migration_dependencies:
+  required: {}
+  optional:
+    - faxekommune_d7_paragraph_accordion_items

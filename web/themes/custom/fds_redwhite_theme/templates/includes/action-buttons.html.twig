@@ -1,0 +1,36 @@
+<div class="action-buttons d-md-block">
+  <div class="flexy-list">
+    <div>
+      <a href="#" class="action-button print" onclick="window.print();">
+{#         <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-white.svg" class="action-button__icon action-button__icon--white" alt="{{ 'Print' | trans }}" />
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-orange.svg" class="action-button__icon action-button__icon--orange" alt="{{ 'Print' | trans }}" /> #}
+
+        {{ 'Print' | trans }}
+      </a>
+    </div>
+    <div>
+      <a class="newsletter" href="{{ url('<front>') }}/abonner">{{ 'Nyhedsbrev' | trans }}</a>
+    </div>
+
+{#     <div>
+      <a href="http://www.adgangforalle.dk/" class="action-button" target="_blank">
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/audio-white.svg" class="action-button__icon action-button__icon--white" alt="{{ 'Læs højt' | trans }}" />
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/audio-orange.svg" class="action-button__icon action-button__icon--orange" alt="{{ 'Læs højt' | trans }}" />
+
+        {{ 'Læs højt' | trans }}
+      </a>
+    </div>
+
+    <div>
+      <a href="#" class="js-decrease-font-size" aria-label="{{ 'Formindsk tekst' | trans }}">
+        {{ 'A-' | trans }}
+      </a>
+    </div>
+
+    <div>
+      <a href="#" class="js-increase-font-size" aria-label="{{ 'Forstør tekst' | trans }}">
+        {{ 'A+' | trans }}
+      </a>
+    </div> #}
+  </div>
+</div>

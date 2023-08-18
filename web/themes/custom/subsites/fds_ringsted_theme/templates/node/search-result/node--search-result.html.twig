@@ -1,0 +1,24 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<div {{ attributes.addClass(classes) }}>
+  <span class="createdtime">{{ node.getCreatedTime()|date("d M Y") }}</span>
+
+  <h4><a href="{{ url }}">{{ label }}</a></h4>
+
+  <div>
+    {{ content }}
+  </div>
+
+  <br>
+
+  <div class="search-content-type">
+    {{ node.type.entity.label }}
+  </div>
+</div>

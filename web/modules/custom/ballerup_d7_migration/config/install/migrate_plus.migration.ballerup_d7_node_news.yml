@@ -1,0 +1,123 @@
+id: ballerup_d7_node_news
+label: Ballerup D7 Node News
+migration_group: ballerup_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: news
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: os2web_news
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_news_heading: title
+  migrate_uid:
+    - plugin: migration_lookup
+      migration: ballerup_d7_user
+      source: node_uid
+  uid:
+    plugin: default_value
+    default_value: 1
+    source: '@migrate_uid'
+  status: status
+  created: created
+  changed: changed
+  #promote: promote
+  sticky: sticky
+  field_os2web_news_article_author: field_newsarticle_author
+  field_os2web_news_article_date:
+    -
+      plugin: skip_row_if_old_news
+      index: 0
+      source: 	field_newsarticle_date
+  field_migration_old_url:
+    plugin: callback
+    callable:
+      - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+      - createUrlFromNid
+    source: nid
+  field_os2web_news_description:
+    - plugin: sub_process
+      source: field_body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_news_section:
+    plugin: migration_lookup
+    migration: ballerup_d7_taxonomy_section
+    source: field_section
+  field_os2web_news_intro: field_deck
+  field_os2web_news_article_date: field_newsarticle_date
+  field_newsarticle_image:
+    plugin: iterator
+    source: field_os2web_news_primaryimage
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: id_of_file_migration
+        source: fid
+      alt: alt
+      title: title
+      height: height
+      width: width
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_newsarticle_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_newsarticle_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+        - createFileManaged
+  field_os2web_news_primaryimage/target_id: '@migrate_file_fid'
+  field_os2web_news_primaryimage/alt: title
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - ballerup_d7_user
+    - ballerup_d7_taxonomy_section
+    #- ballerup_d7_contact_box
+    #- os2web_borgerdk_articles_import
+  optional: {}

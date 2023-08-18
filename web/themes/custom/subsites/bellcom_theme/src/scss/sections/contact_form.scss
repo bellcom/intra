@@ -1,0 +1,186 @@
+.contact-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .contact-form__inner-wrapper {
+    width: 100%;
+    max-width: 1440px;
+    margin: 80px 10px;
+    display: flex;
+
+    @media only screen and (max-width: 1024px) {
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .contact-form__body-content {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 200px;
+
+      @media only screen and (max-width: 1364px) {
+        padding-right: 100px;
+      }
+
+      @media only screen and (max-width: 1096px) {
+        padding-right: 25px;
+      }
+
+      @media only screen and (max-width: 1024px) {
+        padding-right: 0;
+        width: 50%;
+      }
+
+      @media only screen and (max-width: 767px) {
+        width: 100%;
+      }
+
+      .contact-form__upper-body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .contact-form__prefix {
+          display: flex;
+          font-family: 'Poppins', sans-serif;
+          text-transform: uppercase;
+          align-items: center;
+
+
+          span {
+            font-weight: 500;
+            font-size: 13px;
+            color: #344e41;
+            margin-left: 10px;
+          }
+        }
+        h2 {
+          font-family: "Playfair Display", serif;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 1.2;
+        }
+        .contact-form__body {
+          font-family: "Poppins", sans-serif;
+          font-size: 15px;
+        }
+      }
+
+      .contact-form__socials-body {
+        @media only screen and (max-width: 1024px) {
+          margin-top: 50px;
+        }
+        .socials {
+          display: flex;
+          gap: 20px;
+
+          .contact-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #d7d7d7;
+            border-radius: 50%;
+
+            &:hover i {
+              color: white;
+            }
+          }
+          .facebook {
+            &:hover {
+              background-color: #4267B2;
+              border-color: transparent;
+            }
+          }
+          .linkedin {
+            &:hover {
+              background-color: #0077b5;
+              border-color: transparent;
+            }
+          }
+          .instagram {
+            &:hover {
+              background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+              border-color: transparent;
+            }
+          }
+
+
+        }
+      }
+
+    }
+    .contact-form__webform {
+      width: 65%;
+
+      @media only screen and (max-width: 1024px){
+        width: 100%;
+      }
+      .bellcom-contact-form {
+        .bellcom-contact-form__item {
+          .webform-ajax-form-wrapper {
+            form {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 20px;
+
+              @media only screen and (max-width: 540px) {
+                display: flex;
+                flex-direction: column;
+              }
+
+              .js-form-item {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                  font-size: 15px;
+                  font-family: "Poppins", sans-serif;
+                  font-weight: 500;
+                  margin-bottom: 5px;
+                }
+
+                input {
+                  background-color: #f3f3f3;
+                  border-radius: 10px;
+                  height: 45px;
+                  width: 100%;
+                  padding-left: 10px;
+
+                }
+              }
+              .form-item-message {
+                grid-column: span 2;
+
+                textarea {
+                  border-radius: 10px;
+                  background-color: #f3f3f3;
+                  resize: none;
+                  width: 100%;
+                  padding: 10px 0 0 10px;
+
+                }
+              }
+              .form-actions {
+                #edit-actions-submit {
+                  border-radius: 10px;
+                  padding: 12px 35px;
+                  font-family: "Poppins", sans-serif;
+                  font-weight:600;
+                  background-color: #344e41;
+                  color: white;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+diff --git a/src/EasyBreadcrumbBuilder.php b/src/EasyBreadcrumbBuilder.php
+index 91cdf2f..64e8243 100644
+--- a/src/EasyBreadcrumbBuilder.php
++++ b/src/EasyBreadcrumbBuilder.php
+@@ -832,7 +832,7 @@ class EasyBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+ 
+     // Find the system path by resolving aliases, language prefix, etc.
+     $processed = $this->pathProcessor->processInbound($path, $request);
+-    if (empty($processed) || !empty($exclude[$processed])) {
++    if ((empty($processed) || !empty($exclude[$processed])) && $this->config->get(EasyBreadcrumbConstants::INCLUDE_HOME_SEGMENT)) {
+ 
+       // This resolves to the front page, which we already add.
+       return NULL;

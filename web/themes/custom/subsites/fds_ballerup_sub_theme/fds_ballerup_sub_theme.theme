@@ -1,0 +1,170 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fds_ballerup_sub_theme_preprocess_page(array &$variables)
+{
+
+  $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
+
+  $logo = theme_get_setting('logo');
+  if (!empty( $logo ) && !empty($logo['url']))
+  {
+    $variables['custom_logo'] = $logo['url'];
+  }
+
+}
+
+/**
+ * Implements hook_form_search_block_form_alter().
+ */
+function fds_ballerup_sub_theme_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  $form['keys']['#attributes']['placeholder'] = t('Find hvad du leder efter');
+}
+
+/**
+ * Implements hook_form_search_form_alter().
+ */
+function fds_ballerup_sub_theme_form_search_form_alter(&$form, FormStateInterface $form_state) {
+  $form['basic']['label'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['search-form-label'],
+    ],
+    'markup' => ['#markup' => $form['basic']['keys']['#title']->render()],
+  ];
+  $form['basic']['keys']['#title'] = '';
+  $form['basic']['#attributes'] = [];
+  $form['basic']['search-line'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['container-inline'],
+    ],
+    'keys' => $form['basic']['keys'],
+    'submit' => $form['basic']['submit'],
+  ];
+
+  unset($form['basic']['keys']);
+  unset($form['basic']['submit']);
+}
+
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_ballerup_sub_theme_preprocess_swiftmailer(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.svg';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_ballerup_sub_theme_preprocess_anonymous_subscriptions_message(array &$variables) {
+  $subscription = $variables['subscription'];
+  if (!empty($subscription->type->value) && $subscription->type->value == 'os2web_hearings_hearing_case') {
+    $variables['link'] = Link::fromTextAndUrl(t('Klik her for at gå til høringer og afgørelser'), Url::fromUserInput('/hoeringer-og-afgoerelser'));
+  }
+}
+
+/**
+ * Implements hook_preprocess_term().
+ */
+function fds_ballerup_sub_theme_preprocess_taxonomy_term(array &$variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['term'];
+
+  if ($variables['view_mode'] == 'full' && $term->bundle() == 'os2web_sektion') {
+    // Get all pages that are using this section and are promoted.
+    $entity_ids = getSectionPromotedNodes($term->id());
+    if (empty($entity_ids)) {
+      return;
+    }
+
+    $nodes = Node::loadMultiple($entity_ids);
+    $promoted_node_links = [];
+
+    /** @var \Drupal\node\NodeInterface $node */
+    foreach ($nodes as $node) {
+      $promoted_node_links[] = [
+        'title' => $node->label(),
+        'url' => $node->toUrl(),
+      ];
+    }
+
+    $variables['#promoted_node_links'] = $promoted_node_links;
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fds_ballerup_sub_theme_preprocess_node(array &$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if (($variables['view_mode'] == 'search_result' || $variables['view_mode'] == 'search_index') && $node->getType() == 'os2web_page') {
+    $sectionLabels = [];
+    if ($section_id = $node->field_os2web_page_section->target_id) {
+      $parents = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadAllParents($section_id);
+
+      foreach ($parents as $parent) {
+        $sectionLabels[] = $parent->label();
+      }
+
+      $variables['#section_labels'] = array_reverse($sectionLabels);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function fds_ballerup_sub_theme_preprocess_menu(&$variables, $hook) {
+  if ($hook == 'menu') {
+    if (!empty($variables['attributes']['block'])) {
+      unset($variables['attributes']['block']);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_link_alter().
+ */
+function fds_ballerup_sub_theme_preprocess_block(&$variables) {
+  if (!empty($variables['content']['#attributes']['block']) && $variables['content']['#attributes']['block'] == 'primaernavigation_right_sidebar') {
+    if (!empty($variables['content']['#items'])) {
+      $links = $variables['content']['#items'];
+      foreach( $links AS $idx => $link ) {
+        if ($link['in_active_trail']) {
+          unset( $variables['content']['#items'][$idx] );
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,32 @@
+id: faxekommune_d7_contact_box
+label: Faxe D7 Contact Box
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_contact_contact
+  track_changes: true
+process:
+  name:
+    plugin: substr
+    source: title
+    start: 0
+    length: 50
+  field_os2web_contact_heading: field_os2web_contact_field_dept
+  field_os2web_contact_body:
+    plugin: sub_process
+    source: field_os2web_contact_field_info
+    process:
+      value: value
+      format:
+        plugin: default_value
+        default_value: 'wysiwyg_tekst'
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'da'
+destination:
+  plugin: 'entity:os2web_contact'
+  default_bundle: os2web_accordion

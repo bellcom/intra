@@ -1,0 +1,38 @@
+diff --git a/forum_notifications_subscription.module b/forum_notifications_subscription.module
+index 2b45139..9417498 100644
+--- a/forum_notifications_subscription.module
++++ b/forum_notifications_subscription.module
+@@ -314,8 +314,11 @@ function forum_notifications_subscription_node_insert(Drupal\Core\Entity\EntityI
+             }
+           }
+         }
+-        \Drupal::service('forum_notifications_subscription.frequency')
+-          ->createNotificationFrequencyForUser($entity, $postOwner);
++        // Preventing anonym to be added to the database.
++        if (!$postOwner->isAnonymous()) {
++          \Drupal::service('forum_notifications_subscription.frequency')
++            ->createNotificationFrequencyForUser($entity, $postOwner);
++        }
+       }
+     } catch (\Exception $e) {
+       \Drupal::logger('forum_notifications_subscription')
+@@ -338,11 +341,14 @@ function forum_notifications_subscription_comment_insert(CommentInterface $comme
+       ->load($comment->getCommentedEntityId());
+     if ($forumTopic->bundle() === 'forum') {
+       $postOwner = $comment->getOwner();
+-      $freq = \Drupal::service('forum_notifications_subscription.frequency')
+-        ->checkNotificationFrequencyByEntity($forumTopic);
+-      if (!$freq) {
+-        \Drupal::service('forum_notifications_subscription.frequency')
+-          ->createNotificationFrequencyForUser($forumTopic, $postOwner);
++      // Preventing anonym to be added to the database.
++      if (!$postOwner->isAnonymous()) {
++        $freq = \Drupal::service('forum_notifications_subscription.frequency')
++          ->checkNotificationFrequencyByEntity($forumTopic);
++        if (!$freq) {
++          \Drupal::service('forum_notifications_subscription.frequency')
++            ->createNotificationFrequencyForUser($forumTopic, $postOwner);
++        }
+       }
+       $frequencies = \Drupal::service('forum_notifications_subscription.frequency')
+         ->getNotificationFrequencyByEntityAndType($forumTopic->id(), $forumTopic->getEntityTypeId());

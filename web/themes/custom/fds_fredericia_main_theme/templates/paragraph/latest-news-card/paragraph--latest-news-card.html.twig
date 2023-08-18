@@ -1,0 +1,31 @@
+<div class="latest-news-display">
+  <div class="container">
+    <div class="news-title-wrapper">
+      <h2>Nyheder</h2>
+      <div class="see-all-news-btn">
+        <a href="/nyheder">Se flere nyheder</a>
+      </div>
+    </div>
+  <div class="latest-news-innerwrapper">
+  {% for article in latest_news_articles %}
+    <div class="news-card">
+      <a href="{{ path('entity.node.canonical', {'node': article.nid.value}) }}" class="news-image-wrapper">
+        {% if article.field_os2web_news_primaryimage.entity.fileuri %}
+          <img src="{{ file_url(article.field_os2web_news_primaryimage.entity.fileuri) }}" alt="{{ article.field_os2web_news_primaryimage.alt }}">
+        {% else %}
+          <img src="{{ base_path ~ directory }}/src/images/Volden.jpg" />
+
+        {% endif %}
+
+      </a>
+      <div class="news-content-wrapper">
+        <span class="news-date">{{ article.created.value|date('F j, Y') }}</span>
+        <a class="news-heading-link" href="{{ path('entity.node.canonical', {'node': article.nid.value}) }}"><h3 class="news-heading">{{ article.field_os2web_news_heading.value }}</h3></a>
+        <p class="news-intro">{{ article.field_os2web_news_intro.value }}</p>
+        <a class="news-readmore" href="{{ path('entity.node.canonical', {'node': article.nid.value}) }}">Læs mere</a>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+# DO NOT EDIT THIS VHOST. IT WILL BE MODIFIED BY SCRIPTS. (The includes for access limits and ServerAliases)
+<VirtualHost *:80>
+    <Directory [basedir]>
+       AllowOverride All
+       Options FollowSymLinks
+    </Directory>
+
+    ServerAdmin domains@bellcom.dk
+    DocumentRoot /var/www/html
+    ServerName [domain]
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+
+    php_admin_value open_basedir [basedir]:/usr/share/php
+    php_value include_path .:[basedir]
+    php_value error_log /dev/stderr
+    php_value session.save_path [basedir]/sessions/[domain]
+    php_admin_value upload_tmp_dir [basedir]/tmp/[domain]
+
+    php_value log_errors 1
+    php_value html_errors 0
+    php_value display_errors 0
+    php_admin_value error_reporting 2047
+    php_admin_value max_execution_time 180
+</VirtualHost>

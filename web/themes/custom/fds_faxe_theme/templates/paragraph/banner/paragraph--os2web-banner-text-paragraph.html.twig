@@ -1,0 +1,70 @@
+
+{% block paragraph %}
+
+
+{% set image = content.field_os2web_bannertxt_image[0]['#item'].entity %}
+  {% set image_url = file_url(image.uri.value) %}
+
+
+<div class="banner__text-outer" style=" background-image: url({{ image_url }});">
+  <div class="slider" style=" background-image: url({{ image_url }});">
+    <div class="slider-overlay"></div>
+    <div class="slides-container">
+      {% if content.field_os2web_bannertxt_heading_1|render is not empty %}
+      <div class="slide-item">
+        <div class="slide-heading">{% if content.field_os2web_slide_1_link|render is not empty %}<a class="slide-link" title="{{ content.field_os2web_slide_1_link.0['#title'] }}" href="{{ content.field_os2web_slide_1_link.0['#url'] }}">{% endif %}{{  content.field_os2web_bannertxt_heading_1 }}{% if content.field_os2web_slide_1_link|render is not empty %}</a> {% endif %}</div>
+        <div class="slide-content">{{ content.field_os2web_bannertxt_content_1 }}</div>
+      </div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_2|render is not empty %}
+      <div class="slide-item">
+        <div class="slide-heading">{% if content.field_os2web_slide_2_link|render is not empty %}<a class="slide-link" title="{{ content.field_os2web_slide_2_link.0['#title'] }}" href="{{ content.field_os2web_slide_2_link.0['#url'] }}">{% endif %}{{ content.field_os2web_bannertxt_heading_2 }}{% if content.field_os2web_slide_2_link|render is not empty %}</a>{% endif %}</div>
+        <div class="slide-content">{{ content.field_os2web_bannertxt_content_2 }}</div>
+      </div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_3|render is not empty %}
+      <div class="slide-item">
+        <div class="slide-heading">{% if content.field_os2web_slide_3_link|render is not empty %}<a class="slide-link" title="{{ content.field_os2web_slide_3_link.0['#title'] }}" href="{{ content.field_os2web_slide_3_link.0['#url'] }}">{% endif %}{{ content.field_os2web_bannertxt_heading_3 }}{% if content.field_os2web_slide_3_link|render is not empty %}</a>{% endif %}</div>
+        <div class="slide-content">{{ content.field_os2web_bannertxt_content_3 }}</div>
+      </div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_4|render is not empty %}
+      <div class="slide-item">
+        <div class="slide-heading">{% if content.field_os2web_slide_2_link|render is not empty %}<a class="slide-link" title="{{ content.field_os2web_slide_4_link.0['#title'] }}" href="{{ content.field_os2web_slide_4_link.0['#url'] }}">{% endif %}{{ content.field_os2web_bannertxt_heading_4 }}{% if content.field_os2web_slide_4_link|render is not empty %}</a>{% endif %}</div>
+        <div class="slide-content">{{ content.field_os2web_bannertxt_content_4 }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% if content.field_os2web_bannertxt_heading_2|render or content.field_os2web_bannertxt_heading_3|render or content.field_os2web_bannertxt_heading_4|render is not empty  %}
+    <div class="dots-container">
+      {% if content.field_os2web_bannertxt_heading_1|render is not empty %}
+      <div class="dot active"></div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_2|render is not empty %}
+      <div class="dot"></div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_3|render is not empty %}
+      <div class="dot"></div>
+      {% endif %}
+      {% if content.field_os2web_bannertxt_heading_4|render is not empty %}
+      <div class="dot"></div>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if content.field_os2web_bannertxt_heading_2|render or content.field_os2web_bannertxt_heading_3|render or content.field_os2web_bannertxt_heading_4|render is not empty  %}
+    <div class="nav">
+      <button class="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+      <button class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
+    {% endif %}
+  </div>
+  <div class="banner-links-wrapper">
+    <div class="banner-links">
+      {{ content.field_os2web_bannertxt_links }}
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock paragraph %}

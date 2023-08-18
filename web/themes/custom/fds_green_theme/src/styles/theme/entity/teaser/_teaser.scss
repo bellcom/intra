@@ -1,0 +1,129 @@
+// |--------------------------------------------------------------------------
+// | Page
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-teaser
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-teaser-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.node--os2web-page--teaser {
+  border-radius: $big-border-radius;
+  position: relative;
+  background-color: $color-white;
+  box-shadow: $box-shadow;
+  color: $color-black;
+  text-decoration: none;
+  max-width: unset!important;
+  width: 100%;
+  font-size: 1.4rem;
+  .entity-teaser__image {
+    img {
+      width: calc(100% + 30px);
+      border-top-left-radius: $big-border-radius;
+      border-top-right-radius: $big-border-radius;
+    }
+  }
+  .entity-teaser {
+    display: flex;
+
+    flex-direction: column;
+
+    .field--name-field-os2web-page-heading {
+      font-weight: $font-weight-bold;
+    }
+  }
+  .field--type-link {
+    margin-left: 0!important;
+    text-align: right;
+    .text-primary {
+      color: $color-primary;
+      font-weight: $font-weight-bold;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      text-align: right;
+      margin-top: 30px;
+    }
+  }
+}
+div.entity-teaser__image {
+  img {
+    width: 100%;
+  }
+}
+
+.entity-teaser {
+  display: flex;
+
+  flex-direction: column;
+}
+.entity-teaser__body {
+  display: flex;
+
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding: ($grid-gutter-width / 2) $grid-gutter-width;
+
+  .field--type-body {
+    flex-grow: 1;
+    overflow-wrap: break-word;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

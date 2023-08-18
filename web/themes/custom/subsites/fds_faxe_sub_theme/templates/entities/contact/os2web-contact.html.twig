@@ -1,0 +1,51 @@
+{% set modalId = 'modal-' ~ random() %}
+
+<div{{ attributes.addClass('os2web_contact os2web-contact') }}>
+  <div class="box__heading">
+  {{ content.field_os2web_contact_heading }}
+  </div>
+  <div class="box__body">
+    {{ content.field_os2web_contact_body }}
+    {{ content.field_os2web_contact_phone }}
+    {{ content.field_os2web_contact_email }}
+    {% if content.field_os2web_contact_more.value %}
+        {{ content.field_os2web_contact_more }}
+    {% endif %}
+    {% if contact.field_os2web_contact_modal.value and  contact.field_os2web_contact_modal_butt.value %}
+      <button data-micromodal-trigger="{{ modalId }}" class="button button-primary">
+        {{ content.field_os2web_contact_modal_butt }}
+      </button>
+    {% endif %}
+  </div>
+</div>
+
+{% if contact.field_os2web_contact_modal.value %}
+  <div class="modal micromodal-slide" id="{{ modalId }}" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="{{ modalId }}-title">
+
+        {% if contact.field_os2web_contact_modal_head.value %}
+          <header class="modal__header">
+
+            <h2 class="modal__title" id="{{ modalId }}-title">
+              {{ content.field_os2web_contact_modal_head }}
+            </h2>
+
+            <button class="modal__close" aria-label="{{ 'Close' | trans }}" data-micromodal-close></button>
+          </header>
+        {% endif %}
+
+        <main class="modal__content">
+          {{ content.field_os2web_contact_modal_body }}
+        </main>
+
+        <footer class="modal__footer">
+          <button class="button button-secondary" data-micromodal-close aria-label="{{ 'Close this window' | trans }}">
+            {{ 'Close' | trans }}
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+{% endif %}
+

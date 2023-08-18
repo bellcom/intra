@@ -1,0 +1,86 @@
+<header class="d-print-none">
+  <div class="custom-header">
+    <div class="custom-header-row custom-header-row--meta">
+      <div class="container">
+        <div class="flexy-row">
+          {{ page.header__logo }}
+
+          <div class="flexy-spacer"></div>
+
+          <div class="d-none d-lg-block">
+            {{ page.header__top_navigation }}
+          </div>
+          <div class="flexy-row font-resize-row">
+            <button class="visible-sm js-decrease-font-size">A-</button>
+            <button class="visible-sm js-increase-font-size">A+</button>
+          </div>
+          <div class="d-lg-none">
+            {{ page.small_search }}
+          </div>
+            <div class="custom-header-row custom-header-row--mobile-navigation d-lg-none">
+              <div class="flexy-row">
+                <div class="flexy-spacer"></div>
+
+                <div class="custom-mobile-navigation">
+                  <div class="custom-mobile-navigation__overlay"></div>
+
+                  <button class="custom-mobile-navigation-toggle js-custom-mobile-navigation-toggle">
+                    <span class="icon fa fa-bars"></span>
+                  </button>
+
+                  <div class="custom-mobile-navigation-popup">
+                    <div class="custom-mobile-navigation-popup__navigation custom-mobile-navigation-popup__navigation--vertical">
+                      {{ page.header__main_navigation }}
+                    </div>
+                    {# <div class="custom-mobile-navigation-popup__navigation custom-mobile-navigation-popup__navigation--horizontal">
+                      {{ page.header__top_navigation }}
+                    </div> #}
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-header-row custom-header-row--desktop-navigation d-none d-lg-flex">
+      <div class="container">
+        <div class="flexy-row">
+          {{ page.header__main_navigation }}
+          <div class="flexy-spacer"></div>
+          {% if theme_settings.social.facebook.active %}
+         <div class="flexy-header__social-icons d-none d-lg-block">
+            <ul class="flexy-list list-unstyled">
+              <li class="m-0">
+                <a href="{{ theme_settings.social.facebook.url }}" target="_blank" class="social-icon social-icon--facebook" data-toggle="tooltip" data-placement="top" title="" rel="noopener noreferrer" data-original-title="Find os på Facebook">
+                  <span class="icon fa fa-facebook-f"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+          <div class="d-none d-lg-block">
+            {{ page.small_search }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+{{ page.banner_search }}
+{{ page.featured_top }}
+
+{% if not is_front %}
+  <div class="section section--breadcrumb-bar d-print-none layout--hidden-on-sections">
+    <div class="">
+      <div class="flexy-row">
+        {{ page.breadcrumb }}
+
+        <div class="flexy-spacer"></div>
+
+        {% include '@fds_faxe_sub_theme/includes/action-buttons.html.twig' %}
+      </div>
+    </div>
+  </div>
+{% endif %}

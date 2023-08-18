@@ -1,0 +1,14 @@
+{%
+  set classes = [
+  'taxonomy-term',
+  'vocabulary-' ~ term.bundle|clean_class,
+  background_color ? ('taxonomy-term-background-color--' ~ background_color),
+]
+%}
+<div{{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
+  {{ title_prefix }}
+  {% if name and not page %}
+    {{ name }}
+  {% endif %}
+  {{ title_suffix }}
+</div>

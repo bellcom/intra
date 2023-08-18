@@ -1,0 +1,127 @@
+// |--------------------------------------------------------------------------
+// | Page
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-teaser--os2web-event
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-teaser--os2web-event-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-teaser--os2web-event {
+  margin-top: $grid-gutter-width / 2;
+  margin-bottom: $grid-gutter-width / 2;
+  padding: ($grid-gutter-width / 2);
+  padding-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(27, 27, 29, .2);
+  background-color: $background_color__primary;
+
+  .background-color--primary & {
+    background-color: $background_color__default;
+  }
+
+  .field--name-field-os2web-event-heading {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+
+      font-weight: normal;
+
+      color: $color-link;
+    }
+  }
+
+  .field {
+
+    + .field {
+      margin-top: 10px;
+    }
+
+    + .field--type-link {
+      margin-top: 15px;
+    }
+  }
+
+  .field--type-link {
+    font-weight: bold;
+  }
+
+  .field--name-field-os2web-event-start-date {
+    font-weight: $font-weight-bold;
+    font-size: $small-font-size;
+
+    color: #666666;
+  }
+}
+
+a.entity-teaser--os2web-event {
+
+  &, &:hover, &:focus, &:active {
+    color: $color-text;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+
+  .entity-teaser--os2web-event {
+
+    .row {
+      align-items: center;
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

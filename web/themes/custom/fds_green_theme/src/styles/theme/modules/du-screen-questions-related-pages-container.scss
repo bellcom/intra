@@ -1,0 +1,74 @@
+.du-screen-questions-related-pages-container-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  @supports not (gap: 1px) {
+    margin: 20px 0;
+    // @include media-breakpoint-up(sm) {
+    //   margin: 10px 0;
+    // }
+  }
+  .du-screen-questions-related-pages-container {
+    padding: 30px;
+    $bg-colors-and-svgs:
+      "hjaelp-dig-selv" $color-orange-006 "../images/Hjalp_dig_selv.svg",
+      "hverdagsteknologi" $color-blue-009 "../images/Teknologier.svg",
+      "kommunale-tilbud" $color-primary "../images/Kommunale_tilbud.svg",
+      "eksterne-tilbud" $color-red-003 "../images/Private_tilbud.svg",
+      "other" $color-red-003 "../images/Private_tilbud.svg";
+    h2.du-screen-questions-related-pages-container-title {
+      color: $color-base-002;
+      margin: 0;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      padding-left: 46px;
+    }
+    .accordion-button {
+      font-size: 1.4rem;
+      @include media-breakpoint-up(md) {
+        font-size: 1.6rem;
+      }
+    }
+    div.du-screen-questions-link {
+      width: 100%;
+      background-color: $color-green-005; //back#f3f5f2;
+      padding: 16px 16px 16px 24px;
+      border-radius: $big-border-radius;
+      a.du-screen-questions-link {
+        text-decoration: none;
+        font-weight: bolder;
+        color: $color-green-001;
+        &:hover {
+          color: $color-black;
+        }
+      }
+    }
+
+    @each $class, $color-code, $svg-path in $bg-colors-and-svgs {
+      &.#{$class} {
+        border: 1px solid $color-code;
+        border-top: 11px solid $color-code;
+        border-radius: $big-border-radius;
+        position: relative;
+        &::after {
+          content: "";
+          height: 26px;
+          width: 20px;
+          position: absolute;
+          top: 30px;
+          left: 30px;
+          background-image: url($svg-path);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          display: block;
+          z-index: 10;
+          @include media-breakpoint-up(sm) {
+            height: 32px;
+            width: 25px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<a href="{{ node.field_os2web_event_url.value }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Read more about' | trans }} {{ node.field_os2web_event_heading.value }}">
+  <div class="entity-{{ view_mode|clean_class }}__image">
+    {{ content.field_os2web_evnet_image }}
+  </div>
+
+  <div class="entity-{{ view_mode|clean_class }}__body">
+    {{ content.field_os2web_event_start_date }}
+
+    <div class="field field--name-field-os2web-event-heading">
+      <h3>{{ label }}</h3>
+    </div>
+
+    {% set text = content.body | render %}
+    <div class="field field--type-body">
+      {{ text | striptags }}
+    </div>
+
+    <div class="field--type-link">
+      <span class="fake-link">
+        Læs mere
+      </span>
+    </div>
+  </div>
+</a>

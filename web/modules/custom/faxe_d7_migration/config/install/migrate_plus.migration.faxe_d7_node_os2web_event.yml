@@ -1,0 +1,108 @@
+id: faxe_d7_node_os2web_event
+label: Faxe D7 Node Event
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: event_calendar
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: os2web_event
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  body:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_os2web_kulturnaut_slidesho
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_os2web_kulturnaut_slidesho
+      default: ''
+      index:
+          - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        -  createFileManaged
+  field_os2web_evnet_image/target_id: '@migrate_file_fid'
+  field_os2web_evnet_image/alt: title
+  field_os2web_event_start_date:
+    - plugin: sub_process
+      source: event_calendar_date
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: 'Y-m-d\TH:i:s'
+          from_timezone: 'Europe/Copenhagen'
+          to_timezone: 'Europe/Copenhagen'
+          source: value
+  field_os2web_event_end_date:
+    - plugin: sub_process
+      source: event_calendar_date
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: 'Y-m-d\TH:i:s'
+          from_timezone: 'Europe/Copenhagen'
+          to_timezone: 'Europe/Copenhagen'
+          source: value2
+  status: status
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+  created: created
+  changed: changed
+  #promote: promote
+  sticky: sticky
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required: {}
+  optional: {}

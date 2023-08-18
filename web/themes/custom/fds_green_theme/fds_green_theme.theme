@@ -1,0 +1,174 @@
+<?php
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fds_green_theme_preprocess_page(array &$variables) {
+  $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
+  $variables['theme_settings']['texts']['frontpage_banner_heading'] = theme_get_setting('frontpage_banner_heading');
+  $variables['theme_settings']['texts']['frontpage_banner_subheading'] = theme_get_setting('frontpage_banner_subheading');
+  $variables['theme_settings']['contact_information']['bygning_first'] = theme_get_setting('bygning_first');
+  $variables['theme_settings']['contact_information']['afdeling'] = theme_get_setting('afdeling');
+  $variables['theme_settings']['contact_information']['afdeling_bygning'] = theme_get_setting('afdeling_bygning');
+  $variables['theme_settings']['contact_information']['afdeling_indgang'] = theme_get_setting('afdeling_indgang');
+}
+
+/**
+ * Implements hook_form_search_block_form_alter().
+ */
+function fds_green_theme_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  $form['keys']['#attributes']['placeholder'] = t('Find hvad du leder efter');
+}
+
+/**
+ * Implements hook_form_search_form_alter().
+ */
+function fds_green_theme_form_search_form_alter(&$form, FormStateInterface $form_state) {
+  $form['basic']['label'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['search-form-label'],
+    ],
+    'markup' => ['#markup' => $form['basic']['keys']['#title']->render()],
+  ];
+  $form['basic']['keys']['#title'] = '';
+  $form['basic']['#attributes'] = [];
+  $form['basic']['search-line'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['container-inline'],
+    ],
+    'keys' => $form['basic']['keys'],
+    'submit' => $form['basic']['submit'],
+  ];
+
+  unset($form['basic']['keys']);
+  unset($form['basic']['submit']);
+}
+
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_green_theme_preprocess_swiftmailer(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.svg';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_green_theme_preprocess_anonymous_subscriptions_message(array &$variables) {
+  $subscription = $variables['subscription'];
+  if (!empty($subscription->type->value) && $subscription->type->value == 'os2web_hearings_hearing_case') {
+    $variables['link'] = Link::fromTextAndUrl(t('Klik her for at gå til høringer og afgørelser'), Url::fromUserInput('/hoeringer-og-afgoerelser'));
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ *
+ * search_selected_terms block.
+ */
+function fds_green_theme_preprocess_paragraph__os2web_search_selected_terms(&$variables) {
+  if ($variables['view_mode'] == 'preview') {
+    return;
+  }
+
+  $variables['#search_terms'] = [];
+
+  $vid = 'os2web_search_selected_terms';
+  $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+  foreach ($terms as $term) {
+    $variables['#search_terms'][] = $term->name;
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fds_green_theme_preprocess_node(array &$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if (($variables['view_mode'] == 'search_result') && $node->getType() == 'os2web_page') {
+    // Page categories.
+    if ($categories = $node->field_du_screen_category->referencedEntities()) {
+      $category = reset($categories);
+
+      /** @var \Drupal\Component\Transliteration\TransliterationInterface $trans */
+      $trans = \Drupal::service('transliteration');
+      $variables['#page_category_class'] = 'du-cat-' . Html::getClass($trans->transliterate($category->label()));
+    }
+
+    // Page sections.
+    if ($section_id = $node->field_os2web_page_section->target_id) {
+      $sectionLabels = [];
+      $parents = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadAllParents($section_id);
+
+      foreach ($parents as $parent) {
+        $sectionLabels[] = $parent->label();
+      }
+
+      $variables['#section_labels'] = array_reverse($sectionLabels);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_facets_item_list().
+ *
+ * Sets consistent class name for facet items styling.
+ */
+function fds_green_theme_preprocess_facets_item_list(array &$variables) {
+  /** @var \Drupal\facets\Entity\Facet $facet */
+  $facet = $variables['facet'];
+  $result = $facet->getResults();
+
+  /** @var \Drupal\Component\Transliteration\TransliterationInterface $trans */
+  $trans = \Drupal::service('transliteration');
+
+  foreach ($variables['items'] as $delta => $item) {
+    $displayValue = $result[$delta]->getDisplayValue();
+
+    $attributes = $item['attributes'];
+    $attributes = $attributes->addClass('du-cat-' . Html::getClass($trans->transliterate($displayValue)));
+    $variables['items'][$delta]['attributes'] = $attributes;
+  }
+}
+
+/**
+ * Implements hook_preprocess_file_link().
+ */
+function fds_green_theme_preprocess_file_link(array &$variables) {
+  $file = $variables['file'];
+  $result = \Drupal::entityQuery('media')
+    ->condition('bundle', 'document')
+    ->condition('field_media_file.target_id', $file->id())
+    ->execute();
+  if (!empty($result)) {
+    $media = \Drupal::entityTypeManager()->getStorage('media')->load(reset($result));
+    $variables['link']['#title'] = $media->label();
+  }
+}

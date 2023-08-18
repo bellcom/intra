@@ -1,0 +1,58 @@
+id: faxe_d7_paragraph_banner
+label: Faxe D7 Banner
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: banner
+  track_changes: true
+process:
+  field_os2web_banner_heading: field_banner_headline
+  field_os2web_banner_subheading: field_banner_text
+  field_os2web_banner_links:
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFieldLinks
+      source: field_knap_link
+    - plugin: field_link
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_banner_billede
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_banner_billede
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        -  createFileManaged
+  field_os2web_banner_image/target_id: '@migrate_file_fid'
+  field_os2web_banner_image/alt: title
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_banner_paragraph

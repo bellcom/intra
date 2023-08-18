@@ -1,0 +1,41 @@
+<div class="product_showcase_wrapper" data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true">
+  <div class="product_showcase_inner-wrapper">
+    {% for product in content.field_product['#items'].getIterator() %}
+      {% set entity = product.entity %}
+    <div class="product_showcase_element"
+     style="background-image: url({% if entity.field_showcase_blob.value == 'blob_1' %}'/themes/custom/subsites/bellcom_theme/assets/images/blob-1.png'
+      {% elseif entity.field_showcase_blob.value == 'blob_2' %}'/themes/custom/subsites/bellcom_theme/assets/images/blob-2.png'
+      {% elseif entity.field_showcase_blob.value == 'blob_3' %}'/themes/custom/subsites/bellcom_theme/assets/images/blob-3.png' {% endif %});
+       background-repeat: no-repeat; background-size: contain; background-position: center;">
+      <div class="text-block">
+        <div class="product_icon">
+          {% if entity.field_product_icon.value == 'selvbetjening' %}
+          {% include "@bellcom_theme/assets/images/menuboard.svg" %}
+          {% elseif entity.field_product_icon.value == 'webplatforme' %}
+          {% include "@bellcom_theme/assets/images/pointer.svg" %}
+          {% elseif entity.field_product_icon.value == 'datascanner' %}
+          {% include "@bellcom_theme/assets/images/scanner.svg" %}
+          {% elseif entity.field_product_icon.value == 'borgerinddragelse' %}
+          {% include '@bellcom_theme/assets/images/profile2user.svg' %}
+          {% elseif entity.field_product_icon.value == 'valgbemanding' %}
+          {% include '@bellcom_theme/assets/images/edit.svg' %}
+          {% elseif entity.field_product_icon.value == 'moederdagsorden' %}
+          {% include '@bellcom_theme/assets/images/calendar.svg' %}
+          {% endif %}
+        </div>
+        <div class="product_heading">
+          <h2>{{ entity.title.value }}</h2>
+        </div>
+        <div class="product_description">
+          <p>{{ entity.field_product_teaser.value }}</p>
+        </div>
+      </div>
+      <div class="product_btn">
+        <a href="{{ path('entity.node.canonical', {'node': entity.id}) }}"><span>Læs mere</span>{% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "white" } %}</a>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+</div>

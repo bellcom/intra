@@ -1,0 +1,23 @@
+id: faxekommune_d7_paragraph_simple_text
+label: Faxekommune D7 Paragraph Simple Text
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+source:
+  plugin: d7_paragraphs_item
+  bundle: afsnit_paragraphs
+process:
+  field_os2web_simple_text_heading:
+    - plugin: default_value
+      default_value: ''
+  field_os2web_simple_text_body:
+    - plugin: sub_process
+      source: field_afsnit_indhold
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_simple_text_paragraph

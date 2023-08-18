@@ -1,0 +1,194 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function fds_faxe_sub_theme_preprocess_block(&$variables) {
+  if ($variables['elements']['#id']  == 'fds_faxe_sub_theme_indholdfield') {
+    $node = $variables['content']['field']['#object'];
+    $ext_links =  $node->get('field_ext_links')->getValue();
+    foreach( $ext_links as $ext_link) {
+      $url = Url::fromUri($ext_link['uri']);
+      $link = new Link($ext_link['title'], $url);
+      $variables['content']['field'][] = $link->toRenderable();
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fds_faxe_sub_theme_preprocess_page(array &$variables) {
+  $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
+  $variables['theme_settings']['footer']['footer_show_latest_content'] = theme_get_setting('footer_show_latest_content');
+  $variables['theme_settings']['branding']['branding_toggle'] = theme_get_setting('branding_toggle');
+  $variables['theme_settings']['branding']['branding_text'] = theme_get_setting('branding_text');
+}
+
+/**
+ * Implements hook_form_search_block_form_alter().
+ */
+function fds_faxe_sub_theme_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  $form['keys']['#attributes']['placeholder'] = t('Søg på hjemmesiden');
+}
+
+/**
+ * Implements hook_form_search_form_alter().
+ */
+function fds_faxe_sub_theme_form_search_form_alter(&$form, FormStateInterface $form_state) {
+  $form['basic']['label'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['search-form-label'],
+    ],
+    'markup' => ['#markup' => $form['basic']['keys']['#title']->render()],
+  ];
+  $form['basic']['keys']['#title'] = '';
+  $form['basic']['#attributes'] = [];
+  $form['basic']['search-line'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['container-inline'],
+    ],
+    'keys' => $form['basic']['keys'],
+    'submit' => $form['basic']['submit'],
+  ];
+
+  unset($form['basic']['keys']);
+  unset($form['basic']['submit']);
+}
+
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_faxe_sub_theme_preprocess_swiftmailer(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.svg';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_faxe_sub_theme_preprocess_anonymous_subscriptions_message(array &$variables) {
+  $subscription = $variables['subscription'];
+  if (!empty($subscription->type->value) && $subscription->type->value == 'os2web_hearings_hearing_case') {
+    $variables['link'] = Link::fromTextAndUrl(t('Klik her for at gå til høringer og afgørelser'), Url::fromUserInput('/hoeringer-og-afgoerelser'));
+  }
+}
+
+/**
+ * Implements hook_preprocess_term().
+ */
+function fds_faxe_sub_theme_preprocess_taxonomy_term(array &$variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['term'];
+
+  if ($variables['view_mode'] == 'full' && $term->bundle() == 'os2web_sektion') {
+    // Get all pages that are using this section and are promoted.
+    $entity_ids = getSectionPromotedNodes($term->id());
+    if (empty($entity_ids)) {
+      return;
+    }
+
+    $nodes = Node::loadMultiple($entity_ids);
+    $promoted_node_links = [];
+
+    /** @var \Drupal\node\NodeInterface $node */
+    foreach ($nodes as $node) {
+      $promoted_node_links[] = [
+        'title' => $node->label(),
+        'url' => $node->toUrl(),
+      ];
+    }
+
+    $variables['#promoted_node_links'] = $promoted_node_links;
+  }
+
+  // Background color
+  if ($term->field_os2web_color && $term->field_os2web_color->value) {
+    $variables['background_color'] = $term->field_os2web_color->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function fds_faxe_sub_theme_preprocess_node(array &$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if ($variables['view_mode'] == 'search_result' && $node->getType() == 'os2web_page') {
+    $sectionLabels = [];
+    if ($section_id = $node->field_os2web_page_section->target_id) {
+      $parents = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadAllParents($section_id);
+
+      foreach ($parents as $parent) {
+        $sectionLabels[] = $parent->label();
+      }
+
+      $variables['#section_labels'] = array_reverse($sectionLabels);
+    }
+  }
+  if ($variables['view_mode'] == 'full' && $node->getType() == 'os2web_event') {
+    $startDateAttr = $variables['content']['field_os2web_event_start_date'][0]['#attributes']['datetime'];
+    $endDateAttr = $variables['content']['field_os2web_event_end_date'][0]['#attributes']['datetime'];
+    $endDateText = $variables['content']['field_os2web_event_end_date'][0]['#text'];
+    if(substr($startDateAttr, 0 , 11) == substr($endDateAttr, 0 , 11)) {
+      $newEndDate = substr($endDateText, -5);
+      $variables['content']['field_os2web_event_end_date'][0]['#text'] = 'til ' . $newEndDate;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_media().
+ */
+function fds_faxe_sub_theme_preprocess_media(array &$variables) {
+  $media = $variables['media'];
+  $name = $media->getName();
+  if (!empty($name)) {
+    $mediaArray = $media->toArray();
+    if (!empty($mediaArray['field_media_file'][0]['target_id'])) {
+      $fileId = $mediaArray['field_media_file'][0]['target_id'];
+      $file = \Drupal\file\Entity\File::load($fileId);
+      $file->setFilename($name);
+    }
+  }
+}
+
+function fds_faxe_sub_theme_preprocess_field(&$variables) {
+  $field_name = $variables['element']['#field_name'];
+  $view_mode = $variables['element']['#view_mode'];
+  $user = \Drupal::currentUser();
+
+  // Check if the field is "field_selfbetjening_ref" and if the current user is
+  // in the "editor" role.
+  if ($field_name == 'field_selfbetjening_ref' && $user->hasRole('editor') && $view_mode == 'full') {
+    // Hide the field output for the "editor" role.
+    $variables['items'] = [];
+  }
+}

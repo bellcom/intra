@@ -1,0 +1,470 @@
+{# <div class="section section--social-icon-teasers">
+  <div class="container">
+    <div class="preheader">
+      <h2 role="region" aria-label="SOCIALE MEDIER" class="h4">SOCIALE MEDIER</h2>
+    </div>
+
+    <br>
+
+    <div class="social-icon-teasers">
+      <div class="row">
+
+        {% if theme_settings.social.facebook.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.facebook.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--facebook social-icon-teaser--image"
+              title="{{ theme_settings.social.facebook.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/facebook.jpg" alt="Facebook" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Facebook">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-facebook-f"></span>
+                </span>
+                Facebook
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.twitter.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.twitter.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--twitter social-icon-teaser--image"
+              title="{{ theme_settings.social.twitter.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/twitter.jpg" alt="Twitter" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Twitter">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-twitter-square"></span>
+                </span>
+                Twitter
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.googleplus.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.googleplus.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--google-plus"
+              title="{{ theme_settings.social.googleplus.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/google-plus.jpg" alt="Google+" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Google+">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-google-plus"></span>
+                </span>
+                Google+
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.linkedin.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.linkedin.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--linkedin"
+              title="{{ theme_settings.social.linkedin.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/linkedin.jpg" alt="LinkedIn" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="LinkedIn">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-linkedin"></span>
+                </span>
+                LinkedIn
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.pinterest.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.pinterest.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--pinterest"
+              title="{{ theme_settings.social.pinterest.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/pinterest.jpg" alt="Pinterest" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Pinterest">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-pinterest"></span>
+                </span>
+                Pinterest
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.instagram.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.instagram.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--instagram social-icon-teaser--image"
+              title="{{ theme_settings.social.instagram.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/instagram.jpg" alt="Instagram" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Instagram">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-instagram"></span>
+                </span>
+                Instagram
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.youtube.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.youtube.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--youtube"
+              title="{{ theme_settings.social.youtube.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/youtube.jpg" alt="Youtube" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Youtube">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-youtube"></span>
+                </span>
+                Youtube
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.vimeo.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.vimeo.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--vimeo"
+              title="{{ theme_settings.social.vimeo.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/vimeo.jpg" alt="Vimeo" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="Vimeo">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-vimeo"></span>
+                </span>
+                Vimeo
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if theme_settings.social.github.active %}
+          <div class="col-12 col-sm-4">
+            <a
+              href="{{ theme_settings.social.github.url }}"
+              target="_blank"
+              class="social-icon-teaser social-icon-teaser--github"
+              title="{{ theme_settings.social.github.tooltip }}">
+
+              <img src="{{ base_path ~ directory }}/dist/images/social-icon-teaser/github.jpg" alt="GitHub" />
+
+              <div class="social-icon-teaser__bar"  role="region" aria-label="GitHub">
+                <span class="social-icon-teaser__icon">
+                  <span class="icon fa fa-github"></span>
+                </span>
+                GitHub
+              </div>
+            </a>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div> #}
+<div class="footer-branding">
+  <img alt={{"Footer branding" | trans}} src="{{ base_path ~ directory }}/dist/images/footer-logo.png"/>
+</div>
+<footer class="d-print-none">
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-4 footer-col">
+          <div class="block">
+            <h2>Ballerup kommune</h2>
+            {% if theme_settings.contact_information.address %}
+              <div>
+                {{ theme_settings.contact_information.address }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+              <div>
+                {{ theme_settings.contact_information.zipcode }} {{ theme_settings.contact_information.city }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.email %}
+              <div>
+                E-mail:
+                <a href="mailto: {{ theme_settings.contact_information.email }}">
+                  {{ theme_settings.contact_information.email }}
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.phone_readable %}
+              <div>
+                Tlf.:
+                <a href="tel:{{ theme_settings.contact_information.phone_system }}">
+                  {{ theme_settings.contact_information.phone_readable }}
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.fax_readable %}
+              <div>
+                Fax.:
+                <a href="tel:{{ theme_settings.contact_information.fax_system }}">
+                  {{ theme_settings.contact_information.fax_readable }}
+                </a>
+              </div>
+            {% endif %}
+
+            <br>
+
+            {% if theme_settings.contact_information.vat_no %}
+              <div>
+                CVR-nr.: {{ theme_settings.contact_information.vat_no }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.giro_no %}
+              <div>
+                Giro-nr.: {{ theme_settings.contact_information.giro_no }}
+              </div>
+            {% endif %}
+
+            <div>
+              <a href="/ean">EAN</a>
+            </div>
+
+            {% if theme_settings.contact_information.additional_information %}
+              <div>
+                {{ theme_settings.contact_information.additional_information }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_1__day and theme_settings.working_hours.working_hours__row_1__time %}
+              <div class="row">
+                <div class="col-4 col-sm-5">
+                  {{ theme_settings.working_hours.working_hours__row_1__day }}
+                </div>
+                <div class="col-4 col-sm-7">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_1__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_2__day and theme_settings.working_hours.working_hours__row_2__time %}
+              <div class="row">
+                <div class="col-4 col-sm-5">
+                  {{ theme_settings.working_hours.working_hours__row_2__day }}
+                </div>
+                <div class="col-4 col-sm-7">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_2__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_3__day and theme_settings.working_hours.working_hours__row_3__time %}
+              <div class="row">
+                <div class="col-4 col-sm-5">
+                  {{ theme_settings.working_hours.working_hours__row_3__day }}
+                </div>
+                <div class="col-4 col-sm-7">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_3__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_4__day and theme_settings.working_hours.working_hours__row_4__time %}
+              <div class="row">
+                <div class="col-4 col-sm-5">
+                  {{ theme_settings.working_hours.working_hours__row_4__day }}
+                </div>
+                <div class="col-4 col-sm-7">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_4__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_5__day and theme_settings.working_hours.working_hours__row_5__time %}
+              <div class="row">
+                <div class="col-4 col-sm-5">
+                  {{ theme_settings.working_hours.working_hours__row_5__day }}
+                </div>
+                <div class="col-4 col-sm-7">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_5__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-3 footer-col">
+          {{ page.footer_first }}
+        </div>
+
+        <div class="col-12 col-sm-3 footer-col">
+          {{ page.footer_second }}
+        </div>
+
+        <div class="col-12 col-sm-2 footer-col">
+          <div class="social-icon-list">
+
+            {% if theme_settings.social.facebook.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.facebook.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--facebook social-icon--image"
+                  title="{{ theme_settings.social.facebook.tooltip }}"
+                  aria-label={{"facebook" | trans}}>
+                  <span class="icon fa fa-facebook-f"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.twitter.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.twitter.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--twitter social-icon--image"
+                  title="{{ theme_settings.social.twitter.tooltip }}"
+                  aria-label={{'twitter' | trans}}>
+                  <span class="icon fa fa-twitter-square"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.googleplus.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.googleplus.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--google-plus"
+                  title="{{ theme_settings.social.googleplus.tooltip }}"
+                  aria-label={{'googleplus' | trans}}>
+                  <span class="icon fa fa-google-plus"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.linkedin.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.linkedin.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--linkedin"
+                  title="{{ theme_settings.social.linkedin.tooltip }}"
+                  aria-label={{'linkedin' | trans}}>
+                  <span class="icon fa fa-linkedin"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.pinterest.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.pinterest.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--pinterest"
+                  title="{{ theme_settings.social.pinterest.tooltip }}"
+                  aria-label={{'pinterest' | trans}}>
+                  <span class="icon fa fa-pinterest"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.instagram.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.instagram.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--instagram social-icon--image"
+                  title="{{ theme_settings.social.instagram.tooltip }}"
+                  aria-label={{'instagram' | trans}}>
+                  <span class="icon fa fa-instagram"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.youtube.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.youtube.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--youtube"
+                  title="{{ theme_settings.social.youtube.tooltip }}"
+                  aria-label={{'youtube' | trans}}>
+                  <span class="icon fa fa-youtube"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.vimeo.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.vimeo.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--vimeo"
+                  title="{{ theme_settings.social.vimeo.tooltip }}"
+                  aria-label={{'vimeo' | trans}}>
+                  <span class="icon fa fa-vimeo"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.github.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.github.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--github"
+                  title="{{ theme_settings.social.github.tooltip }}"
+                  aria-label={{'github' | trans}}>
+                  <span class="icon fa fa-github"></span>
+                </a>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

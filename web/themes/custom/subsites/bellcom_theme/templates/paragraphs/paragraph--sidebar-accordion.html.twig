@@ -1,0 +1,81 @@
+{#  #}
+<div class="sidebar-accordion-wrapper">
+<div class="sidebar-accordion__inner-wrapper">
+  <div class="sidebar">
+    <ul class="sidebar-list">
+      {% for accordionProduct in content.field_accordion_product['#items'].getIterator() %}
+      {% set accordionEntity = accordionProduct.entity %}
+      <li class="sidebar-item">
+        <span>
+          {% if accordionEntity.field_product_icon.value == 'selvbetjening' %}
+            {% include "@bellcom_theme/assets/images/menuboard.svg" %}
+          {% elseif accordionEntity.field_product_icon.value == 'webplatforme' %}
+            {% include "@bellcom_theme/assets/images/pointer.svg" %}
+          {% elseif accordionEntity.field_product_icon.value == 'datascanner' %}
+            {% include "@bellcom_theme/assets/images/scanner.svg" %}
+          {% elseif accordionEntity.field_product_icon.value == 'borgerinddragelse' %}
+            {% include '@bellcom_theme/assets/images/profile2user.svg' %}
+          {% elseif accordionEntity.field_product_icon.value == 'valgbemanding' %}
+            {% include '@bellcom_theme/assets/images/edit.svg' %}
+          {% elseif accordionEntity.field_product_icon.value == 'moederdagsorden' %}
+            {% include '@bellcom_theme/assets/images/calendar.svg' %}
+          {% endif %}
+          <span class="sidebar-heading-text">{{ accordionEntity.title.value }}</span>
+          </span>
+        <i class=" fa-solid fa-chevron-right"></i>
+        <div class="sidebar-body" style="display: none;">
+          <div class="sidebar-body-prefix">
+            {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "#344E41" } %}
+            <span>Produkt</span>
+          </div>
+            <h3>{{ accordionEntity.title.value }}</h3>
+            <div class="sidebar-product-description">
+              {{ accordionEntity.field_product_teaser.value }}
+            </div>
+            <div class="sidebar-product-btn">
+              <a href="{{ path('entity.node.canonical', {'node': accordionEntity.id}) }}"><span>Gå til produktside</span>{% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "white" } %}</a>
+            </div>
+        </div>
+      </li>
+      {% endfor %}
+
+
+    </ul>
+  </div>
+  <div class="sidebar-content">
+    <div class="sidebar-box">
+      <div class="box-content">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var sidebarItems = document.querySelectorAll('.sidebar-item');
+    var boxContent = document.querySelector('.box-content');
+
+    sidebarItems.forEach(function(item) {
+      item.addEventListener('click', function() {
+        var bodyText = item.querySelector('.sidebar-body').innerHTML;
+        boxContent.innerHTML = bodyText;
+        boxContent.style.display = 'flex';
+
+        var activeItems = document.querySelectorAll('.sidebar-item.active');
+        activeItems.forEach(function(activeItem) {
+          if (activeItem !== item) {
+            activeItem.classList.remove('active');
+          }
+        });
+
+        item.classList.add('active');
+      });
+    });
+
+    var firstSidebarItem = document.querySelector('.sidebar-item');
+    firstSidebarItem.classList.add('active');
+    boxContent.innerHTML = firstSidebarItem.querySelector('.sidebar-body').innerHTML;
+    boxContent.style.display = 'flex';
+  });
+</script>

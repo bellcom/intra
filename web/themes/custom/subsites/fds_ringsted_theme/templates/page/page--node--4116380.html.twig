@@ -1,0 +1,174 @@
+<!-- Begin - ie -->
+<div class="ie-banner">
+  Du kan ikke bruge ringsted.dk i Internet Explorer. Du skal bruge en anden web-browser. Internet Explorer udgår i slutningen af 2021.
+</div>
+<!-- End - ie -->
+
+<header>
+
+  <div class="custom-header custom-header--static">
+    <div class="custom-header__inner">
+      <div class="container">
+        {% if top_btn_text|length %}
+          <li style="list-style: none;" class="test-class"><a class="top-btn" href="{{ top_btn_url }}">{{ top_btn_text }}</a></li>
+        {% endif %}
+        <!-- Begin - top -->
+        <div class="flexy-row">
+          {% if language_picker %}
+            <ul class="header-flags">
+              <li><a href="{{ language_picker_da }}"><img width="34" height="34" src="{{ base_path ~ directory }}/dist/images/dk.png" alt="Dansk flag" /></a></li>
+              <li><a href="{{ language_picker_en }}"><img width="34" height="34" src="{{ base_path ~ directory }}/dist/images/en.png" alt="Engelsk flag" /></a></li>
+            </ul>
+          {% endif %}
+          <div class="flexy-spacer d-sm-none"></div>
+
+          <!-- Begin - logo -->
+          <a href="{{ url('<front>') }}" class="custom-header__logo">
+
+            {% if custom_logo %}
+              <img src="{{ custom_logo }}" alt="Logo" />
+            {% else %}
+              <img src="{{ base_path ~ directory }}/dist/images/logo.png" alt="Logo" />
+            {% endif %}
+
+          </a>
+          <!-- End - logo -->
+
+          <div class="flexy-spacer"></div>
+
+        </div>
+        <!-- End - top -->
+
+        {% if theme_settings.texts.frontpage_banner_heading or theme_settings.texts.frontpage_banner_subheading %}
+          <!-- Begin - meta -->
+          <div class="custom-header__meta">
+            <h1 class="h1">{{ theme_settings.texts.frontpage_banner_heading }}</h1>
+            <h2 class="h4">{{ theme_settings.texts.frontpage_banner_subheading }}</h2>
+          </div>
+          <!-- End - meta -->
+        {% endif %}
+
+        <div class="menuwrapper d-print-none">
+          <!-- Begin - below -->
+          <!-- Begin - toggle -->
+          <button
+            class="custom-header__button custom-header__button--toggle-megamenu d-sm-none" aria-label="{{ 'Åbn menu' | t }}">
+            <span class="menutoggletitle">Menu</span><span class="icon fa fa-bars"></span>
+          </button>
+          <!-- End - toggle -->
+          {{ page.header__below }}
+          <!-- End - below -->
+          <button class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}">
+            <span class="searchy-label">Søg</span><span class="icon fa fa-search"></span>
+          </button>
+          <!-- Begin - toggle search -->
+          <div class="searchy">
+            {{ page.header__search }}
+          </div>
+          <!-- End - toggle search -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-alert" data-font-resize-wrapper id="">
+  <div class="container">
+    {{ page.alert }}
+  </div>
+</div>
+
+{{ page.featured_top }}
+
+<div class="page-container" style="background: white; border-top: 7px solid #ebebeb;" data-font-resize-wrapper id="">
+  <div class="container" id="main-content">
+    {{ page.highlighted }}
+
+    {% if not is_front %}
+      <div class="row d-print-none">
+        <div class="col-12">
+          <div class="flexy-row">
+            <div class="flexy-spacer"></div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+
+    {% set drupalTag = '<drupal-render-placeholder>'%}
+    {% set has_main_content = page.content|render|striptags(drupalTag)|trim is not empty %}
+    {% if has_main_content %}
+      <div class="row row-no-flex">
+        {% set has_sidebar_first = page.sidebar_first|render|striptags(drupalTag)|trim is not empty %}
+        {% set has_sidebar_second = page.sidebar_second|render|striptags(drupalTag)|trim is not empty %}
+
+        {% set sidebar_first_classes = [
+          has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+          has_sidebar_first and has_sidebar_second is empty ? 'sideblock-venstre d-print-none',
+        ] %}
+        {% if has_sidebar_first %}
+          <aside {{ attributes.addClass(sidebar_first_classes) }}>
+            <div class="layout-sidebar-left">
+              {{ page.sidebar_first }}
+            </div>
+          </aside>
+        {% endif %}
+
+        {% set content_classes = [
+          has_sidebar_first and has_sidebar_second ? 'col-12 col-md-6',
+          has_sidebar_first and has_sidebar_second is empty ? 'hovedindhold-hojre',
+          has_sidebar_second and has_sidebar_first is empty ? 'hovedindhold-venstre',
+          has_sidebar_first is empty and has_sidebar_second is empty ? 'col-12'
+        ] %}
+
+        {% if has_main_content %}
+          <main {{ content_attributes.addClass(content_classes) }}>
+            {{ page.breadcrumb }}
+            {{ page.content }}
+          </main>
+        {% endif %}
+
+        {% set sidebar_second_classes = [
+          has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+          has_sidebar_first is empty and has_sidebar_second ? 'sideblock-hojre d-print-none',
+        ] %}
+        {% if has_sidebar_second %}
+          <aside {{ attributes.addClass(sidebar_second_classes) }}>
+            <div class="layout-sidebar-right">
+              {% if show_action_buttons %}
+                {% include '@fds_ringsted_theme/includes/action-buttons.html.twig' %}
+              {% endif %}
+              <div class="box">
+                <div class="box__body">
+                  {{ page.sidebar_second }}
+                </div>
+              </div>
+            </div>
+          </aside>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_ringsted_theme/includes/footer.html.twig' %}
+
+<div class="d-none">
+  {{ page.embedded_code }}
+</div>
+
+<script>
+
+  // Add internet explorer class to <body>
+  (function() {
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+
+    if(isIE) {
+      document.documentElement.classList.add('ie');
+    }
+  })();
+</script>

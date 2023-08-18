@@ -1,0 +1,12 @@
+<nav class="main-menu">
+  <ul>
+    {% for item in items %}
+      <li{{ item.attributes }}>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

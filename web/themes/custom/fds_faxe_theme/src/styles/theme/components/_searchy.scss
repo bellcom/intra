@@ -1,0 +1,321 @@
+// |--------------------------------------------------------------------------
+// | Searchy
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .searchy
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin searchy-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.searchy {
+  position: relative;
+
+  .region {
+    display: none;
+    position: absolute;
+
+    top: 0;
+    right: 100%;
+
+    z-index: 100;
+
+    padding-right: 10px;
+
+    width: 250px;
+  }
+
+  &.searchy--visible-form {
+
+    .region {
+      display: block;
+    }
+  }
+}
+
+
+.page--s {
+  .container {
+    .row {
+      .sidebar-column {
+        .layout-sidebar-left {
+          padding: 0;
+
+          .region-sidebar-first {
+            #block-os2web-search-section-facet {
+              background-color: white;
+              padding: 30px;
+
+              h2 {
+                color: #00789e;
+                font-weight: 400;
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+              }
+            }
+            #block-fds-faxe-theme-sitemap-link {
+              .field {
+                p {
+                  display: flex;
+                  .sidebar-selvbetjening-button {
+                    padding: 18px 30px;
+                    background: #6faa59;
+                    color: white;
+                    text-decoration: none;
+                    font-size: 2rem;
+                    position: relative;
+                    transition: all .3s ease;
+
+                    &:hover {
+                      background-color: #528041;
+                    }
+
+                    &:hover:after {
+                      background-color: #00516b;
+                    }
+
+                    &:after {
+                      content: "\f054";
+                      font-family: 'FontAwesome';
+                      font-size: 18px;
+                      height: 100%;
+                      position: absolute;
+                      background-color: #00789e;
+                      top: 0;
+                      left: 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      padding: 0 25px;
+                      border-left: 1px solid white;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .content-column {
+        .layout-content {
+          padding: 0;
+          background-color: transparent;
+
+          .region-content {
+            #block-os2web-search-os2web-search-page-content {
+              background-color: white;
+              margin: 0;
+              padding: 40px;
+
+              h2 {
+                font-weight: bold;
+                margin-bottom: 20px;
+              }
+
+              form {
+                .form--inline {
+                  width: 100%;
+
+                  .form-item {
+                    margin: 0;
+                    width: 100%;
+                    display: flex;
+
+                    .search-input__input {
+                      border: none;
+                      background-color: #f4f4f4;
+                      height: 55px;
+                    }
+                  }
+                  .form-actions {
+                    margin: 0;
+
+                    &:before {
+                      position: absolute;
+                      display: block;
+                      top: 50%;
+                      right: 50%;
+                      transform: translate(50%, -50%);
+                      font-size: 1.8rem;
+                      z-index: 100;
+                      pointer-events: none;
+                      font-family: FontAwesome;
+                      content: "\f002";
+                      color: #fff;
+                    }
+                    &:after {
+                      display: none !important;
+                    }
+                    input {
+                      height: 100%;
+                    }
+                  }
+                }
+              }
+            }
+            #block-fds-faxe-theme-main-content {
+              .views-element-container {
+                .view-os2web-search {
+                  margin: 0 !important;
+                  padding: 0 !important;
+
+                  .view-header {
+                    background-color: #e9e9e9;
+                    padding: 40px;
+                    margin-bottom: 15px;
+
+                    div {
+                      display: flex;
+                      justify-content: space-evenly;
+                      align-items: center;
+                      margin-top: 20px;
+                      gap: 10px;
+
+                      @media only screen and (max-width: 768px) {
+                        flex-direction: column;
+                      }
+
+                      a {
+                        background-color: #5e5e5e;
+                        color: #fff;
+                        text-align: center;
+                        padding: 18px 10px;
+                        height: 100%;
+                        display: -webkit-inline-box;
+                        display: -ms-inline-flexbox;
+                        display: inline-flex;
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        text-decoration: none;
+                        flex-basis: 33%;
+                        transition: .3s ease;
+                        width: 100%;
+
+                        &:hover {
+                          background-color: #404040;
+                        }
+                      }
+                      a.active {
+                        background-color: #33769a;
+                      }
+                    }
+                  }
+                  .view-content {
+                    -webkit-margin-before: 0;
+                    margin-block-start: 0;
+                    -webkit-margin-after: 0;
+                    margin-block-end: 0;
+                    -webkit-margin-start: 0;
+                    margin-inline-start: 0;
+                    -webkit-margin-end: 0;
+                    margin-inline-end: 0;
+                    -webkit-padding-start: 0;
+                    padding-inline-start: 0;
+                    list-style-type: none;
+                    .views-row {
+                      background-color: white;
+                      .entity-teaser--os2web-news {
+                        background-color: white;
+                        border-radius: 0px;
+                        box-shadow: none;
+                      }
+                      a {
+                        padding: 30px;
+
+                        .entity-teaser__body {
+                          .field--name-field-os2web-page-heading {
+                            padding-top: 30px !important;
+                          }
+                        }
+                        .title {
+                          color: black !important;
+                          font-size: 2.4rem;
+                        }
+                        p {
+                          strong {
+                            background-color: yellow;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .searchy {
+
+    .region {
+      width: 600px;
+    }
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

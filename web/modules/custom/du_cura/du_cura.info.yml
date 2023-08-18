@@ -1,0 +1,8 @@
+name: 'du_cura'
+type: module
+description: 'Digitauniverse CURA'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Custom'
+dependencies:
+  - os2web_rest_api

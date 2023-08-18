@@ -1,0 +1,270 @@
+// |--------------------------------------------------------------------------
+// | Search result
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-search-result
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-search-result-mixin() {
+}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+.path-frontpage .sogeresultater {
+  display: none;
+}
+.sogeresultater {
+  display: none;
+}
+.page--s {
+  .sogeresultater {
+    display: block;
+  }
+  .layout-content {
+    padding-top: 0;
+    margin-bottom: 120px;
+    [class*="search-page"] {
+      padding: 40px 40px;
+      margin-left: -($side-shift-size);
+      margin-right: -($side-shift-size);
+      h2 {
+        margin: 0;
+        margin-bottom: 40px;
+        font-size: 25px;
+        @include media($sm) {
+          font-size: 27px;
+        };
+        @include media($md) {
+          font-size: 32px;
+        };
+      }
+      & > form {
+        margin-bottom: 0 !important;
+        .form--inline {
+          display: flex;
+          margin: 0;
+          .form-type-textfield {
+            //search input block
+            flex-grow: 1;
+            margin: 0;
+            input {
+              width: 100%;
+              background-color: $gray-secondary;
+              padding: 18px 30px;
+              font-size: 1.6rem;
+              color: $color-black;
+              border: 0;
+              border-radius: 0;
+              height: 6rem;
+              &::placeholder {
+                font-size: 1.6rem;
+                color: $gray-helper-color;
+              }
+            }
+          }
+          .form-actions {
+            //submit button
+            color: $color-white;
+            margin: 0;
+            position: relative;
+            width: 92px;
+            input {
+              width: 100%;
+              background-color: $background_color__primary;
+              border: 0;
+              height: 6rem;
+              border-radius: 0;
+              color: transparent;
+              transition: background-color 0.5s;
+              &:hover {
+                background-color: $background_color__navigation;
+              }
+            }
+            &:before {
+              position: absolute;
+              display: block;
+              top: 50%;
+              right: 50%;
+              transform: translateY(-50%);
+              font-size: 1.8rem;
+              z-index: 100;
+              pointer-events: none;
+              font-family: FontAwesome;
+              content: "\f002";
+              color: $color-white;
+            }
+            &:after {
+              position: absolute;
+              display: block;
+              top: 50%;
+              right: 35%;
+              transform: translate(40%, -50%);
+              z-index: 100;
+              pointer-events: none;
+              font-family: FontAwesome;
+              content: "";
+              color: $color-white;
+            }
+          }
+        }
+      }
+    }
+    .view-os2web-search {
+      padding: 0 40px 40px;
+      margin-left: -($side-shift-size);
+      margin-right: -($side-shift-size);
+      .view-content {
+        // fake ul
+        display: block;
+        list-style-type: decimal;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+        .views-row {
+          //fake li
+          display: list-item;
+          text-align: -webkit-match-parent;
+          &::marker {
+            unicode-bidi: isolate;
+            font-variant-numeric: tabular-nums;
+            text-transform: none;
+            text-indent: 0px !important;
+            text-align: start !important;
+            text-align-last: start !important;
+          }
+          article {
+            h2 {
+              margin-top: 20px;
+              margin-bottom: 11px;
+              .search-results-links {
+                text-decoration: none;
+                &:hover {
+                  text-decoration: underline;
+                }
+                .field--name-title {
+                }
+              }
+            }
+            .field--name-field-os2web-page-intro {
+              p {
+                margin-bottom: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.entity-search-result {
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+  }
+
+  .background-color--primary & {
+    background-color: $background_color__default;
+  }
+}
+
+a.entity-search-result {
+  max-width: unset;
+
+  &,
+  &:visited,
+  &:focus {
+    color: $color-text;
+  }
+}
+
+.search-block-page {
+  .title {
+    color: #2a5e6f;
+    font-weight: 400;
+    span {
+      color: #2a5e6f;
+      font-weight: 400;
+    }
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  p {
+    margin: 0 0 11px;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {
+}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {
+}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {
+}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+}
+
+// Print
+@media print {
+}
+
+// Touch
+.touchevents {
+}
+
+// No touch
+.no-touchevents {
+}

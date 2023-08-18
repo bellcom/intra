@@ -1,0 +1,15 @@
+a[data-extlink] {
+    color: $color-primary;
+    position: relative;
+    padding-right: 15px;
+    background-image: url("../images/Pil-rotated.svg");
+    background-repeat: no-repeat;
+    background-position: 100% -3px;
+    background-size: 14px 23px;
+    &:after {
+        display: none;
+    }
+    &:hover {
+        color: $color-green-002; 
+    }
+}

@@ -1,0 +1,44 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% set two_columns = (paragraph.field_os2web_section_par_heading.value or paragraph.field_os2web_section_par_image.value) %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if two_columns %}
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            {{ content.field_os2web_section_par_image }}
+            {{ content.field_os2web_section_par_heading }}
+          </div>
+          <div class="col-12 col-lg-9">
+            <div class="row">
+              {% for term_link in _context['#child_term_links'] %}
+                  <div class="box box--section-link">
+                    <div class="box__body">
+                      <a href="{{ term_link.url }}">{{ term_link.title }}</a>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="row">
+          {% for term_link in _context['#child_term_links'] %}
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="box box--section-link">
+                <div class="box__body">
+                  <a href="{{ term_link.url }}">{{ term_link.title }}</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

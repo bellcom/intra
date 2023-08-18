@@ -1,0 +1,112 @@
+// |--------------------------------------------------------------------------
+// | Lists
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .lists
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin lists-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.accordion-content,
+.field--name-field-os2web-page-keyword,
+.field--type-text-long {
+
+  &:not(.field--widget-text-textarea) {
+
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+      color: inherit;
+      line-height: $body-text-line-height;
+
+      li {
+        margin-top: map-get($spacers, 3);
+        list-style-type: none;
+        position: relative;
+        padding-left: 30px !important;
+        line-height: $body-text-line-height;
+
+        &::before {
+          content: "■";
+          position: absolute;
+          left: 5px;
+          top: -1px;
+          font-size: 20px;
+          color: $color__bullets;
+        }
+      }
+    }
+  }
+}
+
+.field--type-text-long {
+
+  a {
+    font-weight: $font-weight-bold;
+    text-decoration: underline;
+  }
+}
+
+
+ul {
+  li:before {
+    top: -1px !important;
+    left: 0px !important;
+    color: $color__bullets;
+    font-size: 22px !important;
+  }
+}
+
+  // --------------------------------------------------
+  // Responsive
+  // --------------------------------------------------
+
+  // Mobile - and up
+  @include media-breakpoint-up(xs) {}
+
+  // Mobile - only
+  @include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+  // Tablet - and up
+  @include media-breakpoint-up(sm) {}
+
+  // Tablet - only
+  @include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+  // Desktop - and up
+  @include media-breakpoint-up(md) {}
+
+  // Desktop - only
+  @include media-breakpoint-only(md, $grid-breakpoints) {}
+
+  // Large desktop - and up
+  @include media-breakpoint-up(lg) {}
+
+  // Large desktop - only
+  @include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+  // Extra large desktop - and up
+  @include media-breakpoint-up(xl) {}
+
+  // Print
+  @media print {}
+
+  // Touch
+  .touchevents {}
+
+  // No touch
+  .no-touchevents {}
+

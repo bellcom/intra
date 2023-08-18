@@ -1,0 +1,17 @@
+{% set images = paragraph.field_client_logo %}
+{% set links = paragraph.field_client_link %}
+<div class="clients-wrapper" data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true">
+  <div class="clients_inner-wrapper">
+    {% if images|length %}
+      {% set counter = 0 %}
+      {% for key, item in images %}
+        {% if counter < 8 %}
+          <a class="client-element" href="{{ links[key].uri }}" target="_blank">
+            <img src="{{ file_url(item.entity.uri.value) }}" alt="{{ item.alt }}" />
+          </a>
+          {% set counter = counter + 1 %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

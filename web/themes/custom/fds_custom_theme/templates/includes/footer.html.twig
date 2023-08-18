@@ -1,0 +1,258 @@
+<footer class="d-print-none">
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 footer-col">
+          <section>
+            <img src="{{ base_path ~ directory }}/dist/images/logo--footer.svg" alt="Logo" />
+
+            <br>
+            <br>
+
+            <div class="row">
+
+              {% if theme_settings.contact_information.email %}
+                <div class="col-sm-6">
+                  <a href="mailto: {{ theme_settings.contact_information.email }}">
+                    {{ theme_settings.contact_information.email }}
+                  </a>
+                </div>
+              {% endif %}
+
+              {% if theme_settings.contact_information.phone_readable %}
+                <div class="col-sm-6">
+                  <div class="align-text-sm-right">
+                    <a href="tel: {{ theme_settings.contact_information.phone_system }}">
+                      {{ theme_settings.contact_information.phone_readable }}
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col-md-5">
+                <br>
+
+                {% if theme_settings.contact_information.address %}
+                  <div>
+                    {{ theme_settings.contact_information.address }}
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+                  <div>
+                    {{ theme_settings.contact_information.zipcode }} {{ theme_settings.contact_information.city }}
+                  </div>
+                {% endif %}
+
+              </div>
+              <div class="col-md-7">
+
+                {% if theme_settings.working_hours.working_hours__row_1__day and theme_settings.working_hours.working_hours__row_1__time %}
+                  <div class="row">
+                    <div class="col-4 col-sm-5">
+                      {{ theme_settings.working_hours.working_hours__row_1__day }}
+                    </div>
+                    <div class="col-4 col-sm-7">
+                      <div class="align-text-right">
+                        {{ theme_settings.working_hours.working_hours__row_1__time }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.working_hours.working_hours__row_2__day and theme_settings.working_hours.working_hours__row_2__time %}
+                  <div class="row">
+                    <div class="col-4 col-sm-5">
+                      {{ theme_settings.working_hours.working_hours__row_2__day }}
+                    </div>
+                    <div class="col-4 col-sm-7">
+                      <div class="align-text-right">
+                        {{ theme_settings.working_hours.working_hours__row_2__time }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.working_hours.working_hours__row_3__day and theme_settings.working_hours.working_hours__row_3__time %}
+                  <div class="row">
+                    <div class="col-4 col-sm-5">
+                      {{ theme_settings.working_hours.working_hours__row_3__day }}
+                    </div>
+                    <div class="col-4 col-sm-7">
+                      <div class="align-text-right">
+                        {{ theme_settings.working_hours.working_hours__row_3__time }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.working_hours.working_hours__row_4__day and theme_settings.working_hours.working_hours__row_4__time %}
+                  <div class="row">
+                    <div class="col-4 col-sm-5">
+                      {{ theme_settings.working_hours.working_hours__row_4__day }}
+                    </div>
+                    <div class="col-4 col-sm-7">
+                      <div class="align-text-right">
+                        {{ theme_settings.working_hours.working_hours__row_4__time }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.working_hours.working_hours__row_5__day and theme_settings.working_hours.working_hours__row_5__time %}
+                  <div class="row">
+                    <div class="col-4 col-sm-5">
+                      {{ theme_settings.working_hours.working_hours__row_5__day }}
+                    </div>
+                    <div class="col-4 col-sm-7">
+                      <div class="align-text-right">
+                        {{ theme_settings.working_hours.working_hours__row_5__time }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+              </div>
+            </div>
+
+            <br>
+            <br>
+
+            {% if theme_settings.contact_information.additional_information %}
+              <div>
+                {{ theme_settings.contact_information.additional_information }}
+              </div>
+            {% endif %}
+          </section>
+        </div>
+        <div
+          class="col-12 col-sm-12 col-md-4 footer-col">
+          <section>
+            <div class="align-text-left">
+              {{ page.footer_first }}
+            </div>
+
+            <nav role="navigation">
+              <div class="social-icon-list">
+
+                {% if theme_settings.social.facebook.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.facebook.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--facebook social-icon--image"
+                      title="{{ theme_settings.social.facebook.tooltip }}">
+                      <img src="{{ base_path ~ directory }}/dist/images/social-icon/facebook.png" alt="{{ 'Facebook ikon' | trans }}" />
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.twitter.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.twitter.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--twitter social-icon--image"
+                      title="{{ theme_settings.social.twitter.tooltip }}">
+                      <img src="{{ base_path ~ directory }}/dist/images/social-icon/twitter.png" alt="{{ 'Twitter ikon' | trans }}" />
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.googleplus.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.googleplus.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--google-plus"
+                      title="{{ theme_settings.social.googleplus.tooltip }}">
+                      <span class="icon fa fa-google-plus"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.linkedin.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.linkedin.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--linkedin"
+                      title="{{ theme_settings.social.linkedin.tooltip }}">
+                      <span class="icon fa fa-linkedin"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.pinterest.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.pinterest.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--pinterest"
+                      title="{{ theme_settings.social.pinterest.tooltip }}">
+                      <span class="icon fa fa-pinterest"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.instagram.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.instagram.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--instagram social-icon--image"
+                      title="{{ theme_settings.social.instagram.tooltip }}">
+                      <img src="{{ base_path ~ directory }}/dist/images/social-icon/instagram.png" alt="{{ 'Instagram ikon' | trans }}" />
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.youtube.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.youtube.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--youtube"
+                      title="{{ theme_settings.social.youtube.tooltip }}">
+                      <span class="icon fa fa-youtube"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.vimeo.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.vimeo.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--vimeo"
+                      title="{{ theme_settings.social.vimeo.tooltip }}">
+                      <span class="icon fa fa-vimeo"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+                {% if theme_settings.social.github.active %}
+                  <div>
+                    <a
+                      href="{{ theme_settings.social.github.url }}"
+                      target="_blank"
+                      class="social-icon social-icon--github"
+                      title="{{ theme_settings.social.github.tooltip }}">
+                      <span class="icon fa fa-github"></span>
+                    </a>
+                  </div>
+                {% endif %}
+
+              </div>
+            </nav>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

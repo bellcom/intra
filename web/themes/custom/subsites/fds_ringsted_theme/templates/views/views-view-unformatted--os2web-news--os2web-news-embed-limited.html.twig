@@ -1,0 +1,11 @@
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+
+<div class="row">
+  {% for row in rows %}
+    <div class="col-12 col-md-4">
+      {{- row.content -}}
+    </div>
+  {% endfor %}
+</div>

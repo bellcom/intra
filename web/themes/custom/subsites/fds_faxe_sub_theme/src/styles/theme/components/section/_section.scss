@@ -1,0 +1,229 @@
+// |--------------------------------------------------------------------------
+// | Section
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .section
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin section-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.section-heading {}
+.section-heading__title {
+  margin-top: 0;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: $h5-font-size;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+.section--latest {
+  padding-top: 5px;
+  padding-bottom: 20px;
+  background-color: $background_color__footer_secondary;
+
+  &, p {
+    color: #fff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: $h4-font-size;
+    color: rgba(255, 255, 255, 1);
+  }
+
+  ul {
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      margin-top: 3px;
+      margin-left: 0;
+      padding-left: 0;
+      margin-bottom: 0 !important;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .block--latest-content {
+
+    .views-field-changed {
+      display: none;
+    }
+  }
+
+  .block--last-visits {
+
+    ul {
+
+      li {
+
+        &:before {
+          left: 12px;
+        }
+      }
+    }
+  }
+}
+
+.section--alert {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  color: #000;
+  background-color: #ff9e18;
+}
+
+.section--breadcrumb-bar {
+  padding: 0;
+  margin-bottom: 6rem;
+}
+.section--social-icon-teasers {
+  border-top: 1px solid #e6e6e6;
+
+  background-color: #fff;
+}
+
+body {
+
+  .section--banner-search {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/banner-search.jpg');
+
+    form#views-exposed-form-os2web-search-os2web-search-page {
+      padding: 20px;
+      margin: auto;
+
+      max-width: 650px;
+
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, .6);
+
+      .form--inline {
+        position: relative;
+
+        .form-input {
+          padding: 15px 70px 15px 25px;
+
+          font-size: 1.8rem;
+
+          max-width: none !important;
+        }
+      }
+
+      .form-actions {
+        width: 70px;
+
+        .form-submit {
+          width: 70px;
+          height: 50px;
+        }
+
+        &:after {
+          top: 13px;
+          right: 20px;
+
+          font-size: 2.2rem;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+
+  .section--latest {
+    padding-top: 25px;
+    padding-bottom: 40px;
+  }
+
+  .section--alert {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .section--banner-search {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .section--alert {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .section--banner-search {
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

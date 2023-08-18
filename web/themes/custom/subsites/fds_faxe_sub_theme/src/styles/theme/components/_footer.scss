@@ -1,0 +1,230 @@
+// |--------------------------------------------------------------------------
+// | Footer
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .footer
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+footer {
+  border-top: 70px solid $background_color__secondary;
+  background-color: $background_color__default;
+ 
+  .footer {
+    padding-block: 80px;
+    border: 0;
+    margin: 0;
+    > .container {
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        background-image: url(../images/footer__watermark.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 306px;
+        height: 365px;
+        top: -150px;
+        right: 0;
+        pointer-events: none;
+      }
+    }
+
+    a, a:hover, a:visited, a:focus, a:active,
+    .is-active > a,
+    .is-active > a:hover,
+    .is-active > a:focus,
+    .is-active > a:visited,
+    .is-active > a:active {
+      color: $color-white;
+    }
+
+    .logo {
+      width: 42px;
+      height: 50px;
+    }
+
+    .footer-col {
+
+      h2 {
+        margin-bottom: 8px;
+        font-weight: $font-weight-bold;
+        font-size: $h4-font-size;
+        line-height: 2.2rem;
+      }
+    }
+
+    &, p {
+      color: #fff;
+    }
+
+    a {
+      font-size: 2rem;
+      color: $color-white;
+      &:focus {
+        outline-color: rgba(255, 255, 255, .5);
+      }
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 0;
+      font-size: 2.4rem;
+    }
+  }
+  .footer-extra-info {
+    flex-wrap:wrap;
+    gap: 10px;
+    * {
+      font-size: 2rem;
+    }
+    & > div {
+        &:not(:last-child) {
+          &::after {
+            padding-left: 10px;
+            content: "|";
+          }
+        }
+      }
+    }
+  .menu {
+    margin: 0;
+
+    li {
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .menu-item {
+      padding-top: 0;
+      padding-bottom: .4em;
+    }
+  }
+
+
+
+
+
+  // h1, h2, h3, h4, h5, h6,
+  // .h1, .h2, .h3, .h4, .h5, .h6,
+  // p.h1, p.h2, p.h3, p.h4, p.h5, p.h6 {
+  //   margin-bottom: 8px;
+  //   color: rgba(255, 255, 255, 1);
+  // }
+  .region-header__main-navigation {
+    margin: 0;
+    padding-left: 0;
+    nav {
+      ul {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        @include media-breakpoint-up(md) {
+          flex-direction: row;
+        }
+        li {
+          margin: 0;
+          position: relative;
+          list-style: none;
+          float: left;
+          padding: 0;
+          &:before {
+            display: none;
+          }
+         
+          a {
+            font-size: 2rem;
+            display: block;
+            color: $color-white;
+            line-height: 2.8rem;
+            &:focus {
+              outline: 0;
+            }
+            &:hover {
+              text-decoration: none;
+            }
+            & + ul {
+              display: none;
+            }
+            &.is-active {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+  .footer-col {
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  footer .footer {
+    border: none;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

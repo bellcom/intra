@@ -1,0 +1,103 @@
+// |--------------------------------------------------------------------------
+// | Hearings search.
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .paragraph--type--os2web-section-paragraph
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin paragraph--type--os2web-section-paragraph-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+
+
+
+.paragraph--type--os2web-section-paragraph {
+  .field--name-field-os2web-section-par-image {
+    display: inline-block;
+    width: 75px;
+    vertical-align: middle;
+  }
+
+  .field--name-field-os2web-section-par-heading {
+    display: inline-block;
+  }
+
+  .box.box--section-link {
+    margin-right: 10px;
+
+    .box__body {
+      padding: 5px 15px;
+      min-height: auto;
+    }
+
+    a {
+      padding-right: 0;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+  .paragraph--type--os2web-section-paragraph {
+    .row {
+      align-items: center;
+    }
+  }
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

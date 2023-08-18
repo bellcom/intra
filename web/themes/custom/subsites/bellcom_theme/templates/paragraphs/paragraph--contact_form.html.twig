@@ -1,0 +1,33 @@
+{# #}
+<div class="contact-form-wrapper">
+  <div class="contact-form__inner-wrapper">
+    <div class="contact-form__body-content">
+      <div class="contact-form__upper-body">
+        <div class="contact-form__prefix">
+          {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "#344E41" } %}
+          <span>Kontakt</span>
+        </div>
+        <h2>{{ content.field_contactform_heading }}</h2>
+        <div class="contact-form__body">
+          {{ content.field_contactform_body }}
+        </div>
+      </div>
+      <div class="contact-form__socials-body">
+        <div class="socials">
+          <a href="#" class="contact-icon facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="contact-icon instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="contact-icon linkedin">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form__webform">
+      {{ content.field_bellcom_contact_form }}
+    </div>
+  </div>
+</div>

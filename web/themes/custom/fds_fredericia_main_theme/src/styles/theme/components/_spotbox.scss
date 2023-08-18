@@ -1,0 +1,228 @@
+// |--------------------------------------------------------------------------
+// | Spotbox
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .spotbox
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin spotbox-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-default--os2web-spotbox-reference {
+  margin: 20px 0;
+  .field--name-field-os2web-spotbox-reference-h {
+    h2 {
+      text-transform: uppercase;
+      color: #00335b;
+      font-weight: 700;
+    }
+  }
+
+  .field--name-field-os2web-spotbox-reference {
+    display: flex;
+    gap: 20px;
+
+    @media only screen and (max-width: 992px) {
+      flex-direction: column;
+    }
+
+
+    &.tns-slider {
+      display: flex;
+      gap: 20px;
+
+      @media only screen and (max-width: 992px) {
+        flex-direction: row !important;
+      }
+    }
+
+
+    .field__item {
+      min-height: 150px;
+      width: 100%;
+      .spotbox--image {
+        display: flex;
+        line-height: 0;
+        text-decoration: none;
+        height: 100%;
+
+        &.spotbox--background-color-transparent {
+          background-color: transparent;
+
+          .spotbox__heading {
+            h3 {
+              color: black;
+            }
+          }
+          .spotbox__link_text {
+            .field--name-field-os2web-spotbox-link-text {
+              color: black;
+
+            }
+          }
+          .spotbox__arrow svg {
+            fill: black;
+          }
+        }
+        &.spotbox--background-color-primary {
+          background-color: $background_color__primary !important;
+          color: white;
+        }
+        &.spotbox--background-color-secondary {
+          background-color: $background_color__secondary !important;
+          color: white;
+        }
+        &.spotbox--background-color-tertiary {
+          background-color: $background_color__tertiary !important;
+          color: white;
+        }
+
+        &:hover .spotbox__arrow {
+          transform: translateX(0);
+          opacity: 1;
+        }
+
+        @media only screen and (max-width: 540px) {
+          flex-direction: column;
+        }
+        .spotbox__image {
+          width: 30%;
+          height: 100%;
+
+          @media only screen and (max-width: 540px) {
+            width: 100%;
+          }
+
+          .field--name-field-os2web-spotbox-bg-image {
+            height: 100%;
+            display: flex;
+            img {
+              object-fit: cover;
+            }
+          }
+        }
+      }
+      .spotbox__content {
+        line-height: 1;
+        width: 70%;
+        padding: 5px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+
+        @media only screen and (max-width: 540px) {
+          width: 100%;
+          padding: 20px;
+        }
+
+        .spotbox__arrow {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+          opacity: 0;
+          transform: translateX(-20px);
+          transition: .3s ease;
+
+
+          svg {
+            fill: white;
+          }
+        }
+
+        .spotbox__heading {
+          h3 {
+            text-transform: uppercase;
+            color: white;
+            font-weight: 700;
+            margin: 0;
+          }
+        }
+        .spotbox__link_text {
+          .field--name-field-os2web-spotbox-link-text {
+            color: white;
+            height: auto;
+            min-height: auto;
+            box-shadow: none;
+
+          }
+        }
+      }
+    }
+  }
+}
+
+.spotbox--text {
+  text-decoration: none;
+  color: #000 !important;
+
+  .field--name-field-os2web-spotbox-bg-image {
+    box-shadow: none !important;
+  }
+
+  .field--name-field-os2web-spotbox-link-text {
+    box-shadow: none !important;
+    font-size: 20px;
+    padding: 20px 0;
+
+  }
+
+  .read-more-spotbox {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    span {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+
+      i {
+        margin-left: 15px;
+        color: #e82f4c;
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

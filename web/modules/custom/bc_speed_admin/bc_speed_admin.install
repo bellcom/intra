@@ -1,0 +1,62 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function bc_speed_admin_schema() {
+
+    $schema['speed_admin_teacher'] = array(
+        'description' => 'A table to store speed admin teacherdata',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Holds the id value',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'teacher_id' => array(
+                'type' => 'int',
+                'length' => 11,
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'teacher_name' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+            ),
+            'teacher_intro' => array(
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'teacher_email' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => false,
+            ),
+            'teacher_phone' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => false,
+            ),
+            'teacher_image' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => false,
+            ),
+            'teacher_active' => array(
+                'type' => 'int',
+                'length' => 1,
+                'default' => NULL
+            ),
+            'teacher_updated' => array(
+                'mysql_type' => 'timestamp',
+                'not null' => false,
+                'default' => NULL
+            )
+        ),
+        'primary key' => array('id'),
+        'unique keys' => array('teacher_id' => array('teacher_id') )
+    );
+
+    return $schema;
+}

@@ -1,0 +1,228 @@
+// |--------------------------------------------------------------------------
+// | Breadcrumb
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .breadcrumb
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin breadcrumb-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.breadcrumb-container {
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+
+.region-breadcrumb {
+  width: fit-content;
+}
+
+.breadcrumb {
+  background-color: $color-white;
+  margin: 0;
+  padding: 16px 30px;
+  border-radius: 0;
+  display: flex;
+  li {
+    display: flex;
+    font-weight: 600;
+
+    font-size: 1.8rem;
+    color: $blue-primary;
+    a {
+      color: $color-black;
+      text-decoration: none;
+      font-weight: 700;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    i {
+      &::before {
+        font-size: 2rem;
+        color: $background_color__default;
+      }
+      margin-right: 10px;
+    }
+    &:before {
+      margin-left: 10px;
+      margin-right: 10px;
+
+      font-size: 0.4rem;
+      font-family: FontAwesome;
+      content: $fa-var-circle;
+
+      color: #000;
+      transform: translateY(2px);
+    }
+  }
+
+  li:last-child {
+    a {
+      color: $blue-primary !important;
+    }
+  }
+
+  a {
+    font-size: 1.8rem;
+    color: $color-black;
+    cursor: pointer;
+    &, &:hover, &:visited {
+      text-decoration: none;
+    }
+  }
+}
+
+.block-system-breadcrumb-block-search-result {
+  .breadcrumb {
+    padding: 10px;
+
+    li {
+
+      &:before {
+        font-size: 1.4rem;
+      }
+
+      i {
+        &:before {
+          font-size: 1.4rem;
+        }
+      }
+      a {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+.search-result-breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  font-size: 13px;
+  a:first-child {
+    padding: 0 !important;
+    margin: 0 !important;
+    .found-under {
+      margin: 0 10px 0 0;
+      color: #007ca3;
+      min-width: 85px;
+    }
+  }
+
+
+
+  .breadcrumb-ul-list {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    flex-wrap: wrap;
+
+    a:first-child {
+      display: none;
+    }
+
+    .breadcrumb-list-item {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+
+      &:first-child {
+        a:first-child {
+          display: none;
+        }
+      }
+      &:before {
+        display: none;
+      }
+      &:last-child {
+        .breadcrumb-link-item {
+          .breadcrumb-icon {
+            display: none;
+          }
+        }
+      }
+      .breadcrumb-link-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 0 !important;
+        margin: 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+        .breadcrumb-icon {
+          margin: 0 10px;
+        }
+      }
+    }
+
+  }
+
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

@@ -1,0 +1,30 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+{% set timestamp = node.field_os2web_m_start_date.date|date('U') %}
+<div {{ attributes.addClass(classes) }}>
+  {{ content.field_os2web_hearings_heading }}
+  {{ content.field_os2web_hearings_intro }}
+  {{ content.body }}
+  {{ content.field_os2web_hearings_attac_doc }}
+
+  {% if not content['#is_decision'] %}
+  {{ content.field_os2web_hearings_reply }}
+{% endif %}
+  <br />
+
+  {# Link back to result overview. Hardcoded! #}
+  <div class="node__links">
+    <a href="/hoeringer-og-afgoerelser" role="button">
+      {{ 'Tilbage' | trans }}
+    </a>
+  </div>
+
+  <br><br>
+</div>

@@ -1,0 +1,115 @@
+<header class="d-print-none">
+  <div class="custom-header">
+    <div class="custom-header-row custom-header-row--meta">
+      <div class="container">
+        <div class="flexy-row">
+          {{ page.header__logo }}
+
+          <div class="flexy-spacer"></div>
+
+          <div class="d-none d-md-block">
+            {{ page.header__top_navigation }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-header-row custom-header-row--desktop-navigation d-none d-md-block">
+      <div class="container">
+        <div class="flexy-row">
+          <div class="flexy-spacer"></div>
+
+          {{ page.header__main_navigation }}
+          {{ page.small_search }}
+        </div>
+      </div>
+    </div>
+    <div class="custom-header-row custom-header-row--mobile-navigation d-md-none">
+      <div class="container">
+        <div class="flexy-row">
+          <div class="flexy-spacer"></div>
+
+          <div class="custom-mobile-navigation">
+            <div class="custom-mobile-navigation__overlay"></div>
+
+            <button class="custom-mobile-navigation-toggle js-custom-mobile-navigation-toggle">
+              <span class="icon fa fa-angle-down"></span>
+              <span class="icon fa fa-angle-up"></span>
+            </button>
+
+            <div class="custom-mobile-navigation-popup">
+              <div class="custom-mobile-navigation-popup__navigation custom-mobile-navigation-popup__navigation--vertical">
+                {{ page.header__main_navigation }}
+              </div>
+              <div class="custom-mobile-navigation-popup__navigation custom-mobile-navigation-popup__navigation--horizontal">
+                {{ page.header__top_navigation }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{{ page.alert }}
+{{ page.banner_search }}
+{{ page.featured_top }}
+
+{% if not is_front %}
+  <div class="section section--breadcrumb-bar d-print-none layout--hidden-on-sections">
+    <div class="container">
+      <div class="flexy-row">
+        {{ page.breadcrumb }}
+
+        <div class="flexy-spacer"></div>
+
+        {% include '@fds_bg_theme/includes/action-buttons.html.twig' %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="page-container" id="font-resize-wrapper">
+  <div class="container">
+    {{ page.highlighted }}
+
+    <div class="row layout--hidden-on-sections">
+      {%
+        set content_classes = [
+        page.sidebar_first ? 'col-12 col-md-6',
+        page.sidebar_first is empty ? 'col-12 col-md-9'
+      ]
+      %}
+
+      {% if page.sidebar_first %}
+        {% block sidebar_first %}
+          <aside class="col-12 col-md-3">
+            <div class="layout-sidebar-left">
+              {{ page.sidebar_first }}
+            </div>
+          </aside>
+        {% endblock %}
+      {% endif %}
+
+      <main {{ content_attributes.addClass(content_classes) }}>
+        <div class="layout-content">
+          {{ page.content }}
+        </div>
+      </main>
+
+      <aside class="col-12 col-md-3 d-print-none">
+        <div class="layout-sidebar-right">
+          {% if page.sidebar_second %}
+            {% block sidebar_second %}
+              {{ page.sidebar_second }}
+            {% endblock %}
+          {% endif %}
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_bg_theme/includes/footer.html.twig' %}

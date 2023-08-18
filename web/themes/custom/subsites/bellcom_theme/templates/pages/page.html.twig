@@ -1,0 +1,97 @@
+
+{% if page.header %}
+<header class="header" role="banner">
+  <div class="header__inner-wrapper">
+    <div class="logo-wrapper">
+      {{ page.header__logo }}
+    </div>
+    {{ page.header }}
+    <div class="hamburger">
+      <span class="bar bar-1"></span>
+      <span class="bar bar-2"></span>
+      <span class="bar bar-3"></span>
+    </div>
+  </div>
+</header>
+{% endif %}
+
+<main class="main" role="main">
+  <a id="main-content" tabindex="-1"></a>
+
+  {% if page.content %}
+  <div class="main__content">
+    {{ page.content }}
+  </div>
+  {% endif %}
+</main>
+
+
+{% if page.footer %}
+<footer class="footer" role="contentinfo">
+  <div class="footer_inner-wrapper">
+    <div class="footer_logo_links">
+        <div class="footer_logo">
+          {{ page.footer__logo }}
+          <div class="footer-info-wrapper">
+            <div>
+              <h2>Adresse</h2>
+              <p>Bredgade 20, 6000 Kolding</p>
+            </div>
+            <div>
+              <h2>Telefon</h2>
+              <p>70 26 00 85</p>
+            </div>
+            <div>
+              <h2>Åbningstider</h2>
+              <p>Mandag - Fredag</p>
+              <p><strong>09:00 - 17:00</strong></p>
+            </div>
+          </div>
+        </div>
+      <div class="footer_navigation">
+        {{ page.footer }}
+      </div>
+    </div>
+    <div class="footer_newsletter">
+      <h2>Tilmeld dig vores nyhedsbrev</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <form>
+          <input type="email" placeholder="Skriv din e-mail her...">
+          <button id="subscribe-btn" type="submit">
+            <span>Abonnér</span>
+            <div class="icon">
+              <i class="fa-regular fa-paper-plane"></i>
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </button>
+        </form>
+
+    </div>
+  </div>
+  <div class="bottom__footer">
+    <div class="bottom__footer-inner">
+      <div class="left-side">
+        <p>&copy; 2023, Bellcom</p>
+        {{ page.footer__bottom }}
+      </div>
+      <div class="right-side">
+        <p>Følg os på</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-icon facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="footer-icon instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="footer-icon linkedin">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endif %}
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>

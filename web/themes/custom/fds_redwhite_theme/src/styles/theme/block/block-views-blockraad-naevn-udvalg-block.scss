@@ -1,0 +1,19 @@
+div[class*="block-views-blockraad-naevn-udvalg-block"] {
+    border-bottom: 1px solid #586464;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    .views-field.views-field-name {
+        margin-block: 5px;
+        .field-content {
+            a {
+                text-decoration: none;
+                transition: all 0.2s ease-in;
+                &:hover {
+                    font-family: "Museo 700", Helvetica, Arial, sans-serif;
+                    padding-left: 10px;
+                    color: $color-dark-gray2;
+                }
+            }
+        }
+    }
+}

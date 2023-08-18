@@ -1,0 +1,66 @@
+diff --git a/color.module b/color.module
+index 8a8aa5e..2a1c638 100644
+--- a/color.module
++++ b/color.module
+@@ -543,7 +543,7 @@ function _color_rewrite_stylesheet($theme, &$info, &$paths, $palette, $style) {
+       }
+       // Not a pre-set color. Extrapolate from the base.
+       else {
+-        $chunk = _color_shift($palette[$base], $default[$base], $chunk, $info['blend_target']);
++        $chunk = _color_shift(($palette[$base] ?? 0), ($default[$base] ?? 0), ($chunk ?? 0), ($info['blend_target'] ?? 0)) ;
+       }
+     }
+     else {
+@@ -695,14 +695,14 @@ function _color_shift($given, $ref1, $ref2, $target) {
+   $numerator = 0;
+   $denominator = 0;
+   for ($i = 0; $i < 3; ++$i) {
+-    $numerator += ($ref2[$i] - $ref1[$i]) * ($ref2[$i] - $ref1[$i]);
+-    $denominator += ($target[$i] - $ref1[$i]) * ($target[$i] - $ref1[$i]);
++    $numerator += (($ref2[$i] ?? 0) - ($ref1[$i] ?? 0)) * (($ref2[$i] ?? 0) - ($ref1[$i] ?? 0));
++    $denominator += (($target[$i] ?? 0) - ($ref1[$i] ?? 0)) * (($target[$i] ?? 0) - ($ref1[$i] ?? 0));
+   }
+   $delta = ($denominator > 0) ? (1 - sqrt($numerator / $denominator)) : 0;
+ 
+   // Calculate the color that ref2 would be if the assumption was true.
+   for ($i = 0; $i < 3; ++$i) {
+-    $ref3[$i] = $target[$i] + ($ref1[$i] - $target[$i]) * $delta;
++    $ref3[$i] = ($target[$i] ?? 0) + (($ref1[$i] ?? 0) - ($target[$i] ??0)) * ($delta ?? 0);
+   }
+ 
+   // If the assumption is not true, there is a difference between ref2 and ref3.
+@@ -716,7 +716,7 @@ function _color_shift($given, $ref1, $ref2, $target) {
+   // Take the given color, and blend it towards the target.
+   $given = _color_unpack($given, TRUE);
+   for ($i = 0; $i < 3; ++$i) {
+-    $result[$i] = $target[$i] + ($given[$i] - $target[$i]) * $delta;
++    $result[$i] = ($target[$i] ?? 0) + (($given[$i] ?? 0) - ($target[$i] ?? 0)) * ($delta ?? 0);
+   }
+ 
+   // Finally, we apply the extra shift in HSL space.
+@@ -757,15 +757,17 @@ function _color_blend($img, $hex1, $hex2, $alpha) {
+  * Converts a hex color into an RGB triplet.
+  */
+ function _color_unpack($hex, $normalize = FALSE) {
+-  $hex = substr($hex, 1);
+-  if (strlen($hex) == 3) {
+-    $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+-  }
+-  $c = hexdec($hex);
+-  for ($i = 16; $i >= 0; $i -= 8) {
+-    $out[] = (($c >> $i) & 0xFF) / ($normalize ? 255 : 1);
++  $out = array();
++  if (!empty($hex)) {
++    $hex = substr($hex, 1);
++    if (strlen($hex) == 3) {
++      $hex = ($hex[0] ?? 0) . ($hex[0] ?? 0) . ($hex[1] ?? 0) . ($hex[1] ?? 0). ($hex[2] ?? 0) . ($hex[2] ?? 0);
++    }
++    $c = hexdec($hex);
++    for ($i = 16; $i >= 0; $i -= 8) {
++      $out[] = (($c >> $i) & 0xFF) / ($normalize ? 255 : 1);
++    }
+   }
+-
+   return $out;
+ }
+ 

@@ -1,0 +1,138 @@
+.block-facet-blockdu-screenings-kategori {
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    top: 0;
+  }
+  h2.h4 {
+    color: $color-gray-001;
+    max-width: unset;
+    margin-bottom: 10px;
+    @include media-breakpoint-up(md) {
+      font-size: 2rem;
+    }
+  }
+  p {
+    max-width: unset;
+    color: $color-gray-001;
+  }
+  ul {
+    max-width: unset !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-auto-rows: 1fr;
+    @supports (gap: 1px) {
+      gap: 11px 15px;
+      @include media-breakpoint-up(sm) {
+        gap: 20px;
+      }
+    }
+    @include media-breakpoint-up(sm) {
+      display: flex;
+      flex-direction: column;
+    }
+    li {
+      margin: 0;
+      padding: 0;
+      &:nth-child(1) {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+      &:nth-child(2) {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+      &:nth-child(3) {
+        grid-area: 2 / 1 / 3 / 2;
+      }
+      &:nth-child(4) {
+        grid-area: 2 / 2 / 3 / 3;
+      }
+      @include media-breakpoint-up(sm) {
+        width: 100%;
+        display: block;
+      }
+      @supports not (gap: 1px) {
+        margin: 5px 8px;
+        @include media-breakpoint-up(sm) {
+          margin: 10px 0;
+        }
+      }
+
+      $bg-colors-and-svgs:
+      ".du-cat-hjaelp-dig-selv" $color-orange-006 "../images/Hjalp_dig_selv.svg",
+      ".du-cat-kommunale-tilbud" $color-primary "../images/Kommunale_tilbud.svg",
+      ".du-cat-hverdagsteknologi" $color-blue-009 "../images/Teknologier.svg",
+      ".du-cat-eksterne-tilbud" $color-red-003 "../images/Private_tilbud.svg",
+      ".du-cat-other" $color-red-003 "../images/Private_tilbud.svg";
+
+      @each $id, $color-code, $svg-path in $bg-colors-and-svgs {
+        &#{$id} input {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+          & + label {
+            background-color: $color-code;
+            color: $color-white;
+            border: $button-border-width solid transparent;
+            border-radius: $big-border-radius;
+            width: 100%;
+            height: 100%;
+            padding: 16px 26px 16px 61px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            &::after {
+              content: "";
+              height: 26px;
+              width: 20px;
+              position: absolute;
+              top: 50%;
+              left: 10%;
+              transform: translateY(-50%);
+              background-image: url($svg-path);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+              display: block;
+              z-index: 10;
+              filter: invert(34%)
+                sepia(110%)
+                saturate(75%)
+                hue-rotate(-35deg)
+                brightness(369%)
+                contrast(139%);
+              @include media-breakpoint-up(sm) {
+                height: 32px;
+                width: 25px;
+              }
+            }
+
+            &:hover {
+              border: $button-border-width solid $color-code;
+              color: $color-code;
+              background-color: transparent;
+              &::after {
+                filter: unset;
+              }
+            }
+          }
+          &:checked {
+            & + label {
+              border: $button-border-width solid $color-code;
+              color: $color-code;
+              background-color: transparent;
+              &::after {
+                filter: unset;
+              }
+            }
+          }
+        }
+      }
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

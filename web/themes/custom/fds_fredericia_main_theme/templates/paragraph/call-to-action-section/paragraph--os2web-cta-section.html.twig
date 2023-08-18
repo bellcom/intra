@@ -1,0 +1,34 @@
+{#  #}
+
+<div class="cta-section-wrapper">
+
+  <div class="container">
+
+    <div class="cta-inner-wrapper">
+
+      <div class="cta-heading">
+        <h2>{{ paragraph.field_cta_heading.value }}</h2>
+      </div>
+
+      <div class="cta-btn-content">
+
+        {% for cta_link in paragraph.field_cta_links %}
+
+
+          <a title="{{ cta_link.url }}" href="{{ cta_link.url }}" class="cta-link">
+            <div class="cta-link-content">
+              <div class="cta-link-upper-text">
+                {{ cta_link.title }}
+                <i class="fa-solid fa-arrow-right-long"></i>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

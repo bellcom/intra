@@ -1,0 +1,43 @@
+id: ballerup_d7_institution_contact_box
+label: Ballerup D7 Contact Box
+migration_tags:
+  - 'Drupal 7'
+migration_group: ballerup_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: institution_page
+  track_changes: true
+process:
+  name:
+    plugin: substr
+    source: title
+    length: 50
+  field_os2web_contact_heading: title
+  field_os2web_contact_body:
+    plugin: sub_process
+    source: field_contact_text
+    process:
+      value: value
+      format:
+        plugin: default_value
+        default_value: 'wysiwyg_tekst'
+  migrate_contact_more/0/value:
+    plugin: concat
+    source:
+      - field_site_display/0/value
+      - field_site/0/value
+    delimiter: '<br/>'
+  field_os2web_contact_more:
+    - plugin: sub_process
+      source: '@migrate_contact_more'
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_contact_email: field_email/0/email
+  field_os2web_contact_phone: field_phone_number
+destination:
+  plugin: 'entity:os2web_contact'
+  default_bundle: os2web_page

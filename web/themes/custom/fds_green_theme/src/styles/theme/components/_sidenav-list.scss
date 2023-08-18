@@ -1,0 +1,266 @@
+// |--------------------------------------------------------------------------
+// | Sidenav list
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .sidenav-list
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$sidenav-list-spacing-left: 25px;
+$sidenav-list-dot-spacing: 25px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.region-sidebar-first,
+.region-sidebar-second {
+
+  .sidenav-list {
+    display: flex;
+
+    flex-direction: column;
+
+    border-top: 0;
+    border-bottom: 0;
+
+    > li {
+      border-top: 1px solid $color-green-004;
+
+      background-color: rgba($color-green-005, 1);
+
+      &:first-child {
+        border-top-left-radius: $big-border-radius;
+        border-top-right-radius: $big-border-radius;
+      }
+
+      &:nth-last-child(2) {
+        border-bottom-left-radius: $big-border-radius;
+        border-bottom-right-radius: $big-border-radius;
+        .sidenav-sub_list {
+          border-bottom-left-radius: $big-border-radius;
+          border-bottom-right-radius: $big-border-radius;
+        }
+      }
+
+      > .sidenav-sub_list {
+        padding-top: 0;
+        padding-bottom: 25px;
+      }
+
+      &.current {
+
+        > ul {
+
+          > li {
+
+            > a {
+              padding-left: $sidenav-list-spacing-left + $sidenav-list-dot-spacing;
+              &:hover,
+              &:focus {
+                font-weight: $font-weight-bold;
+              }
+
+              &.is-active::before {
+                top: calc(50% - 1px);
+                left: $sidenav-list-spacing-left;
+                width: 18px;
+                height: 2px;
+                background: $color-white;
+                content: "" !important;
+                display: block;
+                position: absolute;
+              }
+            }
+          }
+        }
+      }
+
+      > a {
+        padding-top: 19px;
+        padding-bottom: 19px;
+        padding-left: $sidenav-list-spacing-left;
+
+        font-weight: $font-weight-bold;
+
+        color: $color-primary;
+      }
+
+      &.current {
+        border-left: 0;
+      }
+
+      &.active {}
+
+      &.active,
+      &.current {
+        display: block !important;
+
+        border-top: 0;
+
+        background-color: $color-primary;
+
+        > a {
+          color: #fff;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  .sidenav-sub_list {
+    background-color: $color-primary;
+
+    > li {
+      border-top: 0;
+
+      > a {
+        padding-left: $sidenav-list-spacing-left + $sidenav-list-dot-spacing;
+        font-size: 1.4rem !important;
+      }
+
+      &.active {
+
+        > a {
+          font-weight: $font-weight-bold;
+        }
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      &:last-child {
+
+        > a {
+          padding-bottom: 2px;
+        }
+      }
+
+      a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+
+        font-size: $base-font-size;
+
+        color: $color-white;
+      }
+    }
+
+    .sidenav-sub_list {
+
+      li {
+
+        &::before {
+          content: "\FE63" !important;
+        }
+      }
+    }
+  }
+
+  .sidenav-list {
+
+    > li > .sidenav-sub_list {
+      padding-left: 0;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 13px;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 26px;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 39px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+  .region-sidebar-first,
+  .region-sidebar-second {
+
+    .sidenav-list {
+
+      > li {
+
+        &:first-child {
+          border-top-left-radius: 0;
+          border-top-right-radius: $big-border-radius;
+        }
+
+        &:nth-last-child(2) {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: $big-border-radius;
+          .sidenav-sub_list {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: $big-border-radius;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  .region-sidebar-first,
+  .region-sidebar-second {
+
+    .sidenav-list {
+      display: none !important;
+    }
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

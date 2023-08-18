@@ -1,0 +1,44 @@
+<div class="text-bg-wrapper">
+  {% set selectedBackground = content.field_text_bgcolor['#items'].getString() %}
+  <div data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" class="text-bg__inner-wrapper" style="{% if selectedBackground == 'green' %} background-color: #344E41;
+  {% elseif selectedBackground == 'black' %} background-color: #212529;
+  {% elseif selectedBackground == 'sand' %} background-color: #DAD7CD;
+  {% elseif selectedBackground == 'blue' %} background-color: #22223B;
+  {% elseif selectedBackground == 'grey' %} background-color: #343A40;
+  {% else %} background-color: transparent; {% endif %}">
+    <div class="text-bg__element-wrapper" style="{% if selectedBackground in ['black', 'green', 'blue', 'grey'] %} color: #fff;
+     {% elseif selectedBackground == 'sand' or selectedBackground is empty %} color: black; {% endif %}{% if selectedBackground is empty %} padding: 0 10px; {% endif %}">
+      <h2 data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="500" class="text-bg__element-heading">
+        {{ content.field_text_heading }}
+      </h2>
+      <div data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true" data-aos-delay="1000" class="text-bg__element-paragraph">
+          {{ content.field_text_body }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  {% if selectedBackground in ['black', 'green', 'blue', 'sand', 'grey'] %}
+.text-bg__element-wrapper {
+
+  padding: 70px;
+
+}
+
+  @media (max-width: 1064px) {
+    .text-bg__element-wrapper {
+      padding: 40px;
+    }
+  }
+
+  {% else %}
+
+  .text-bg__element-rapper {
+    padding: 0;
+  }
+
+  {% endif %}
+
+
+</style>

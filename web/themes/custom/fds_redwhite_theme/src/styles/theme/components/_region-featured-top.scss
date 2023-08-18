@@ -1,0 +1,204 @@
+// |--------------------------------------------------------------------------
+// | Region-featured-top
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .region-featured-top
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.region-featured-top {
+  background-color: $color-light-gray1;
+  padding-top: 5px;
+  .breadcrumb {
+    margin-top: 0;
+  }
+  .entity-default--os2web-banner-paragraph {
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    max-width: 1200px;
+    margin: 0 auto -1px;
+    padding: 37px 0;
+    transition: all 0.2s ease-in-out;
+    .banner__box {
+      padding: 40px 37px 60px;
+      background: rgba(255, 255, 255, 0.8);
+      margin-left: 0;
+      transition: all 0.2s ease-in-out;
+      .banner__heading + .banner__body,
+      .banner__heading + .banner__actions {
+        margin-top: 50px;
+      }
+      .field--type-text-long a {
+        font-weight: 400;
+      }
+      h2 {
+        line-height: 1em;
+        color: $color-dark-gray2;
+      }
+      .banner__actions {
+        margin-bottom: 0;
+        .inline-list {
+            li + li {
+            margin-top: 0;
+          }
+          .field__item {
+            margin-right: 1.52905%;
+            width: 46%;
+            float: none;
+            display: inline-block;
+            vertical-align: top;
+            zoom: 1;
+            border: 0 none;
+            margin-bottom: 5px;
+            .button-primary {
+              display: inline;
+              line-height: 24px;
+              padding: 0 0 0 25px;
+              position: relative;
+              font-size: 1rem;
+              color: $color-tertiary;
+              text-decoration: none;
+              background: transparent;
+              padding: 0;
+              margin: 0;
+              font-family: "Museo 300", sans-serif;
+              font-weight: normal;
+              font-size: 1.6rem;
+              height: auto;
+              &::after {
+                display: none;
+              }
+              &::before {
+                content: "";
+                background: transparent url("../images/sprite.png") no-repeat 0 -47px;
+                position: relative;
+                display: inline-block;
+                top: 4px;
+                left: 0;
+                width: 19px;
+                height: 19px;
+                margin-right: 5px;
+              }
+              &:hover,
+              &:focus {
+                background: transparent;
+                color: $color-dark-gray2;
+                &::before {
+                  background-position: -19px -47px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+@media screen and (max-width: 480px) {
+  .region-featured-top {
+    .banner__actions {
+      .inline-list li {
+        width: 100%;
+        margin-right: 1.52905%;
+        & + li {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+  .region-featured-top {
+    .banner__box {
+      h2 {
+        font-size: calc(40px + 6 * ((100vw - 576px) / 680));
+      }
+    }
+  }
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+  .region-featured-top {
+    .banner__box {
+      h2 {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+@media screen and (min-width: 980px) {
+  .region-featured-top {
+    .entity-default--os2web-banner-paragraph {
+      height: 520px;
+      .banner__box {
+        margin-left: -37px;
+        max-width: calc(50% + 40px);
+      }
+    }
+  }
+}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+  .region-featured-top {
+    .banner__box {
+      h2 {
+        font-size: 5rem;
+      }
+    }
+  }
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

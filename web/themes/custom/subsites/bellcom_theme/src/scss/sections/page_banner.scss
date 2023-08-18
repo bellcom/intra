@@ -1,0 +1,139 @@
+.page-banner-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 550px;
+  margin: 80px 0;
+
+
+  .page-banner__inner-wrapper {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+
+    &.page-banner-image-left {
+      flex-direction: row-reverse;
+
+      @media only screen and (max-width: 1024px) {
+        flex-direction: column-reverse;
+      }
+    }
+
+    @media only screen and (max-width: 1024px) {
+      flex-direction: column;
+      padding: 30px 10px;
+      gap: 30px;
+    }
+
+    .page-banner__content-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+
+      @media only screen and (max-width: 1024px) {
+        width: 100%;
+      }
+
+      .page-banner__prefix {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        span {
+          margin-left: 10px;
+          text-transform: uppercase;
+          font-family: "Poppins", sans-serif;
+          font-weight: 500;
+          font-size: 13px;
+          color: #344E41;
+        }
+      }
+      h2 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      .page-banner__body {
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+      }
+      .page-banner__cta {
+        display: flex;
+        width: 100%;
+        margin-top: 40px;
+
+        .page-banner__cta_button {
+          background-color: #344E41;
+          padding: 12px 35px;
+          border-radius: 10px;
+          color: white;
+          font-weight: 600;
+          font-family: 'Poppins', sans-serif;
+          display: flex;
+          align-items: center;
+          transition: 0.3s ease;
+          position: relative;
+          margin-right: 10px;
+
+          &:hover svg {
+            opacity: 1;
+            transform: translateX(0);
+          }
+
+          &:hover span {
+            transform: translateX(-10px);
+          }
+
+          span {
+            transition: 0.3s ease;
+          }
+
+          svg {
+            opacity: 0;
+            transform: translateX(-25px);
+            transition: 0.3s ease;
+            position: absolute;
+            right: 15px;
+          }
+
+          .ext {
+            display: none;
+          }
+        }
+
+
+      }
+    }
+
+
+    .page-banner__image {
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      @media only screen and (max-width: 1024px) {
+        width: 100%;
+        justify-content: center;
+      }
+      img {
+        width: 550px;
+        border-radius: 10px;
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+        @media only screen and (max-width: 1024px) {
+          width: 100%;
+        }
+      }
+    }
+
+
+
+  }
+}

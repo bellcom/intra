@@ -1,0 +1,184 @@
+// |--------------------------------------------------------------------------
+// | Custom header
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .custom-header
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin custom-header-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.custom-header {
+  background-color: #fff;
+
+  .menu {
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      list-style: none;
+      float: left;
+
+      padding: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    a {
+      display: block;
+    }
+  }
+}
+
+.custom-header-row {}
+.custom-header-row--meta {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  background-color: $color-white;
+  color: $color-black;
+  .flexy-row {
+    align-items: initial;
+  }
+
+  .menu {
+
+    a {
+      font-size: $small-text;
+      font-weight: $font-weight-bold;
+      text-decoration: none;
+
+      color: $color-text;
+
+      &:hover, &:focus {
+        color: $color-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .menu-item {
+
+    + .menu-item {
+      margin-left: 30px;
+    }
+  }
+}
+.custom-header-row--desktop-navigation {
+  background-color: $background_color__default;
+  color: $color-white;
+  height: auto;
+  .menu {
+
+    a {
+      padding: 14px 15px;
+
+      font-size: $h4-font-size;
+      text-transform: uppercase;
+
+      color: $color-white;
+
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:hover, &:focus, &.is-active {
+        outline: none;
+      }
+
+    }
+    .menu-item--active-trail {
+      a {
+        text-decoration: none;
+        background-color: $color-white;
+        color: $background_color__default;
+      }
+    }
+  }
+}
+.custom-header-row--mobile-navigation {
+  height: auto;
+
+  background-color: $color-white;
+}
+
+.custom-header__logo {
+
+  img {
+    height: 42px;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+@media only screen and (max-width: 1000px) {
+  .flexy-row {
+    flex-direction: column;
+  }
+}
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .custom-header__logo {
+
+    img {
+      height: auto;
+      max-height: 58px;
+    }
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
+

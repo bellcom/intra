@@ -1,0 +1,199 @@
+header.menu-toggler.open {
+  position: relative;
+  &:after {
+    content: "";
+    z-index: 1;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+}
+
+.overflow-menu {
+  ///BURGER
+  .button-overflow-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 11;
+    &:hover {
+      text-decoration: none;
+    }
+    &::before,
+    &::after {
+      display: none;
+    }
+    .icon {
+      font-size: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      &::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &[aria-expanded="false"] {
+      .fa-bars {
+        display: flex;
+        color: $color-primary;
+        -webkit-text-stroke: 2px $color-green-005;
+        font-size: 3rem;
+      }
+      .fa-times {
+        display: none;
+      }
+    }
+    &[aria-expanded="true"] {
+
+      .fa-bars {
+        display: none;
+      }
+      .fa-times {
+        display: flex;
+        color: $color-white;
+        font-size: 46px;
+        &::before {
+            -webkit-text-stroke: 7px $color-primary;
+        }
+      }
+    }
+  }
+
+  //MENU CONTENT
+  .overflow-menu-inner {
+    padding: 0;
+    padding-block: 82px;
+    top: -30px;
+    left: unset!important;
+    right: -17px !important;
+    z-index: 9;
+    background-color: $color-primary;
+    border: 0;
+    min-width: 300px;
+
+
+    &[aria-hidden="false"] {
+      .region-header__top {
+        margin: 0;
+        .menu.menu-level-0 {
+          & > li > a {
+            display: none;
+          }
+        }
+        .menu-level-1.accordion {
+          display: block;
+          position: static;
+          margin-top: 0;
+          & > li.menu-item {
+            margin: 0;
+            background-color: transparent;
+            box-shadow: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            &:not(:first-child):before {
+                content: "";
+                    height: 2px;
+                    background-color: $color-white;
+                    position: absolute;
+                    opacity: 0.2;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    width: calc(100% - 55px);
+                    display: block;
+                    margin-left: 2.6rem;
+                    z-index: 10;
+              }
+            button.accordion-button {
+              border: 0;
+              background-color: transparent;
+              padding-inline: 26px 33px;
+              padding-block: 10px 10px;
+              margin: auto 0;
+              min-height: 68px; 
+              &:focus {
+                outline: 0;
+              }
+              &:focus-visible {
+                outline: 2px solid black;
+              }
+              &::after {
+                content: '';
+                background-image: url("../images/down-arrow-white.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                position: absolute;
+                top: 50%;
+                right: 33px;
+                height: 10px;
+                width: 17px;
+              }
+           
+
+              &[aria-expanded="true"] {
+                &::after {
+                  transform: rotate(180deg) translateY(100%);
+                }
+              }
+              .menu-level-1-link-wrap {
+                img {
+                  filter: invert(34%) sepia(110%) saturate(75%)
+                    hue-rotate(-35deg) brightness(369%) contrast(139%);
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                a {
+                  color: $color-white;
+                  padding-inline: 60px 25px;
+                  text-transform: initial;
+                  font-weight: normal;
+                  &:focus {
+                    outline: 0;
+                  }
+                  &:focus-visible {
+                    outline: 2px solid black;
+                  }
+                }
+              }
+            }
+            .accordion-content {
+              background-color: transparent;
+              border: 0;
+              padding-top: 0;
+              ul.menu {
+                li.menu-item {
+                    padding-left: 0!important;
+                    margin-bottom: 10px;
+                  a {
+                    color: $color-white;
+                    text-transform: initial;
+                    font-size: 1.4rem;
+                    font-weight: normal;
+                  }
+                }
+              }
+
+              .field--name-field-ikon {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

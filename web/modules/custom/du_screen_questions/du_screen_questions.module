@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains du_screen_questions.module.
+ */
+
+use Drupal\du_screen_questions\Form\RelatedPagesFilterForm;
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function du_screen_questions_preprocess_node(array &$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if ($variables['view_mode'] == 'full' && $node->getType() == 'os2web_page') {
+    $form = \Drupal::formBuilder()->getForm(RelatedPagesFilterForm::class, $node);
+    $form['#weight'] = 999;
+    $variables['content']['related_pages'] = $form;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function du_screen_questions_theme() {
+  return [
+    'du_screen_questions_related_pages_container' => [
+      'render element' => 'container',
+    ],
+  ];
+}
+
+
+

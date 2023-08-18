@@ -1,0 +1,49 @@
+
+.entity-full--forum {
+
+  .forum-question {
+    width: 100%;
+    background-color: white;
+    border: 1px solid lightgray;
+
+    .forum-text, .forum-info {
+      display: inline-table;
+      width: 49.4%;
+      h3 {
+        background-color: #e3e3e3;
+        padding: 5px;
+        border-bottom: 2px solid #c30a32;
+        font-weight: 600;
+        font-size: 2rem;
+      }
+      padding: 0 1em 2em 1em;
+    }
+  }
+
+  .forum-question-files {
+    width: 100%;
+    background-color: white;
+    border: 1px solid lightgray;
+  }
+
+  h3.forum-h3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: 1px solid red;
+    color: blue;
+  }
+}
+
+.forum {
+  table {
+    .forum__title {
+      a {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+    }
+    a.username {
+      color: #000;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<a href="{{ url }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Read more about' | trans }} {{ node.field_os2web_news_heading.value }}">
+  <div class="entity-{{ view_mode|clean_class }}__body">
+    {{ content.field_os2web_news_article_date }}
+    {{ content.field_os2web_news_heading }}
+
+    {% set text = content.field_os2web_news_description | render %}
+    <div class="field field--type-body">
+      {{ text | striptags }}
+    </div>
+  </div>
+</a>
+
+{% if breadcrumb %}
+<div class="block-system-breadcrumb-block-search-result">
+  {% include 'breadcrumb.html.twig' %}
+</div>
+{% endif %}

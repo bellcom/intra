@@ -1,0 +1,57 @@
+.clients-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .clients_inner-wrapper {
+    max-width: 1440px;
+    width: 100%;
+    margin: 80px 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+
+    @media only screen and (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .client-element {
+      background-color: #F5F7F9;
+      height: 230px;
+      border-radius: 10px;
+      position: relative;
+
+      @media only screen and (max-width: 500px) {
+        height: 180px;
+      }
+
+      &:hover img {
+        filter: grayscale(0%);
+
+      }
+
+      img {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        bottom: 0;
+        left: 50%;
+        object-fit: contain;
+        transform: translateY(-50%) translateX(-50%);
+        filter: grayscale(100%);
+        transition: 0.3s ease-in-out;
+
+        @media only screen and (max-width: 500px) {
+          width: 75%;
+        }
+
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+id: faxe_d7_spotbox
+label: Faxe D7 Spotbox
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_spotbox_box
+  track_changes: true
+process:
+  name: title
+  field_os2web_spotbox_link:
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFieldLinks
+      source: field_spot_link
+    - plugin: field_link
+  type:
+    plugin: default_value
+    default_value: 'default'
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_os2web_spotbox_big_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_os2web_spotbox_big_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        -  createFileManaged
+  field_os2web_spotbox_bg_image/target_id: '@migrate_file_fid'
+  field_os2web_spotbox_bg_image/alt: title
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+destination:
+  plugin: 'entity:os2web_spotbox'
+  default_bundle: os2web_spotbox_box

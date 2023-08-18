@@ -1,0 +1,6 @@
+bc_speed_admin.settings:
+  title: 'Bellcom SpeedAdmin'
+  route_name: bc_speed_admin.settings
+  description: 'Bellcom SpeedAdmn configuration'
+  parent: system.admin_config_system
+  weight: 99

@@ -1,0 +1,19 @@
+{%
+  set classes = [
+  'box',
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+]
+%}
+
+<div{{ attributes.addClass(classes, 'field__items') }}>
+  <div class="box__body">
+    <h2 class="h4" style="margin-top: 0;">{{ label }}</h2>
+
+    {% for item in items %}
+      <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+    {% endfor %}
+  </div>
+</div>

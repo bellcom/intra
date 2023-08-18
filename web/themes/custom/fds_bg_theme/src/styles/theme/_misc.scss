@@ -1,0 +1,411 @@
+// |--------------------------------------------------------------------------
+// | Misc
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+body {
+  background-color: #f5f3ef !important;
+}
+
+// Increased specificity to win over base theme.
+body .container-fluid {
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}
+
+// Accessibility overrides.
+button,
+body a {
+
+  &:focus {
+    outline-width: 2px;
+  }
+}
+
+.button {
+  font-weight: bold;
+
+  &.form-submit {
+    color: $button-primary-color;
+    background-color: $button-primary-bg;
+    border-color: $button-primary-border-color;
+
+    &:hover,
+    &.button-hover {
+      background-color: $button-primary-hover-bg;
+      border-color: $button-primary-hover-border-color;
+    }
+
+    &:active,
+    &.button-active {
+      background-color: $button-primary-active-bg;
+      border-color: $button-primary-active-border-color;
+    }
+
+    &.focus,
+    &:focus {
+      background-color: $button-primary-focus-bg;
+      border-color: $button-primary-focus-border-color;
+    }
+
+    &:disabled,
+    &.disabled {
+      opacity:0.3;
+      box-shadow: none !important;
+      cursor: not-allowed;
+
+      &:hover {
+        color: $button-primary-color !important;
+        background-color: $button-primary-bg !important;
+        border-color: $button-primary-border-color !important;
+        opacity:0.3 !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+.button.button--selvbetjening {
+  display: block;
+
+  margin-bottom: $grid-gutter-width / 2;
+  padding: 15px 30px;
+
+  text-align: left;
+  font-size: 2rem;
+}
+
+//.paragraph a,
+//.region-content a,
+//.breadcrumb a {
+//
+//  &:focus {
+//    outline-width: 2px;
+//  }
+//}
+
+.region-content {
+  padding-bottom: 4rem;
+}
+
+svg.mailto {
+  display: none !important;
+}
+
+.fields-inline {
+
+  > .field {
+    display: inline-block;
+  }
+}
+
+svg.ext {
+  display: none;
+}
+
+#views-exposed-form-os2web-meetings-search-os2web-meetings-embed-search-from-to-dates {
+  margin-bottom: $grid-gutter-width / 2;
+  padding: 30px;
+
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(27, 27, 29, .2);
+  background-color: #fff;
+
+  .form-item-from-date,
+  .form-item-to-date {
+    max-width: 150px;
+  }
+
+  .form-select {
+    margin-top: 8px;
+  }
+
+  .form-actions {
+    margin-bottom: 0;
+
+    text-align: right;
+  }
+}
+
+body .page-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.region-sidebar-second {
+
+  > .box {
+    margin-bottom: $grid-gutter-width;
+
+    > .box__body {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      min-height: unset;
+    }
+  }
+
+  .block {
+    padding-top: $grid-gutter-width;
+    padding-bottom: $grid-gutter-width;
+
+    &:first-child {
+    }
+
+    &:last-child {
+    }
+  }
+
+  .block + .block {
+    margin-top: $grid-gutter-width;
+  }
+}
+
+//.path-frontpage {
+//
+//  .layout-sidebar-left,
+//  .layout-sidebar-right {
+//    display: none;
+//  }
+//}
+.block-os2web-pagebuilder-related-links {
+
+  ul.related-links {
+    margin-bottom: 0;
+  }
+}
+
+.block-os2web-contact,
+.block-os2web-pagebuilder-related-links {
+
+  .box__heading {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    background-color: transparent;
+  }
+}
+
+.layout-sidebar-left,
+.layout-sidebar-right {
+
+  h1, h2, h3, h4, h5, h6 {
+
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
+.layout-sidebar-left,
+.layout-sidebar-right,
+.layout-content {
+  padding-top: $grid-gutter-width;
+}
+
+.layout-sidebar-right {
+
+  .os2web_contact {
+
+    .field {
+
+      + .field {
+        //margin-top: 2.8rem; // Same distance as between <p> <p>
+      }
+    }
+
+    .field--name-field-os2web-contact-heading,
+    .field--name-field-os2web-contact-body {
+
+      + .field {
+        margin-top: 2.8rem; // Same distance as between <p> <p>
+      }
+    }
+
+    .field--name-field-os2web-contact-phone,
+    .field--name-field-os2web-contact-email {
+
+      &:before {
+        display: inline-block;
+
+        margin-right: .5rem;
+        width: 2.2rem;
+
+        font-family: FontAwesome;
+      }
+    }
+
+    .field--name-field-os2web-contact-phone {
+
+      &:before {
+        content: $fa-var-phone;
+      }
+    }
+    .field--name-field-os2web-contact-email {
+
+      &:before {
+        content: $fa-var-envelope-o;
+      }
+    }
+  }
+
+  > .box {
+
+    > .box__body {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      > .region {
+
+        > * {
+
+          &:first-child {
+            padding-top: 30px;
+          }
+          &:last-child {
+            padding-bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.button--primary {
+
+  &, &:hover, &:focus {
+    font-weight: $font-weight-bold;
+
+    color: #fff;
+    background-color: $color-orange-004;
+  }
+}
+
+.button--rounded {
+  padding-left: 30px;
+  padding-right: 30px;
+
+  border-radius: 30px;
+}
+
+.background-color--primary {
+  color: #fff !important;
+  background-color: $color-green-001 !important;
+}
+.background-color--secondary {
+  background-color: #fff;
+}
+.background-color--tertiary {
+  color: #fff !important;
+  background-color: $color-primary !important;
+}
+
+// Remove max-width on all text elements.
+body {
+
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6{
+    max-width: unset;
+  }
+  p,
+  ul:not(.accordion):not(.accordion-bordered):not(.nav-primary):not(.inline-list):not(.tabnav):not(.sidenav-list):not(.sidenav-sub_list),
+  ol:not(.accordion):not(.accordion-bordered):not(.sidenav-list){
+    max-width: unset;
+  }
+  .font-lead{
+    max-width: unset;
+  }
+
+  .form-label, .form-hint, .form-error-message{
+    max-width: unset;
+  }
+  .form-checkbox+label, .form-radio+label{
+    max-width: unset;
+  }
+  a:not(.button){
+    max-width: unset;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+
+  #views-exposed-form-os2web-meetings-search-os2web-meetings-embed-search-from-to-dates {
+
+    .form-item-from-date,
+    .form-item-to-date {
+      max-width: 200px;
+    }
+
+    .form-type-select {
+      margin-right: 0;
+    }
+  }
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  body .page-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

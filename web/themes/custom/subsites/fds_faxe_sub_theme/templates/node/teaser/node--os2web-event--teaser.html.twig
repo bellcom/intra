@@ -1,0 +1,38 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+
+{% set link = node.field_os2web_event_url.value | default(url) %}
+<a href="{{ link }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}" title="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}">
+
+  <div class="entity-{{ view_mode|clean_class }}__image">
+    {{ content.field_os2web_evnet_image }}
+  </div>
+
+  <div class="entity-{{ view_mode|clean_class }}__body">
+
+    <div>
+      <div class="" style="color: white; display: inline-block; max-width: 15%; vertical-align: top; padding: 10px; background-color: #007ca3;">
+        {{ node.field_os2web_event_start_date.value|date("l")|trans }}
+        {{ node.field_os2web_event_start_date.value|date("d") }}. <br>
+        <div style="color: white; display: flex; justify-content: center;">
+          {{ node.field_os2web_event_start_date.value|date("F")|trans }}
+        </div>
+      </div>
+
+      {% set text = content.body | render %}
+      <div class="field field--type-body" style="display: inline-block; max-width: 82%; padding: 0 0 12px 12px;">
+        <h2 style="margin-top: -4px; color: #007ca3;">{{ node.title.value }}</h2>
+        {{ text }}
+      </div>
+    </div>
+
+  </div>
+</a>

@@ -1,0 +1,19 @@
+{
+  "javascripts": [
+    "node_modules/dkfds/dist/js/dkfds.js",
+    "src/javascripts/megamenu.js",
+    "src/javascripts/structure-navigation.js",
+    "src/javascripts/font-resizer.js",
+    "src/javascripts/a11y.js",
+    "src/javascripts/app.js"
+  ],
+  "styles": [
+    "src/styles/stylesheet.scss"
+  ],
+  "fonts": [
+    "node_modules/font-awesome/fonts/*",
+    "node_modules/dkfds/src/fonts/**/*",
+    "node_modules/material-design-icons/iconfont/MaterialIcons-Regular.*",
+    "src/fonts/**/*"
+  ]
+}

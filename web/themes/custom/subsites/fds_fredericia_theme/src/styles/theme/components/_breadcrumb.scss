@@ -1,0 +1,98 @@
+// |--------------------------------------------------------------------------
+// | Breadcrumb
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .breadcrumb
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin breadcrumb-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.breadcrumb {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  li {
+    display: inline-block;
+
+    font-size: $small-font-size;
+
+    &:before {
+      float: left;
+
+      margin-top: -1px;
+      margin-left: 8px;
+      margin-right: 12px;
+
+      font-size: 1.4rem;
+      font-family: FontAwesome;
+      content: $fa-var-angle-right;
+
+      color: #555;
+    }
+  }
+
+  a {
+    font-size: $small-font-size;
+
+    &, &:hover, &:visited {
+      text-decoration: none;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

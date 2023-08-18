@@ -1,0 +1,33 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<div {{ attributes.addClass(classes) }}>
+  <div class="entity-{{ view_mode|clean_class }}__image">
+    {{ content.field_os2web_news_primaryimage }}
+  </div>
+
+  <div role="region" aria-label="{{'Teaser'| trans}}" class="entity-{{ view_mode|clean_class }}__body">
+    {{ content.field_os2web_news_heading }}
+    <time>
+      {{ content.field_os2web_news_article_date }}
+    </time>
+    
+    {% set text = content.field_os2web_news_description | render %}
+    <div class="field field--type-body">
+      {{ text | striptags }}
+    </div>
+
+    <div class="field--type-link">
+      <a href="{{ url }}" aria-label="{{ 'Read more about' | trans }} {{ node.field_os2web_news_heading.value }}">
+        {# {{ 'Read more' | trans }} #}
+        {# {{ 'Read more about' | trans }} {{ node.field_os2web_news_heading.value }} #}
+      </a>
+    </div>
+  </div>
+</div>

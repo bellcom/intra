@@ -1,0 +1,25 @@
+<div class="action-buttons d-none d-lg-block pt-6">
+  <div class="flexy-list">
+    <div>
+      <a href="#" class="action-button" onclick="window.print();">
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-white.svg" class="action-button__icon action-button__icon--white" alt="{{ 'Print' | trans }}" />
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-green.svg" class="action-button__icon action-button__icon--green" alt="{{ 'Print' | trans }}" />
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-orange.svg" class="action-button__icon action-button__icon--orange" alt="{{ 'Print' | trans }}" />
+        <img src="{{ base_path ~ directory }}/dist/images/action-buttons/print-light-green.svg" class="action-button__icon action-button__icon--light-green" alt="{{ 'Print' | trans }}" />
+        {{ 'Print' | trans }}
+      </a>
+    </div>
+    
+    <div>
+      <a data-decrease-font-size class="font-size-change decrease-font-size" aria-label="{{ 'Formindsk tekst' | trans }}">
+        {{ 'A-' | trans }}
+      </a>
+    </div>
+
+    <div>
+      <a data-increase-font-size class="font-size-change increase-font-size" aria-label="{{ 'Forstør tekst' | trans }}">
+        {{ 'A+' | trans }}
+      </a>
+    </div>
+  </div>
+</div>

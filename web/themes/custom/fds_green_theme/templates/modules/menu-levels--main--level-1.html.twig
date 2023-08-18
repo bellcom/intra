@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Default theme implementation to each level of menu.
+ */
+#}
+{% import _self as menu %}
+
+{{ menu.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+	<ul class="menu accordion accordion-bordered accordion-multiselectable menu-level-{{ items|first.menu_level }}">
+		{% set i = 0 %}
+		{% for key, item in items if key|first != '#' %}
+
+			{# item.is_expanded ? 'menu-item--expanded', #}
+			{% set menu_item_classes = [
+      'menu-item',
+      item.is_collapsed ? 'menu-item--collapsed',
+      item.in_active_trail ? 'menu-item--active-trail',
+    ] %}
+
+			<li{{item.attributes.addClass(menu_item_classes)}}>
+				<button class="accordion-button" aria-expanded="false" aria-controls="a-menu-{{i}}">
+					<div class='position-relative menu-level-{{ items|first.menu_level }}-link-wrap'>
+						<img class="position-absolute" src={{ file_url(item.entity.field_ikon.entity.field_os2web_icon_file.entity.uri.value) }}>
+						{{ link(item.title, item.url) }}
+					</div>
+				</button>
+				<div id="a-menu-{{i}}" aria-hidden="true" class="accordion-content">
+					{% set rendered_content = item.content|without('')|render %}
+					{% if rendered_content %}
+						{{ rendered_content }}
+					{% endif %}
+				</div>
+			</li>
+			{% set i = i + 1 %}
+		{% endfor %}
+	</ul>
+{% endmacro %}

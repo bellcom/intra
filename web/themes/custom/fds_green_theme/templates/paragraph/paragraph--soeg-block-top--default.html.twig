@@ -1,0 +1,41 @@
+{% block paragraph %}
+
+	{%
+        set classes = [
+        'block',
+        'block-' ~ configuration.provider|clean_class,
+        'block-' ~ plugin_id|clean_class,
+        'front-search'
+    ]
+    %}
+
+	<div{{attributes.addClass(classes)}}>
+		{% block content %}
+			<div class="container soeg-block-wrap">
+				<div class="row">
+					<div class="col-12 col-md-7 soeg-block-top-content">
+						{% include '@fds_green_theme/includes/action-buttons.html.twig' %}
+						<div class="text align-self-center pt-7 py-md-7 hero-content">
+							<h1>{{ content.field_headline }}</h1>
+							{{ content.field_description }}
+							{% if content.field_show_search[0]|render == 'On' %}
+							<form block="os2web_search_page_form_content_front_page" action="/s" method="get" id="views-exposed-form-os2web-search-os2web-search-page" accept-charset="UTF-8">
+								<div class="form--inline clearfix">
+									<div class="search-input-submit-after form-group form-item js-form-item form-type-search-api-autocomplete js-form-type-search-api-autocomplete form-item-sq js-form-item-sq form-no-label">
+										<button type="submit" class="position-absolute"></button>
+                                        <input placeholder="{{ "Insert search word"|trans }}" class="pl-7 search-input__input form-autocomplete form-text form-input ui-autocomplete-input" data-drupal-selector="edit-sq" data-search-api-autocomplete-search="os2web_search" data-autocomplete-path="/search_api_autocomplete/os2web_search?display=os2web_search_page&amp;&amp;filter=sq" type="text" id="edit-sq" name="sq" value="" size="100%" maxlength="128" aria-label="Indtast søgeord" data-once="autocomplete" autocomplete="off">
+									</div>
+								</div>
+							</form>
+							{% endif %}
+						</div>
+					</div>
+					<div class="position-absolute hero-img d-none d-md-block">
+						{{ content.field_image }}
+					</div>
+				</div>
+			</div>
+		{% endblock %}
+	</div>
+
+{% endblock paragraph %}

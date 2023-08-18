@@ -1,0 +1,147 @@
+{#
+/**
+ * @file
+ * Anonymous subscription messages template.
+ */
+#}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="x-apple-disable-message-reformatting">
+		<title></title>
+		<style type="text/css">
+			@media screen and(max-width: 460px) {
+				.two-col {
+					background-size: 150px, 300px !important;
+					background-position: calc(100% + 50px) -75px, -110px -90px !important;
+				}
+				.two-col .column {
+					max-width: 100% !important;
+				}
+				.two-col .footerpad {
+					padding: 10px !important;
+				}
+			}
+			@media screen and(min-width: 461px) {
+				.two-col .column {
+					max-width: 50% !important;
+				}
+			}
+		</style>
+	</head>
+	<body style="margin:0;padding:0;word-spacing:normal;background-color:#ebebeb;">
+		<div role="article" aria-roledescription="email" lang="en" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#ffffff;">
+			<table role="presentation" style="width:100%;border:0;border-spacing:0;">
+				<tr>
+					<td align="center" style="background-color:#ebebeb;padding:25px;">
+						<table width="912">
+							<tr>
+								<td align="center" style="padding: 0; padding-top: 7px;width:912px;margin:20px auto;background-color:#ffffff;">
+									{# <div class="outer" style="padding-top: 7px;width:912px;margin:20px auto;background:#ffffff;"> #}
+									<table align="center" role="presentation" style="width:666px;border:0;border-spacing:0;">
+										<tr>
+											<td style="padding:20px 0;font-family:Arial,sans-serif;font-size:24px;line-height:28px;font-weight:bold;">
+												<a href="{{ url('<front>') }}" style="display:block; float:left;">
+													<img src="{{ logo_url }}" alt="Ringsted logotype" style="border:0;" width="215" height="97">
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:10px 0;text-align:right;">
+												{{ 'the'|trans }}
+												{{ "now"|date('U')|format_date("custom", "j. F Y") }}
+											</td>
+										</tr>
+										<tr>
+											<td style="font-family: Arial; color: #333333; font-size: 15px; padding:10px 0;text-align:left;">
+												{{ message|raw }}
+												{% if link %}
+													<div class="anonymous-subscription-url">
+														{{ link }}
+													</div>
+												{% endif %}
+											</td>
+										</tr>
+									</table>
+									{# <div class="spacer" style="line-height:26px;height:26px;mso-line-height-rule:exactly;">&nbsp;</div> #}
+
+									<table class="spacer">
+										<tr>
+											<td style="line-height:26px;height:26px;mso-line-height-rule:exactly;">
+												&nbsp;
+											</td>
+										</tr>
+									</table>
+
+									<table>
+										<tr>
+											<td></td>
+										</tr>
+									</table>
+
+
+									<table bgcolor="#D1D3D4" align="center"  height="240" border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+										<tbody>
+											<tr>
+												<td height="240" bgcolor="#D1D3D4" background="{{ base_url }}themes/custom/fds_ringsted_theme/dist/images/blobs.png" border="0" style="vertical-align:top;padding:0;background-repeat:no-repeat; background-size: cover; background-position: center;">
+													<table align="center">
+														<tr>
+															<td style="vertical-align:top;width:333px;padding-top:40px;">
+																<div class="column" style="display:inline-block;vertical-align:middle;">
+																	<div class="footerpad" style="">
+																		<p style="margin:0;font-family:Arial,sans-serif;font-size:16px;line-height:18px;color:#333;">
+																			<img src="{{ logo_url }}" alt="Ringsted logotype" width="166" height="76" style="display:block;height:auto;"/>
+																		</p>
+																	</div>
+																</div>
+															</td>
+															<td style="vertical-align:top;width:333px;padding-top:40px;">
+																<div class="column" style="display:inline-block;vertical-align:middle;">
+																	<div class="footerpad" style="font-size:16px;line-height:18px;text-align:left;">
+																		<p style="margin-top:0;margin-bottom:16px;font-family:Arial,sans-serif;color:#333;">
+																			{% if theme_settings.contact_information.business_owner_name %}
+																				{{ theme_settings.contact_information.business_owner_name | trans }}
+																			{% endif %}
+																			<br>
+																			{% if theme_settings.contact_information.address %}
+																				{{ theme_settings.contact_information.address }}
+																			{% endif %}
+																			<br>
+																			{% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+																				{{ theme_settings.contact_information.zipcode }}
+																				{{ theme_settings.contact_information.city }}
+																			{% endif %}
+																			<br>
+																			<br>
+																			{% if theme_settings.contact_information.phone_readable %}
+																				{{ theme_settings.contact_information.phone_readable }}
+																			{% endif %}
+																			<br>
+																			{% if theme_settings.contact_information.email %}
+																				<a href="mailto: {{ theme_settings.contact_information.email }}" style="color:#333; font-weight:bold; text-decoration:none;">
+																					{{ theme_settings.contact_information.email }}
+																				</a>
+																			{% endif %}
+																		</p>
+																	</div>
+																</div>
+															</td>
+														</tr>
+													</table>
+													{# </div> #}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									{# </div> #}
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

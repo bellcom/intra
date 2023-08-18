@@ -1,0 +1,18 @@
+fonts:
+  css:
+    base:
+      'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap': { type: external }
+
+styles:
+  css:
+    theme:
+      dist/stylesheets/stylesheet.css: {}
+
+javascripts:
+  js:
+    "https://unpkg.com/@popperjs/core@2": { type: external }
+    "https://unpkg.com/tippy.js@6": { type: external }
+    dist/javascripts/app.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Contains du_cura.module.
+ */
+
+use Drupal\Component\Serialization\Json;
+use Drupal\field\FieldStorageConfigInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function du_cura_views_data_alter(&$data) {
+  $data['taxonomy_index']['cura_tids_by_names'] = [
+    'group' => t('Content'),
+    'title' => t('CURA OS2Web Rest API: Has taxonomy term ID, by name'),
+    'help' => t('Display content if it has the selected taxonomy terms.'),
+    'real field' => 'tid',
+    'filter' => [
+      'title' => t('CURA OS2Web Rest API: Has taxonomy term ID, by name'),
+      'id' => 'cura_os2web_rest_taxonomy_index_term_name',
+      'hierarchy table' => 'taxonomy_term__parent',
+      'numeric' => TRUE,
+      'skip base' => 'taxonomy_term_field_data',
+      'allow empty' => TRUE,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_views_data_alter().
+ *
+ * Views integration for entity reference fields which reference taxonomy terms.
+ * Adds a term relationship to the default field data.
+ *
+ * @see views_field_default_views_data()
+ */
+function du_cura_field_views_data_alter(array &$data, FieldStorageConfigInterface $field_storage) {
+  if ($field_storage->getType() == 'entity_reference' && $field_storage->getSetting('target_type') == 'taxonomy_term') {
+    foreach ($data as $table_name => $table_data) {
+      foreach ($table_data as $field_name => $field_data) {
+        if (isset($field_data['filter']) && $field_name != 'delta') {
+          $data[$table_name][$field_name]['filter']['id'] = 'cura_os2web_rest_taxonomy_index_term_name';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * Setting limit restriction for cura_dialog_local_area_events views.
+ */
+function du_cura_views_query_alter(ViewExecutable $view,     QueryPluginBase $query) {
+  if ($view->id() == "cura_dialog_local_area_events") {
+    $json = file_get_contents('php://input');
+    $json_data = Json::decode($json);
+    if (isset($json_data['maxCount']) && is_numeric($json_data['maxCount'])) {
+      $view->getPager()->setItemsPerPage($json_data['maxCount']);
+    }
+  }
+}

@@ -1,0 +1,162 @@
+// |--------------------------------------------------------------------------
+// | Box
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .box
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin box-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.box {
+  background-color: $gray-primary;
+  .box__heading {
+    padding: 20px 20px;
+    color: $color-black;
+    background-color: $gray-primary;
+    .h4 {
+      font-size: 2.4rem;
+    }
+  }
+  .box__body {
+    font-size: 1.6rem;
+    color: $color-black;
+    padding: 20px 20px;
+    background-color: $gray-primary;
+  }
+  .box__heading + .box__body {
+    padding-top: 0;
+  }
+}
+
+.field--name-field-os2web-files-media {
+  background-color: $gray-primary;
+  padding: 10px 0px;
+}
+
+
+// Variants.
+.box--section-link {
+  margin-bottom: 14px;
+
+  .box__body {
+    min-height: 40px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    > a {
+      position: relative;
+
+      padding-right: 12px;
+
+      font-weight: $font-weight-bold;
+
+      &:after {
+        display: inline-block;
+        position: absolute;
+
+        top: 50%;
+        right: 0;
+
+        margin-top: -12px;
+
+        font-family: FontAwesome;
+        content: $fa-var-angle-right;
+
+        color: $color__bullets;
+      }
+    }
+  }
+
+  a {
+    display: block;
+
+    text-decoration: none;
+  }
+
+  ul {
+    margin: 0 0 5px 0;
+
+    li {
+      list-style: none;
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    a {
+      font-size: $small-text;
+    }
+  }
+
+
+}
+
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  .box {
+    box-shadow: none !important;
+
+    .box__heading {
+      padding: 0;
+    }
+    .box__body {
+      padding: 0;
+    }
+
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

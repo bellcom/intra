@@ -1,0 +1,197 @@
+// |--------------------------------------------------------------------------
+// | Accordion
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .accordion
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin accordion-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.accordion {
+  margin-top: 10px;
+  margin-bottom: $grid-gutter-width / 2;
+
+  border-top: 2px solid $color-primary;
+  border-bottom: 1px solid $color-primary;
+
+  > li {
+    margin-bottom: 0;
+
+    + li {
+      border-top: 1px solid #dadde0;
+    }
+  }
+
+  li.has-selfservice-links {
+    position: relative;
+
+    .selfservice-links {
+      position: absolute;
+
+      top: 0;
+      right: 0;
+
+      z-index: 500;
+
+      padding-top: 14px;
+      padding-bottom: 14px;
+      padding-right: 14px;
+      padding-left: 20px;
+    }
+
+    .accordion-button {
+      padding-right: 12rem;
+    }
+  }
+}
+.accordion-button {
+  position: relative;
+
+  padding: 2.4rem 2.4rem;
+  padding-left: 7rem;
+
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+
+  border-radius: 0 !important;
+
+  background-image: none !important;
+  background-color: $gray-primary;
+  color: $color-black;
+  &, &:hover, &:focus {
+    background-color: #fff;
+  }
+
+  &:after {
+    display: flex;
+    position: absolute;
+
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 2px;
+
+    top: 50%;
+    left: 2.4rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    margin-top: -1.75rem;
+
+    font-size: 2rem;
+    font-family: FontAwesome;
+
+    content: $fa-var-plus;
+
+    color: $color-black;
+    border: 1px solid $color-black;
+    background-color: $color-white;
+
+    border-radius: 25px;
+  }
+
+  &[aria-expanded="true"] {
+    &, &:hover, &:focus {
+    }
+
+    &:after {
+      content: $fa-var-minus;
+    }
+  }
+}
+
+.accordion-content {
+  padding: 2rem 2.4rem;
+
+  .field {
+
+    + .field--name-field-os2web-hearings-reply-docs {
+      margin-top: $grid-gutter-width / 2;
+    }
+  }
+}
+
+.accordion-close-button {
+  display: block;
+
+  margin-left: -2.4rem;
+  margin-right: -2.4rem;
+  margin-bottom: -2rem;
+  padding: 2rem 0 3rem 0;
+
+  font-weight: $font-weight-bold;
+  font-size: 4rem;
+  text-align: center;
+  border: 0;
+
+  color: $background_color__default;
+  background-color: transparent;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.accordion {
+
+  .box__body {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

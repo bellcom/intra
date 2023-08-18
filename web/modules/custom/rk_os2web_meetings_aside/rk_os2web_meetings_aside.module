@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements HOOK_views_pre_view().
+ */
+function rk_os2web_meetings_aside_views_pre_view($view) {
+  if ($view->id() == 'os2web_meetings_aside') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node) {
+      $committee_id = $node->get('field_os2web_m_committee')->target_id;
+      $meeting_start_date = $node->get('field_os2web_m_start_date')->value;
+      $view->setArguments(array($committee_id));
+      $filters = $view->getDisplay()->getOption('filters');
+      $filters['field_os2web_m_start_date_value']['value']['value'] = date('Y-m-d', strtotime($meeting_start_date));
+      $view->getDisplay()->setOption('filters', $filters);
+    }
+  }
+}

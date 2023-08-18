@@ -1,0 +1,19 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+      <div class="preheader">
+        {{ content.field_os2web_news_block_header }}
+        {{ content.field_os2web_news_details_link }}
+      </div>
+
+      {{ content | without('field_os2web_news_block_header', 'field_os2web_news_details_link') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

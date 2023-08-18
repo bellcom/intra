@@ -1,0 +1,227 @@
+// |--------------------------------------------------------------------------
+// | File
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .file
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin file-mixin() {
+}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+
+
+.field--type-file>.field__item, .field--type-file>.field__items>.field__item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.field--type-file {
+  .field__item {
+    max-width: 100% !important;
+  }
+}
+
+
+.field--name-field-media-file {
+  .field__item {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    span {
+      a{
+        &:before {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+
+.file {
+  display: block;
+  box-shadow: none !important;
+  margin-bottom: 4px;
+  background-color: #fafafa;
+  padding: 30px;
+  border: 1px solid var(--light-gray2);
+  margin-bottom: 15px;
+  padding-left: 0 !important; // Reset.
+  background-image: none !important;
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+    padding: 10px 0 10px 30px; // Width of icon + left/right spacing + gutter.
+    height: auto;
+    max-width: 100%; // Reset.
+    font-weight: 500;
+    &:hover,
+    &:focus,
+    &:visited {
+      text-decoration: none;
+    }
+    &:after {
+      display: inline-block;
+      position: absolute;
+      content: "";
+      top: 50%;
+      right: 30px;
+      margin-top: -15px; // Half the height.
+      width: 30px;
+      height: 30px;
+      background-image: url("../images/download.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    &:before {
+    }
+  }
+}
+
+.field--name-field-os2web-m-bp-enclosures {
+  span.file {
+    all: revert;
+    a {
+      font-size: 15px;
+      position: relative;
+      margin-bottom: 5px;
+      margin-left: 23px;
+      padding: 0;
+      display: inline;
+      &::before {
+        content: "";
+        display: block !important;
+        background-image: url("../images/sprite.png");
+        background-repeat: no-repeat;
+        background-position: 0 -48px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -25px;
+        width: 19px;
+        height: 19px;
+      }
+      &:hover,
+      &:focus {
+        font-weight: initial;
+        font-family: "Museo 700", Helvetica, Arial, sans-serif;
+        &::before,
+        &::before {
+          background-position: -19px -48px;
+        }
+      }
+    }
+  }
+}
+
+.field--type-file {
+  > .field__items,
+  &.field__items {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-right: ($grid-gutter-width / -4);
+    margin-left: ($grid-gutter-width / -4);
+  }
+
+  > .field__items > .field__item,
+  > .field__item {
+    // Column.
+    position: relative;
+    width: 100%;
+    min-height: 1px; // Prevent columns from collapsing when empty
+    padding-right: ($grid-gutter-width / 4);
+    padding-left: ($grid-gutter-width / 4);
+
+    @include grid-col(12, 12);
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+  .field--type-file {
+    > .field__items > .field__item,
+    > .field__item {
+      @include grid-col(6, 12);
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {
+}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {
+}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {
+}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+}
+
+// Print
+@media print {
+  .file {
+    box-shadow: none;
+
+    border: 1px solid #000;
+  }
+
+  .field--type-file {
+    > .field__items > .field__item,
+    > .field__item {
+      @include grid-col(6, 12);
+    }
+  }
+}
+
+// Touch
+.touchevents {
+}
+
+// No touch
+.no-touchevents {
+}

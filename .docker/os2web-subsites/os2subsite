@@ -1,0 +1,6 @@
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/subsite_add_domain.sh
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/subsite_create.sh
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/subsite_delete.sh
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/subsite_remove_domain.sh
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/phase1.sh
+www-data   ALL=(root) NOPASSWD:SETENV: /opt/drupal/scripts/os2subsites_provision/phase2.sh

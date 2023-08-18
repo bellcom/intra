@@ -1,0 +1,40 @@
+id: faxekommune_d7_user
+label: Faxekommune D7 User accounts
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+class: Drupal\user\Plugin\migrate\User
+source:
+  plugin: d7_user
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration,
+  # consider removing the uid field to allow
+  # incremental migrations.
+  #uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  created: created
+  access: access
+  login: login
+  status: status
+  timezone: timezone
+  init: init
+  roles:
+    plugin: static_map
+    source: roles
+    map:
+      3: 'administrator'
+      9: 'hoeringer_og_afgoerelser'
+      5: 'kommunikation'
+      4: 'editor'
+      12:	'student'
+      10:	'udbud'
+      7: 'webmaster'
+      8: 'postlister'
+destination:
+  plugin: entity:user
+migration_dependencies:
+  required: {  }
+  optional: {  }

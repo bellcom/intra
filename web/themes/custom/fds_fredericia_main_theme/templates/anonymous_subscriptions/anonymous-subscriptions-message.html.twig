@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * Anonymous subscription messages template.
+ */
+#}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <title></title>
+  <style type="text/css">
+    @media screen and(max-width: 460px) {
+      .two-col {
+        background-size: 150px, 300px !important;
+        background-position: calc(100% + 50px) -75px, -110px -90px !important;
+      }
+      .two-col .column {
+        max-width: 100% !important;
+      }
+      .two-col .footerpad {
+        padding: 10px !important;
+      }
+    }
+    @media screen and(min-width: 461px) {
+      .two-col .column {
+        max-width: 50% !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;word-spacing:normal;background-color:#ebebeb;">
+<div role="article" aria-roledescription="email" lang="en" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#ffffff;">
+  <table role="presentation" style="width:100%;border:0;border-spacing:0;">
+                <tr>
+                  <td style="padding:10px 0;text-align:right;">
+                    den.
+                    {{ "now"|date('U')|format_date("custom", "j. F Y") }}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-family: Arial; color: #333333; font-size: 15px; padding:10px 0;text-align:left;">
+                    {{ message|raw }}
+                    {% if link %}
+                      <div class="anonymous-subscription-url">
+                        {{ link }}
+                      </div>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+              {# <div class="spacer" style="line-height:26px;height:26px;mso-line-height-rule:exactly;">&nbsp;</div> #}
+
+              <table class="spacer">
+                <tr>
+                  <td style="line-height:26px;height:26px;mso-line-height-rule:exactly;">
+                    &nbsp;
+                  </td>
+                </tr>
+              </table>
+
+
+              {# </div> #}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

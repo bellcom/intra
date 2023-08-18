@@ -1,0 +1,105 @@
+diff --git a/src/Plugin/Field/FieldWidget/StringTextareaWithCounterWidget.php b/src/Plugin/Field/FieldWidget/StringTextareaWithCounterWidget.php
+index 43cd01a..6ce8fea 100644
+--- a/src/Plugin/Field/FieldWidget/StringTextareaWithCounterWidget.php
++++ b/src/Plugin/Field/FieldWidget/StringTextareaWithCounterWidget.php
+@@ -81,10 +81,7 @@ class StringTextareaWithCounterWidget extends StringTextareaWidget {
+       }
+       $element['#textfield-maxlength'] = $maxlength;
+       $element['#textfield-count-html'] = $count_html_characters;
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     return $element;
+diff --git a/src/Plugin/Field/FieldWidget/StringTextfieldWithCounterWidget.php b/src/Plugin/Field/FieldWidget/StringTextfieldWithCounterWidget.php
+index cd4d8e5..cc82e7c 100644
+--- a/src/Plugin/Field/FieldWidget/StringTextfieldWithCounterWidget.php
++++ b/src/Plugin/Field/FieldWidget/StringTextfieldWithCounterWidget.php
+@@ -85,10 +85,7 @@ class StringTextfieldWithCounterWidget extends StringTextfieldWidget {
+       }
+       $element['#textfield-maxlength'] = $maxlength;
+       $element['#textfield-count-html'] = $count_html_characters;
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     return $element;
+diff --git a/src/Plugin/Field/FieldWidget/TextFieldCounterWidgetTrait.php b/src/Plugin/Field/FieldWidget/TextFieldCounterWidgetTrait.php
+index 2ec5b4a..a89ebc6 100644
+--- a/src/Plugin/Field/FieldWidget/TextFieldCounterWidgetTrait.php
++++ b/src/Plugin/Field/FieldWidget/TextFieldCounterWidgetTrait.php
+@@ -349,7 +349,7 @@ trait TextFieldCounterWidgetTrait {
+     $input_exists = FALSE;
+     $value = NestedArray::getValue($form_state->getValues(), $element['#parents'], $input_exists);
+     $value = is_array($value) ? $value['value'] : $value;
+-    $value_length = self::getLengthOfSubmittedValue($element, $value);
++    $value_length = static::getLengthOfSubmittedValue($element, $value);
+     if ($value_length > $element['#textfield-maxlength']) {
+       $form_state->setError($element, t(
+         '@name cannot be longer than %max characters but is currently %length characters long.',
+diff --git a/src/Plugin/Field/FieldWidget/TextareaWithCounterWidget.php b/src/Plugin/Field/FieldWidget/TextareaWithCounterWidget.php
+index 16a442a..71db600 100644
+--- a/src/Plugin/Field/FieldWidget/TextareaWithCounterWidget.php
++++ b/src/Plugin/Field/FieldWidget/TextareaWithCounterWidget.php
+@@ -82,10 +82,7 @@ class TextareaWithCounterWidget extends TextareaWidget {
+       }
+       $element['#textfield-maxlength'] = $maxlength;
+       $element['#textfield-count-html'] = $count_html_characters;
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     return $element;
+diff --git a/src/Plugin/Field/FieldWidget/TextareaWithSummaryAndCounterWidget.php b/src/Plugin/Field/FieldWidget/TextareaWithSummaryAndCounterWidget.php
+index 645e3d2..aec673c 100644
+--- a/src/Plugin/Field/FieldWidget/TextareaWithSummaryAndCounterWidget.php
++++ b/src/Plugin/Field/FieldWidget/TextareaWithSummaryAndCounterWidget.php
+@@ -149,10 +149,7 @@ class TextareaWithSummaryAndCounterWidget extends TextareaWithSummaryWidget {
+       }
+       $element['#textfield-maxlength'] = $maxlength;
+       $element['#textfield-count-html'] = $count_html_characters;
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     if ($summary_maxlength = $this->getSetting('summary_maxlength')) {
+@@ -160,10 +157,7 @@ class TextareaWithSummaryAndCounterWidget extends TextareaWithSummaryWidget {
+       $element['summary']['#textfield-maxlength'] = $summary_maxlength;
+       $element['summary']['#textfield-count-html'] = $this->getSetting('count_html_characters');
+
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['summary']['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['summary']['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     return $element;
+diff --git a/src/Plugin/Field/FieldWidget/TextfieldWithCounterWidget.php b/src/Plugin/Field/FieldWidget/TextfieldWithCounterWidget.php
+index 98e4125..894c6e4 100644
+--- a/src/Plugin/Field/FieldWidget/TextfieldWithCounterWidget.php
++++ b/src/Plugin/Field/FieldWidget/TextfieldWithCounterWidget.php
+@@ -85,10 +85,7 @@ class TextfieldWithCounterWidget extends TextfieldWidget {
+       }
+       $element['#textfield-maxlength'] = $maxlength;
+       $element['#textfield-count-html'] = $count_html_characters;
+-      $classes = class_uses($this);
+-      if (count($classes)) {
+-        $element['#element_validate'][] = [array_pop($classes), 'validateFieldFormElement'];
+-      }
++      $element['#element_validate'][] = [static::class, 'validateFieldFormElement'];
+     }
+
+     return $element;

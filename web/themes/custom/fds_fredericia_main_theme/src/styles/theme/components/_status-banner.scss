@@ -1,0 +1,33 @@
+.status-banner {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  padding: 10px 0;
+
+  .container {
+    position: relative;
+    .status-banner-heading {
+      text-transform: uppercase;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .status-banner-close-btn {
+      position: absolute;
+      top: 0;
+      right: 30px;
+      border: none;
+      background-color: transparent;
+    }
+    .status-banner-body {
+      p, h1, h2, h3, h4, h5, h6, span {
+        margin-bottom: 0;
+      }
+    }
+    .white-text {
+      p {
+        color: white !important;
+      }
+    }
+  }
+}

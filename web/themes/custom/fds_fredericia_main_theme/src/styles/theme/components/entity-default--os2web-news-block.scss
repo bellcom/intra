@@ -1,0 +1,83 @@
+.entity-default--os2web-news-block {
+    background-color: $color-white;
+    .row {
+        padding: 0;
+        margin: 0;
+    }
+    .preheader {
+        background-color: $color-white;
+        padding: 40px;
+        h2 {
+            margin: 0;
+            padding: 0!important;
+            color: inherit;
+            font-size: 2.4rem;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+    }
+    $news-block-content-shift-size: 40px;
+    .view-os2web-news-wrapper {
+        position: relative;
+        padding: 15px $news-block-content-shift-size;
+        background-color: $color-white;
+        transition: all 0.3s ease;
+        &:hover {
+            color: $background_color__default !important;
+            background-color: $gray-primary;
+            a {
+                color: $background_color__default !important;
+            }
+        }
+        &:after {
+            position: absolute;
+            background-color: $background_color__default;
+            color: $color-white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            // content: '\276f';
+            font-family: FontAwesome;
+            content: "\f105";
+            font-size: 1.6rem;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            height: 40px;
+            width: 40px;
+        }
+        .views-field-title {
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.6rem;
+            letter-spacing: 0;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            a {
+                display: block;
+                padding-bottom: 25px;
+                width: 100%;
+                z-index: 2;
+                font-weight: 700;
+                color: #000;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+        .views-field-field-os2web-news-article-date {
+            .field-content {
+                position: absolute;
+                bottom: 15px;
+                left: $news-block-content-shift-size;
+                pointer-events: none;
+                color: $background_color__default;
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+        }
+    }
+}

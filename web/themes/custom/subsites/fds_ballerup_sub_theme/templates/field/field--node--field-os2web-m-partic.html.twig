@@ -1,0 +1,34 @@
+{%
+  set classes = [
+    'box',
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+
+<div{{ attributes.addClass(classes, 'field__items') }}>
+  <div class="box__body">
+    <h2 class="h4" style="margin-top: 0;">{{ label }}</h2>
+
+    {% for item in items %}
+      {% set participantRendered = item.content | render %}
+      {% set participantsList = participantRendered | split(',') %}
+
+      <div{{ item.attributes.addClass('field__item') }}>
+        {% if participantsList | length == 0 %}
+          {{ 'Der er ingen deltagere.' | trans }}
+        {% else %}
+          <ul class="two-col-list">
+            {% for participant in participantsList %}
+              <li>
+                {{ participant }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

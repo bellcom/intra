@@ -1,0 +1,41 @@
+<?php
+
+use Drupal\bc_speed_admin\Controller\Sync;
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Access\AccessResult;
+
+function bc_speed_admin_cron() {
+
+  $run = \Drupal::config('bc_speed_admin.settings')->get('run');
+  if ($run == 'drush') return;
+
+  $doRun = false;
+  $last_start = \Drupal::keyValue('bc_speed_admin_cron')->get('last_start');
+
+  if (empty($last_start)) {
+    $doRun = true;
+
+  } else {
+
+    $next = null;
+    switch ($run) {
+      case 'cronday'  : $next = strtotime("+1 day", $last_start); break;
+      case 'cronweek' : $next = strtotime("+1 week", $last_start); break;
+      case 'cronmonth': $next = strtotime("+1 month", $last_start); break;
+      default: $next = null;
+    }
+
+    if ($next && $next <= time()) {
+      $doRun = true;
+    }
+  }
+
+  if ($doRun) {
+    \Drupal::keyValue('bc_speed_admin_cron')->set('last_start', time());
+    Sync::handler();
+  }
+
+
+
+
+}

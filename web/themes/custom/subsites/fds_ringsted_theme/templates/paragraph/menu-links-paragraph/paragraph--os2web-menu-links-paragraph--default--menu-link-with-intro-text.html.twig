@@ -1,0 +1,41 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+      {# Begin - links #}
+    <nav class="row entrylinks">
+      {% for menu_link in _context['#menu_links'] %}
+      <div class="col-12 col-sm-6 col-md-3 entrylinks-col">
+        <div class="entrylinks-wrapper">
+          <a href="{{ menu_link.url }}">{{ menu_link.title }}</a>
+          <h2>{{ menu_link.title }}</h2>
+          {% set rendered_content = menu_link.content.field_os2web_icon|render %}
+          {% if rendered_content %}
+            {{ rendered_content }}
+          {% endif %}
+          {% if menu_link['intro_text']|length %}
+            {{ menu_link['intro_text'] }}
+          {% endif %}
+          {% if menu_link['children']|length %}
+            <hr>
+            <ul>
+              {% for node_link in menu_link['children'] %}
+                <li><a href="{{ node_link.url }}">{{ node_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+      </nav>
+      {# End - links #}
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

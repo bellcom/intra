@@ -1,0 +1,47 @@
+.field--name-field-os2web-banner-links {
+    li {
+        margin: 0!important;
+        a {
+            position: relative;
+            padding: 18px 45px 18px 30px;
+            max-width: 290px;
+            text-align: left;
+            white-space: normal;
+            color: #333!important;
+            background-color: $color-white!important;
+            border: 1px solid #ccc!important;
+            display: block;
+            width: 100%;
+            border-radius: 0;
+            margin-inline: auto!important;
+            margin-bottom: 10px;
+            text-decoration: none;
+            font-size: 1.6rem;
+            line-height: 1.42857;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            &::after {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 50%;
+                right: 26px;
+                content: "\2303";
+                margin-top: -15px;
+                height: 30px;
+                font-size: 1.6rem;
+                color: #000;
+                transform: rotate(90deg);
+            }
+            &:hover {
+                color: $background_color__default!important;
+                background-color: #e6e6e6!important;
+                border-color: #adadad!important;
+            }
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+}

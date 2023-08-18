@@ -1,0 +1,44 @@
+
+  {% set titles = paragraph.field_toc_title %}
+  {% set contents = paragraph.field_toc_content %}
+  {% set anchorIds = []  %}
+
+  <div class="toc-outer-wrapper">
+    <div class="toc-inner-wrapper">
+    <h2 class="toc-heading">Indholdsfortegnelse</h2>
+
+    <ul>
+      {% for key in titles|keys %}
+        {% set title = titles[key] %}
+        {% if title.value is not empty %}
+          {# Generate a unique anchor ID for each title #}
+          {% set anchorId = 'toc-anchor-' ~ loop.index0 %}
+          {% set anchorIds = anchorIds|merge([anchorId]) %}
+
+          {# Output the anchor link in the Table of Contents #}
+          <li>
+            <a href="#{{ anchorId }}">{{ title.value }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    </div>
+    <div class="toc-content-wrapper">
+
+    {% for key in contents|keys %}
+      {% set content = contents[key] %}
+      {% if content.value is not empty %}
+        {# Generate a unique anchor ID for each content #}
+        {% set anchorId = 'toc-anchor-' ~ loop.index0 %}
+        {% set anchorIds = anchorIds|merge([anchorId]) %}
+
+        {# Render the anchor paragraph with the corresponding anchor ID #}
+        <div id="{{ anchorId }}" class="anchor">
+          <h2 class="content-heading">{{ titles[key].value }}</h2>
+          {{ content.value|raw }}
+        </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+

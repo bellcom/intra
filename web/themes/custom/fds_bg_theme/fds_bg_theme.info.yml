@@ -1,0 +1,31 @@
+name: 'Designsystem.dk - brown & green (subsites)'
+type: theme
+description: 'Brown & green theme for subsites.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+screenshot: screenshot.png
+base theme: fds_base_theme
+package: OS2web
+
+regions:
+  header__logo: 'Header - logo'
+  header__top_navigation: 'Header - top navigation'
+  header__main_navigation: 'Header - main navigation'
+  alert: 'Alert'
+  banner_search: 'Banner search'
+  small_search: 'Small search'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  featured_bottom_first: 'Featured bottom first'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  embedded_code: 'Embedded code'
+
+libraries:
+  - 'fds_bg_theme/fonts'
+  - 'fds_bg_theme/styles'
+  - 'fds_bg_theme/javascripts'

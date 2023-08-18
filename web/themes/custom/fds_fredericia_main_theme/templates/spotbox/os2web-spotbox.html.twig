@@ -1,0 +1,32 @@
+{#
+/**
+ * @file os2web_spotbox.html.twig
+ * Default theme implementation to present OS2Web Spotbox data.
+ *
+ * This template is used when viewing OS2Web Spotbox pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_os2web_spotbox()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = [
+  'spotbox',
+  'spotbox--' ~ spotbox_type,
+  background_color ? ('spotbox--background-color-' ~ background_color),
+] %}
+<a href="{{ spotbox_url }}" {{ attributes.addClass(classes) }}>
+
+  {% if content %}
+    {{- content|without('field_os2web_spotbox_link') -}}
+  {% endif %}
+  <div class="read-more-spotbox">
+    <span>Læs mere <i class="fa-solid fa-circle-chevron-right"></i></span>
+  </div>
+
+</a>

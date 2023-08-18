@@ -1,0 +1,31 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'search-block-page',
+]
+%}
+<a href="{{ url }}" {{ attributes.addClass(classes) }}>
+	<h3 class="title">{{ label }}</h3>
+	<p>
+	{{ content }}
+	</p>
+
+  {% if breadcrumb %}
+    <div class="search-result-breadcrumb">
+      <p class="found-under">Fundet under:</p>
+      <ul class="breadcrumb-ul-list">
+        {% for crumb in breadcrumb %}
+          <li class="breadcrumb-list-item">
+            <a class="breadcrumb-link-item" href="{{ crumb.url }}">{{ crumb.text }} <span class="breadcrumb-icon"><i class="fa-solid fa-angle-right"></i></span></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+</a>

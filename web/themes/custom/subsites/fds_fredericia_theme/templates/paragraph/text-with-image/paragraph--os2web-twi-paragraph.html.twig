@@ -1,0 +1,70 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="row">
+
+        {% if image_position == 'left' %}
+          <div class="col-12 col-sm-1">
+
+            {# Begin - image #}
+            {{ content.field_os2web_twi_image }}
+            {# End - image #}
+
+          </div>
+          <div class="col-12 col-sm-11">
+
+            {# Begin - heading #}
+            {{ content.field_os2web_twi_heading }}
+            {# End - heading #}
+
+            {# Begin - subheading #}
+            {{ content.field_os2web_twi_subheading }}
+            {# End - subheading #}
+
+            {# Begin - body #}
+            {{ content.field_os2web_twi_body }}
+            {# End - body #}
+
+            {# Begin - link #}
+            {{ content.field_os2web_twi_link }}
+            {# End - link #}
+
+          </div>
+        {% else %}
+          <div class="col-12 col-sm-11">
+
+            {# Begin - heading #}
+            {{ content.field_os2web_twi_heading }}
+            {# End - heading #}
+
+            {# Begin - subheading #}
+            {{ content.field_os2web_twi_subheading }}
+            {# End - subheading #}
+
+            {# Begin - body #}
+            {{ content.field_os2web_twi_body }}
+            {# End - body #}
+
+            {# Begin - link #}
+            {{ content.field_os2web_twi_link }}
+            {# End - link #}
+
+          </div>
+          <div class="col-12 col-sm-1">
+
+            {# Begin - image #}
+            {{ content.field_os2web_twi_image }}
+            {# End - image #}
+
+          </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,47 @@
+id: faxe_d7_contact_box
+label: Faxe D7 Contact Box
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_contact_contact
+  track_changes: true
+process:
+  name: title
+  field_os2web_contact_heading: field_os2web_contact_field_dept
+  field_os2web_contact_body:
+    plugin: sub_process
+    source: field_os2web_contact_field_info
+    process:
+      value: value
+      format:
+        plugin: default_value
+        default_value: 'wysiwyg_tekst'
+  migrate_contact_more/0/value:
+    plugin: concat
+    source:
+      - field_os2web_contact_field_zip/0/value
+      - field_os2web_contact_field_addr/0/value
+    delimiter: '<br/>'
+  field_os2web_contact_more:
+    - plugin: sub_process
+      source: '@migrate_contact_more'
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_contact_more/format:
+    plugin: default_value
+    default_value: 'wysiwyg_tekst'
+  field_os2web_contact_email: field_os2web_contact_field_mail/0/email
+  field_os2web_contact_phone: field_os2web_contact_field_tel
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'da'
+destination:
+  plugin: 'entity:os2web_contact'
+  default_bundle: os2web_accordion

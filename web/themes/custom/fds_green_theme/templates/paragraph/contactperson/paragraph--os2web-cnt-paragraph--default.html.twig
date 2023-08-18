@@ -1,0 +1,172 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  'paragraph--image-position--' ~ image_position,
+  'clearfix',
+  'paragraph--os2web-cnt-paragraph--default',
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+    <div class="row">
+      <div class="col-12">
+        {# Begin - heading #}
+        <h2>Kontakt</h2>
+        {# End - heading #}
+      </div>
+
+      <div class="col-12 col-sm-6 mb-auto">
+        {# Begin - subheading #}
+        {% if content.field_os2web_cnt_subheading %}
+          {{ content.field_os2web_cnt_subheading }}
+        {% endif %}
+        {# End - subheading #}
+
+        {# Begin - Fornavn Efternavn #}
+        {% if content.field_fornavn and content.field_efternavn %}
+          {{ content.field_fornavn }} {{ content.field_efternavn }}
+        {% endif %}
+        {# End - Fornavn Efternavn #}
+
+        {# Begin - address #}
+        {% if content.field_adresse %}
+          {{ content.field_adresse }}
+        {% endif %}
+        {# End - address #}
+
+        {# Begin - zipcode city #}
+        {% if content.field_postnummer and content.field_by %}
+          {{ content.field_postnummer }} {{ content.field_by }}
+        {% endif %}
+        {# End -city #}
+
+        <div class="spacer"></div>
+
+        {# Begin - Jobtitel #}
+        {% if content.field_jobtitel %}
+          {{ content.field_jobtitel }}
+        {% endif %}
+        {# End - Jobtitel#}
+
+        {# Begin - Arbejdsopgaver #}
+        {% if content.field_arbejdsopgaver %}
+          {{ content.field_arbejdsopgaver }}
+        {% endif %}
+        {# End - Arbejdsopgaver#}
+
+        {# Begin - Beskrivelse #}
+        {% if content.field_beskrivelse %}
+          {{ content.field_beskrivelse }}
+        {% endif %}
+        {# End - beskrivelse#}
+        {# Begin - body #}
+        {% if content.field_os2web_cnt_body %}
+          <div>
+            {{ content.field_os2web_cnt_body }}
+          </div>
+        {% endif %}
+        {# End - body #}
+        {# Begin - phone #}
+        {% if content.field_os2web_cnt_phone %}
+          <div class="field--name-field-os2web-cnt-phone">
+            {{ 'Tlf.' | t }}: {{ content.field_os2web_cnt_phone.0|render|striptags|trim }}
+          </div>
+        {% endif %}
+        {# End - phone #}
+
+        {# Begin - Hovednummer #}
+        {% if content.field_hovednummer %}
+          <div>
+            {{ 'Dir.' | t }}: {{ content.field_hovednummer|render|striptags|trim }}
+          </div>
+        {% endif %}
+        {# End - Hovednummer#}
+
+        {# Begin - Direkte nummer #}
+        {% if content.direkte_nummer %}
+          <div>
+            {{ content.direkte_nummer }}
+          </div>
+        {% endif %}
+        {# End - Direkte nummer#}
+
+        {# Begin - Mobilnummer #}
+        {% if content.field_mobilnummer %}
+          <div>
+            {{ 'Mobil' | t }}: {{ content.field_mobilnummer|render|striptags|trim }}
+          </div>
+        {% endif %}
+        {# End - Mobilnummer#}
+
+        {# Begin - Fax #}
+        {% if content.field_fax %}
+          <div>
+            {{ 'Fax' | t }}: {{ content.field_fax|render|striptags|trim }}
+          </div>
+        {% endif %}
+        {# End - Fax#}
+
+        {# Begin - email #}
+        {% if content.field_os2web_cnt_email %}
+          <div>
+            {{ 'E-mail' | t }}:  <a href="mailto:{{ content.field_os2web_cnt_email.0|render|striptags|trim }}">{{ content.field_os2web_cnt_email.0|render|striptags|trim }}</a>
+          </div>
+        {% endif %}
+        {# End - email #}
+
+        {# Begin - link #}
+        {% if content.field_os2web_cnt_link %}
+          <div class="mt-6 d-none d-sm-block">
+            {{ content.field_os2web_cnt_link }}
+          </div>
+        {% endif %}
+        {# End - link #}
+
+        {# Begin - website #}
+        {% if content.field_os2web_cnt_website %}
+          <div>
+            <a href="{{ content.field_os2web_cnt_website.0 }}" target="_blank">{{ paragraph.field_os2web_cnt_website.0.value|trim('https://')|trim('http://')}}</a>
+          </div>
+        {% endif %}
+        {# End - website #}
+
+        {# Begin - facebook #}
+        {% if content.field_os2web_cnt_facebook %}
+          <div>
+            <a href="{{ content.field_os2web_cnt_facebook.0 }}" target="_blank">facebook.com</a>
+          </div>
+        {% endif %}
+        {# End - facebook #}
+      </div>
+
+      <div class="col-12 col-sm-6 mb-auto">
+        {% if content.field_os2web_cnt_open_hours %}
+          {# Begin - open_hours #}
+          {{ 'Visiting hours' | t }}:
+          {{ content.field_os2web_cnt_open_hours }}
+          {# End - open_hours #}
+        {% endif %}
+
+          {# Begin - link #}
+        {% if content.field_os2web_cnt_link %}
+          <div class="mt-7 d-sm-none">
+            {{ content.field_os2web_cnt_link }}
+          </div>
+        {% endif %}
+        {# End - link #}
+      </div>
+
+      <div class="col-12 spacer"></div>
+
+      <div class="col-12 os2web_cnt_body">
+        {# <p>Hvis du ønsker at sende følsomme eller fortrolige oplysninger til Ringsted Kommune, eksempelvis dit cpr.nr., oplysninger om dine helbredsforhold eller økonomiske situation, anbefales du at gøre det via Digital Post. <a href="#">Læs om beskyttelse af persondata</a></p> #}
+
+      </div>
+    </div>
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,21 @@
+fonts:
+  css:
+    base:
+      'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap': { type: external }
+
+styles:
+  css:
+    theme:
+      dist/stylesheets/stylesheet.css: {}
+      "https://slinky.js.org/dist/slinky.min.css": { type: external, minified: true }
+javascripts:
+  js:
+    src/javascripts/slinky.js: {}
+    'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js': { type: external }
+    js/tns.js: {}
+    js/slideshow.js: {}
+    dist/javascripts/app.js: {}
+    'https://cdhsign.dk/cdh_player.js': { type: external }
+  dependencies:
+    - core/drupal
+    - core/jquery

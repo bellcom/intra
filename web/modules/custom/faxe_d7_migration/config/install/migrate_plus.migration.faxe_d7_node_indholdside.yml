@@ -1,0 +1,196 @@
+id: faxe_d7_node_indholdside
+label: Faxe D7 Node Indholdside
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_base_contentpage
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: os2web_page
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_page_heading: title
+  status: status
+  created: created
+  changed: changed
+  #promote: promote
+  sticky: sticky
+  field_os2web_page_description:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_page_intro: field_os2web_base_field_summary
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_os2web_base_field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_os2web_base_field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - createFileManaged
+  field_os2web_page_primaryimage/target_id: '@migrate_file_fid'
+  field_os2web_page_primaryimage/alt: title
+  field_link_til_andet_indhold:
+    - plugin: callback
+      source: field_os2web_base_field_related
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - migrateRelatedLinks
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+  migrate_paragraph_banner:
+    plugin: migration_lookup
+    migration: faxe_d7_paragraph_banner
+    source: field_os2web_base_banner
+    no_stub: true
+  migrate_paragraph_files:
+    plugin: migration_lookup
+    migration: faxe_d7_os2web_contentpage_paragraph_files
+    source: nid
+    no_stub: true
+  migrate_paragraph_spotbox:
+    - plugin: migration_lookup
+      migration: faxe_d7_spotbox
+      source: field_os2web_base_field_spotbox
+      no_stub: true
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - createSpotboxParagraph
+  migrate_paragraph_accordion:
+    plugin: sub_process
+    source: field_afsnit
+    process:
+      0:
+        - plugin: migration_lookup
+          migration:
+            - faxe_d7_paragraph_simple_text
+            - faxe_d7_paragraph_accordion
+          source: value
+        - plugin: extract
+          index:
+            - 0
+      1:
+        - plugin: migration_lookup
+          migration:
+            - faxe_d7_paragraph_simple_text
+            - faxe_d7_paragraph_accordion
+          source: value
+        - plugin: extract
+          index:
+            - 1
+  field_os2web_page_paragraph_narr:
+    - plugin: callback
+      source:
+        - '@migrate_paragraph_accordion'
+        - '@migrate_paragraph_files'
+        - '@migrate_paragraph_spotbox'
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - migrateNarrowParagraph
+#  field_os2web_page_paragraph_narr:
+#    plugin: sub_process
+#    source: field_afsnit
+#    process:
+#      target_id:
+#        - plugin: migration_lookup
+#          migration:
+#            - faxe_d7_paragraph_simple_text
+#            - faxe_d7_paragraph_accordion
+#          source: value
+#        - plugin: extract
+#          index:
+#            - 0
+#      target_revision_id:
+#        - plugin: migration_lookup
+#          migration:
+#            - faxe_d7_paragraph_simple_text
+#            - faxe_d7_paragraph_accordion
+#          source: value
+#        - plugin: extract
+#          index:
+#            - 1
+#  field_os2web_page_paragraph_narr:
+#    - plugin: migration_lookup
+#      migration: faxe_d7_spotbox
+#      source: field_os2web_base_field_spotbox
+#      no_stub: true
+#    - plugin: callback
+#      callable:
+#        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+#        - createSpotboxParagraph
+  field_os2web_page_paragraph_bann:
+    plugin: sub_process
+    source: '@migrate_paragraph_banner'
+    process:
+      target_id: '0'
+      target_revision_id: '1'
+# field_os2web_page_paragraph_wide: ''
+  field_os2web_page_contact:
+    plugin: migration_lookup
+    migration: faxe_d7_contact_box
+    source: field_os2sub_contact_ref
+    no_stub: true
+  field_ext_links:
+    plugin: field_link
+    source: field_os2web_base_field_ext_link
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - faxe_d7_contact_box
+    - faxe_d7_paragraph_simple_text
+    - faxe_d7_spotbox
+    - faxe_d7_os2web_contentpage_paragraph_files
+    - faxe_d7_paragraph_banner
+  optional:
+    - faxe_d7_paragraph_accordion

@@ -1,0 +1,25 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+      <div class="row">
+        {% for term_link in _context['#child_term_links'] %}
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="box box--section-link">
+              <div class="box__body">
+                <a href="{{ term_link.url }}">{{ term_link.title }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

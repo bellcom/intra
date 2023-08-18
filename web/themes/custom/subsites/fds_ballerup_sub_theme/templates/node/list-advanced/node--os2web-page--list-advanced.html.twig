@@ -1,0 +1,42 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<a href="{{ url }}" {{ attributes.addClass(classes) }}>
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+      {{ content.field_os2web_page_primaryimage }}
+    </div>
+    <div class="col-xs-12 col-md-9">
+      {{ content.field_os2web_page_heading }}
+
+      <div>
+        {{ content | without('field_os2web_page_heading', 'field_os2web_page_primaryimage') }}
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <strong>
+        {{ _context['#section_labels']|last }}
+      </strong>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="field--type-link text-align-right">
+        <strong>
+          {{ 'Read more' | trans }}
+        </strong>
+      </div>
+    </div>
+  </div>
+</a>

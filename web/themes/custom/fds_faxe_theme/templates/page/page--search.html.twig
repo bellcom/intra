@@ -1,0 +1,40 @@
+{% include '@fds_faxe_theme/includes/header.html.twig' %}
+
+
+
+<div class="page-container page--s">
+  <div class="container" id="main-content" role="main">
+    {{ page.highlighted }}
+
+    <div class="row layout--hidden-on-sections">
+      {%
+        set content_classes = [
+        'col-12 col-lg-8 content-column'
+      ]
+      %}
+
+
+
+      <main {{ content_attributes.addClass(content_classes) }}>
+        <div class="layout-content">
+          {{ page.content }}
+        </div>
+      </main>
+      {% if page.sidebar_first %}
+        {% block sidebar_first %}
+          <aside class="col-12 col-lg-4 sidebar-column">
+            <div class="layout-sidebar-left">
+              {{ page.sidebar_first }}
+            </div>
+          </aside>
+        {% endblock %}
+      {% endif %}
+    </div>
+  </div>
+
+  {{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_faxe_theme/includes/footer.html.twig' %}
+
+{{ page.embedded_code }}

@@ -1,0 +1,258 @@
+// |--------------------------------------------------------------------------
+// | Custom mobile navigation
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .custom-mobile-navigation
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$distance-from-top: 78px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin custom-mobile-navigation-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.custom-mobile-navigation {}
+
+.custom-mobile-navigation-toggle {
+  position: absolute;
+
+  top: $distance-from-top;
+  right: 10px;
+
+  height: 50px;
+  width: 50px;
+
+  z-index: 1080;
+
+  border: 0;
+
+  font-size: 2.4rem;
+
+  color: $color-orange-004;
+  background-color: #e6e6e6;
+
+  .toolbar-vertical & {
+    top: $distance-from-top + 39px;
+  }
+
+  .fa-angle-down {
+
+    .custom-mobile-navigation--open & {
+      display: none;
+    }
+  }
+  .fa-angle-up {
+    display: none;
+
+    .custom-mobile-navigation--open & {
+      display: inline-block;
+    }
+  }
+}
+
+.custom-mobile-navigation__overlay {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 1000;
+
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.custom-mobile-navigation__overlay {
+  display: none;
+
+  .custom-mobile-navigation--open & {
+    display: block;
+  }
+}
+
+.custom-mobile-navigation-popup {
+  position: absolute;
+
+  top: $distance-from-top;
+  left: 0;
+  right: 0;
+
+  width: 100vw;
+
+  z-index: 1050;
+
+  .toolbar-vertical & {
+    top: $distance-from-top + 39px;
+  }
+}
+
+.custom-mobile-navigation-popup__navigation {
+
+  .menu {
+    margin: 0;
+    padding-left: 0;
+
+    list-style: none;
+
+    li {
+      padding: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    a {
+      display: block;
+    }
+  }
+}
+.custom-mobile-navigation-popup__navigation--vertical {
+  margin-left: 80px;
+  margin-right: 10px;
+
+  background-color: #fff;
+
+  .custom-mobile-navigation--open & {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .menu {
+    display: flex;
+
+    flex-direction: column;
+
+    li {
+      display: none;
+
+      order: 2;
+
+      text-align: right;
+
+      &.menu-item--active-trail {
+        display: block !important;
+
+        order: 1;
+      }
+
+      .custom-mobile-navigation--open & {
+        display: block;
+      }
+    }
+
+    a {
+      padding: 14px 80px 14px 15px;
+
+      text-decoration: none;
+      text-transform: uppercase;
+
+      border-bottom: 1px solid #dadde0;
+
+      &, &.is-active, &:hover, &:focus {
+        color: $color-orange-004;
+      }
+
+      .custom-mobile-navigation--open & {
+        padding-right: 90px;
+      }
+    }
+  }
+}
+.custom-mobile-navigation-popup__navigation--horizontal {
+  display: none;
+
+  background-color: #fff;
+
+  .custom-mobile-navigation--open & {
+    display: block;
+  }
+
+  .menu {
+    display: flex;
+
+    justify-content: space-between;
+
+    li {
+      float: left;
+    }
+
+    a {
+      padding: 15px;
+
+      font-size: $small-text;
+      font-weight: $font-weight-bold;
+      text-decoration: none;
+
+      color: $color-text;
+
+      &:hover, &:focus {
+        color: $color-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .menu-item {
+
+    + .menu-item {
+      margin-left: 30px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

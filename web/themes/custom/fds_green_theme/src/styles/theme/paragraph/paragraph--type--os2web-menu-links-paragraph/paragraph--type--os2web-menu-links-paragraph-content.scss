@@ -1,0 +1,134 @@
+///CONTENT PART
+///CONTENT PART
+///CONTENT PART
+///CONTENT PART
+.paragraph--type--os2web-menu-links-paragraph {
+  section.sublist-wrapper.tabnav-panel[aria-hidden="false"],
+  section.accordion-content {
+    background-color: $color-white;
+    margin-bottom: 0;
+    border: 0;
+    z-index: 1;
+    width: 100%;
+    border-radius: unset!important;
+    &:last-of-type {
+      border-bottom-right-radius: $big-border-radius!important;
+      border-bottom-left-radius: $big-border-radius!important;
+    }
+    @include media-breakpoint-only(xs) {
+      order: 0;
+    }
+    @include media-breakpoint-up(sm) {
+      border-bottom-right-radius: $big-border-radius!important;
+      border-bottom-left-radius: $big-border-radius!important;
+    }
+    .temaer {
+      background: $color-white;
+      text-align: left;
+      font-style: italic;
+      padding: 30px 48px 2px;
+      @include media-breakpoint-only(xs) {
+        padding: 0;
+        display: flex;
+      }
+      a {
+       color: initial;
+       text-decoration: none;
+       font-size: 1.8rem;
+      }
+      p {
+        max-width: 100%;
+      }
+    }
+    ul {
+      min-width: 100%;
+      li {
+        text-align: left;
+        position: relative;
+        @include media-breakpoint-only(xs) {
+            padding: 0!important;
+        }
+        &::before {
+          content: "";
+          display: none;
+        }
+        a {
+          position: relative;
+          text-decoration: none;
+          display: block;
+          height: 100%;
+          width: 100%;
+          @include media-breakpoint-up(xs) {
+            padding: 30px 72px 46px 22px;
+          }
+          @include media-breakpoint-up(md) {
+            padding-right: 63px;
+          }
+          &::before {
+            content: "";
+            height: 18px;
+            width: 35px;
+            background-image: url("../images/Pil.svg");
+            background-size: 35px 18px;
+            display: block;
+            position: absolute;
+            bottom: 44px;
+            right: 23px;
+            transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+          }
+          &::after {
+            content: "";
+            height: 1px;
+            width: calc(100% - 46px);
+            background-color: $color-light-green-002;
+            display: block;
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            z-index: 2;
+            pointer-events: none;
+          }
+          &:hover,
+          &:focus {
+            background: $color-green-005;
+          }
+          &:hover::before,
+          &:focus::before {
+            right: 17px;
+          }
+        }
+        .sublist-title {
+          padding: 0;
+          font-weight: bold;
+          font-size: 1.6rem;
+          color: $color-primary;
+        }
+        .field--name-field-os2web-page-intro p {
+          font-weight: normal;
+          color: $color-primary;
+          font-size: 1.6rem;
+          margin-top: 10px;
+          z-index: 2;
+          strong {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    &[aria-hidden="false"] + .accordion-button[aria-expanded="false"] {
+      &::after {
+        display: none;
+      }
+    }
+  }
+  .accordion-bordered .accordion-button[aria-expanded=true], .accordion-bordered .tabnav > button[aria-expanded=true] {
+    border-bottom: none;
+  }
+}
+

@@ -1,0 +1,43 @@
+{% set classes = [
+  'banner',
+  'banner-overlay',
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div class="banner__image-outer" {% if background_image %} style="background-image: url({{ background_image }})" {% endif %}>
+    <div {{ attributes.addClass(classes) }}>
+      <div class="container">
+        {% block content %}
+          {% if paragraph.field_os2web_banner_heading.value or paragraph.field_os2web_banner_subheading.value or paragraph.field_os2web_banner_body.value or paragraph.field_os2web_banner_links.value %}
+            <div class="row">
+              <div class="col-md-7 col-12">
+                {% if paragraph.field_os2web_banner_heading.value %}
+                  <div class="banner__heading">
+                    {{ content.field_os2web_banner_heading }}
+                  </div>
+                {% endif %}
+
+                {% if paragraph.field_os2web_banner_subheading.value or paragraph.field_os2web_banner_body.value %}
+                  <div class="banner__body">
+                    {{ content.field_os2web_banner_subheading }}
+                    {{ content.field_os2web_banner_body }}
+                  </div>
+                {% endif %}
+              </div>
+
+              {% if paragraph.field_os2web_banner_links.value %}
+                <div class="banner__actions col-md-5 col-12">
+                  {{ content.field_os2web_banner_links }}
+                </div>
+              {% endif %}
+
+            </div>
+          {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock paragraph %}

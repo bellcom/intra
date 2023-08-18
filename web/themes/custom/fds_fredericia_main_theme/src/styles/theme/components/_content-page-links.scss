@@ -1,0 +1,116 @@
+.banner-content-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 50px 0;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .banner-content-links {
+      display: flex;
+      gap: 20px;
+
+      @media only screen and (max-width: 992px) {
+        flex-wrap: wrap;
+      }
+
+      .banner-link {
+        flex: 1;
+        background-color: #0a2d49;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 270px;
+
+        @media only screen and (max-width: 992px) {
+          flex: 1 1 100%;
+          max-width: none;
+        }
+
+
+
+        a {
+          color: white;
+          font-size: 1.8rem;
+          font-weight: 600;
+          text-decoration: none;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          padding: 25px 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .hidden-links {
+      gap: 20px;
+
+      .banner-link {
+        flex: 1;
+        background-color: #0a2d49;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 270px;
+
+        @media only screen and (max-width: 992px) {
+          flex: 1 1 40%;
+          max-width: none;
+        }
+
+        @media only screen and (max-width: 536px) {
+          flex: 1 1 100%;
+        }
+
+        a {
+          color: white;
+          font-size: 1.8rem;
+          font-weight: 600;
+          text-decoration: none;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          padding: 25px 10px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .show-more-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 10px;
+
+      .show-more-button {
+        background-color: transparent;
+        border: none;
+        color: #0a2d49;
+        font-size: 2rem;
+        font-weight: 600;
+
+        &:before {
+          font-family: FontAwesome;
+          margin-right: 10px;
+        }
+        &:hover span {
+        text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+

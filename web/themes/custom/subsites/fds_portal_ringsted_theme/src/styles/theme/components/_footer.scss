@@ -1,0 +1,303 @@
+// |--------------------------------------------------------------------------
+// | Footer
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .footer
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+footer {
+
+  .footer {
+    color: $color-dark-gray2;
+    background-color: $color-light-gray2;
+    background-image: url(../images/small-circle.png), url(../images/big-circle.png);
+    background-repeat: no-repeat;
+    background-position: 110% -95px, -250px -95px;
+    margin-top: 0;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    font-size: 1.5rem;
+
+    border-top: 0;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $color-dark-gray2;
+      margin: 25px 0 10px;
+      font-family: "Museo 500", sans-serif;
+    }
+    h2 {
+      font-size: 2.2rem;
+    }
+    h3 {
+      font-size: 1.9rem;
+    }
+    h2 + p,
+    h3 + p {
+      margin-top: 10px;
+    }
+    #block-footertwo {
+      .field--name-field-os2web-page-intro + .field,
+      .field--type-text-with-summary{
+        margin-top: 0;
+      }
+      p:first-child {
+      margin-top: 0;
+    }
+    }
+    a, a:hover, a:visited, a:focus, a:active,
+    .is-active > a,
+    .is-active > a:hover,
+    .is-active > a:focus,
+    .is-active > a:visited,
+    .is-active > a:active,
+    p {
+      margin: 20px 0;
+      color: inherit;
+    }
+
+    a, a:visited {
+      color: $color-dark-gray2;
+      font-weight: inherit;
+      border-bottom: 1px dotted $color-dark-gray1;
+      text-decoration: none;
+      &:focus {
+        outline-color: $color-dark-gray1;
+      }
+      &:hover,
+      &:focus {
+        color: $color-primary;
+        border-bottom: none;
+      }
+    }
+
+    .social-icon {
+      font-size: 2rem;
+    }
+
+    .block-menu.navigation .menu-item--expanded {
+      position: relative;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      display: inline-block;
+      background: $color-white;
+      width: 100%;
+      padding: 0;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        color: $color-primary;
+      }
+      .menu-item a {
+        transition: all 0.2s ease-in-out;
+        border-bottom: none;
+        &:hover,
+        &:focus {
+          font-weight: 700;
+          padding-left: 5px;
+          color: $color-dark-gray2;
+        }
+      }
+      ul {
+        display: none;
+        position: absolute;
+        padding: 0;
+        background: $color-light-gray1;
+        width: 100%;
+        z-index: 3;
+        &.show {
+          display:block;
+        }
+        li {
+          text-decoration: none;
+          display: block;
+          padding: 6px 10px;
+          border-bottom: 1px solid $color-white;
+        }
+      }
+      span {
+        cursor: pointer;
+        display: block;
+        position: relative;
+        padding: 6px 10px;
+        &:after {
+          width: 10px;
+          height: 10px;
+          line-height: 10px;
+          border-top: 1px solid $color-black;
+          border-right: 1px solid $color-black;
+          transform: rotate(45deg);
+          position: absolute;
+          right: 15px;
+          top: 14px;
+          content: '';
+        }
+      }
+      &.active span:after {
+        transform: rotate(135deg);
+        right: 15px;
+        top: 10px;
+      }
+    }
+    .block-menu.navigation .active {
+      color: $color-primary;
+    }
+  }
+
+  section {
+    max-width: none;
+    padding: 0;
+  }
+
+  .menu {
+    margin: 0;
+
+    li {
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .menu-item {
+      line-height: 1.9em;
+      padding-top: 0;
+    }
+  }
+
+  .social-icon-list {
+    margin-top: 35px;
+  }
+  .field--type-text-with-summary {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .footer-wrapper .contacts .tel, .footer-wrapper .contacts p,
+  .footer-wrapper .contacts-secondary .tel,
+  .footer-wrapper .contacts-secondary p {
+    margin-bottom: 20px;
+  }
+}
+.footer-col {
+  padding-top: 0;
+  & + .footer-col {
+    border-left: none;
+  }
+  &:not(:first-child) {
+    margin-top: 25px;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+  footer {
+    .footer {
+      background-position: 110% -95px, -250px 50%;
+      .footer-col:not(:first-child) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .footer-col {
+    padding-bottom: 15px;
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+  footer {
+    max-width: 100%;
+    margin: 30px 8px 0;
+    border-top: 2px solid $color-black;
+    .footer {
+      background-image: none;
+      padding-top: 0;
+      padding-bottom: 30px;
+      font-size: 1.3rem;
+      .container {
+        padding: 0;
+        p {
+          font-size: 1.3rem;
+        }
+        a, a:visited {
+          border-bottom: none;
+        }
+        h2,
+        h3 {
+          font-family: Helvetica, Arial, sans-serif;
+          line-height: 1.4;
+          margin: 13px 0 10px;
+        }
+        h2 {
+          font-size: 1.4rem;
+          text-transform: uppercase;
+        }
+        .vispaakort {
+          font-size: 1.8rem;
+          font-weight: bold !important;
+        }
+      }
+      .footer-col:not(:first-child) {
+        margin-top: 0;
+      }
+      .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

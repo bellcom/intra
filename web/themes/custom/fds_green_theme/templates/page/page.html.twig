@@ -1,0 +1,215 @@
+<!-- Begin - ie -->
+<div class="ie-banner">
+	Du kan ikke bruge "Frederiksberg Kommune - Min Trivsel" i Internet Explorer. Du skal bruge en anden web-browser. Internet Explorer udgår i slutningen af 2021.
+</div>
+<!-- End - ie -->
+<!-- Begin - megamenu -->
+<div class="custom-megamenu d-print-none d-sm-none">
+	<div
+		class="container-fluid">
+
+		<!-- Begin - top row -->
+		<div class="custom-megamenu__row custom-megamenu__row--top">
+			<div
+				class="row">
+
+				<!-- Begin - toggle megamenu -->
+				<div class="col-12 col-sm-3">
+					<div class="text-align-right">
+						<button class="custom-megamenu__button custom-megamenu__button--toggle-megamenu js-toggle-megamenu d-sm-inline-block" aria-label="{{ 'Luk menu' | t }}">
+							<span class="material-icons icon">close</span>
+						</button>
+					</div>
+				</div>
+				<!-- End - toggle megamenu -->
+
+			</div>
+		</div>
+		<!-- End - top row -->
+
+		<!-- Begin - navigation -->
+		<div class="custom-megamenu__row custom-megamenu__row--navigation">
+			TEST
+			{{ page.megamenu__navigation }}
+			{{ page.megamenu__selfservice }}
+		</div>
+		<!-- End - navigation -->
+
+	</div>
+</div>
+<!-- End - megamenu -->
+
+<header class="menu-toggler d-print-none sticky">
+	<div class="custom-header custom-header--static">
+		<div class="custom-header__inner">
+			<div class="container">
+
+				<!-- Begin - top -->
+				<div class="d-flex">
+					<div class="flexy-row">
+					<!-- Begin - below -->
+					<a class="custom-header-link" href="{{ url('<front>') }}">{{ "MIN TRIVSEL" | t }}</a>
+					<!-- End - below -->
+					<span>
+          				<a class="custom-header-link" href="https://sund.frederiksberg.dk" target="_blank">{{ "Frederiksberg Sundhedscenter" | t }}</a>
+					</span>
+					<!-- Begin - searchtoggle -->
+					<button class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}">
+						<span class="searchy-label">Søg</span>
+					</button>
+					<!-- End - searchtoggle -->
+
+					<div class="flexy-spacer d-sm-none"></div>
+
+					<div class="flexy-spacer"></div>
+
+					<!-- End - logo -->
+
+					<!-- Begin - mobile menu -->
+
+					</div>
+					<!-- Begin - logo -->
+					<a href="{{ url('<front>') }}" class="pl-4 ml-auto custom-header__logo d-none d-lg-block">
+						<img src="{{ base_path ~ directory }}/dist/images/logo.svg" alt="Logo"/>
+					</a>
+					<div class="overflow-menu pl-4 ml-auto overflow-menu--open-right d-block d-lg-none">
+						<button class="button-overflow-menu js-dropdown" data-js-target="overflow1" aria-haspopup="true" aria-expanded="false">
+							<span class="icon fa fa-bars"></span>
+							<span class="icon fa fa-times"></span>
+
+						</button>
+						<div class="overflow-menu-inner" id="overflow1" aria-hidden="true">
+							{{ page.header__top }}
+						</div>
+					</div>
+					
+
+					<!-- Begin - mobile menu -->
+
+				</div>
+				<!-- End - top -->
+
+				{% if theme_settings.texts.frontpage_banner_heading or theme_settings.texts.frontpage_banner_subheading %}
+					<!-- Begin - meta -->
+					<div class="custom-header__meta">
+						<h1 class="h1">{{ theme_settings.texts.frontpage_banner_heading }}</h1>
+						<h2 class="h4">{{ theme_settings.texts.frontpage_banner_subheading }}</h2>
+					</div>
+					<!-- End - meta -->
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+	<!-- Begin - toggle search -->
+	<div id="search-container" class="search-container">
+		<div class="container">
+			{% include '@fds_green_theme/includes/action-buttons.html.twig' %}
+			<div class="searchy-close">
+				<button class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}"></button>
+			</div>
+			{{ page.header__search }}
+		</div>
+	</div>
+	<!-- End - toggle search -->
+</header>
+<div class="header-sticky-spacer"></div>
+
+{{ page.featured_top }}
+
+<div class="page-container pt-0 {% if is_front %}  py-0  {% endif %}" id="font-resize-wrapper">
+	{{ page.highlighted }}
+	<div class="container" id="main-content">
+
+		{% if not is_front %}
+			<div class="region-action-buttons row d-print-none">
+				<div class="col-12 col-md-3 d-lg-block">
+					<a onclick="event.preventDefault(); history.back();" href="#" class="return-to-home-link">
+						{{ 'Back' | trans }}
+					</a>
+				</div>
+				<div class="col-12 col-md-9 d-none d-lg-block col--align-center">
+					<div class="flexy-row">
+
+						<div class="flexy-spacer"></div>
+
+						{% include '@fds_green_theme/includes/action-buttons.html.twig' %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		{% if logged_in or not is_front %}
+			<div class="row">
+				{% set has_sidebar_first = page.sidebar_first|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+				{% set has_sidebar_second = page.sidebar_second|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+
+				{% if has_sidebar_first %}
+				{% set sidebar_first_classes = [
+					has_sidebar_first and has_sidebar_second ? 'col-12 col-lg-3',
+					has_sidebar_first and has_sidebar_second is empty ? 'col-12 col-lg-3 d-print-none',
+				] %}
+					<aside {{ attributes.addClass(sidebar_first_classes) }}>
+					{# <aside class="col-12 col-md-12 col-lg-4 col-xl-3"> #}
+						<div class="layout-sidebar-left">
+							{{ page.sidebar_first }}
+						</div>
+					</aside>
+				{% endif %}
+
+
+        		{% set has_main_content = page.content|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+				{% if has_main_content %}
+				{% set content_classes = [
+					has_sidebar_first and has_sidebar_second ? 'order-2 order-lg-1 col-12 col-lg-6',
+					has_sidebar_first and has_sidebar_second is empty ? 'col-12 col-lg-9',
+					has_sidebar_second and has_sidebar_first is empty ? 'order-2 order-lg-1 col-12 col-lg-9 ',
+					has_sidebar_first is empty and has_sidebar_second is empty ? 'col-12'
+				] %}
+					<main {{ content_attributes.addClass(content_classes) }}>
+					{# <main {{ content_attributes.addClass('order-2 order-md-1 col-12 col-md-8 col-lg-6 col-xl-6') }}> #}
+						{{ page.content }}
+					</main>
+				{% endif %}
+
+
+				{% if has_sidebar_second %}
+				{% set sidebar_second_classes = [
+					has_sidebar_first and has_sidebar_second ? 'order-1 order-lg-2 col-12 col-lg-3',
+					has_sidebar_first is empty and has_sidebar_second ? 'order-1 order-lg-2 col-12 col-lg-3 d-print-none',
+				] %}
+          			<aside {{ attributes.addClass(sidebar_second_classes) }}>
+					{# <aside class="order-1 order-md-2 col-12 col-md-4 col-lg-2 col-xl-3 d-print-none"> #}
+						<div class="layout-sidebar-right">
+							<div class="box">
+								<div class="box__body">
+									{{ page.sidebar_second }}
+
+								</div>
+							</div>
+						</div>
+					</aside>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+
+	{{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_green_theme/includes/footer.html.twig' %}
+
+<div class="d-none">
+	{{ page.embedded_code }}
+</div>
+
+<script>
+  // Add internet explorer class to <body>
+  (function() {
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+
+    if(isIE) {
+      document.documentElement.classList.add('ie');
+    }
+  })();
+</script>

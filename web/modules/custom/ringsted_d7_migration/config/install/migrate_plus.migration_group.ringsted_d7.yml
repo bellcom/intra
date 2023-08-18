@@ -1,0 +1,11 @@
+langcode: da
+status: true
+dependencies:
+  enforced:
+    module:
+      - ringsted_d7_migration
+id: ringsted_d7
+label: 'Ringsted D7 Content'
+description: 'Ringsted.dk D7 content import'
+source_type: 'Ringsted.dk Database'
+module: null

@@ -1,0 +1,83 @@
+id: faxekommune_d7_os2web_contentpage_paragraph_files
+label: Faxekommune D7 OS2Web contentpage files
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type:
+    - os2web_base_contentpage
+    - os2web_base_news
+  track_changes: true
+process:
+  field_os2web_files_media:
+    - plugin: skip_on_empty
+      method: row
+      source: field_os2web_base_field_media
+    - plugin: sub_process
+      source: field_os2web_base_field_media
+      process:
+        migrate_file_url_source:
+          - plugin: skip_on_empty
+            method: row
+            source: fid
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+              - getFileDownloadUrl
+        migrate_file_url_destination:
+          - plugin: skip_on_empty
+            method: row
+            source: fid
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+              - generateFileDestinationPath
+        migrate_file_fid:
+          - plugin: skip_on_empty
+            method: row
+            source: fid
+          - plugin: skip_on_empty
+            method: process
+            source: '@migrate_file_url_source'
+            message: 'Image is missing'
+          - plugin: file_copy
+            source:
+              - '@migrate_file_url_source'
+              - '@migrate_file_url_destination'
+          - plugin: callback
+            callable:
+              - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+              -  createFileManaged
+        migrate_file_title:
+          - plugin: skip_on_empty
+            method: row
+            source: fid
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+              - getFileName
+        migrate_media_entity:
+          - plugin: skip_on_empty
+            method: row
+            source: fid
+          - plugin: skip_on_empty
+            method: process
+            source: '@migrate_file_url_source'
+            message: 'File is missing'
+          - plugin: callback
+            unpack_source: true
+            callable:
+              - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+              -  createMediaEntity
+            source:
+              - '@migrate_file_fid'
+              - '@migrate_file_title'
+        target_id: '@migrate_media_entity'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_files_paragraph

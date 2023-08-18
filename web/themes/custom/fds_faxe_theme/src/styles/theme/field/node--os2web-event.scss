@@ -1,0 +1,14 @@
+.layout-content.node--type-os2web-event-wrapper {
+    padding-top: 40px;
+}
+.node--type-os2web-event {
+  .field--name-field-os2web-evnet-image {
+    img {
+      display: block;
+      object-fit: cover;
+    }
+  }
+  .field--type-datetime {
+    display: inline;
+  }
+}

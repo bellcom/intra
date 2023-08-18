@@ -1,0 +1,66 @@
+id: byradsportal_d7_forum_archive
+label: Ringsted Byradsportal D7 Node Forum Archive
+migration_group: ringsted_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: sp_rgsm_l_svar_arkiv
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: forum_archive
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  status: status
+  created: created
+  changed: changed
+  taxonomy_forums/target_id:
+    plugin: default_value
+    default_value: 13
+  sticky: sticky
+  field_forum_file:
+    - plugin: sub_process
+      source: field_file
+      process:
+        migrate_file_url_source:
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - getFileDownloadUrl
+        migrate_file_url_destination:
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - generateFileDestinationPath
+        migrate_file_fid:
+          - plugin: skip_on_empty
+            method: process
+            source: '@migrate_file_url_source'
+            message: 'Image is missing'
+          - plugin: file_copy
+            source:
+              - '@migrate_file_url_source'
+              - '@migrate_file_url_destination'
+          - plugin: callback
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - createFileManaged
+        target_id: '@migrate_file_fid'
+destination:
+  plugin: entity:node

@@ -1,0 +1,104 @@
+<footer>
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-3 footer-col">
+          <section>
+            {% if theme_settings.contact_information.business_owner_name %}
+                <h2>{{ theme_settings.contact_information.business_owner_name }}</h2>
+            {% endif %}
+
+            {% if theme_settings.contact_information.additional_information %}
+              <div>
+                {{ theme_settings.contact_information.additional_information }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.address %}
+              <div>
+                {{ theme_settings.contact_information.address }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+              <div>
+                {{ theme_settings.contact_information.zipcode }} {{ theme_settings.contact_information.city }}
+              </div>
+            {% endif %}
+            
+            {% if theme_settings.contact_information.vat_no %}
+              <div>
+                CVR: {{ theme_settings.contact_information.vat_no }}
+              </div>
+            {% endif %}
+
+            <p>
+            {% if theme_settings.contact_information.vispaakort %}
+              <div>
+                <a class="vispaakort" href="{{ theme_settings.contact_information.vispaakort }}" target="_blank">Vis på kort</a>
+              </div>
+            {% endif %}
+            </p>
+
+            <p>
+            {% if theme_settings.contact_information.phone_readable %}
+              <a href="tel: {{ theme_settings.contact_information.phone_system }}">
+                {{ theme_settings.contact_information.phone_readable }}
+              </a>
+            {% endif %}
+            <br />
+            {% if theme_settings.contact_information.email %}
+              <a href="mailto: {{ theme_settings.contact_information.email }}">
+                {{ theme_settings.contact_information.email }}
+              </a>
+            {% endif %}
+            </p>
+
+            <h3>Åbningstider</h3>
+            {% if theme_settings.working_hours.working_hours__row_1__day and theme_settings.working_hours.working_hours__row_1__time %}
+              <div class="row">
+                <div class="col-6">
+                  {{ theme_settings.working_hours.working_hours__row_1__day }}
+                </div>
+                <div class="col-6">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_1__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.working_hours.working_hours__row_2__day and theme_settings.working_hours.working_hours__row_2__time %}
+              <div class="row">
+                <div class="col-6">
+                  {{ theme_settings.working_hours.working_hours__row_2__day }}
+                </div>
+                <div class="col-6">
+                  <div class="align-text-right">
+                    {{ theme_settings.working_hours.working_hours__row_2__time }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {{ page.footer_first }}
+          </section>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 footer-col">
+          <section>
+            {{ page.footer_second }}
+          </section>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 footer-col d-print-none">
+          <section>
+            {{ page.footer_third }}
+          </section>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 footer-col d-print-none">
+          <section>
+            {{ page.footer_fourth }}
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,35 @@
+.menu-search-bar {
+  border-radius: 4px;
+  border: 1px solid $color-white;
+  margin: 2px;
+  width: 2%;
+  margin-left: 14px;
+  input.menu-search {
+    padding-top: 4px;
+    padding-left: 4px;
+    color: $color-white;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    width: 84%;
+  }
+  button.menu-search {
+    width: 10%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    span {
+      padding-right: 8px;
+    }
+  }
+  ::placeholder {
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .menu-search-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,71 @@
+<div class="text-img-wrapper">
+  {% set selectedTextImgBackground = content.field_text_image_bg['#items'].getString() %}
+  {% set selectedLayout = content.field_text_image_layout['#items'].getString() %}
+  <div data-aos="fade-in" data-aos-duration="800" data-aos-easing="ease" data-aos-once="true"
+       class="text-img__inner-wrapper {% if selectedLayout == 'image_right' %} image-right {% endif %}" style="background-color:{% if selectedTextImgBackground == 'black' %} #212529;
+  {% elseif selectedTextImgBackground == 'green' %} #344E41;
+  {% elseif selectedTextImgBackground == 'blue' %} #22223B; {% elseif selectedTextImgBackground == 'grey' %} #343A40;
+  {% elseif selectedTextImgBackground == 'sand' %} #DAD7CD; {% endif %}{% if selectedTextImgBackground is empty %} border-radius: 0px;{% endif %}">
+    <div class="image-wrapper">
+      {% if paragraph.field_text_image_img.value %}
+        <img style="{% if selectedTextImgBackground is empty %} border-radius: 10px; {% endif %}" src="{{ file_url(paragraph.field_text_image_img.entity.fileuri) }}"  alt="{{ paragraph.field_text_image_img.alt }}" title="{{ paragraph.field_text_image_img.title }}">
+      {% endif %}
+    </div>
+    <div class="content-wrapper {% if selectedLayout == 'image_right' %} content-wrapper-image-right {% endif %}  {% if selectedTextImgBackground is empty %} content-wrapper-no-bg {% endif %}" style="{% if selectedTextImgBackground in ['black', 'grey', 'blue', 'green'] %}color: #fff; {% endif %}">
+      <div class="heading-wrapper">
+        {% if paragraph.field_text_image_prefix is not empty %}
+        <div class="prefix-container">
+        {% if selectedTextImgBackground is empty or selectedTextImgBackground == 'sand' %}
+        {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "#344E41" } %}
+        {% else %}
+        {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "white" } %}
+        {% endif %}
+          <span style="{% if selectedTextImgBackground is empty or selectedTextImgBackground == 'sand' %}color: #344E41; {% endif %}">{{ content.field_text_image_prefix }}</span>
+        </div>
+        {% endif %}
+        <h2>
+        {{ content.field_text_image_heading }}
+        </h2>
+      </div>
+      <div class="content-body">
+        {{ content.field_text_image_body }}
+      </div>
+      <div class="content-element">
+        {% if paragraph.field_newsletter_form.value is not empty and paragraph.field_newsletter_form.value %}
+        <form>
+          <input type="email" placeholder="Skriv din e-mail her..." style="{% if selectedTextImgBackground is empty %} padding: 10px 0 8px 10px; border: 1px solid #212529; border-top-left-radius: 10px; border-bottom-left-radius: 10px; {% endif %}">
+          <button id="subscribe-btn-text-image" type="submit" style="{% if selectedTextImgBackground == 'green' %}background-color: #fff; color: #000; border-left: 1px solid #000;{% endif %}">
+            <span>Abonnér</span>
+            <div class="icon">
+              <i class="fa-regular fa-paper-plane"></i>
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </button>
+        </form>
+        {% endif %}
+        {% if paragraph.field_text_image_btn_1.value is not empty %}
+        <div class="text_image_btn_wrapper">
+          <a class="text_image_btn_1" style="{% if selectedTextImgBackground in ['green', 'blue', 'grey', 'black'] %}background-color: white; color: black; {% endif %}" href="{{ paragraph.field_text_image_btn_1.0.url }}">
+            <span>{{ paragraph.field_text_image_btn_1.0.title }}</span>
+            {% if selectedTextImgBackground in ['green', 'blue', 'grey', 'black'] %}
+            {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "black" } %}
+            {% else %}
+            {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "white" } %}
+            {% endif %}
+          </a>
+          {% if paragraph.field_text_image_btn_2.value is not empty %}
+          <a class="text_image_btn_2" style="{% if selectedTextImgBackground in ['green', 'blue', 'grey', 'black'] %}background-color: white; color: black;½½½½½½½½ {% endif %}" href="{{ paragraph.field_text_image_btn_2.0.url }}">
+            <span>{{ paragraph.field_text_image_btn_2.0.title }}</span>
+            {% if selectedTextImgBackground in ['green', 'blue', 'grey', 'black'] %}
+            {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "black" } %}
+            {% else %}
+            {% include "@bellcom_theme/assets/images/arrow-right-small.svg" with { custom_color: "white" } %}
+            {% endif %}
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<footer class="d-print-none pt-5 {% if not is_front %} footer-not-front {% endif %}">
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-sm-5 col-md-4">
+					<section>
+						{{ page.footer_first }}
+					</section>
+				</div>
+				<div class="col-12 col-sm-7 col-md-8">
+					<section>
+						<nav class="mb-9">
+							{% if theme_settings.contact_information.business_owner_name %}
+								<h2>{{ theme_settings.contact_information.business_owner_name }}</h2>
+							{% endif %}
+							<ul class="menu">
+								<li class="menu-item">
+									{% if theme_settings.contact_information.bygning_first %}
+										{{ theme_settings.contact_information.bygning_first }}
+									{% endif %}
+								</li>
+								<li class="menu-item">
+									{% if theme_settings.contact_information.address %}
+										{{ theme_settings.contact_information.address }}
+									{% endif %}
+								</li>
+								<li class="menu-item">
+									{% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+										{{ theme_settings.contact_information.zipcode }}
+										{{ theme_settings.contact_information.city }}
+									{% endif %}
+								</li>
+							</ul>
+						</nav>
+						<nav class="mb-8">
+							{% if theme_settings.contact_information.afdeling %}
+								<h2>{{ theme_settings.contact_information.afdeling }}</h2>
+							{% endif %}
+							<ul class="menu">
+								<li class="menu-item">
+									{% if theme_settings.contact_information.afdeling_bygning %}
+										{{ theme_settings.contact_information.afdeling_bygning }}
+									{% endif %}
+								</li>
+								<li>
+									{% if theme_settings.contact_information.afdeling_indgang %}
+										{{ theme_settings.contact_information.afdeling_indgang }}
+									{% endif %}
+								</li>
+								<li class="menu-item">
+									{% if theme_settings.contact_information.phone_system and theme_settings.contact_information.phone_readable %}
+										Telefon:
+										{{ theme_settings.contact_information.phone_readable }}
+									{% endif %}
+								</li>
+								<li class="menu-item mt-6">{{ page.footer_second }}</li>
+							</ul>
+						</nav>
+					</section>
+				</div>
+				<div class="col-12 footer-wide">
+					{{ page.footer_wide }}
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

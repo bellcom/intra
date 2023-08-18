@@ -1,0 +1,80 @@
+id: byradsportal_d7_node_news_paragraph_files
+label: Ringsted Byradsportal D7 OS2Web news files
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type:
+    - nyhed
+  track_changes: true
+process:
+  field_os2web_news_article_date:
+    - plugin: skip_row_if_old_news
+      index: 0
+      source: field_publishdate
+    - plugin: sub_process
+      source: field_publishdate
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: 'Y-m-d\TH:i:s'
+          from_timezone: 'Europe/Copenhagen'
+          source: value
+  field_os2web_files_media:
+    - plugin: skip_row_if_not_set
+      index: 0
+      source: field_file
+    - plugin: sub_process
+      source: field_file
+      process:
+        migrate_file_url_source:
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - getFileDownloadUrl
+        migrate_file_url_destination:
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - generateFileDestinationPath
+        migrate_file_fid:
+          - plugin: skip_on_empty
+            method: process
+            source: '@migrate_file_url_source'
+            message: 'Image is missing'
+          - plugin: file_copy
+            source:
+              - '@migrate_file_url_source'
+              - '@migrate_file_url_destination'
+          - plugin: callback
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              -  createFileManaged
+        migrate_file_title:
+          - plugin: callback
+            source: fid
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              - getFileName
+        migrate_media_entity:
+          - plugin: skip_on_empty
+            method: process
+            source: '@migrate_file_url_source'
+            message: 'File is missing'
+          - plugin: callback
+            unpack_source: true
+            callable:
+              - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+              -  createMediaEntity
+            source:
+              - '@migrate_file_fid'
+              - '@migrate_file_title'
+        target_id: '@migrate_media_entity'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_files_paragraph

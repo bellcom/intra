@@ -1,0 +1,320 @@
+// |--------------------------------------------------------------------------
+// | Path-s
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | Path-s
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.path-s {
+  .page-alert {
+    display: none;
+  }
+  .region-content .block-views-exposed-filter-blockos2web-search-os2web-search-page {
+    display: none;
+  }
+  .sapi-did-you-mean {
+    font-size: 2.4rem;
+    font-weight: 300;
+    font-family: "MuseoSans", "Helvetica", "Arial", sans-serif;
+  }
+}
+#block-filtertoggle {
+  position: relative;
+  .btn-filters {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    text-indent: -999em;
+    cursor: pointer;
+    background: $background_color__button url("../images/sprite.png") no-repeat 3px -253px;
+    z-index: 32;
+  }
+}
+.entity-search-result {
+  box-shadow: none;
+  padding: 0;
+}
+
+.view-os2web-search,
+.view-os2web-meetings-search-page {
+  .view-header {
+    h2 {
+      font-size: 3rem;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 30px;
+      color: $color-dark-gray2;
+      @include media-breakpoint-up(sm) {
+        font-size: calc(40px + 6 * ((100vw - 576px) / 680));
+      }
+    }
+  }
+  .field--name-title {
+    font-weight: 500;
+    font-family: "Museo 500", sans-serif;
+    font-size: 2.2rem;
+  }
+  h4 {
+    a {
+      @extend .field--name-title;
+    }
+  }
+  .createdtime {
+    font-size: 1.2rem;
+    text-transform: lowercase;
+  }
+  .search-content-type {
+    font-style: italic;
+    color: $color-dark-gray0;
+  }
+  .pager {
+    margin-bottom: 45px;
+    li {
+      &.is-active a {
+        background: $color-white;
+        color: $background_color__button;
+        font-weight: normal;
+      }
+      &.pager__item--next,
+      &.pager__item--previous {
+        padding: 0;
+        a {
+          padding: 1px 0 0;
+          @include media-breakpoint-up(sm) {
+            background: transparent;
+            color: $background_color__button;
+            text-transform: uppercase;
+            border: none;
+          }
+        }
+        @include media-breakpoint-up(sm) {
+          .visually-hidden {
+            position: relative !important;
+            overflow: visible;
+            clip: auto;
+            width: auto;
+            height: auto;
+            word-wrap: normal;
+          }
+          .icon {
+            display: none;
+          }
+        }
+      }
+      &.pager__item--next {
+        a {
+          &:after {
+            @include media-breakpoint-up(sm) {
+              content: "›";
+            }
+          }
+        }
+      }
+      &.pager__item--previous {
+        a {
+          &:before {
+            @include media-breakpoint-up(sm) {
+              content: "‹";
+            }
+          }
+        }
+      }
+
+
+      &.pager__item {
+        margin: 2px;
+        @include media-breakpoint-up(sm) {
+          margin: 5px;
+        }
+        a {
+          padding: 2px 8px;
+          background: $background_color__button;
+          color: $color-white;
+          border: 1px solid $color-light-gray2;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  .pager__item a {
+    font-size: 1.5rem;
+  }
+}
+
+.path-s {
+  .row {
+    position: relative;
+  }
+  aside {
+    position: absolute;
+    top: 154px;
+    .region-sidebar-second {
+      background-color: $color-white;
+      padding: 80px 15px 15px;
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 15px;
+      z-index: 30;
+      margin-left: 15px;
+      @include media-breakpoint-up(md) {
+        background-color: transparent;
+        padding: 0;
+        display: block;
+        position: relative;
+        top: 0;
+        right: auto;
+        z-index: auto;
+        margin-left: 0;
+      }
+      &.filterVisible {
+        display: block;
+        @include media-breakpoint-up(md) {
+          top: 55px;
+        }
+      }
+   
+    }
+    .action-buttons {
+      display: none;
+      @include media-breakpoint-up(md) {
+        display: block;
+      }
+    }
+    &.filterVisible {
+      .action-buttons {
+        position: absolute;
+        right: 15px;
+        width: 100%;
+        max-width: 257px;
+        z-index: 31;
+        margin: 0 15px;
+        display: block;
+        @include media-breakpoint-up(md) {
+          position: relative;
+          right: 0;
+          width: auto;
+          max-width: none;
+          z-index: 31;
+          margin: 0;
+          display: block;
+        }
+      }
+    }
+    @include media-breakpoint-up(md) {
+      position: relative;
+      top: 0;
+    }
+  }
+  .region-breadcrumb,
+  .layout-sidebar-right {
+    transition: none;
+  }
+}
+@include media-breakpoint-up(md) {
+  #block-filtertoggle {
+    display: none;
+  }
+}
+
+
+
+.region-sidebar-first > div + div ul,
+.region-sidebar-second > div + div ul {
+  // border: 1px solid $color-light-gray1;
+  border-bottom: 0;
+  @include media-breakpoint-up(md) {
+    border-top: 1px solid $color-light-gray1;
+  }
+}
+
+.view-os2web-search,
+.view-os2web-meetings-search-page {
+  .views-row {
+    border-bottom: 1px solid $color-dark-gray2;
+    padding: 15px 0 25px;
+    &:first-of-type {
+      border-top: 1px solid $color-dark-gray2;
+    }
+    & + .views-row {
+      margin-top: 0;
+    }
+  }
+  a {
+    text-decoration: none;
+    &:visited {
+      color: $color__link;
+    }
+  }
+  h2 {
+    font-size: 2.2rem;
+    @include media-breakpoint-up(xl) {
+      font-size: 5rem;
+    }
+  }
+}
+
+
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+
+}
+@include media-breakpoint-up(sm) {
+ 
+}
+
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+ 
+}
+@include media-breakpoint-up(md) {
+
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

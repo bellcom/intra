@@ -1,0 +1,49 @@
+.paragraph--type--links-block-with-bg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  min-height: 400px;
+  color: $color-white;
+  background-color: $color-primary;
+  align-items: center;
+
+  & .field--name-field-os2web-simple-text-heading h2 {
+    font-size: 2.5rem;
+    color: $color-white !important;
+  }
+  & .field--name-field-os2web-simple-text-subhead p {
+    color: $color-white;
+  }
+  & .paragraph--type--os2web-search-selected-terms ul {
+    list-style: none;
+    & li {
+      padding: 0;
+      margin-right: 20px;
+      &::before {
+        content: none;
+      }
+      & a {
+        color: $color-white;
+        &:hover {
+          color: $color-primary-light;
+        }
+      }
+    }
+  }
+  & .field--name-field-os2web-simple-text-body p {
+   color: $color-white;
+  }
+
+  & .field--name-field-os2web-simple-text-body p a {
+    color: $color-white;
+  }
+
+  @include media($xs) {
+    background-image: url("../images/falks.svg");
+    background-repeat: no-repeat;
+    background-position: 100% -25px;
+    background-size: 50% 115%;
+  }
+}

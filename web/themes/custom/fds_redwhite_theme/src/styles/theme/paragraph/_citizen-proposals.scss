@@ -1,0 +1,84 @@
+.os2web-citizen-proposals--create-new-block {
+  margin-bottom: 40px;
+  a {
+    &.os2web-citizen-proposals--create-new-link {
+      color: $color-primary;
+      padding-right: 0;
+      font-weight: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted $color-dark-gray1;
+    }
+  }
+}
+.new-proposal-form {
+  border-top: 1px solid $color-dark-gray3;
+  padding-top: 40px;
+}
+
+.os2web-citizen-proposals-create-form {
+  .form-label,
+  .form-composite > legend,
+  .label {
+    margin: 0;
+  }
+}
+
+.os2web-citizen-proposals--wrapper #proposals-list {
+  border-top: 1px solid $color-gray-001;
+  border-bottom: none;
+  .accordion-content {
+    .form-label,
+    .form-composite > legend,
+    .label {
+      margin: 0;
+    }
+
+    .author {
+      padding-top: 22px;
+      padding-bottom: 16px;
+    }
+  }
+  .accordion-button,
+  .tabnav > button {
+    background-image: url("/sites/default/files/2021-12/Thumbs-Up-32.png") !important;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) 50%;
+    position: relative;
+    &::after {
+      display: none;
+    }
+    .header {
+      font-family: "Museo 500", sans-serif;
+      font-weight: normal;
+      font-size: 1.5rem;
+      .date {
+        font-size: 1.3rem;
+        margin-right: 30px;
+        display: block;
+      }
+      .title {
+        max-width: 80%;
+        word-break: break-word;
+      }
+      .votes {
+        position: absolute;
+        top: 33%;
+        right: 50px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .os2web-citizen-proposals--wrapper #proposals-list {
+    .accordion-button,
+    .tabnav > button {
+      .header {
+        .date,
+        .title {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

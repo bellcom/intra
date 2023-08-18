@@ -1,0 +1,117 @@
+.latest-news-display {
+  width: 100%;
+  background-color: #0a2d49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+
+    .news-title-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 50px;
+
+      @media only screen and (max-width: 420px) {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+
+      h2 {
+        margin: 0;
+        color: white;
+        text-transform: uppercase;
+        font-size: 32px;
+        font-weight: 600;
+      }
+
+      .see-all-news-btn {
+        a {
+          color: white;
+          text-transform: uppercase;
+          font-size: 20px;
+          font-weight: 500;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+
+  .latest-news-innerwrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    gap: 50px;
+
+    @media only screen and (max-width: 992px) {
+      flex-direction: column;
+
+    }
+
+    .news-card {
+      flex: 1;
+
+      .news-image-wrapper {
+        height: 250px;
+        display: flex;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .news-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .news-date {
+          color: white;
+          padding: 10px 0;
+          font-size: 14px;
+        }
+
+        .news-heading-link {
+
+          &:hover .news-heading {
+            text-decoration: underline;
+          }
+
+          .news-heading {
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+
+          }
+
+        }
+
+        .news-intro {
+          color: white;
+        }
+
+        .news-readmore {
+          color: white;
+          font-weight: 600;
+          font-size: 20px;
+          text-align: right;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+  }
+}
+}

@@ -1,0 +1,6 @@
+name: 'du_screen_questions'
+type: module
+description: 'Digitauniverse Screening questions'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Custom'

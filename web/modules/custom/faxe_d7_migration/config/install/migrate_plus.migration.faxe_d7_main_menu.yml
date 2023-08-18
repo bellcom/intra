@@ -1,0 +1,65 @@
+id: faxe_d7_main_menu
+label: Faxe D7 Main Menu
+audit: true
+migration_tags:
+  - Drupal 7
+  - Content
+source:
+  plugin: menu_link
+  menu_name: main-menu
+  constants:
+    bundle: menu_link_content
+process:
+  skip_translation:
+    plugin: skip_on_empty
+    method: row
+    source: skip_translation
+  id: mlid
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  bundle: 'constants/bundle'
+  title: link_title
+  description: description
+  menu_name:
+    -
+      plugin: default_value
+      default_value: main
+    -
+      plugin: skip_on_empty
+      method: row
+  'link/uri':
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getMenuLink
+      source: link_path
+    - plugin: link_uri
+  'link/options': options
+  route:
+    plugin: route
+    source:
+      - link_path
+      - options
+  route_name: '@route/route_name'
+  route_parameters: '@route/route_parameters'
+  url: '@route/url'
+  options: '@route/options'
+  external: external
+  weight: weight
+  expanded: expanded
+  enabled: enabled
+  parent:
+    plugin: menu_link_parent
+    source:
+      - plid
+      - '@menu_name'
+      - parent_link_path
+  changed: updated
+destination:
+  plugin: entity:menu_link_content
+  no_stub: true
+migration_dependencies:
+  optional:
+    - faxe_d7_node_indholdside

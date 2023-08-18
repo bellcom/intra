@@ -1,0 +1,22 @@
+{%
+  set classes = [
+    field_name|replace({'field_':''})|clean_class,
+    group ? group|replace({'group_':''})|clean_class ~ '__item',
+    group ? element['#object'].getType ~ '__' ~ group|replace({'group_':''})|clean_class ~ '__item' : element['#object'].entityTypeId == 'node' ? element['#object'].getType ~ '__item',
+  ]
+%}
+ 
+{% if items %}
+  <div{{attributes.addClass(classes) }}>
+    {% for index,item in items %}
+      {%
+        set field_item_classes = [
+          paragraph.bundle|clean_class,
+          field_name|replace({'field_':''})|clean_class ~ '__item',
+          item.content['#paragraph'] ? '--' ~ item.content['#paragraph'].bundle
+        ]
+      %}
+      <div{{ item.attributes.addClass(field_item_classes) }}>{{ item.content }}</div>
+    {% endfor %}
+  </div>
+{% endif %}

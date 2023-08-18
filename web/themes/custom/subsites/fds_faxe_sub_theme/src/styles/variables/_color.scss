@@ -1,0 +1,56 @@
+$background_color__default: #007ca3;
+$background_color__primary: #007ca3;
+$background_color__secondary: #4195b2;
+// $background_color__tertiary: #165f1d;
+// $background_color__navigation: #921730;
+// $background_color__footer_primary: #00335b;
+// $background_color__footer_secondary: #2a4f75;
+// $background_color__button: #196620;
+// $background_color__button_hover: #114f16;
+// $color__link: #022e51;
+// $color__link__hover: #01233e;
+// $color__link_footer: #6dcff6;
+// $color__bullets: #a5122f;
+
+
+
+
+
+// $background_color__default: #eeeff4;
+
+$background_color__default_secondary: darken($background_color__default, 10%);
+
+
+// $background_color__primary: #012c4e;
+// $background_color__secondary: $background_color__secondary;
+
+
+$background_color__tertiary: lighten($background_color__secondary, 10%);
+$background_color__navigation: darken($background_color__primary, 10%);
+$background_color__footer_primary: $background_color__navigation;
+$background_color__footer_secondary: lighten($background_color__navigation, 10%);
+$background_color__button: darken($background_color__default, 15%);
+$background_color__button_hover: $background_color__default;
+$color__link: #007ca3;
+$color__link__hover: darken($background_color__primary, 10%);
+$color__link_footer: lighten($background_color__tertiary, 50%);
+$color__bullets: $color__link;
+
+
+div[data-drupal-messages] {
+    display: none;
+}
+
+
+
+$gray-primary: #E6E3E1;
+$gray-secondary: #F4F4F4;
+$gray-tertiary: #e1e5e5;
+
+$gray-helper: #eceae8;
+$gray-helper-color: #6c6c6c;
+$gray-helper-bg: #eeeeee;
+$gray-helper-border: #dddddd;
+
+
+$blue-primary: #295d6f;

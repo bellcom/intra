@@ -1,0 +1,55 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if label and not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer class="node__meta">
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('node__content') }}>
+
+    <div>{{content.field_os2web_page_primaryimage }}</div>
+    {{content | without('field_os2web_page_primaryimage') }}
+
+      {% if node.field_show_print_section.value %}
+      <!-- BEGIN Print section markup. All classes here is hardcoded and added for reusing styles -->
+      <div class="paragraph--type--os2web-twi-paragraph" style="margin-top: 32px;">
+        <div class="row">
+          <div class="col-12 col-sm-1">
+            <div>
+              <img src="/themes/custom/subsites/fds_faxe_sub_theme/dist/images/print-ikon.png" alt="Print ikon" width="48" height="48">
+            </div>
+          </div>
+          <div class="col-12 col-sm-11">
+            <div class="field field--name-field-os2web-twi-heading"><h2 class="h3">{{ 'Udskriv information' | trans }}</h2></div>
+            <div class="field--name-field-os2web-twi-body"><p><a href="#" onclick="window.print();" title="{{ 'Udskriv siden' | trans }}">{{ 'Print information og kontaktoplysninger.' | trans }}</a></p></div>
+          </div>
+        </div>
+      </div>
+      <!-- END Print section markup -->
+    {% endif %}
+  </div>
+</article>

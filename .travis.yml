@@ -1,0 +1,15 @@
+dist: bionic
+
+language: minimal
+
+install:
+  - curl -fsSL https://get.docksal.io | bash
+  - fin version
+  - fin sysinfo
+
+before_script:
+  - echo 'y' | fin init
+  - fin exec 'sudo composer self-update'
+
+script:
+  - echo 'y' |fin rebuild-test

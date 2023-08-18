@@ -1,0 +1,22 @@
+name: Bellcom Theme
+type: theme
+description: A Clean and Stylistic theme
+core_version_requirement: ^8.8 || ^9
+base theme: stable
+screenshot: theme.png
+logo: logo.png
+
+libraries:
+  - bellcom_theme/global-styling
+
+regions:
+  header__logo: Header logo
+  header: Header
+  content: Content
+  footer__logo: Footer logo
+  footer: Footer
+  footer__bottom: Footer bottom
+  hidden: Hidden
+
+ckeditor_stylesheets:
+  - assets/css/bundle.css

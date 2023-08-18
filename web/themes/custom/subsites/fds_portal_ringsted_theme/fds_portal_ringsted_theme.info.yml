@@ -1,0 +1,37 @@
+name: 'Designsystem.dk - Byrådsportal Ringsted theme'
+type: theme
+description: 'Theme for Ringsted Byrådsportal'
+core: 8.x
+core_version_requirement: ^8 || ^9
+screenshot: screenshot.png
+base theme: fds_base_theme
+package: OS2web
+
+regions:
+  megamenu__navigation: 'Megamenu - navigation'
+  megamenu__search: 'Megamenu - search'
+  megamenu__language_selector: 'Megamenu - language selector'
+  megamenu__selfservice: 'Megamenu - self service'
+  header__search: 'Header - search'
+  header__below: 'Header - below'
+  account_menu: 'Account menu'
+  alert: 'Alert'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  featured_bottom_first: 'Featured bottom first'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  embedded_code: 'Embedded code'
+
+libraries:
+  - 'fds_portal_ringsted_theme/fonts'
+  - 'fds_portal_ringsted_theme/styles'
+  - 'fds_portal_ringsted_theme/javascripts'

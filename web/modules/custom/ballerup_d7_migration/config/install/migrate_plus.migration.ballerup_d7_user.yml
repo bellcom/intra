@@ -1,0 +1,34 @@
+id: ballerup_d7_user
+label: Ballerup D7 User accounts
+migration_group: ballerup_d7
+migration_tags:
+  - Drupal 7
+class: Drupal\user\Plugin\migrate\User
+source:
+  plugin: d7_user
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration,
+  # consider removing the uid field to allow
+  # incremental migrations.
+  #uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  created: created
+  access: access
+  login: login
+  status: status
+  timezone: timezone
+  init: init
+#  roles:
+#    plugin: migration_lookup
+#    migration: d7_user_role
+#    source: roles
+destination:
+  plugin: entity:user
+migration_dependencies:
+#  required:
+#    - d7_user_role
+  required: {  }
+  optional: {  }

@@ -1,0 +1,37 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  'paragraph--image-position--' ~ image_position,
+  'clearfix',
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+      {# Begin - image #}
+      {{ content.field_os2web_cnt_image }}
+      {# End - image #}
+
+      {# Begin - heading #}
+      <h3>
+        {{ content.field_os2web_cnt_heading }}
+      </h3>
+      {# End - heading #}
+
+      {# Begin - subheading #}
+      {{ content.field_os2web_cnt_subheading }}
+      {# End - subheading #}
+
+      {# Begin - body #}
+      {{ content.field_os2web_cnt_body }}
+      {# End - body #}
+
+      {# Begin - link #}
+      {{ content.field_os2web_cnt_link }}
+      {# End - link #}
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

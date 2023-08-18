@@ -1,0 +1,330 @@
+// |--------------------------------------------------------------------------
+// | Form
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .form
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$custom-input-top-bottom-padding: 8px;
+$custom-input-left-right-padding: 20px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin form-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.form-search,
+.form-input,
+.form-email,
+.form-select {
+  padding: $custom-input-top-bottom-padding $custom-input-left-right-padding;
+  border: 1px solid #000;
+}
+
+.form-checkbox,
+.form-radio {
+
+  + label {
+
+    &:before {
+      border-color: $background_color__default;
+    }
+  }
+
+  &:checked {
+
+    + label {
+
+      &:before {
+        background-color: $background_color__default;
+      }
+    }
+  }
+}
+
+// Remove max width.
+body {
+
+  .form-input,
+  .form-search,
+  .form-email,
+  .form-select,
+  .form-hint {
+    max-width: none;
+  }
+}
+
+.form-hint {
+  color: $color-text;
+}
+
+.form-item {
+
+  .form-hint,
+  .form-hint.description {
+    font-size: $base-font-size;
+  }
+}
+
+.form-select {
+  min-width: 250px;
+
+  margin-top: 5px;
+  padding-right: 45px;
+}
+
+.form-input {}
+
+.js input.form-autocomplete{
+  background-image: none;
+}
+
+// Search form.
+form#search-block-form,
+.region-small-search form {
+  position: relative;
+
+  .form-actions {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    z-index: 500;
+
+    width: 30px;
+
+    margin: 0;
+
+    .form-submit {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      z-index: 500;
+
+      min-width: auto;
+      width: 30px;
+      height: 100%;
+
+      padding: 0 !important;
+
+      font-size: 0;
+
+      border: 0;
+
+      background-color: transparent;
+    }
+
+    &:after {
+      position: absolute;
+      display: inline-block;
+
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+
+      z-index: 100;
+      pointer-events: none;
+      font-family: FontAwesome;
+
+      content: "\f002";
+
+      color: $color-white;
+    }
+  }
+
+  .form-input,
+  .form-search {
+    margin: 0;
+    padding: 4px 40px 4px 15px;
+
+    max-width: 200px;
+
+    background-color: $background_color__default;
+
+    color: $color-white;
+    display: none;
+    @include media($md) {
+      display: block;
+    };
+    &::placeholder {
+      color: $color-white;
+    }
+  }
+
+  // Remove float from inline form elements.
+  .form--inline {
+
+    .form-item {
+      float: initial;
+
+      margin: 0;
+    }
+  }
+
+  input.form-autocomplete {
+    background-image: none;
+  }
+}
+
+.region-content {
+  form{
+    margin-bottom: 1rem;
+
+    > .form--inline {
+      > div {
+        display: inline;
+
+        input {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+// Dagsorden search form.
+form#views-exposed-form-os2web-meetings-search-page-os2web-meeetings-search-page {
+  position: relative;
+
+  margin-bottom: $grid-gutter-width;
+
+  .form-actions {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    z-index: 500;
+
+    width: 30px;
+
+    margin: 0;
+
+    .form-submit {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      z-index: 500;
+
+      min-width: auto;
+      width: 30px;
+      height: 32px;
+
+      padding: 0 !important;
+
+      border: 0;
+
+      background-color: transparent;
+    }
+
+    &:after {
+      position: absolute;
+      display: inline-block;
+      pointer-events: none;
+      top: 6px;
+      right: 10px;
+
+      z-index: 100;
+
+      font-family: FontAwesome;
+
+      content: "\f002";
+
+      color: $color-text;
+    }
+  }
+
+  .form-search,
+  .form-input {
+    margin: 0;
+    padding: 8px 40px 8px 15px;
+
+    border-radius: 4px;
+  }
+
+  // Remove float from inline form elements.
+  .form--inline {
+    position: relative;
+
+    max-width: 350px;
+
+    .form-item {
+      float: initial;
+
+      margin: 0;
+    }
+  }
+
+  input.form-autocomplete {
+    background-image: none;
+  }
+}
+.form-type-search-api-autocomplete {}
+
+.form-radio:checked+label:after {
+  content: "";
+  height: calc(18px - 10px);
+  width: calc(18px - 10px);
+  background-color: #fff;
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  border-radius: 100%;
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

@@ -1,0 +1,84 @@
+.header-account-menu {
+  background-color: #c30a32;
+
+  .container {
+    .account-menu-btn {
+      background-color: transparent;
+      border: none;
+      text-transform: uppercase;
+      font-family: "Museo 300", sans-serif;
+      display: none;
+      .icon {
+        color: #c30a32;
+      }
+    }
+    .region-account-menu {
+      .menu--account {
+        display: flex;
+        justify-content: flex-end;
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+
+          li {
+
+            &:before {
+              display: none;
+            }
+
+            a {
+              color: white;
+              text-decoration: none;
+              font-size: 14px;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+  .header-account-menu {
+    position: relative;
+    background-color: transparent;
+    .container {
+      .account-menu-btn {
+        display: block;
+      }
+      .region-account-menu {
+        position: absolute;
+        top: 45px;
+        z-index: 99;
+        width: 100%;
+        background-color: #c30a32;
+        left: 0;
+        transform: translateX(-110%);
+        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+
+        .menu--account {
+          justify-content: flex-start;
+
+          ul {
+            flex-direction: column;
+
+            li {
+              padding-left: 0 !important;
+            }
+          }
+        }
+        &.expand-collaps {
+          display: block;
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

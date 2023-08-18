@@ -1,0 +1,180 @@
+// |--------------------------------------------------------------------------
+// | File
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .file
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin file-mixin() {
+}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+.media.media--type-document {
+  background-color: $color-green-005;
+  color: $color-black;
+  position: relative;
+  padding: 38px 38px 38px 30px;
+  border-radius: $big-border-radius;
+  margin-bottom: 10px;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("../images/download.svg");
+    background-size: 21px 28px;
+    background-repeat: no-repeat;
+    background-color: $color-light-green-003;
+    background-position: center;
+    border-top-right-radius: $big-border-radius;
+  }
+  &:before {
+    position: absolute;
+    content: "";
+    top: 37px;
+    right: 15px;
+    height: 2px;
+    width: 21px;
+    background-color: $color-primary;
+    z-index: 1;
+  }
+  
+  &:hover {
+    &:after {
+      background-position: center 70%;
+    }
+  }
+  .file {
+    display: block;
+    background-image: none !important;
+    margin-bottom: 10px;
+    padding-left: 0;
+    a {
+      display: flex;
+      align-items: center;
+      word-break: break-word;
+      max-width: 100%; // Reset.
+      font-weight: bold;
+      color: $color-black;
+      text-decoration: none;
+      &:hover,
+      &:focus,
+      &:visited {
+        text-decoration: none;
+      }
+    }
+  }
+  .field--name-field-media-description {
+    padding-left: 8px;
+  }
+}
+
+.field--type-file {
+  > .field__items,
+  &.field__items {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-right: ($grid-gutter-width / -4);
+    margin-left: ($grid-gutter-width / -4);
+  }
+
+  > .field__items > .field__item,
+  > .field__item {
+    // Column.
+    position: relative;
+    width: 100%;
+    min-height: 1px; // Prevent columns from collapsing when empty
+    padding-right: ($grid-gutter-width / 4);
+    padding-left: ($grid-gutter-width / 4);
+
+    @include grid-col(12, 12);
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+  .field--type-file {
+    > .field__items > .field__item,
+    > .field__item {
+      @include grid-col(6, 12);
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {
+}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {
+}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {
+}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+}
+
+// Print
+@media print {
+  .file {
+    box-shadow: none;
+
+    border: 1px solid #000;
+  }
+
+  .field--type-file {
+    > .field__items > .field__item,
+    > .field__item {
+      @include grid-col(6, 12);
+    }
+  }
+}
+
+// Touch
+.touchevents {
+}
+
+// No touch
+.no-touchevents {
+}

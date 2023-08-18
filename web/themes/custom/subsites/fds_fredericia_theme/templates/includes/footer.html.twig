@@ -1,0 +1,306 @@
+{% if theme_settings.footer.footer_show_latest_content %}
+  <div class="section section--latest d-print-none">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="block block--latest-content">
+            {{ page.footer__latest_content }}
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="block block--last-visits">
+            <h2>Senest besøgte indhold</h2>
+            <div id="js-visited-content">
+              Indlæser...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<footer class="d-print-none">
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-3 footer-col">
+          <div class="block">
+            {% if theme_settings.footer.footer_use_default_logo %}
+              <img src="{{ base_path ~ directory }}/dist/images/logo--footer.png" alt="" class="logo logo--footer" />
+            {% else %}
+              <img src="{{ theme_settings.footer.logo_settings.footer_logo_path | replace({'internal:':''})}}" alt="" class="logo logo--footer">
+            {% endif %}
+            {% if theme_settings.contact_information.address %}
+              <div>
+                {{ theme_settings.contact_information.address }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+              <div>
+                {{ theme_settings.contact_information.zipcode }} {{ theme_settings.contact_information.city }}
+              </div>
+            {% endif %}
+
+            <br>
+
+            {% if theme_settings.contact_information.vat_no %}
+              <div>
+                CVR-nr.: {{ theme_settings.contact_information.vat_no }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.ean_no %}
+              <div>
+                EAN-nr.: {{ theme_settings.contact_information.ean_no }}
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.giro_no %}
+              <div>
+                Giro-nr.: {{ theme_settings.contact_information.giro_no }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-3 footer-col">
+          <div class="block">
+            {% if theme_settings.contact_information.business_owner_name
+              or theme_settings.contact_information.email
+              or theme_settings.contact_information.phone_readable %}
+              <p class="h4">Kontakt</p>
+            {% endif %}
+
+            {% if theme_settings.contact_information.business_owner_name %}
+              <div>
+                {{ theme_settings.contact_information.business_owner_name }}
+              </div>
+            {% endif %}
+            {% if theme_settings.contact_information.email %}
+              <div>
+                E-mail:
+                <a href="mailto: {{ theme_settings.contact_information.email }}">
+                  {{ theme_settings.contact_information.email }}
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.phone_readable %}
+              <div>
+                Tlf.:
+                <a href="tel: {{ theme_settings.contact_information.phone_system }}">
+                  {{ theme_settings.contact_information.phone_readable }}
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.contact_information.fax_readable %}
+              <div>
+                Fax.:
+                <a href="tel: {{ theme_settings.contact_information.fax_system }}">
+                  {{ theme_settings.contact_information.fax_readable }}
+                </a>
+              </div>
+            {% endif %}
+
+            {% if (theme_settings.working_hours | filter(v => v != '')) is not empty %}
+              <br>
+              <p class="h4">Åbningstider</p>
+              {% if theme_settings.working_hours.working_hours__row_1__day and theme_settings.working_hours.working_hours__row_1__time %}
+                <div class="row">
+                  <div class="col-4 col-sm-5">
+                    {{ theme_settings.working_hours.working_hours__row_1__day }}
+                  </div>
+                  <div class="col-4 col-sm-7">
+                    <div class="align-text-right">
+                      {{ theme_settings.working_hours.working_hours__row_1__time }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if theme_settings.working_hours.working_hours__row_2__day and theme_settings.working_hours.working_hours__row_2__time %}
+                <div class="row">
+                  <div class="col-4 col-sm-5">
+                    {{ theme_settings.working_hours.working_hours__row_2__day }}
+                  </div>
+                  <div class="col-4 col-sm-7">
+                    <div class="align-text-right">
+                      {{ theme_settings.working_hours.working_hours__row_2__time }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if theme_settings.working_hours.working_hours__row_3__day and theme_settings.working_hours.working_hours__row_3__time %}
+                <div class="row">
+                  <div class="col-4 col-sm-5">
+                    {{ theme_settings.working_hours.working_hours__row_3__day }}
+                  </div>
+                  <div class="col-4 col-sm-7">
+                    <div class="align-text-right">
+                      {{ theme_settings.working_hours.working_hours__row_3__time }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if theme_settings.working_hours.working_hours__row_4__day and theme_settings.working_hours.working_hours__row_4__time %}
+                <div class="row">
+                  <div class="col-4 col-sm-5">
+                    {{ theme_settings.working_hours.working_hours__row_4__day }}
+                  </div>
+                  <div class="col-4 col-sm-7">
+                    <div class="align-text-right">
+                      {{ theme_settings.working_hours.working_hours__row_4__time }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if theme_settings.working_hours.working_hours__row_5__day and theme_settings.working_hours.working_hours__row_5__time %}
+                <div class="row">
+                  <div class="col-4 col-sm-5">
+                    {{ theme_settings.working_hours.working_hours__row_5__day }}
+                  </div>
+                  <div class="col-4 col-sm-7">
+                    <div class="align-text-right">
+                      {{ theme_settings.working_hours.working_hours__row_5__time }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+
+            {% if theme_settings.contact_information.additional_information %}
+              <br>
+              <div>
+                {{ theme_settings.contact_information.additional_information }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-3 footer-col">
+          {{ page.footer_first }}
+        </div>
+
+        <div class="col-12 col-sm-3 footer-col">
+          <div class="social-icon-list">
+
+            {% if theme_settings.social.facebook.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.facebook.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--facebook social-icon--image"
+                  title="{{ theme_settings.social.facebook.tooltip }}">
+                  <span class="icon fa fa-facebook-f"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.twitter.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.twitter.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--twitter social-icon--image"
+                  title="{{ theme_settings.social.twitter.tooltip }}">
+                  <span class="icon fa fa-twitter-square"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.googleplus.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.googleplus.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--google-plus"
+                  title="{{ theme_settings.social.googleplus.tooltip }}">
+                  <span class="icon fa fa-google-plus"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.linkedin.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.linkedin.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--linkedin"
+                  title="{{ theme_settings.social.linkedin.tooltip }}">
+                  <span class="icon fa fa-linkedin"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.pinterest.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.pinterest.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--pinterest"
+                  title="{{ theme_settings.social.pinterest.tooltip }}">
+                  <span class="icon fa fa-pinterest"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.instagram.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.instagram.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--instagram social-icon--image"
+                  title="{{ theme_settings.social.instagram.tooltip }}">
+                  <span class="icon fa fa-instagram"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.youtube.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.youtube.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--youtube"
+                  title="{{ theme_settings.social.youtube.tooltip }}">
+                  <span class="icon fa fa-youtube"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.vimeo.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.vimeo.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--vimeo"
+                  title="{{ theme_settings.social.vimeo.tooltip }}">
+                  <span class="icon fa fa-vimeo"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            {% if theme_settings.social.github.active %}
+              <div>
+                <a
+                  href="{{ theme_settings.social.github.url }}"
+                  target="_blank"
+                  class="social-icon social-icon--github"
+                  title="{{ theme_settings.social.github.tooltip }}">
+                  <span class="icon fa fa-github"></span>
+                </a>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

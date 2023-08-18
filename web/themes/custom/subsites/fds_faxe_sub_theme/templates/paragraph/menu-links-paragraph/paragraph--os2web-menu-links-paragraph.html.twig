@@ -1,0 +1,34 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+      <div class="row">
+        {% for menu_link in _context['#menu_links'] %}
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="box box--section-link">
+              <div class="box__body">
+                <a href="{{ menu_link.url }}">{{ menu_link.title }}</a>
+
+                {% if menu_link['children']|length %}
+                  <hr>
+                  <ul>
+                    {% for node_link in menu_link['children'] %}
+                      <li><a href="{{ node_link.url }}">{{ node_link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

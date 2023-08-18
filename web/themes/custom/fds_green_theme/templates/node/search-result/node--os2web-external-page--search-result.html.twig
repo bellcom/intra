@@ -1,0 +1,38 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+<div {{ attributes.addClass(classes).addClass(_context['#page_category_class']) }}>
+  <div class="field--type-link">
+    <a href="{{ node.field_os2web_ep_url.value }}" target="_blank">
+      <h4>{{ label }}</h4>
+
+      <div class="search-results-examples">
+        {{ content }}
+      </div>
+
+      <br>
+      <div class="search-results-bread-crumbs">
+        {% for sectionLabel in _context['#section_labels'] %}
+          {{ sectionLabel }}
+          {% if not loop.last %}
+            <svg class="mx-3" xmlns="http://www.w3.org/2000/svg" width="6.49" height="11" viewBox="0 0 6.49 11">
+              <g id="Brødkrummepil" transform="translate(1.729 0.75)">
+                <path id="Path_2987" data-name="Path 2987" d="M5.5,6.49a.7.7,0,0,1-.507-.219L.211,1.281A.774.774,0,0,1,.21.22a.7.7,0,0,1,1.015,0L5.5,4.68,9.776.219a.7.7,0,0,1,1.015,0,.774.774,0,0,1,0,1.061L6.007,6.271A.7.7,0,0,1,5.5,6.49Z" transform="translate(-1.729 10.25) rotate(-90)" fill="#00502d"/>
+              </g>
+            </svg>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+
+      {# {{ 'Read more' | trans }} #}
+    </a>
+  </div>
+</div>
+

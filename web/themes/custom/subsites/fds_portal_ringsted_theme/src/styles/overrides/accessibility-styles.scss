@@ -1,0 +1,186 @@
+@mixin reset-border {
+  text-decoration: underline dotted var(--dark-gray1) 1px;
+  text-underline-offset: 3px;
+  border-bottom: none;
+}
+
+body {
+  input,
+  button,
+  textarea {
+    display: inline-block;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  a {
+    display: inline-block;
+    min-width: 44px !important;
+  }
+
+  .entity-default--os2web-spotbox-reference {
+    .tns-outer {
+      .tns-controls {
+        button {
+          &[data-controls="next"] {
+            background: url(../images/sprite.png) no-repeat -154px 0;
+            right: -4px;
+          }
+          &[data-controls="prev"] {
+            background: transparent url("../images/sprite.png") no-repeat -188px
+              0;
+            left: -3px;
+          }
+        }
+      }
+    }
+  }
+
+  .accordion-content {
+    a {
+      margin: 0;
+      @include reset-border;
+    }
+  }
+  .field--name-field-os2web-simple-text-body {
+    a {
+      margin: 3px 0;
+      @include reset-border;
+    }
+  }
+
+  .breadcrumb a,
+  .breadcrumb a:hover {
+    margin: 3px 0;
+    @include reset-border;
+  }
+
+  .view-os2web-meetings-search-page,
+  .view-os2web-search {
+    .pager {
+      li {
+        &.is-active,
+        &.pager__item {
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    .footer {
+      a {
+        margin: 3px 0;
+        @include reset-border;
+        &:focus,
+        &:hover {
+          color: #c30a32;
+          border-bottom: none;
+          margin: 3px 0;
+        }
+        &:visited {
+          margin: 3px 0;
+          @include reset-border;
+          &:focus,
+          &:hover {
+            color: #c30a32;
+            border-bottom: none;
+          }
+        }
+      }
+      .menu.show {
+        a {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .tns-outer {
+    a {
+      text-decoration: none !important;
+    }
+  }
+
+  .page-alert {
+    .custom-alert {
+      a {
+        @include reset-border;
+        text-decoration: underline dotted $color-white 1px !important;
+      }
+      .custom-alert__button {
+        a {
+          text-decoration: none !important;
+        }
+      }
+    }
+  }
+  .field--name-field-os2web-page-description,
+  .accordion-content,
+  .field--name-field-os2web-simple-text-body,
+  .contactperson,
+  .paragraph--type--os2web-cnt-paragraph,
+  .entity-default--os2web-gis-map,
+  .field,
+  .field--type-text-long {
+    a {
+      @include reset-border;
+    }
+  }
+
+  div.field--name-field-os2web-page-description {
+    div.field__item {
+      & > span.file {
+        a {
+          @include reset-border;
+        }
+      }
+    }
+  }
+
+  .contactperson {
+    .field--name-field-os2web-cnt-link {
+      a {
+        @include reset-border;
+      }
+    }
+  }
+
+  .paragraph--type--os2web-cnt-paragraph {
+    &-reference {
+      .os2web_contact {
+        a {
+          @include reset-border;
+        }
+      }
+    }
+    .field--name-field-os2web-cnt-body,
+    .field--name-field-os2web-cnt-link {
+      a {
+        @include reset-border;
+      }
+    }
+  }
+
+  .field--name-field-os2web-bdk-article {
+    .spotbox--button.spotbox {
+      .spotbox__content {
+        h3 {
+          @include reset-border;
+        }
+      }
+    }
+  }
+  .hovedindhold-venstre {
+    .entity-default--os2web-borgerdk-selfser-ref {
+      a {
+        @include reset-border;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+id: faxekommune_d7_taxonomy_keywords
+label: Faxekommune D7 Taxonomy keywords
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+deriver: Drupal\taxonomy\Plugin\migrate\D7TaxonomyTermDeriver
+source:
+  plugin: d7_taxonomy_term
+  bundle: os2web_taxonomies_tax_editor_tag
+  track_changes: true
+process:
+  vid:
+    plugin: default_value
+    default_value: os2web_keyword
+  name: name
+  weight: weight
+  # Only attempt to stub real (non-zero) parents.
+  parent_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: faxekommune_d7_taxonomy_keywords
+  parent:
+    plugin: default_value
+    default_value: 0
+    source: '@parent_id'
+  changed: timestamp
+  langcode: language
+destination:
+  plugin: entity:taxonomy_term
+migration_dependencies:
+  required: {}
+  optional: {}

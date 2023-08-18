@@ -1,0 +1,66 @@
+{#  #}
+<div class="simple-accordion-wrapper">
+  <div class="simple-accordion__inner-wrapper">
+    <div class="simple-accordion__intro-wrapper">
+      {% if paragraph.field_simple_accordion_prefix is not empty %}
+      <div class="simple-accordion__intro-prefix">
+        {% include "@bellcom_theme/assets/images/arrowcircleright.svg" with { custom_color: "#344E41" } %}
+        <span>{{ content.field_simple_accordion_prefix }}</span>
+      </div>
+      {% endif %}
+      <h2>{{ content.field_simple_accordion_heading }}</h2>
+      <div class="simple-accordion__intro-body">
+        {{ content.field_simple_accordion_body }}
+      </div>
+    </div>
+    <div class="accordion-wrapper">
+      {% if paragraph.field_accordion_heading_1 is not empty %}
+      <div class="accordion-header"><span>01</span>{{ content.field_accordion_heading_1 }}</div>
+      <div class="accordion-body">
+        {{ content.field_accordion_body_1 }}
+      </div>
+      {% endif %}
+      {% if paragraph.field_accordion_heading_2 is not empty %}
+      <div class="accordion-header"><span>02</span>{{ content.field_accordion_heading_2 }}</div>
+      <div class="accordion-body">
+        {{ content.field_accordion_body_2 }}
+      </div>
+      {% endif %}
+      {% if paragraph.field_accordion_heading_3 is not empty %}
+      <div class="accordion-header"><span>03</span>{{ content.field_accordion_heading_3 }}</div>
+      <div class="accordion-body">
+        {{ content.field_accordion_body_3 }}
+      </div>
+      {% endif %}
+      {% if paragraph.field_accordion_heading_4 is not empty %}
+      <div class="accordion-header"><span>04</span>{{ content.field_accordion_heading_4 }}</div>
+      <div class="accordion-body">
+        {{ content.field_accordion_body_4 }}
+      </div>
+      {% endif %}
+      {% if paragraph.field_accordion_heading_5 is not empty %}
+        <div class="accordion-header"><span>05</span>{{ content.field_accordion_heading_5 }}</div>
+        <div class="accordion-body">
+          {{ content.field_accordion_body_5 }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+  accordionHeaders.forEach((header) => {
+    header.addEventListener("click", () => {
+      header.classList.toggle("active");
+      console.log('clicked');
+      const accordionBody = header.nextElementSibling;
+      if (header.classList.contains("active")) {
+        accordionBody.style.maxHeight = accordionBody.scrollHeight + "px";
+      } else {
+        accordionBody.style.maxHeight = 0;
+      }
+    });
+  });
+</script>

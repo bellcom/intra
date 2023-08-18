@@ -1,0 +1,227 @@
+// |--------------------------------------------------------------------------
+// | Custom header
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .custom-header
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin custom-header-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.region-header__main-navigation {
+
+  + .region-small-search {
+    margin-left: 3rem;
+  }
+}
+
+.custom-header {
+  background-color: #fff;
+
+  .menu {
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      position: relative;
+      list-style: none;
+      float: left;
+
+      padding: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    a {
+      display: block;
+    }
+  }
+
+  // Dropdown menu.
+  .menu li:hover > .menu {
+    display: block;
+  }
+  .menu .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 240px;
+    min-width: 200px;
+    z-index: 500;
+    display: none;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(27, 27, 29, .2);
+
+    li {
+      float: none;
+      border-bottom: 1px solid #eee;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    a {
+      padding: 5px ($grid-gutter-width / 2);
+      font-size: $small-font-size;
+      color: $background_color__navigation;
+
+      &.is-active, &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.custom-header-row {}
+.custom-header-row--meta {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .flexy-row {
+    align-items: initial;
+  }
+
+  .menu {
+
+    a {
+      font-size: $small-text;
+      font-weight: $font-weight-bold;
+      text-decoration: none;
+
+      color: $color-text;
+
+      &:hover, &:focus {
+        color: $color__link__hover;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .menu-item {
+
+    + .menu-item {
+      margin-left: 30px;
+    }
+  }
+}
+.custom-header-row--desktop-navigation {
+  background-color: $background_color__navigation;
+
+  .menu {
+
+    li.menu-item--active-trail {
+
+      > a {
+        color: $background_color__navigation;
+        background-color: #fff;
+      }
+    }
+
+    a {
+      padding: 18px 15px;
+
+      font-size: $h4-font-size;
+
+      color: #fff;
+
+      &, &:hover {
+        text-decoration: none;
+      }
+
+      &:hover, &:focus, &.is-active {
+        outline: none;
+        color: $background_color__navigation;
+        background-color: #fff;
+      }
+    }
+  }
+}
+.custom-header-row--mobile-navigation {
+  height: 50px;
+
+  background-color: $background_color__navigation;
+}
+
+.custom-header {
+
+  .logo {
+
+    img {
+      display: block;
+      max-height: 60px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .custom-header {
+
+    .logo {
+
+      img {
+        max-height: 80px;
+      }
+    }
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

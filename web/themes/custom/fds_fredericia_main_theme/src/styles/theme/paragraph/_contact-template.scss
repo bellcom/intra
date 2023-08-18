@@ -1,0 +1,256 @@
+.contact-template-wrapper {
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    .contact-template-heading {
+      margin-bottom: 50px;
+      h2 {
+        margin: 0;
+        color: #00325b;
+        font-weight: 600;
+      }
+    }
+
+
+    .inner-contact-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      @media only screen and (max-width: 992px) {
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      .contact-col-1 {
+
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        width: 70%;
+
+        &.no-col-2 {
+          flex-direction: row;
+          width: 100% !important;
+          gap: 35px 10px !important;
+          flex-wrap: wrap;
+
+          @media only screen and (max-width: 768px) {
+            flex-direction: column !important;
+          }
+
+        }
+
+        @media only screen and (max-width: 992px) {
+          width: 100%;
+        }
+        .contact-template-address {
+          display: flex;
+          gap: 20px;
+          max-width: 90%;
+
+          &.no-col-2-item {
+            max-width: 100% !important;
+            flex: 45%;
+          }
+
+          @media only screen and (max-width: 992px) {
+            max-width: 100%;
+          }
+
+          .contact-template-icon {
+            font-size: 32px;
+            color: #00325b;
+            i {
+              width: 50px;
+            }
+
+          }
+          .address-info {
+            color: #00325b;
+            .info-heading {
+              margin-top: 0;
+              font-size: 20px;
+              font-weight: 600;
+              color: #00325b;
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .contact-template-phone {
+          display: flex;
+          gap: 20px;
+          max-width: 90%;
+
+          &.no-col-2-item {
+            max-width: 100% !important;
+            flex: 45%;
+          }
+
+          @media only screen and (max-width: 992px) {
+            max-width: 100%;
+          }
+
+          .contact-template-icon {
+            font-size: 32px;
+            color: #00325b;
+
+            i {
+              width: 50px;
+            }
+
+          }
+          .phone-info {
+            color: #00325b;
+            .info-heading {
+              margin-top: 0;
+              font-size: 20px;
+              font-weight: 600;
+              color: #00325b;
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .contact-template-mail {
+          display: flex;
+          gap: 20px;
+          max-width: 90%;
+
+          &.no-col-2-item {
+            max-width: 100% !important;
+            flex: 45%;
+          }
+
+          @media only screen and (max-width: 992px) {
+            max-width: 100%;
+          }
+
+          .contact-template-icon {
+            font-size: 32px;
+            color: #00325b;
+
+            i {
+              width: 50px;
+            }
+
+          }
+          .mail-info {
+            color: #00325b;
+            .info-heading {
+              margin-top: 0;
+              font-size: 20px;
+              font-weight: 600;
+              color: #00325b;
+              margin-bottom: 10px;
+            }
+          }
+        }
+        .contact-template-warning {
+          display: flex;
+          gap: 20px;
+          max-width: 90%;
+
+          &.no-col-2-item {
+            max-width: 100% !important;
+            flex: 45%;
+          }
+
+          @media only screen and (max-width: 992px) {
+            max-width: 100%;
+          }
+
+          .contact-template-icon {
+            font-size: 32px;
+            color: #00325b;
+
+            i {
+              width: 50px;
+            }
+
+          }
+          .warning-info {
+            color: #00325b;
+            .info-heading {
+              margin-top: 0;
+              font-size: 20px;
+              font-weight: 600;
+              color: #00325b;
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+
+      }
+
+      .contact-col-2 {
+        width: 30%;
+        display: flex;
+        gap: 35px;
+        flex-direction: column;
+
+        @media only screen and (max-width: 992px) {
+          width: 100%;
+        }
+        .opening-hours {
+          .info-heading {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #00325b;
+            margin-bottom: 10px;
+          }
+          .opening-hours-days {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .monday, .tuesday, .wednesday, .thursday, .friday {
+              display: flex;
+              color: #00325b;
+
+              .day {
+                width: 120px;
+              }
+            }
+          }
+        }
+        .phone-opening-hours {
+          .info-heading {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #00325b;
+            margin-bottom: 10px;
+          }
+          .phone-opening-hours-days {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .monday, .tuesday, .wednesday, .thursday, .friday {
+              display: flex;
+              color: #00325b;
+
+              .day {
+                width: 120px;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{%
+  set classes = [
+    'node',
+    'node--os2web-news--full',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article {{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if label and not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer class="node__meta">
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div {{ content_attributes.addClass('node__content') }}>
+
+    {{ content.field_os2web_news_primaryimage }}
+    <div class="node--os2web-news--full-inner-wrap">
+      <h1>{{ content.field_os2web_news_heading | render | striptags }}</h1>
+      <div class="news-metadata">
+        <div class="">
+          <span class="date">
+            {{ content.field_os2web_news_article_date | render | striptags }}
+          </span>
+          <span>{{ content.field_os2web_news_article_author | render | striptags }}</span>
+        </div>
+      </div>
+      <div><strong>{{ content.field_os2web_news_intro }}</strong></div>
+      <div>{{ content.field_os2web_news_description }}</div>
+      {{ content | without('field_os2web_news_primaryimage', 'field_os2web_news_description', 'field_os2web_news_heading','field_os2web_news_article_date', 'field_os2web_news_article_author', 'field_os2web_news_intro') }}
+    </div>
+  </div>
+</article>

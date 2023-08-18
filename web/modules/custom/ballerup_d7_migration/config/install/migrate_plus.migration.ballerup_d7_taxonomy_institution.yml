@@ -1,0 +1,27 @@
+id: ballerup_d7_taxonomy_institution
+label: Ballerup D7 Taxonomy section
+migration_group: ballerup_d7
+migration_tags:
+  - Drupal 7
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: institution_page
+  track_changes: true
+process:
+  vid:
+    plugin: default_value
+    default_value: os2web_instituion
+  name: title
+  #weight: weight
+  # Only attempt to stub real (non-zero) parents.
+  parent:
+    plugin: default_value
+    default_value: 0
+  changed: timestamp
+  langcode: language
+destination:
+  plugin: entity:taxonomy_term
+migration_dependencies:
+  required: {}
+  optional: {}

@@ -1,0 +1,23 @@
+{%
+  set classes = [
+  'element-wrapper-link',
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'search-block-page',
+]
+%}
+<a href="{{ url }}" {{ attributes.addClass(classes) }}>
+	<h3 class="title">{{ label }}</h3>
+	<p>
+	{{ content }}
+	</p>
+	<p>
+  {{ node.type.entity.label }}
+	</p>
+	<div>
+		{{ _context['#section_labels']|last }}
+	</div>
+</a>

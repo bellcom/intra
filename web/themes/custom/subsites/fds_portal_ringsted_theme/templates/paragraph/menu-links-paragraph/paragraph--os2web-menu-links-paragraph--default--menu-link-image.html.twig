@@ -1,0 +1,47 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  {% set backgroundImageUrl = file_url(paragraph.field_os2web_menu_links_image.entity.fileuri) %}
+  <div{{ attributes.addClass(classes) }} {% if backgroundImageUrl %}style="background-image: url({{ backgroundImageUrl }})"{% endif %}>
+    {% block content %}
+      {# Begin - links #}
+      <div class="container">
+        <nav class="row">
+        {% for menu_link in _context['#menu_links'] %}
+          <div class="col-12 col-md-6 col-lg-3 entry">
+            <div class="entrywrap">
+                  <div class="entry-graphic">
+                    <div class="taxonomy-pic">
+                      {% set rendered_content = menu_link.content.field_os2web_icon|render %}
+                      {% if rendered_content %}
+                        {{ rendered_content }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="entry-text">
+                    <p role='heading' aria-level="3" aria-label="{{ menu_link.title }}" class="h3">{{ menu_link.title }}</p>
+                  </div>
+                  <a class="global-link" title="{{ menu_link.title }}" aria-label="{{ menu_link.title }}" href="{{ menu_link.url }}"></a>
+                  {% if menu_link['children']|length %}
+                    <hr>
+                    <ul>
+                      {% for node_link in menu_link['children'] %}
+                        <li><a href="{{ node_link.url }}">UPD: {{ node_link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        </nav>
+      </div>
+      {# End - links #}
+
+    {% endblock %}
+  </div>
+<div class="rk_cover_arrow_button_wrapper"><div class="rk_cover_arrow_button"><div class="arrows"></div></div></div>
+{% endblock paragraph %}

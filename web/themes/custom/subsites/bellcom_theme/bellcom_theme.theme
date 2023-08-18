@@ -1,0 +1,27 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function bellcom_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    // Add wrapper css classes to some forms
+    if ($form_id == 'user_login_form' || $form_id == 'user_pass') {
+        $form['#attributes']['class'][] = 'admin__form';
+        $form['#attributes']['class'][] = 'form';
+    }
+
+    if ($form_id == 'user_login_form') {
+        $form['name']['#attributes']['placeholder'] = t('Username');
+        $form['pass']['#attributes']['placeholder'] = t('***********');
+    }
+
+    if ($form_id == 'user_pass') {
+        $form['name']['#attributes']['placeholder'] = t('email@domain.com');
+    }
+}
+
+function bellcom_theme_preprocess(&$variables, $hook) {
+    $variables['base_path'] = base_path();
+}

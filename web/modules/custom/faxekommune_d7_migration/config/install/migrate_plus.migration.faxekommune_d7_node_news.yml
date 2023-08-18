@@ -1,0 +1,120 @@
+id: faxekommune_d7_node_news
+label: Faxekommune D7 Node News
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_base_news
+  track_changes: true
+process:
+  type:
+    plugin: default_value
+    default_value: os2web_news
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_news_heading: title
+  field_os2web_news_section:
+    plugin: migration_lookup
+    migration: faxekommune_d7_taxonomy_section
+    source: field_os2web_news_section
+    no_stub: true
+  field_os2web_news_intro: field_os2web_base_field_summary
+  status: status
+  created: created
+  changed: changed
+  #promote: promote
+  sticky: sticky
+  field_os2web_news_article_date:
+    plugin: format_date
+    source: created
+    from_format: 'U'
+    to_format: 'Y-m-d\TH:i:s'
+    from_timezone: 'UTC'
+    to_timezone: 'Europe/Copenhagen'
+  field_os2web_news_description:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_os2web_base_field_lead_img
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_os2web_base_field_lead_img
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - createFileManaged
+  field_os2web_news_primaryimage/target_id: '@migrate_file_fid'
+  field_os2web_news_primaryimage/alt: title
+  migrate_paragraph_files:
+    plugin: migration_lookup
+    migration: faxekommune_d7_os2web_contentpage_paragraph_files
+    source: nid
+    no_stub: true
+  field_os2web_news_paragraph_narr:
+    plugin: sub_process
+    source:
+      - '@migrate_paragraph_files'
+    process:
+      target_id: '0'
+      target_revision_id: '1'
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+  field_os2web_news_kle:
+    - plugin: callback
+      source: field_os2web_base_field_kle_ref
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - findLocalKleTerm
+  field_link_til_andet_indhold:
+    - plugin: callback
+      source: field_os2web_base_field_related
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - migrateRelatedLinks
+  field_ext_links:
+    plugin: field_link
+    source: field_os2web_base_field_ext_link
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required: {}
+  optional: {}

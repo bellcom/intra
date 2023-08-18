@@ -1,0 +1,6 @@
+services:
+  custom_utility.commands:
+    class: \Drupal\bc_utility\Commands\BatchCommands
+    tags:
+      - { name: drush.command }
+    arguments: ['@entity_type.manager', '@logger.factory']

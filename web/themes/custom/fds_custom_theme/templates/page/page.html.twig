@@ -1,0 +1,244 @@
+<!-- Begin - ie -->
+<div class="ie-banner">
+  Du kan ikke bruge rebild.dk i Internet Explorer. Du skal bruge en anden web-browser. Internet Explorer udgår i slutningen af 2021.
+</div>
+<!-- End - ie -->
+
+<!-- Begin - megamenu -->
+<div class="custom-megamenu d-print-none">
+  <div class="container-fluid">
+
+    <!-- Begin - top row -->
+    <div class="custom-megamenu__row custom-megamenu__row--top">
+      <div class="row">
+
+        <!-- Begin - language selector -->
+        <div class="col-12 col-sm-3">
+          <button
+            class="custom-megamenu__button custom-megamenu__button--toggle-megamenu js-toggle-megamenu d-sm-none" aria-label="{{ 'Luk menu' | t }}">
+
+            <span class="material-icons icon">close</span>
+          </button>
+
+          {{ page.megamenu__language_selector }}
+        </div>
+        <!-- End - language selector -->
+
+        <!-- Begin - search -->
+        <div class="col-12 col-sm-6">
+          {{ page.megamenu__search }}
+        </div>
+        <!-- End - search -->
+
+        <!-- Begin - toggle megamenu -->
+        <div class="col-12 col-sm-3">
+          <div class="text-align-right">
+            <button
+              class="custom-megamenu__button custom-megamenu__button--toggle-megamenu js-toggle-megamenu d-none d-sm-inline-block" aria-label="{{ 'Luk menu' | t }}">
+
+              <span class="material-icons icon">close</span>
+            </button>
+          </div>
+        </div>
+        <!-- End - toggle megamenu -->
+
+      </div>
+    </div>
+    <!-- End - top row -->
+
+    <!-- Begin - navigation -->
+    <div class="custom-megamenu__row custom-megamenu__row--navigation">
+      {{ page.megamenu__navigation }}
+      {{ page.megamenu__selfservice }}
+    </div>
+    <!-- End - navigation -->
+
+  </div>
+</div>
+<!-- End - megamenu -->
+
+<header class="d-print-none">
+
+  {% if is_front %}
+    <div class="custom-header custom-header--static">
+      <div class="custom-header__inner">
+        <div class="container">
+
+          <!-- Begin - top -->
+          <div class="flexy-row">
+
+            <!-- Begin - toggle -->
+            <button
+              class="custom-header__button custom-header__button--toggle-megamenu js-toggle-megamenu d-sm-none" aria-label="{{ 'Åbn menu' | t }}">
+              <span class="icon fa fa-bars"></span>
+            </button>
+            <!-- End - toggle -->
+
+            <div class="flexy-spacer d-sm-none"></div>
+
+            <!-- Begin - logo -->
+            <a href="{{ url('<front>') }}" class="custom-header__logo">
+              <img src="{{ base_path ~ directory }}/dist/images/logo.svg" alt="Logo" />
+            </a>
+            <!-- End - logo -->
+
+            {% include '@fds_custom_theme/includes/action-buttons.html.twig' %}
+
+            <div class="flexy-spacer"></div>
+
+            <!-- Begin - toggle search -->
+            <div class="searchy d-sm-none">
+              {{ page.header__search }}
+
+              <button
+                class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}">
+                <span class="icon fa fa-search"></span>
+              </button>
+            </div>
+            <!-- End - toggle search -->
+
+            <!-- Begin - toggle -->
+            <button
+              class="custom-header__button custom-header__button--toggle-megamenu js-toggle-megamenu d-none d-sm-block" aria-label="{{ 'Åbn menu' | t }}">
+              <span class="icon fa fa-bars"></span>
+            </button>
+            <!-- End - toggle -->
+
+          </div>
+          <!-- End - top -->
+
+          {% if theme_settings.texts.frontpage_banner_heading or theme_settings.texts.frontpage_banner_subheading %}
+            <!-- Begin - meta -->
+            <div class="custom-header__meta">
+              <h1 class="h1">{{ theme_settings.texts.frontpage_banner_heading }}</h1>
+              <h2 class="h4">{{ theme_settings.texts.frontpage_banner_subheading }}</h2>
+            </div>
+            <!-- End - meta -->
+          {% endif %}
+
+          <!-- Begin - below -->
+          {{ page.header__below }}
+          <!-- End - below -->
+
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not is_front %}
+    <div class="custom-header custom-header--fixed">
+      <div class="custom-header__inner">
+        <div class="container">
+          <div class="flexy-row">
+
+            <!-- Begin - toggle -->
+            <button
+              class="custom-header__button custom-header__button--toggle-megamenu js-toggle-megamenu d-sm-none" aria-label="{{ 'Åbn menu' | t }}">
+              <span class="icon fa fa-bars"></span>
+            </button>
+            <!-- End - toggle -->
+
+            <div class="flexy-spacer d-sm-none"></div>
+
+            <!-- Begin - logo -->
+            <a href="{{ url('<front>') }}" class="custom-header__logo">
+              <img src="{{ base_path ~ directory }}/dist/images/logo.svg" alt="Logo" />
+            </a>
+            <!-- End - logo -->
+
+            <div class="flexy-spacer"></div>
+
+            <!-- Begin - toggle search -->
+            <div class="searchy">
+              {{ page.header__search }}
+
+              <button
+                class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}">
+                <span class="icon fa fa-search"></span>
+              </button>
+            </div>
+            <!-- End - toggle search -->
+
+            <!-- Begin - toggle -->
+            <button
+              class="custom-header__button custom-header__button--toggle-megamenu js-toggle-megamenu d-none d-sm-block" aria-label="{{ 'Åbn menu' | t }}">
+              <span class="icon fa fa-bars"></span>
+            </button>
+            <!-- End - toggle -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</header>
+
+{{ page.featured_top }}
+
+<div class="page-container" id="font-resize-wrapper">
+  <div class="container" id="main-content">
+    {{ page.highlighted }}
+
+    {% if not is_front %}
+      <div class="row d-print-none">
+        <div class="col-12 col-md-3 d-none d-md-block">
+          <a href="{{ url('<front>') }}" class="return-to-home-link">
+            {{ 'Hjem' | trans }}
+          </a>
+        </div>
+        <div class="col-12 col-md-9 col--align-center">
+          <div class="flexy-row">
+            {{ page.breadcrumb }}
+
+            <div class="flexy-spacer"></div>
+
+            {% include '@fds_custom_theme/includes/action-buttons.html.twig' %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <div class="row">
+
+      <aside class="col-12 col-md-3">
+        <div class="layout-sidebar-left">
+          {{ page.sidebar_first }}
+        </div>
+      </aside>
+
+      <main {{ content_attributes.addClass('col-12 col-md-6') }}>
+        {{ page.content }}
+      </main>
+
+      <aside class="col-12 col-md-3 d-print-none">
+        <div class="layout-sidebar-right">
+          <div class="box">
+            <div class="box__body">
+              {{ page.sidebar_second }}
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_custom_theme/includes/footer.html.twig' %}
+
+<div class="d-none">
+  {{ page.embedded_code }}
+</div>
+
+<script>
+
+  // Add internet explorer class to <body>
+  (function() {
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+
+    if(isIE) {
+      document.documentElement.classList.add('ie');
+    }
+  })();
+</script>

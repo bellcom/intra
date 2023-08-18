@@ -1,0 +1,145 @@
+// |--------------------------------------------------------------------------
+// | Spotbox reference
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .paragraph--type--os2web-spotbox-reference
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin paragraph--type--os2web-spotbox-reference-mixin() {
+}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.paragraph--type--os2web-spotbox,
+.paragraph--type--os2web-spotbox-reference {
+  display: block;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+  .spotbox {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    .spotbox__image {
+      img {
+        display: block;
+        width: 100%;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        min-height: 272px;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+  .spotbox__content {
+    line-height: 1.35;
+    height: 5em;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: $color-white;
+    background-color: $background_color__default;;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    .field--name-field-os2web-spotbox-heading {
+      z-index: 1;
+    }
+    h3 {
+      line-height: 1.35;
+      font-weight: 400;
+      font-size: 19px;
+      color: $color-white;
+      text-transform: uppercase;
+      margin: 0;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {
+}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+  .paragraph--grid_1,
+  .paragraph--grid_2,
+  .paragraph--grid_3 {
+  }
+
+  .paragraph--grid_1 {
+  }
+
+  .paragraph--grid_2 {
+  }
+
+  .paragraph--grid_3 {
+    .field--name-field-os2web-spotbox-reference {
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {
+}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {
+}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {
+}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+}
+
+// Print
+@media print {
+}
+
+// Touch
+.touchevents {
+}
+
+// No touch
+.no-touchevents {
+}

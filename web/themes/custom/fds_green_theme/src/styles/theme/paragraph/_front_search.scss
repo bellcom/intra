@@ -1,0 +1,29 @@
+.field--name-field-os2web-paragraphs {
+
+  .front-search {
+    h1 {
+      font-size: 2.4rem;
+      color: $color-white;
+    }
+    p {
+      color: $color-white;
+    }
+    .col-5 {
+      padding: unset;
+    }
+    input.form-input {
+      border-radius: 10px;
+      height: 45px;
+    }
+
+
+    .field--type-image {
+      margin-bottom: -6px;
+    }
+
+    img {
+      min-height: 400px;
+    }
+  }
+
+}

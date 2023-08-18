@@ -1,0 +1,170 @@
+// |--------------------------------------------------------------------------
+// | Tiny slider
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .tiny-slider
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin tiny-slider-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.tns-outer {
+  position: relative;
+
+  margin-bottom: 50px;
+}
+
+.tns-nav {
+  position: absolute;
+
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin-bottom: -40px;
+
+  button {
+    width: 14px;
+    height: 14px;
+
+    border-width: 1px;
+    border-color: $background_color__default;
+
+    &.tns-nav-active {
+      background-color: $background_color__default;
+    }
+
+    + button {
+      margin-left: 8px;
+    }
+  }
+}
+
+.tns-controls {
+
+  button {
+    display: flex;
+    position: absolute;
+
+    z-index: 100;
+
+    top: 50%;
+    margin-top: -15px;
+    padding: 0;
+
+    height: 30px;
+    width: 30px;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0;
+    border: 0;
+    border-radius: 100%;
+
+    color: #fff;
+    background-color: $background_color__default;
+
+    &:before {
+      display: inline-block;
+
+      font-family: FontAwesome;
+      font-size: 2.2rem;
+    }
+
+    &[data-controls="prev"] {
+      left: -15px;
+
+      &:before {
+        content: "\f104";
+      }
+    }
+
+    &[data-controls="next"] {
+      right: -15px;
+
+      &:before {
+        content: "\f105";
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+
+  .tns-controls {
+
+    button {
+      margin-top: -20px;
+
+      height: 40px;
+      width: 40px;
+
+      &:before {
+        font-size: 2.6rem;
+      }
+
+      &[data-controls="prev"] {
+        left: -20px;
+      }
+
+      &[data-controls="next"] {
+        right: -20px;
+      }
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

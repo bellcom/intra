@@ -1,0 +1,177 @@
+// |--------------------------------------------------------------------------
+// | Footer
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .footer
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+.footer-branding {
+  background-color: $background_color__default;
+  padding: 20px;
+  color: #FFF;
+  text-transform: uppercase;
+  height: 140px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/watermark.svg");
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: right 150px top -100px;
+  img {
+    display: inline;
+    max-height: 61px;
+  }
+}
+footer {
+
+  .footer {
+    margin-top: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    border-top: 0;
+    background-color: $footer-color;
+
+    a, a:hover, a:visited, a:focus, a:active,
+    .is-active > a,
+    .is-active > a:hover,
+    .is-active > a:focus,
+    .is-active > a:visited,
+    .is-active > a:active {
+      color: #6dcff6 !important;
+    }
+
+    .block {
+
+      h2 {
+        margin-bottom: 2.5rem;
+
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $h5-font-size;
+      }
+    }
+
+    &, h1, h2, h3, h4, h5, h6,
+    p {
+      color: #fff;
+    }
+
+    a {
+      text-decoration: underline;
+
+      &:focus {
+        outline-color: $background_color__default;
+      }
+    }
+
+    .social-icon {
+      font-size: 2rem;
+    }
+  }
+
+  .menu {
+    margin: 0;
+
+    li {
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .menu-item {
+      padding-top: 0;
+      padding-bottom: .8em;
+    }
+  }
+
+  .social-icon-list {
+    margin-top: 5.5rem;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+
+  footer {
+
+    .footer {
+
+      .menu {
+        padding-top: 10px;
+
+        border-top: 1px solid rgba(255, 255, 255, .5);
+      }
+    }
+  }
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .footer-col {
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  footer .footer {
+    border: none;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

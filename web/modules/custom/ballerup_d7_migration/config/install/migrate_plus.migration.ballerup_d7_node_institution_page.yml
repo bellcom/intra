@@ -1,0 +1,84 @@
+id: ballerup_d7_node_institution_page
+label: Ballerup D7 Node Institution page
+migration_group: ballerup_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: institution_page
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: os2web_page
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  migrate_uid:
+    - plugin: migration_lookup
+      migration: ballerup_d7_user
+      source: node_uid
+  uid:
+    plugin: default_value
+    default_value: 1
+    source: '@migrate_uid'
+  status: status
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+  field_migration_old_url:
+    plugin: callback
+    callable:
+      - 'Drupal\ballerup_d7_migration\Utility\MigrationHelper'
+      - createUrlFromNid
+    source: nid
+  field_os2web_page_description:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  # ...
+  field_os2web_page_contact:
+    plugin: migration_lookup
+    migration: ballerup_d7_institution_contact_box
+    source: nid
+    no_stub: true
+  field_os2web_page_institution:
+    plugin: migration_lookup
+    migration: ballerup_d7_taxonomy_institution
+    source: nid
+    no_stub: true
+  field_os2web_page_section:
+    plugin: migration_lookup
+    migration: ballerup_d7_taxonomy_section
+    source: field_section
+    no_stub: true
+  field_os2web_page_related_hide:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - ballerup_d7_institution_contact_box
+    - ballerup_d7_taxonomy_institution
+    - ballerup_d7_taxonomy_section
+    - ballerup_d7_user
+  optional: {}

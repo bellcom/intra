@@ -1,0 +1,19 @@
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - fds_green_theme
+id: main_content
+theme: fds_green_theme
+region: content
+weight: -7
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Primært sideindhold'
+  provider: system
+  label_display: '0'
+visibility: {  }

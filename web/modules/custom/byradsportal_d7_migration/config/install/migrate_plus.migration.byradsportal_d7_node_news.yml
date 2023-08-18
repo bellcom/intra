@@ -1,0 +1,81 @@
+id: byradsportal_d7_node_news
+label: Ringsted Byradsportal D7 Node News
+migration_group: ringsted_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: nyhed
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  type:
+    plugin: default_value
+    default_value: os2web_news
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_news_heading: title
+  status: status
+  created: created
+  changed: changed
+  sticky: sticky
+  field_os2web_news_article_author: field_author
+  field_os2web_news_article_date:
+    - plugin: skip_row_if_old_news
+      index: 0
+      source: field_publishdate
+    - plugin: sub_process
+      source: field_publishdate
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: 'Y-m-d\TH:i:s'
+          from_timezone: 'Europe/Copenhagen'
+          source: value
+  field_os2web_news_description:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_news_intro:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: body/0/value
+    -
+      plugin: substr
+      start: 0
+      length: 199
+  migrate_paragraph_files:
+    plugin: migration_lookup
+    migration: byradsportal_d7_node_news_paragraph_files
+    source: nid
+    no_stub: true
+  field_os2web_news_paragraph_narr:
+    plugin: sub_process
+    source:
+      - '@migrate_paragraph_files'
+    process:
+      target_id: '0'
+      target_revision_id: '1'
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\byradsportal_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+destination:
+  plugin: entity:node

@@ -1,0 +1,369 @@
+{% if theme_settings.footer.footer_show_latest_content %}
+	<div class="section section--latest d-print-none">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-6">
+					<div class="block block--latest-content">
+						{{ page.footer__latest_content }}
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="block block--last-visits">
+						<h2>Senest besøgte indhold</h2>
+						<div id="js-visited-content">
+							Indlæser...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+<footer class="d-print-none">
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+
+				{#  <div class="col-12 mb-8">
+					{{ page.header__main_navigation }}
+				</div> #}
+
+				{# <div class="col-12 col-sm-9 footer-col">
+					<div class="block">
+						<div class="social-icon-list">
+							{% if theme_settings.social.facebook.active %}
+							<div>
+								<a href="{{ theme_settings.social.facebook.url }}" target="_blank" class="social-icon social-icon--facebook social-icon--image" title="{{ theme_settings.social.facebook.tooltip }}">
+									<span class="icon fa fa-facebook-f"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.twitter.active %}
+							<div>
+								<a href="{{ theme_settings.social.twitter.url }}" target="_blank" class="social-icon social-icon--twitter social-icon--image" title="{{ theme_settings.social.twitter.tooltip }}">
+									<span class="icon fa fa-twitter-square"></span>
+								</a>
+							</div>
+							{% endif %}
+
+							{% if theme_settings.social.googleplus.active %}
+							<div>
+								<a href="{{ theme_settings.social.googleplus.url }}" target="_blank" class="social-icon social-icon--google-plus" title="{{ theme_settings.social.googleplus.tooltip }}">
+									<span class="icon fa fa-google-plus"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.linkedin.active %}
+								<div>
+									<a href="{{ theme_settings.social.linkedin.url }}" target="_blank" class="social-icon social-icon--linkedin" title="{{ theme_settings.social.linkedin.tooltip }}">
+										<span class="icon fa fa-linkedin"></span>
+									</a>
+								</div>
+							{% endif %}
+
+							{% if theme_settings.social.pinterest.active %}
+							<div>
+								<a href="{{ theme_settings.social.pinterest.url }}" target="_blank" class="social-icon social-icon--pinterest" title="{{ theme_settings.social.pinterest.tooltip }}">
+									<span class="icon fa fa-pinterest"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.instagram.active %}
+							<div>
+								<a href="{{ theme_settings.social.instagram.url }}" target="_blank" class="social-icon social-icon--instagram social-icon--image" title="{{ theme_settings.social.instagram.tooltip }}">
+									<span class="icon fa fa-instagram"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.youtube.active %}
+							<div>
+								<a href="{{ theme_settings.social.youtube.url }}" target="_blank" class="social-icon social-icon--youtube" title="{{ theme_settings.social.youtube.tooltip }}">
+									<span class="icon fa fa-youtube"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.vimeo.active %}
+							<div>
+								<a href="{{ theme_settings.social.vimeo.url }}" target="_blank" class="social-icon social-icon--vimeo" title="{{ theme_settings.social.vimeo.tooltip }}">
+									<span class="icon fa fa-vimeo"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+							{% if theme_settings.social.github.active %}
+							<div>
+								<a href="{{ theme_settings.social.github.url }}" target="_blank" class="social-icon social-icon--github" title="{{ theme_settings.social.github.tooltip }}">
+									<span class="icon fa fa-github"></span>
+								</a>
+							</div>
+              				{% endif %}
+
+						</div>
+          			</div>
+				</div>
+
+				<div class="col-12 col-sm-3 footer-col">
+					<div class="d-flex align-items-center">
+						<a href="{{ path('<front>') }}" title="{{ 'Home'|t }}">
+								{% if theme_settings.footer.footer_use_default_logo %}
+									<img src="{{ base_path ~ directory }}/dist/images/logo__white.png" alt="" class="logo mr-5 logo--footer"/>
+								{% else %}
+									<img src="{{ theme_settings.footer.logo_settings.footer_logo_path | replace({'internal:':''})}}" alt="" class="logo mr-5 logo--footer">
+								{% endif %}
+						</a>
+						{% if theme_settings.branding.branding_toggle %}
+							<div class="footer-free-text">
+								{{ theme_settings.branding.branding_text }}
+							</div>
+						{% endif %}
+					</div>
+				</div> #}
+
+				<div class="col-12 footer-col customer-footer">
+
+					<div class="d-flex align-items-center footer-extra-info">
+
+						{% if theme_settings.contact_information.business_owner_name %}
+							<p>{{ theme_settings.contact_information.business_owner_name }}</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.address %}
+							<p>{{ theme_settings.contact_information.address }}</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.zipcode and theme_settings.contact_information.city %}
+							<p>
+							{{ theme_settings.contact_information.zipcode }}
+							{{ theme_settings.contact_information.city }}
+							</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.vat_no %}
+							<p>CVR-nr.: {{ theme_settings.contact_information.vat_no }} </p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.ean_no %}
+								<p>EAN-nr.: {{ theme_settings.contact_information.ean_no }}</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.giro_no %}
+							<p>Giro-nr.: {{ theme_settings.contact_information.giro_no }}</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.email %}
+							<p>
+								<a href="mailto: {{ theme_settings.contact_information.email }}">
+							  		{{ theme_settings.contact_information.email }}
+								</a>
+							</p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.phone_readable %}
+							<p><a href="tel: {{ theme_settings.contact_information.phone_system }}">
+							 Tlf.: {{ theme_settings.contact_information.phone_readable }}
+							</a></p>
+						{% endif %}
+
+						{% if theme_settings.contact_information.fax_readable %}
+							<p><a href="tel: {{ theme_settings.contact_information.fax_system }}">
+							  {{ theme_settings.contact_information.fax_readable }}
+							</a></p>
+						{% endif %}
+
+						{% if (theme_settings.working_hours | filter(v => v != '')) is not empty %}
+							  <br>
+							  {% if theme_settings.working_hours.working_hours__row_1__day and theme_settings.working_hours.working_hours__row_1__time %}
+								<div class="row">
+								  <div class="col-4 col-sm-5">
+									{{ theme_settings.working_hours.working_hours__row_1__day }}
+								  </div>
+								  <div class="col-4 col-sm-7">
+									<div class="align-text-right">
+									  {{ theme_settings.working_hours.working_hours__row_1__time }}
+									</div>
+								  </div>
+								</div>
+							  {% endif %}
+
+							  {% if theme_settings.working_hours.working_hours__row_2__day and theme_settings.working_hours.working_hours__row_2__time %}
+								<div class="row">
+								  <div class="col-4 col-sm-5">
+									{{ theme_settings.working_hours.working_hours__row_2__day }}
+								  </div>
+								  <div class="col-4 col-sm-7">
+									<div class="align-text-right">
+									  {{ theme_settings.working_hours.working_hours__row_2__time }}
+									</div>
+								  </div>
+								</div>
+							  {% endif %}
+
+							  {% if theme_settings.working_hours.working_hours__row_3__day and theme_settings.working_hours.working_hours__row_3__time %}
+								<div class="row">
+								  <div class="col-4 col-sm-5">
+									{{ theme_settings.working_hours.working_hours__row_3__day }}
+								  </div>
+								  <div class="col-4 col-sm-7">
+									<div class="align-text-right">
+									  {{ theme_settings.working_hours.working_hours__row_3__time }}
+									</div>
+								  </div>
+								</div>
+							  {% endif %}
+
+							  {% if theme_settings.working_hours.working_hours__row_4__day and theme_settings.working_hours.working_hours__row_4__time %}
+								<div class="row">
+								  <div class="col-4 col-sm-5">
+									{{ theme_settings.working_hours.working_hours__row_4__day }}
+								  </div>
+								  <div class="col-4 col-sm-7">
+									<div class="align-text-right">
+									  {{ theme_settings.working_hours.working_hours__row_4__time }}
+									</div>
+								  </div>
+								</div>
+							  {% endif %}
+
+							  {% if theme_settings.working_hours.working_hours__row_5__day and theme_settings.working_hours.working_hours__row_5__time %}
+								<div class="row">
+								  <div class="col-4 col-sm-5">
+									{{ theme_settings.working_hours.working_hours__row_5__day }}
+								  </div>
+								  <div class="col-4 col-sm-7">
+									<div class="align-text-right">
+									  {{ theme_settings.working_hours.working_hours__row_5__time }}
+									</div>
+								  </div>
+								</div>
+							  {% endif %}
+						{% endif %}
+
+						{% if theme_settings.contact_information.additional_information %}
+							<p>{{ theme_settings.contact_information.additional_information }}</p>
+						{% endif %}
+
+					</div>
+                    <div class="row">
+                      <div class="col-12 col-sm-4">
+                        {{ page.footer_first }}
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        {{ page.footer_second }}
+                      </div>
+                      <div class="socials-footer col-12 col-sm-4">
+                        <div class="social-icon-list">
+                          {% if theme_settings.social.facebook.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.facebook.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.facebook.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-facebook-f"></span>
+                                </span>
+                                Facebook
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.twitter.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.twitter.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.twitter.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-twitter-square"></span>
+                                </span>
+                                Twitter
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.googleplus.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.googleplus.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.googleplus.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-google-plus"></span>
+                                </span>
+                                Google plus
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.linkedin.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.linkedin.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.linkedin.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-linkedin"></span>
+                                </span>
+                                LinkedIn
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.pinterest.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.pinterest.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.pinterest.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-pinterest"></span>
+                                </span>
+                                Pinterest
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.instagram.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.instagram.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.instagram.tooltip }}">
+                               <span class="social-icon-frame">
+                                <span class="icon fa fa-instagram"></span>
+                               </span>
+                                Instagram
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.youtube.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.youtube.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.youtube.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-youtube"></span>
+                                </span>
+                                YouTube
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.vimeo.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.vimeo.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.vimeo.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-vimeo"></span>
+                                </span>
+                                Vimeo
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          {% if theme_settings.social.github.active %}
+                            <div>
+                              <a href="{{ theme_settings.social.github.url }}" target="_blank" class="social-link" title="{{ theme_settings.social.github.tooltip }}">
+                                <span class="social-icon-frame">
+                                  <span class="icon fa fa-github"></span>
+                                </span>
+                                Github
+                              </a>
+                            </div>
+                          {% endif %}
+
+                        </div>
+                      </div>
+
+                    </div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

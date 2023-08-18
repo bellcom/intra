@@ -1,0 +1,9 @@
+bc_speed_admin.settings:
+  path: '/admin/config/speedadmin'
+  defaults:
+    _title: 'rediger'
+    _form: '\Drupal\bc_speed_admin\Form\SettingsForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

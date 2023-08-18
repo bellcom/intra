@@ -1,0 +1,188 @@
+// |--------------------------------------------------------------------------
+// | Text with image
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .paragraph--type--os2web-twi-paragraph
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin paragraph--type--os2web-twi-paragraph-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.paragraph--type--os2web-twi-paragraph {
+
+  .field--name-field-os2web-twi-heading {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+
+      color: $color-text;
+    }
+  }
+  .field--name-field-os2web-twi-subheading {}
+  .field--name-field-os2web-twi-body {}
+  .field--name-field-os2web-twi-link {
+  }
+  .field--name-field-os2web-twi-image {}
+
+  .field {
+
+    + .field--name-field-os2web-twi-heading,
+    + .field--name-field-os2web-twi-subheading,
+    + .field--name-field-os2web-twi-body {
+      margin-top: 10px;
+    }
+
+    + .field--name-field-os2web-twi-link {
+      margin-top: 20px;
+    }
+  }
+}
+
+.field--name-field-os2web-twi-heading {
+  h2 {
+    background-color: #e3e3e3;
+    padding: 5px;
+    border-bottom: 2px solid #c30a32;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}
+
+.paragraph--type--os2web-twi-paragraph {
+  .row {
+    align-items: flex-start !important
+  }
+}
+
+.paragraph--type--os2web-twm-paragraph {
+
+  .field--name-field-os2web-twm-heading {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+
+      color: $color-text;
+    }
+  }
+  .field--name-field-os2web-twm-subheading { font-weight: 600;}
+  .field--name-field-os2web-twm-body {}
+  .field--name-field-os2web-twm-link {
+    color: #c30a32;
+    a {
+      color: #c30a32;
+    }
+  }
+  .field--name-field-os2web-twm-image {}
+
+  .field {
+
+    + .field--name-field-os2web-twm-heading,
+    + .field--name-field-os2web-twm-subheading,
+    + .field--name-field-os2web-twm-body {
+      margin-top: 10px;
+    }
+
+    + .field--name-field-os2web-twm-link {
+      margin-top: 20px;
+    }
+  }
+}
+
+.field--name-field-os2web-twm-heading {
+  background-color: #e3e3e3;
+  padding: 5px;
+  border-bottom: 2px solid #c30a32;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #333;
+  font-family: "Museo 300", sans-serif;
+  h2 {
+    background-color: #e3e3e3;
+    padding: 5px;
+    border-bottom: 2px solid #c30a32;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #333;
+    font-family: "Museo 300", sans-serif;
+  }
+}
+
+.paragraph--type--os2web-twm-paragraph {
+  .row {
+    align-items: flex-start !important
+  }
+}
+
+.text_image_content {
+  padding: 20px;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+
+  .paragraph--type--os2web-twi-paragraph {
+
+    .row {
+      align-items: center;
+    }
+  }
+  .paragraph--type--os2web-twm-paragraph {
+
+    .row {
+      align-items: center;
+    }
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

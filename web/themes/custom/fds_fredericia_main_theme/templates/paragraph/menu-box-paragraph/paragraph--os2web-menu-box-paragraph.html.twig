@@ -1,0 +1,41 @@
+{% set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+<div{{ attributes.addClass(classes) }}>
+    {% block content %}
+
+        <div class="fredericia-menu-link-wrapper">
+            {% for menu_link in menubox %}
+            <a href="{{ menu_link.url }}" class="fredericia-menu-link__inner-wrapper">
+              <div class="fredericia-box-arrow">
+                {% include '@fds_fredericia_main_theme/src/images/svg-icons/arrow-right.svg' %}
+              </div>
+                <div class="fredericia-box fredericia-box--section-link">
+{#                    <div class="fredericia-box__heading" >#}
+{#                        {% set rendered_content = menu_link.image|render %}#}
+{#                        {% if rendered_content %}#}
+{#                            {{ rendered_content }}#}
+{#                        {% endif %}#}
+{#                    </div>#}
+                    <div class="fredericia-box__body">
+                        <span>{{ menu_link.title }}</span>
+{#                        {% if menu_link.children|length %}#}
+{#                            <ul>#}
+{#                                {% for node_link in menu_link.children %}#}
+{#                                    <li><a href="{{ node_link.url }}">{{ node_link.title }}</a></li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        {% endif %}#}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+    {% endblock %}
+</div>
+{% endblock paragraph %}

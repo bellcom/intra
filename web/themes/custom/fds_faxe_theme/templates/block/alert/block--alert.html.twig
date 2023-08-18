@@ -1,0 +1,21 @@
+{%
+  set classes = [
+  'section',
+  'section--alert',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+]
+%}
+
+{% set colorValue = content.field_os2web_alert_page_ref['#items'].entity.field_alert_color.value %}
+<div{{ attributes.addClass(classes) }} style="{% if colorValue == 'white' %} background-color: white;
+{% elseif colorValue == 'yellow' %} background-color: #eed202; {% elseif colorValue == 'red' %}background-color: #ff2e2e; color: white; {% endif %}">
+  <div class="container">
+    <div class="custom-alert">
+      <div class="custom-alert__meta {% if colorValue == 'red' %} red-text {% endif %}">
+        {{ content.field_os2web_alert_page_ref['#items'].entity.field_os2web_system_page_content.value|raw }}
+      </div>
+    </div>
+  </div>
+</div>

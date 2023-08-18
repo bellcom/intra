@@ -1,0 +1,144 @@
+{% if theme_settings.external_links.link1_url and theme_settings.external_links.link1_label is not empty %}
+<div class="custom-external-links-banner">
+  <div class="container custom-external-links-inner">
+  <select class="custom-external-links-select">
+        {% if theme_settings.external_links.link1_url and theme_settings.external_links.link1_label %}
+        <option value="{{ theme_settings.external_links.link1_url }}"> {{ theme_settings.external_links.link1_label }} </option>
+        {% endif %}
+    {% if theme_settings.external_links.link2_url and theme_settings.external_links.link2_label %}
+      <option value="{{ theme_settings.external_links.link2_url }}"> {{ theme_settings.external_links.link2_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link3_url and theme_settings.external_links.link3_label %}
+      <option value="{{ theme_settings.external_links.link3_url }}"> {{ theme_settings.external_links.link3_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link4_url and theme_settings.external_links.link4_label %}
+      <option value="{{ theme_settings.external_links.link4_url }}"> {{ theme_settings.external_links.link4_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link5_url and theme_settings.external_links.link5_label %}
+      <option value="{{ theme_settings.external_links.link5_url }}"> {{ theme_settings.external_links.link5_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link6_url and theme_settings.external_links.link6_label %}
+      <option value="{{ theme_settings.external_links.link6_url }}"> {{ theme_settings.external_links.link6_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link7_url and theme_settings.external_links.link7_label %}
+      <option value="{{ theme_settings.external_links.link7_url }}"> {{ theme_settings.external_links.link7_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link8_url and theme_settings.external_links.link8_label %}
+      <option value="{{ theme_settings.external_links.link8_url }}"> {{ theme_settings.external_links.link8_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link9_url and theme_settings.external_links.link9_label %}
+      <option value="{{ theme_settings.external_links.link9_url }}"> {{ theme_settings.external_links.link9_label }} </option>
+    {% endif %}
+    {% if theme_settings.external_links.link10_url and theme_settings.external_links.link10_label %}
+      <option value="{{ theme_settings.external_links.link10_url }}"> {{ theme_settings.external_links.link10_label }} </option>
+    {% endif %}
+
+
+  </select>
+  <button class="custom-external-links-button">Gå til hjemmesiden</button>
+  </div>
+</div>
+{% endif %}
+<header class="d-print-none">
+  <div class="custom-header">
+    <div class="custom-header-row custom-header-row--meta">
+      <div class="container">
+        <div class="flexy-row">
+          {{ page.header__logo }}
+
+          <div class="d-none d-lg-block">
+            {{ page.header__top_navigation }}
+          </div>
+           {# <div class="flexy-row font-resize-row">
+            <button class="visible-sm js-decrease-font-size">A-</button>
+            <button class="visible-sm js-increase-font-size">A+</button>
+          </div> #}
+          <div class="top-search-wrapper">
+            <div class="top-search-inner-wrapper">
+              {{ page.small_search }}
+              <div class="close-search-wrapper">
+                <button id="close-search" class="close-search-btn"><span class="close-search-text">Luk</span><i class="fa-solid fa-xmark"></i></button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="megamenu-overlay"></div>
+          <div class="megamenu-wrapper">
+            <button class="megamenu-close"><span class="close-text">Luk</span><i class="fa-solid fa-xmark"></i></button>
+            <div class="megamenu-inner-wrapper">
+              {{ page.header__megamenu_navigation }}
+            </div>
+          </div>
+
+          <div class="search-megamenu-btns-wrapper">
+            <div class="search-btn-wrapper">
+              <button id="nav-search" class="search-btn">
+                <span>Søg</span>
+                <i class="fa-solid fa-magnifying-glass" style="color: #e82f4c;"></i>
+              </button>
+            </div>
+
+            <div class="megamenu-burger-button-wrapper">
+              <button class="burger-btn">
+                <span class="burger-btn-text">Menu</span>
+                <div class="bar-wrapper">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                </div>
+              </button>
+            </div>
+            <button class="custom-external-links-toggle"><span>Øvrige hjemmesider</span><i class="fa-solid fa-globe"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if node.field_status_banner_reference.entity and node.field_status_banner_reference.entity.field_status_banner_color.value is not empty %}
+
+      <div data-node-id="{{ node.id }}" class="status-banner" style="{% if node.field_status_banner_reference.entity.field_status_banner_color.value == 'alert' %} background-color: #e82f4c;
+        {% elseif node.field_status_banner_reference.entity.field_status_banner_color.value == 'warning' %} background-color: #f2ef96;
+        {% elseif node.field_status_banner_reference.entity.field_status_banner_color.value == 'alright' %}background-color: #007200; {% endif  %}">
+        <div class="container">
+          <div class="status-banner-heading" style="{% if node.field_status_banner_reference.entity.field_status_banner_color.value in ['alert', 'alright'] %} color: white; {% else %} color:black; {% endif %}">
+            {{ node.field_status_banner_reference.entity.field_status_heading.value }}
+          </div>
+          <div class="status-banner-body {% if node.field_status_banner_reference.entity.field_status_banner_color.value in ['alert', 'alright'] %} white-text {% endif  %}">
+            {{ node.field_status_banner_reference.entity.field_status_body.value|raw }}
+            <button class="status-banner-close-btn">{% if node.field_status_banner_reference.entity.field_status_banner_color.value == 'warning' %}{% include '@fds_fredericia_main_theme/src/images/svg-icons/close.svg' with { close_icon_color: "black" } %} {% else %}{% include '@fds_fredericia_main_theme/src/images/svg-icons/close.svg' with { close_icon_color: "white" } %} {% endif%} </button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {{ page.alert_banner }}
+    {{ page.banner_search }}
+    {% if page.header__main_navigation is not empty %}
+    <div class="custom-header-row custom-header-row--desktop-navigation d-none d-lg-flex">
+      <div class="container">
+        <div class="flexy-row">
+          {{ page.header__main_navigation }}
+          <div class="flexy-spacer"></div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+
+
+{{ page.featured_top }}
+
+{% if not is_front %}
+  <div class="section section--breadcrumb-bar d-print-none layout--hidden-on-sections">
+    <div class="container">
+      <div class="flexy-row breadcrumb-wrapper">
+        {{ page.breadcrumb }}
+
+        <div class="flexy-spacer"></div>
+
+        {% include '@fds_fredericia_main_theme/includes/action-buttons.html.twig' %}
+      </div>
+    </div>
+  </div>
+{% endif %}

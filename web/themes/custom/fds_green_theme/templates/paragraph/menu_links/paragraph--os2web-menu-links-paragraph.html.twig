@@ -1,0 +1,102 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+
+{% set i = 0 %}
+{% block paragraph %}
+	<div{{attributes.addClass(classes)}}>
+		{% block content %}
+			<div class="tabnav d-none d-sm-flex" role="tablist">
+				{% for menu_link in _context['#menu_links'] %}
+					<button aria-controls="tabpanel-{{i}}" id="tab-{{i}}" class="tabnav-item m-0 {% if i == 0 %} class-remover initial-first-border {% elseif i == 7  %} initial-last-border {% endif %}" role="tab" {% if i == 0 %} aria-selected="true" {% else %} aria-selected="false" {% endif %}>
+                        <span class="p-1 d-md-none">&nbsp;</span>
+                        <span class="toplist-title pr-7 pr-sm-0">
+                        {% set rendered_content = menu_link.content.field_ikon|render %}
+                            {% if rendered_content %}
+                                {{ rendered_content }}
+                            {% endif %}
+                            {{ menu_link.title }}
+                        </span>
+					</button>
+					<section class="sublist-wrapper tabnav-panel {% if i == 0 %} d-none {% endif %}" {% if i == 0 %} aria-hidden="false" {% else %} aria-hidden="true" {% endif %} role="tabpanel" tabindex="0" id="tabpanel-{{i}}" aria-labelledby="tab-{{i}}">
+            <ul class="m-0 mw-100">
+            {% if menu_link['children']|length %}
+              <div class="temaer">
+                {{ menu_link['intro_text'] }}
+              </div>
+              <ul class="row">
+                {% for node_link in menu_link['children'] %}
+                  {% set intro_text = node_link.intro_text|render|striptags %}
+                  <li class="col-12 col-md-6 col-lg-4">
+                    <a href="{{ node_link.url }}">
+                      <span class="sublist-title">{{ node_link.heading }} </span>
+                      <div class="field--name-field-os2web-page-intro">
+                        <p>
+                          <strong>
+                            {{ intro_text|length > 150 ? intro_text|slice(0, 150) ~ '...' : intro_text  }}
+                          </strong>
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <div class="px-5 pt-5 pb-2"><strong>No data</strong></div>
+              {% endif %}
+            </ul>
+					</section>
+					{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+
+        {% set a = 0 %}
+      <div class="accordion d-sm-none accordion-bordered accordion-multiselectable">
+      	{% for menu_link in _context['#menu_links'] %}
+            <button aria-controls="a{{a}}" class="accordion-button" aria-expanded="false">
+                {% set rendered_content = menu_link.content.field_ikon|render %}
+                {% if rendered_content %}
+                  {{ rendered_content }}
+                {% endif %}
+                <span class="toplist-title pr-7 pr-sm-0">{{ menu_link.title }}</span>
+            </button>
+            <section id="a{{a}}" aria-hidden="true" class="accordion-content w-100">
+                <ul class="m-0 mw-100">
+                  {% if menu_link['children']|length %}
+                    <div class="temaer">
+                       {{ menu_link['intro_text'] }}
+                    </div>
+                      <ul class="row">
+                        {% for node_link in menu_link['children'] %}
+                          <li class="col-12 col-md-6 col-lg-4">
+                            <a href="{{ node_link.url }}">
+                              <span class="sublist-title">{{ node_link.title }}</span>
+                              <div class="field--name-field-os2web-page-intro">
+                                <p>
+                                  <strong>
+                              {% set intro_text = node_link.intro_text|render|striptags %}
+                              {{ intro_text|length > 150 ? intro_text|slice(0, 150) ~ '...' : intro_text  }}
+                                  </strong>
+                                </p>
+                              </div>
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% else %}
+                    <div class="px-5 pt-5 pb-2"><strong>No data</strong></div>
+                    {% endif %}
+                </ul>
+            </section>
+        {% set a = a + 1 %}
+        	{% endfor %}
+      </div>
+		{% endblock %}
+	</div>
+{% endblock paragraph %}
+
+
+

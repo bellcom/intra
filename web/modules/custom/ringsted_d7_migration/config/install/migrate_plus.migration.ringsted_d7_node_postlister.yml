@@ -1,0 +1,63 @@
+id: ringsted_d7_node_postlister
+label: Ringsted D7 Node Postlister
+migration_group: ringsted_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: postliste
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  type:
+    plugin: default_value
+    default_value: os2web_postlister
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_postlister_heading: field_teaser
+  status: status
+  created:
+    plugin: skip_row_if_old
+    skipOlderThanDate: "2021-01-01"
+    source: created
+    message: "Skipped old content"
+  changed: changed
+  #promote: promote
+  sticky: sticky
+  field_os2web_postlister_descript:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_postlister_kle/target_id:
+    - plugin: callback
+      callable:
+        - 'Drupal\ringsted_d7_migration\Utility\MigrationHelper'
+        - findPostlisterKleTerm
+      source: nid
+  field_os2web_postlister_section:
+    - plugin: sub_process
+      source: field_taxonomy_subject_area
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: ringsted_d7_taxonomy_section
+          source: tid
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - ringsted_d7_taxonomy_section
+  optional: {}

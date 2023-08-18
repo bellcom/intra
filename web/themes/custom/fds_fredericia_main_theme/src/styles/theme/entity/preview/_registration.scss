@@ -1,0 +1,104 @@
+// |--------------------------------------------------------------------------
+// | Registration
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-preview--os2web-registration
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-preview--os2web-registration-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+a.entity-preview--os2web-registration {
+  max-width: unset;
+}
+.entity-preview--os2web-registration {
+  margin-bottom: 8px;
+  padding: 8px ($grid-gutter-width / 2);
+  max-width: 450px;
+  color: #fff;
+}
+
+a.entity-preview--os2web-registration {
+
+  &, &:hover, &:focus, &:active {
+    color: $color-text;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+.entity-preview--os2web-registration {
+
+  &,
+  &.taxonomy-term-background-color--primary {
+    background-color: #7A342B;
+  }
+
+  &.taxonomy-term-background-color--secondary {
+    background-color: #34526A;
+  }
+
+  &.taxonomy-term-background-color--tertiary {
+    background-color: #346060;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  .entity-preview--os2web-registration {
+    border: 1px solid #333;
+    color: $color-text !important;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

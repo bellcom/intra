@@ -1,0 +1,7 @@
+name: 'Bellcom SpeedAdmin'
+type: module
+description: 'Bellcom Speed Admin importer'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Bellcom'
+

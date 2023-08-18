@@ -1,0 +1,82 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fds_custom_theme_preprocess_page(array &$variables) {
+  $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
+  $variables['theme_settings']['texts']['frontpage_banner_heading'] = theme_get_setting('frontpage_banner_heading');
+  $variables['theme_settings']['texts']['frontpage_banner_subheading'] = theme_get_setting('frontpage_banner_subheading');
+}
+
+/**
+ * Implements hook_form_search_block_form_alter().
+ */
+function fds_custom_theme_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  $form['keys']['#attributes']['placeholder'] = t('Find hvad du leder efter');
+}
+
+/**
+ * Implements hook_form_search_form_alter().
+ */
+function fds_custom_theme_form_search_form_alter(&$form, FormStateInterface $form_state) {
+  $form['basic']['label'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['search-form-label'],
+    ],
+    'markup' => ['#markup' => $form['basic']['keys']['#title']->render()],
+  ];
+  $form['basic']['keys']['#title'] = '';
+  $form['basic']['#attributes'] = [];
+  $form['basic']['search-line'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['container-inline'],
+    ],
+    'keys' => $form['basic']['keys'],
+    'submit' => $form['basic']['submit'],
+  ];
+
+  unset($form['basic']['keys']);
+  unset($form['basic']['submit']);
+}
+
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_custom_theme_preprocess_swiftmailer(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.svg';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_custom_theme_preprocess_anonymous_subscriptions_message(array &$variables) {
+  $subscription = $variables['subscription'];
+  if (!empty($subscription->type->value) && $subscription->type->value == 'os2web_hearings_hearing_case') {
+    $variables['link'] = Link::fromTextAndUrl(t('Klik her for at gå til høringer og afgørelser'), Url::fromUserInput('/hoeringer-og-afgoerelser'));
+  }
+}

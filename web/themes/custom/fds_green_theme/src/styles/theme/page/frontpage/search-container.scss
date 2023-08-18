@@ -1,0 +1,129 @@
+.search-container {
+  position: absolute;
+  color: $color-white;
+  z-index: 8;
+  width: 100%;
+  background-color: $color-primary;
+  background-image: url("../images/search-bg.png");
+  background-repeat: repeat;
+  background-position: center;
+  min-height: 537px;
+
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  @include media-breakpoint-up(lg) {
+    min-height: 577px;
+  }
+  .container {
+    position: relative;
+  }
+
+  .searchy-close {
+    position: absolute;
+    right: 34px;
+    top: -25px;
+    @include media-breakpoint-up(lg) {
+      top: 0;
+      right: 28px;
+    }
+  
+    display: block;
+    z-index: 102;
+    button {
+      width: 24px;
+      height: 24px;
+      background-color: transparent;
+      background-image: url("../images/searchy-close.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      border: none;
+      cursor: pointer;
+
+    }
+  }
+
+  .region {
+    color: $color-white;
+    text-align: center;
+    max-width: 572px;
+    margin: 0 auto;
+    &.region-header__search {
+      form {
+        .form-label {
+          display: none;
+        }
+      }
+    }
+    h2 {
+      color: inherit !important;
+      font-size: 1.5625em;
+      margin-bottom: 3rem;
+    }
+    p {
+      color: inherit;
+      text-align: left;
+    }
+  }
+  p {
+    color: inherit;
+  }
+  .action-buttons {
+    margin: 32px 0 30px 0;
+    z-index: 101;
+    position: relative;
+    padding: 0!important;
+    a {
+      color: $color-white;
+      &:hover {
+        color: $color-primary-light!important; 
+      }
+    }
+    .action-button__icon--green {
+      display: none;
+    }
+    .action-button__icon--white {
+      display: inline-block;
+    }
+  }
+
+  .block-popular-search-blockos2web-search-content {
+    text-align: left;
+    h2 {
+      font-size: $body-text;
+      font-weight: normal;
+      margin: 0;
+    }
+    ul {
+      margin-top: 0;
+      li {
+        display: inline-block;
+        list-style-type: none;
+        padding: 0 30px 0 0;
+        &::before {
+          display: none;
+        }
+        a {
+          color: $color-white;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  &.searchy--visible-form {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+  }
+}

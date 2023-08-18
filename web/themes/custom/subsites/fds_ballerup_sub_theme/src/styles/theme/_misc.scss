@@ -1,0 +1,482 @@
+// |--------------------------------------------------------------------------
+// | Misc
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+body {
+  background-color: #f5f3ef !important;
+}
+
+// Increased specificity to win over base theme.
+body .container-fluid {
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}
+
+// Accessibility overrides.
+button,
+body a {
+
+  &:focus {
+    outline-width: 2px;
+  }
+}
+
+.row--equal-height-columns {
+
+  > div {
+    display: flex;
+  }
+}
+
+.button {
+  font-weight: bold;
+
+  &.form-submit {
+    color: $color-white;
+    background-color: $background_color__default;
+    border-color: $background_color__default;
+
+    &:hover,
+    &.button-hover {
+      background-color: $background_color__secondary;
+      border-color: $background_color__secondary;
+    }
+
+    &:active,
+    &.button-active {
+      background-color: $button-primary-active-bg;
+      border-color: $button-primary-active-border-color;
+    }
+
+    &.focus,
+    &:focus {
+      background-color: $button-primary-focus-bg;
+      border-color: $button-primary-focus-border-color;
+    }
+
+    &:disabled,
+    &.disabled {
+      opacity:0.3;
+      box-shadow: none !important;
+      cursor: not-allowed;
+
+      &:hover {
+        color: $button-primary-color !important;
+        background-color: $button-primary-bg !important;
+        border-color: $button-primary-border-color !important;
+        opacity:0.3 !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+.button.button--selvbetjening {
+  display: block;
+
+  margin-bottom: $grid-gutter-width / 2;
+  padding: 15px 30px;
+
+  text-align: left;
+  font-size: 2rem;
+}
+
+//.paragraph a,
+//.region-content a,
+//.breadcrumb a {
+//
+//  &:focus {
+//    outline-width: 2px;
+//  }
+//}
+
+.region-content {
+  padding-bottom: 4rem;
+}
+
+svg.mailto {
+  display: none !important;
+}
+
+.fields-inline {
+
+  > .field {
+    display: inline-block;
+  }
+}
+
+svg.ext {
+  display: none;
+}
+
+.view {
+
+  .form-type-select {
+
+    .form-label {
+      display: block;
+    }
+
+    .chosen-single {
+      @extend .form-select;
+
+      b {
+        display: none;
+      }
+    }
+
+    .chosen-container .chosen-drop {
+      border: $outer-border;
+    }
+  }
+}
+
+#views-exposed-form-os2web-meetings-search-os2web-meetings-embed-search-from-to-dates {
+  margin-bottom: $grid-gutter-width / 2;
+  padding: 30px;
+
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(27, 27, 29, .2);
+  background-color: #fff;
+
+  .form-item-from-date,
+  .form-item-to-date {
+    max-width: 130px;
+  }
+
+  .form-actions {
+    margin-bottom: 0;
+
+    text-align: right;
+  }
+}
+
+body .page-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.two-col-list {
+  position: relative;
+  list-style: none;
+  padding: 10px 30px 30px 30px;
+  margin: 15px -30px -30px -30px;
+  column-count: 2;
+  column-gap: 30px;
+  border-top: 1px solid #f5f7f8;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    background-color: #f5f7f8;
+  }
+
+  li {
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0;
+    min-height: 26px;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+.region-sidebar-second {
+
+  > .box {
+    margin-bottom: $grid-gutter-width;
+
+    > .box__body {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      min-height: unset;
+    }
+  }
+
+  .block {
+
+    &:first-child {
+      padding-top: $grid-gutter-width;
+    }
+
+    &:last-child {
+      padding-bottom: $grid-gutter-width;
+    }
+  }
+
+  .block + .block {
+    margin-top: $grid-gutter-width;
+  }
+}
+
+.path-frontpage {
+
+  .layout-sidebar-left,
+  .layout-sidebar-right {
+    display: none;
+  }
+}
+
+.layout-sidebar-left,
+.layout-sidebar-right,
+.layout-content {
+  padding-top: $grid-gutter-width;
+}
+
+.layout-sidebar-right {
+
+  .os2web_contact {
+
+    .field {
+
+      + .field {
+        //margin-top: 2.8rem; // Same distance as between <p> <p>
+      }
+    }
+
+    .field--name-field-os2web-contact-heading,
+    .field--name-field-os2web-contact-body {
+
+      + .field {
+        margin-top: 2.8rem; // Same distance as between <p> <p>
+      }
+    }
+
+    .field--name-field-os2web-contact-phone,
+    .field--name-field-os2web-contact-email {
+
+      &:before {
+        display: inline-block;
+
+        margin-right: .5rem;
+        width: 2.2rem;
+
+        font-family: FontAwesome;
+      }
+    }
+
+    .field--name-field-os2web-contact-phone {
+
+      &:before {
+        content: $fa-var-phone;
+      }
+    }
+    .field--name-field-os2web-contact-email {
+
+      &:before {
+        content: $fa-var-envelope-o;
+      }
+    }
+  }
+
+  > .box {
+
+    > .box__body {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      > .region {
+
+        > * {
+
+          &:first-child {
+            padding-top: 30px;
+          }
+          &:last-child {
+            padding-bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.button--primary {
+  background-color: $background_color__default;
+  border-color: $background_color__default;
+  color: $color-white;
+  &:hover, &:focus {
+    font-weight: $font-weight-bold;
+    background-color: $background_color__secondary;
+    border-color: $background_color__secondary;
+  }
+}
+
+.button--rounded {
+  padding-left: 30px;
+  padding-right: 30px;
+
+  border-radius: 30px;
+}
+
+.background-color--primary {
+  color: #fff !important;
+  background-color: $background_color__default !important;
+}
+.background-color--secondary {
+  background-color: $background_color__secondary !important;
+
+}
+.background-color--tertiary {
+  color: #fff !important;
+  background-color: $color-primary !important;
+}
+
+// Remove max-width on all text elements.
+body {
+
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6{
+    max-width: unset;
+  }
+  p,
+  ul:not(.accordion):not(.accordion-bordered):not(.nav-primary):not(.inline-list):not(.tabnav):not(.sidenav-list):not(.sidenav-sub_list),
+  ol:not(.accordion):not(.accordion-bordered):not(.sidenav-list){
+    max-width: unset;
+  }
+  .font-lead{
+    max-width: unset;
+  }
+
+  .form-label, .form-hint, .form-error-message{
+    max-width: unset;
+  }
+  .form-checkbox+label, .form-radio+label{
+    max-width: unset;
+  }
+  a:not(.button){
+    max-width: unset;
+  }
+}
+
+// Hide all other content, than the wide one on section pages and frontpages.
+.section--social-icon-teasers {
+  display: none;
+}
+
+.path-frontpage,
+.path-node-3235,
+.path-node-3366,
+.path-node-3323,
+.path-node-3347 {
+
+  .section--social-icon-teasers {
+    display: block;
+  }
+
+  .layout--hidden-on-sections {
+    display: none !important;
+  }
+}
+
+body {
+
+  .tooltip{
+    text-align: center;
+    font-size: 1.2rem;
+    box-shadow: $box-shadow-moderately;
+    color: #fff;
+    background-color: rgba(0,0,0,.9);
+    border: none;
+    border-radius: 4px;
+    padding: .3rem .6rem;
+    max-width: 260px;
+  }
+}
+
+.field--name-field-os2web-hearings-reply {
+  display: none !important;
+}
+
+body.page-node-type-os2web-news,
+body.page-node-type-os2web-page {
+
+  h1, .h1 {
+    font-weight: 400;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {
+
+  #views-exposed-form-os2web-meetings-search-os2web-meetings-embed-search-from-to-dates {
+
+    .form-item-from-date,
+    .form-item-to-date {
+      max-width: 200px;
+    }
+
+    .form-type-select {
+      margin-right: 0;
+    }
+  }
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  body .page-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

@@ -1,0 +1,85 @@
+// FRONT-TOP-BANNER
+$block-height: 465px;
+.soeg-block-wrap {
+  min-height: $block-height;
+  .hero-content {
+    p {
+      font-size: 1.7rem;
+      @include media-breakpoint-up(md) {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+.hero-block {
+  overflow: hidden;
+  color: $color-white;
+  @include media-breakpoint-up(lg) {
+    min-height: $block-height;
+  }
+  .hero-img {
+    top: 0;
+    bottom: 0;
+    right: -25px;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 45%;
+    display: block;
+    .field--name-field-image {
+      min-height: 500px;
+      img {
+        object-fit: cover;
+        aspect-ratio: 2/1;
+        height: 100%;
+        display: block;
+        position: absolute;
+      }
+    }
+  }
+  .hero-content {
+    padding-bottom: 85px;
+    @include media-breakpoint-up(md) {
+      padding-left: 70px;
+      padding-right: 30px;
+    }
+  }
+  form {
+    margin: 21px 0;
+  }
+  h1,
+  p,
+  a {
+    color: $color-white;
+  }
+  h1 {
+    font-size: 2rem;
+    @include media-breakpoint-up(md) {
+      font-size: 3rem;
+    }
+  }
+  p {
+    font-size: 1.4rem;
+    @include media-breakpoint-up(md) {
+      font-size: 1.6rem;
+    }
+  }
+  .action-button__icon {
+    display: none;
+    margin-right: 5px;
+  }
+  .action-button__icon--white {
+    display: inline-block;
+  }
+  .action-buttons a {
+    color: $color-white;
+    &:hover {
+      color: $color-primary-light !important;
+    }
+    @include media-breakpoint-up(md) {
+    }
+  }
+  .form-actions.js-form-wrapper.form-wrapper {
+    z-index: 1 !important;
+  }
+}

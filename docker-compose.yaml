@@ -1,0 +1,116 @@
+version: '3.7'
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+volumes:
+  mysql:
+    driver: local
+  os2web:
+    driver: local
+services:
+
+  # General application container.
+  # Could be run with many replica on demand.
+  php:
+    # Both php and CLI containers should use the same container.
+    image: dkbellcom/os2web8:${OS2WEB_TAG}
+    container_name: php
+    volumes:
+      - ./.docker/logs:/var/log:delegated
+      - ./files:/opt/drupal/files
+      - ./private:/opt/drupal/private
+    depends_on:
+      - mariadb
+    ports:
+      - "${WEB_SERVER_PORT}:80"
+    networks:
+      - backend
+      - frontend
+    env_file:
+      - .env
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    volumes:
+      - ./.docker/mariadb/data:/var/lib/mysql:delegated
+      - ./.docker/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf:ro,delegated
+    env_file:
+      - .env
+    networks:
+      - backend
+
+  # SOLR Docker service.
+  ## On the first run on local environment you need to create SOLR core
+  ## Run command below to create it.
+  ## docker-compose exec solr bash -c "bin/solr create_core -c os2web-core -d /solr-config"
+  solr:
+    image: dkbellcom/os2web8-solr:0.0.3
+    container_name: solr
+    # Uncomment lines below if you need access to SOLR admin panel.
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./.docker/solr_data:/var/solr:delegated
+    networks:
+      - backend
+
+  solr-bootstrap:
+    image: dkbellcom/os2web8-solr:0.0.3
+    container_name: solr-bootstrap
+    volumes:
+      - ./.docker/solr/solr:/var/solr:delegated
+    networks:
+      - backend
+    command:
+      - /bin/bash
+      - -c
+      - "sleep 10 && bin/solr start && bin/solr create_core -c os2web-core -d /solr-config"
+
+  # Example of CLI container.
+  # It's used separately from php container as standalone CLI container.
+  # Starts on demands and stops right after job has been done.
+  # Use cases for this container:
+  #  - provide CLI for developers
+  #  - run cron job
+  cli:
+    # Both php and CLI containers should use the same container.
+    image: dkbellcom/os2web8:${OS2WEB_TAG}
+    container_name: cli
+    volumes:
+      - ./files:/opt/drupal/files
+      - ./private:/opt/drupal/private
+    depends_on:
+      - mariadb
+    networks:
+      - backend
+    entrypoint:
+      - /bin/bash
+      - -c
+      - "drush status --root=/opt/drupal"
+    env_file:
+      - .env
+
+  agenda_import:
+    # Check agenda file container.
+    image: dkbellcom/os2web8:${OS2WEB_TAG}
+    container_name: agenda_import
+    volumes:
+      - ./files:/opt/drupal/files
+      - ./:/opt/drupal
+      - ./private:/opt/drupal/private
+    env_file:
+      - .env
+    networks:
+      - backend
+    entrypoint:
+      - /bin/bash
+      - -c
+    command:
+      - "mkdir -p mnt/Testshares; \
+      cat /opt/drupal/private/mntCred; \
+      php /opt/drupal/scripts/dagsorden/check_shares.php -h=${OS2WEB_MEETINGS_MNT_HOST} -s=${OS2WEB_MEETINGS_MNT_SHARES} -m=/opt/drupal/mnt -c=/opt/drupal/private/mntCred -d"

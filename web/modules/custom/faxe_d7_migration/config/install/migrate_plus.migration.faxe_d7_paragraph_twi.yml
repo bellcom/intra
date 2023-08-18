@@ -1,0 +1,57 @@
+id: faxe_d7_paragraph_twi
+label: Faxe D7 Paragraph Text with Image
+migration_tags:
+  - 'Drupal 7'
+migration_group: faxe_d7
+source:
+  plugin: d7_paragraphs_item
+  bundle: afsnit_m_billede
+process:
+  field_os2web_twi_body:
+    - plugin: sub_process
+      source: field_paragraph_text
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxe_d7_migration\Utility\MigrationHelper'
+        - createFileManaged
+  field_os2web_twi_image/target_id: '@migrate_file_fid'
+  field_os2web_twi_image_position:
+    - plugin: default_value
+      default_value: 'left'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: os2web_twi_paragraph

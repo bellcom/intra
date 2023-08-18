@@ -1,0 +1,14 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'block-last-updated'
+]
+%}
+{% if lastupdated %}
+<div{{ attributes.addClass(classes) }}>
+  <div class="last-updated-title">{{ "Last updated"|trans }}</div>
+<div class="last-updated-date">{{ lastupdated }}</div>
+</div>
+{% endif %}

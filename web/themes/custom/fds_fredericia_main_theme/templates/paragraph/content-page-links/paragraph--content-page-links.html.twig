@@ -1,0 +1,33 @@
+<div class="banner-content-links-wrapper">
+  <div class="container">
+    {% set totalLinks = paragraph.field_content_page_link|length %}
+    {% set maxVisibleLinks = 8 %}
+    {% set showMoreButton = totalLinks > maxVisibleLinks %}
+
+    {% set linkCounter = 0 %}
+    <div class="banner-content-links">
+      {% for link in paragraph.field_content_page_link %}
+      {% if linkCounter > 0 and linkCounter % 4 == 0 %}
+    </div><div class="banner-content-links" style="{% if loop.index > maxVisibleLinks %}display: none;{% endif %}">
+      {% endif %}
+      <div class="banner-link">
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      </div>
+      {% set linkCounter = linkCounter + 1 %}
+      {% endfor %}
+    </div>
+
+    {% if showMoreButton %}
+      <div class="hidden-links" style="display: none;">
+        {% for link in paragraph.field_content_page_link|slice(maxVisibleLinks) %}
+          <div class="banner-link">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="show-more-button-wrapper">
+        <button class="fa-plus show-more-button"><span class="show-more-button-content">Se flere muligheder</span></button>
+      </div>
+    {% endif %}
+  </div>
+</div>

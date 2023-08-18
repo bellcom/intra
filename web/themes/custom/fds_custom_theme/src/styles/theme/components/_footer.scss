@@ -1,0 +1,168 @@
+// |--------------------------------------------------------------------------
+// | Footer
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .footer
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+footer {
+
+  .footer {
+    margin-top: 0;
+    padding-top: calc(#{map-get($spacers, 905)} - 1px);
+    padding-bottom: calc(#{map-get($spacers, 905)} - 1px);
+
+    border-top: 0;
+    background-color: $color-footer-background;
+
+    h1, h2, h3, h4, h5, h6,
+    a, a:hover, a:visited, a:focus, a:active,
+    .is-active > a,
+    .is-active > a:hover,
+    .is-active > a:focus,
+    .is-active > a:visited,
+    .is-active > a:active,
+    &, p {
+      color: #fff;
+    }
+
+    a {
+      font-weight: bold;
+      text-decoration: none;
+
+      &:focus {
+        outline-color: $color-orange-004;
+      }
+    }
+
+    .social-icon {
+      font-size: 2rem;
+    }
+  }
+
+  section {
+    max-width: 450px;
+  }
+
+  .menu {
+    margin: 0;
+
+    li {
+      padding-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .menu-item {
+      padding-top: .8em;
+    }
+  }
+
+  .social-icon-list {
+    margin-top: 35px;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {
+
+  footer {
+
+    .footer {
+
+      .menu {
+        padding-top: 10px;
+
+        border-top: 1px solid rgba(255, 255, 255, .5);
+      }
+    }
+  }
+}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {
+
+  .footer-col {
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    + .footer-col {
+      border-left: 1px solid #fff;
+    }
+
+    &:nth-child(1) {
+
+      section {
+        padding-left: 70px;
+      }
+    }
+
+    &:nth-child(2) {
+
+      section {
+        padding-top: 60px;
+        padding-left: 70px;
+      }
+    }
+  }
+}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  footer .footer {
+    border: none;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

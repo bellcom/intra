@@ -1,0 +1,17 @@
+
+.block-last-updated {
+  background-color: $background-normal;
+  color: #000;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  .last-updated-title {
+    margin-right: 10px;
+  }
+
+  .last-updated-date {
+    font-weight: bold;
+  }
+}

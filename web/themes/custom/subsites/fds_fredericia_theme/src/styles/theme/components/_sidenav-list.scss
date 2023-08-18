@@ -1,0 +1,226 @@
+// |--------------------------------------------------------------------------
+// | Sidenav list
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .sidenav-list
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$sidenav-list-spacing-left: 25px;
+$sidenav-list-dot-spacing: 22px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin footer-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.region-sidebar-first,
+.region-sidebar-second {
+
+  .sidenav-list {
+    display: flex;
+
+    flex-direction: column;
+
+    border-top: 0;
+    border-bottom: 0;
+
+    > li {
+      order: 2;
+
+      border-top: 1px solid $color-neutral;
+
+      background-color: rgba($color-neutral, .3);
+
+      > .sidenav-sub_list {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      &.current {
+
+        > ul {
+
+          > li {
+
+            > a {
+              padding-left: $sidenav-list-spacing-left + $sidenav-list-dot-spacing;
+            }
+          }
+        }
+      }
+
+      > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: $sidenav-list-spacing-left;
+
+        font-weight: $font-weight-bold;
+
+        color: $color-text;
+      }
+
+      &.current {
+        border-left: 0;
+      }
+
+      &.active {}
+
+      &.active,
+      &.current {
+        display: block !important;
+
+        order: 1;
+
+        border-top: 0;
+
+        background-color: $color-primary;
+
+        > a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .sidenav-sub_list {
+    background-color: $color-green-002;
+
+    > li {
+      border-top: 0;
+
+      > a {
+        padding-left: $sidenav-list-spacing-left + $sidenav-list-dot-spacing;
+      }
+
+      &.active {
+
+        > a {
+          font-weight: $font-weight-bold;
+        }
+      }
+
+      &:before {
+        top: 4px;
+        left: $sidenav-list-spacing-left;
+
+        content: "\2022" !important;
+
+        font-size: 22px;
+
+        color: $color-red-001;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      &:last-child {
+
+        > a {
+          padding-bottom: 2px;
+        }
+      }
+
+      a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+
+        font-size: $base-font-size;
+
+        color: $color-text;
+      }
+    }
+
+    .sidenav-sub_list {
+
+      li {
+
+        &:before {
+          content: "\FE63" !important;
+        }
+      }
+    }
+  }
+
+  .sidenav-list {
+
+    > li > .sidenav-sub_list {
+      padding-left: 0;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 13px;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 26px;
+    }
+
+    > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list > li > .sidenav-sub_list {
+      padding-left: 39px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {
+
+  .region-sidebar-first,
+  .region-sidebar-second {
+
+    .sidenav-list {
+      display: none !important;
+    }
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

@@ -1,0 +1,140 @@
+// |--------------------------------------------------------------------------
+// | Typography
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .typography
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin typography-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+html {
+  font-family: $font-family;
+  line-height: $base-line-height;
+}
+html body {
+  line-height: $base-line-height;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: 3rem;
+  font-family: "Museo 300", sans-serif;
+  font-weight: normal;
+  color: $color-dark-gray2;
+
+  + p,
+  + .body-text {
+    margin-top: 0;
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1em;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+
+
+h2, .h2,
+h3, .h3 {
+  margin-bottom: 1rem;
+}
+
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-bottom: .4rem;
+}
+
+h2, .h2 {
+  line-height: 0.9;
+}
+p, .body-text, .body-copy-text {
+  font-size: inherit;
+}
+
+p, .body-text {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+  h1 {
+    font-size: calc(40px + 6 * ((100vw - 576px) / 680));
+  }
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {
+  h1 {
+    font-size: 5rem;
+  }
+}
+
+// Print
+@media print {
+
+  p, .body-text, .body-copy-text,
+  body {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

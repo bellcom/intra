@@ -1,0 +1,13 @@
+Inkonsekvent brug af !default i variabel angivelser - gør at man ikke kan overskrive bl.a.:
+
+//Borders
+$outer-border:            1px solid #e4e4e4;
+$inner-border:            1px solid #e4e4e4;
+$inner-inner-border:      1px solid #e4e4e4;
+$button-border-width:     2px;
+$button-border:           $button-border-width solid $button-primary-border-color;
+
+//Backgrounds
+$background-normal: #FFFFFF;
+$background-alternative: #F5F5F5;
+$background-modal: rgba(0, 0, 0, 0.75);

@@ -1,0 +1,27 @@
+{%
+  set classes = [
+  'section',
+  'section--alert',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set color = content.field_alert_color[0] %}
+<div{{ attributes.addClass(classes) }} {% if color %}style="background-color: {{color}};{% endif %}">
+  <div class="container">
+    <div class="custom-alert">
+      <div class="custom-alert__icon">
+        {{ content.field_alert_icon }}
+      </div>
+      <div class="custom-alert__meta">
+        {{ content.field_heading }}
+
+        {{ content.field_body }}
+      </div>
+      <div class="custom-alert__button">
+        {{ content.field_link }}
+      </div>
+    </div>
+  </div>
+</div>

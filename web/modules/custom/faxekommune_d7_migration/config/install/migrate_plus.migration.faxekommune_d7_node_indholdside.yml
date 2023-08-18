@@ -1,0 +1,156 @@
+id: faxekommune_d7_node_indholdside
+label: Faxekommune D7 Node Indholdside
+migration_group: faxe_d7
+migration_tags:
+  - Drupal 7
+  - Content
+deriver: Drupal\node\Plugin\migrate\D7NodeDeriver
+source:
+  plugin: d7_node
+  node_type: os2web_base_contentpage
+  track_changes: true
+process:
+  # If you are using this file to build a custom migration consider removing
+  # the nid and vid fields to allow incremental migrations.
+  # In D7, nodes always have a tnid, but it's zero for untranslated nodes.
+  # We normalize it to equal the nid in that case.
+  # @see \Drupal\node\Plugin\migrate\source\d7\Node::prepareRow().
+  #nid: tnid
+  #vid: vid
+  type:
+    plugin: default_value
+    default_value: os2web_page
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: 'und'
+  title: title
+  field_os2web_page_heading: title
+  status: status
+  created: created
+  changed: changed
+  promote:
+    - plugin: callback
+      source: field_os2web_base_field_promote
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - getContentPagePromote
+    - plugin: default_value
+      default_value: '0'
+  sticky: sticky
+  field_os2web_page_description:
+    - plugin: sub_process
+      source: body
+      process:
+        value: value
+        format:
+          plugin: default_value
+          default_value: 'wysiwyg_tekst'
+  field_os2web_page_intro: field_os2web_base_field_summary
+  migrate_file_url_source:
+    - plugin: extract
+      source: field_os2web_base_field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - getFileDownloadUrl
+  migrate_file_url_destination:
+    - plugin: extract
+      source: field_os2web_base_field_image
+      default: ''
+      index:
+        - 0
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - generateFileDestinationPath
+  migrate_file_fid:
+    - plugin: skip_on_empty
+      method: process
+      source: '@migrate_file_url_source'
+      message: 'Image is missing'
+    - plugin: file_copy
+      source:
+        - '@migrate_file_url_source'
+        - '@migrate_file_url_destination'
+    - plugin: callback
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - createFileManaged
+  field_os2web_page_primaryimage/target_id: '@migrate_file_fid'
+  field_os2web_page_primaryimage/alt: title
+  field_link_til_andet_indhold:
+    - plugin: skip_on_empty
+      method: process
+      source: field_os2web_base_field_related
+    - plugin: migration_lookup
+      migration:
+        - faxekommune_d7_node_indholdside
+        - faxekommune_d7_node_news
+      source: field_os2web_base_field_related
+  moderation_state:
+    plugin: callback
+    callable:
+      - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+      - setModerationState
+    source: status
+  field_os2web_page_kle:
+    - plugin: callback
+      source: field_os2web_base_field_kle_ref
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - findLocalKleTerm
+  field_os2web_page_keyword:
+    plugin: migration_lookup
+    migration: faxekommune_d7_taxonomy_keywords
+    source: field_os2web_base_field_edi_tags
+    no_stub: true
+  migrate_paragraphs:
+    plugin: migration_lookup
+    migration: faxekommune_d7_paragraph_accordion
+    source: nid
+    no_stub: true
+  migrate_paragraph_files:
+    plugin: migration_lookup
+    migration: faxekommune_d7_os2web_contentpage_paragraph_files
+    source: nid
+    no_stub: true
+  field_os2web_page_paragraph_narr:
+    - plugin: callback
+      source:
+        - '@migrate_paragraphs'
+        - '@migrate_paragraph_files'
+      callable:
+        - 'Drupal\faxekommune_d7_migration\Utility\MigrationHelper'
+        - migrateNarrowParagraph
+  field_os2web_page_contact:
+    plugin: migration_lookup
+    migration: faxekommune_d7_contact_box
+    source: field_os2web_base_field_contact
+    no_stub: true
+  field_ext_links:
+    plugin: field_link
+    source: field_os2web_base_field_ext_link
+  field_os2web_page_related_hide: field_os2web_base_field_hidlinks
+  field_os2web_page_contact_hide: field_os2web_base_hide_contact
+  field_os2web_page_section:
+    plugin: migration_lookup
+    migration: faxekommune_d7_taxonomy_section
+    source: field_os2web_base_field_struct
+    no_stub: true
+  field_selfbetjening_ref:
+    plugin: migration_lookup
+    migration: faxekommune_d7_selfservice
+    source: field_os2web_base_field_selfserv
+    no_stub: true
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - faxekommune_d7_taxonomy_keywords
+    - faxekommune_d7_contact_box
+    - faxekommune_d7_os2web_contentpage_paragraph_files
+  optional: {}

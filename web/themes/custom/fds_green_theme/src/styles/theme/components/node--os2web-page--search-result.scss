@@ -1,0 +1,99 @@
+.view-id-os2web_search.view-display-id-os2web_search_page {
+  .view-header {
+    h2 {
+      display: none;
+    }
+  }
+}
+
+.entity-search-result.search-result {
+  $side-gap: 15px;
+  $bottom-gap: 12px;
+  box-shadow: none;
+  border: 1px solid $color-gray-medium-dark;
+  border-top: 11px solid $color-gray-medium-dark;
+  border-radius: $big-border-radius;
+  color: $color-primary;
+  font-size: 1.5rem;
+  position: relative;
+  padding: 21px $side-gap $bottom-gap;
+
+
+  $bg-colors:
+      "du-cat-hjaelp-dig-selv" $color-orange-006,
+      "du-cat-kommunale-tilbud" $color-primary,
+      "du-cat-hverdagsteknologi" $color-blue-009,
+      "du-cat-eksterne-tilbud" $color-red-003,
+      "du-cat-other" $color-red-003;
+
+ @each $id, $color-code in $bg-colors {
+      &.#{$id} {
+        border-color: $color-code;
+      }
+    }
+
+
+  h4 {
+    color: $color-primary;
+    font-size: 1.6rem;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: $bottom-gap;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 1px;
+    width: calc(100% - (#{$side-gap} * 2));
+    background-color: $color-green-006;
+  }
+  .field--type-link {
+    margin-bottom: 30px;
+    & > a {
+      display: block;
+      text-decoration: none;
+      color: $color-primary;
+      max-width: unset;
+      width: 100%;
+      position: relative;
+      &:after {
+        height: 18px;
+        width: 35px;
+        background-image: url("../images/Pil.svg");
+        background-size: 35px 18px;
+        background-repeat: no-repeat;
+        content: "";
+        transform: none;
+        position: absolute;
+        left: unset;
+        bottom: 3px;
+        right: 0;
+        transition: right 0.2s ease-in-out;
+
+      }
+      .search-results-examples {
+        padding-bottom: 22px;
+        strong {
+          background-color: #E0E9D0;
+        }
+      }
+      .search-results-bread-crumbs {
+        color: $color-black;
+        font-weight: $font-weight-bold;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  &:hover {
+    background-color: $color-green-005;
+    .field--type-link {
+      & > a {
+        &:after,
+        &:after {
+          right: -6px;
+        }
+      }
+    }
+  }
+}

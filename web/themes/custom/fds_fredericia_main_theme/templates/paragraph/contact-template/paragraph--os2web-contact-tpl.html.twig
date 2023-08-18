@@ -1,0 +1,255 @@
+{# #}
+
+<div class="contact-template-wrapper">
+
+    <div class="container">
+
+      <div class="contact-template-heading">
+        <h2>Kontakt</h2>
+      </div>
+
+      <div class="inner-contact-wrapper">
+
+
+        <div class="contact-col-1 {% if paragraph.field_cnt_monday.value is empty
+          and paragraph.field_cnt_tuesday.value is empty
+          and paragraph.field_cnt_wednesday.value is empty
+          and paragraph.field_cnt_thursday.value is empty
+          and paragraph.field_cnt_friday.value is empty
+          and paragraph.field_cnt_phone_monday.value is empty
+          and paragraph.field_cnt_phone_tuesday.value is empty
+          and paragraph.field_cnt_phone_wednesday.value is empty
+          and paragraph.field_cnt_phone_thursday.value is empty
+          and paragraph.field_cnt_phone_friday.value is empty %}
+  no-col-2
+{% endif %} ">
+
+          {% if paragraph.field_contact_location.value or paragraph.field_contact_address.value is not empty %}
+
+          <div class="contact-template-address {% if paragraph.field_cnt_monday.value is empty
+            and paragraph.field_cnt_tuesday.value is empty
+            and paragraph.field_cnt_wednesday.value is empty
+            and paragraph.field_cnt_thursday.value is empty
+            and paragraph.field_cnt_friday.value is empty
+            and paragraph.field_cnt_phone_monday.value is empty
+            and paragraph.field_cnt_phone_tuesday.value is empty
+            and paragraph.field_cnt_phone_wednesday.value is empty
+            and paragraph.field_cnt_phone_thursday.value is empty
+            and paragraph.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon address-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="address-info">
+              <h3 class="info-heading">{{ content.field_contact_location }}</h3>
+              <div class="info-content">
+                {{ content.field_contact_address }}
+              </div>
+            </div>
+          </div>
+
+          {% endif %}
+
+          {% if paragraph.field_contact_tlf is not empty %}
+
+          <div class="contact-template-phone {% if paragraph.field_cnt_monday.value is empty
+            and paragraph.field_cnt_tuesday.value is empty
+            and paragraph.field_cnt_wednesday.value is empty
+            and paragraph.field_cnt_thursday.value is empty
+            and paragraph.field_cnt_friday.value is empty
+            and paragraph.field_cnt_phone_monday.value is empty
+            and paragraph.field_cnt_phone_tuesday.value is empty
+            and paragraph.field_cnt_phone_wednesday.value is empty
+            and paragraph.field_cnt_phone_thursday.value is empty
+            and paragraph.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon phone-icon">
+              <i class="fa-solid fa-phone-flip"></i>
+            </div>
+            <div class="phone-info">
+              <h3 class="info-heading">Ring til os</h3>
+              <a href="tel:{{ paragraph.field_contact_tlf.value }}">{{ content.field_contact_tlf }}</a>
+            </div>
+          </div>
+
+          {% endif %}
+
+          {% if paragraph.field_contact_mail is not empty %}
+
+          <div class="contact-template-mail {% if paragraph.field_cnt_monday.value is empty
+            and paragraph.field_cnt_tuesday.value is empty
+            and paragraph.field_cnt_wednesday.value is empty
+            and paragraph.field_cnt_thursday.value is empty
+            and paragraph.field_cnt_friday.value is empty
+            and paragraph.field_cnt_phone_monday.value is empty
+            and paragraph.field_cnt_phone_tuesday.value is empty
+            and paragraph.field_cnt_phone_wednesday.value is empty
+            and paragraph.field_cnt_phone_thursday.value is empty
+            and paragraph.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon mail-icon">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="mail-info">
+              <h3 class="info-heading">Skriv til os</h3>
+              {{ content.field_contact_mail }}
+            </div>
+          </div>
+
+          {% endif %}
+
+          {% if paragraph.field_vigtig_info is not empty %}
+
+          <div class="contact-template-warning {% if paragraph.field_cnt_monday.value is empty
+            and paragraph.field_cnt_tuesday.value is empty
+            and paragraph.field_cnt_wednesday.value is empty
+            and paragraph.field_cnt_thursday.value is empty
+            and paragraph.field_cnt_friday.value is empty
+            and paragraph.field_cnt_phone_monday.value is empty
+            and paragraph.field_cnt_phone_tuesday.value is empty
+            and paragraph.field_cnt_phone_wednesday.value is empty
+            and paragraph.field_cnt_phone_thursday.value is empty
+            and paragraph.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon warning-icon">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+
+            <div class="warning-info">
+              <h3 class="info-heading">Vigtig info</h3>
+              {{ content.field_vigtig_info }}
+            </div>
+          </div>
+
+          {% endif %}
+
+        </div>
+
+
+        {% if paragraph.field_cnt_monday.value or paragraph.field_cnt_tuesday.value or paragraph.field_cnt_wednesday.value or paragraph.field_cnt_thursday.value or paragraph.field_cnt_friday.value or paragraph.field_cnt_phone_monday.value or paragraph.field_cnt_phone_tuesday.value or paragraph.field_cnt_phone_wednesday.value or paragraph.field_cnt_phone_thursday.value or paragraph.field_cnt_phone_friday.value is not empty  %}
+        <div class="contact-col-2">
+
+          {% if paragraph.field_cnt_monday.value or paragraph.field_cnt_tuesday.value or paragraph.field_cnt_wednesday.value or paragraph.field_cnt_thursday.value or paragraph.field_cnt_friday.value is not empty %}
+
+          <div class="opening-hours">
+            <h3 class="info-heading">Åbningstider</h3>
+
+            <div class="opening-hours-days">
+
+              {% if paragraph.field_cnt_monday is not empty %}
+
+              <div class="monday">
+                <span class="day">Mandag</span>
+                <span>{{ content.field_cnt_monday }}</span>
+              </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_tuesday is not empty %}
+
+              <div class="tuesday">
+                <span class="day">Tirsdag</span>
+                <span>{{ content.field_cnt_tuesday }}</span>
+              </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_wednesday is not empty %}
+
+              <div class="wednesday">
+                <span class="day">Onsdag</span>
+                <span>{{ content.field_cnt_wednesday }}</span>
+              </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_thursday is not empty %}
+
+              <div class="thursday">
+                <span class="day">Torsdag</span>
+                <span>{{ content.field_cnt_thursday }}</span>
+              </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_friday is not empty %}
+
+              <div class="friday">
+                <span class="day">Fredag</span>
+                <span>{{ content.field_cnt_friday }}</span>
+              </div>
+
+              {% endif %}
+
+            </div>
+          </div>
+          {% endif %}
+
+          {% if paragraph.field_cnt_phone_monday.value or paragraph.field_cnt_phone_tuesday.value or paragraph.field_cnt_phone_wednesday.value or paragraph.field_cnt_phone_thursday.value or paragraph.field_cnt_phone_friday.value is not empty %}
+          <div class="phone-opening-hours">
+            <h3 class="info-heading">Telefontider</h3>
+
+            <div class="phone-opening-hours-days">
+
+              {% if paragraph.field_cnt_phone_monday is not empty %}
+
+                <div class="monday">
+                  <span class="day">Mandag</span>
+                  <span>{{ content.field_cnt_phone_monday }}</span>
+                </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_phone_tuesday is not empty %}
+
+                <div class="tuesday">
+                  <span class="day">Tirsdag</span>
+                  <span>{{ content.field_cnt_phone_tuesday }}</span>
+                </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_phone_wednesday is not empty %}
+
+                <div class="wednesday">
+                  <span class="day">Onsdag</span>
+                  <span>{{ content.field_cnt_phone_wednesday }}</span>
+                </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_phone_thursday is not empty %}
+
+                <div class="thursday">
+                  <span class="day">Torsdag</span>
+                  <span>{{ content.field_cnt_phone_thursday }}</span>
+                </div>
+
+              {% endif %}
+
+              {% if paragraph.field_cnt_phone_friday is not empty %}
+
+                <div class="friday">
+                  <span class="day">Fredag</span>
+                  <span>{{ content.field_cnt_phone_friday }}</span>
+                </div>
+
+              {% endif %}
+
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+
+
+      </div>
+
+    </div>
+
+</div>

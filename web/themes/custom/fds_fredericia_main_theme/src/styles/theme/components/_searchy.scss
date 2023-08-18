@@ -1,0 +1,199 @@
+// |--------------------------------------------------------------------------
+// | Searchy
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .searchy
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin searchy-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+#block-fds-fredericia-main-theme-os2web-search-os2web-search-page-content {
+  #views-exposed-form-os2web-search-os2web-search-page {
+    .form--inline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      @media only screen and (max-width: 425px) {
+        flex-direction: column;
+      }
+      .form-item {
+        margin-right: 20px;
+        margin-bottom: 0;
+        flex-grow: 1;
+
+        @media only screen and (max-width: 425px) {
+          margin-right: 0;
+        }
+        .search-input__input {
+          border-radius: 0;
+        }
+      }
+
+      .form-actions {
+
+        background-color: #e82f4c;
+        border: none;
+        position: relative;
+        flex-grow: 1;
+
+
+        .search-input__button {
+          background-color: #e82f4c;
+          border-radius: 0;
+          position: relative;
+          border: none;
+          width: 100%;
+          background-image: url('../images/svg-icons/magnifying-glass-solid.svg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          padding: 0;
+          margin: 0;
+          min-width: 80px;
+          transition: .3s ease;
+
+          &:hover {
+            background-color: #bf263e;
+          }
+        }
+      }
+    }
+  }
+}
+
+.view-os2web-search {
+  .view-header {
+    background-color: #dee2e6;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    color: #000;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      @media only screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      a {
+        background-color: #e82f4c;
+        padding: 10px 20px;
+        flex-grow: 1;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: .3s ease;
+
+        &:hover {
+          background-color: #bf263e;
+        }
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .view-empty {
+    padding: 50px 0;
+  }
+}
+
+#block-fds-fredericia-main-theme-sitemap-link {
+  .field__item {
+    p {
+      display: flex;
+
+      .sidebar-selvbetjening-button {
+        background-color: #e82f4c;
+        padding: 10px 20px;
+        flex-grow: 1;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        transition: .3s ease;
+
+        &:hover {
+          background-color: #bf263e;
+        }
+
+        &:after {
+          content: '\f061';
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-family: "FontAwesome";
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

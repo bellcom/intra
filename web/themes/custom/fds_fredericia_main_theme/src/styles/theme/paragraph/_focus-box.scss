@@ -1,0 +1,230 @@
+
+
+
+.sidebar-content {
+  width: 65%;
+  box-sizing: border-box;
+  position: relative;
+
+  @media only screen and (max-width: 940px) {
+    width: 100%;
+  }
+
+  .sidebar-box {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 50px;
+    background-color: transparent;
+
+    @media only screen and (max-width: 480px) {
+      padding: 30px;
+    }
+
+    .box-content {
+      display: none;
+      flex-direction: column;
+      gap: 25px;
+
+      .sidebar-body-prefix {
+        display: flex;
+        align-items: center;
+
+        span {
+          color: #344e41;
+          font-size: 13px;
+          text-transform: uppercase;
+          font-weight: 500;
+          margin-left: 10px;
+        }
+      }
+      h3 {
+        font-size: 28px;
+        font-weight: 700;
+        color: white;
+      }
+      .sidebar-product-description {
+        font-size: 15px;
+        width: 75%;
+
+        .field__item {
+          p, h2, h3, h4, h5, h6 {
+            color: white;
+          }
+        }
+
+        @media only screen and (max-width: 1368px) {
+          width: 100%;
+        }
+      }
+      .sidebar-product-btn {
+        display: flex;
+        a {
+          background-color: #353535;
+          padding: 8px 35px;
+          border-radius: 50px;
+          color: white;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          position: relative;
+          text-decoration: none;
+          transition: .3s ease;
+
+          &:hover {
+            background-color: white;
+            color: black;
+          }
+        }
+      }
+      .sidebar-product-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -2;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .sidebar-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.4);
+        z-index: -1;
+      }
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+.sidebar-accordion-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sidebar-accordion__inner-wrapper {
+    display: flex;
+    height: auto;
+    width: 100%;
+
+    @media only screen and (max-width: 940px) {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 35%;
+
+      @media only screen and (max-width: 940px) {
+        width: 100%;
+      }
+
+      .sidebar-list {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        height: 100%;
+
+        @media only screen and (max-width: 640px) {
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .sidebar-item {
+          cursor: pointer;
+          background-color: #F5F7F9;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          list-style: none;
+          margin: 0;
+          border: 1px solid $gray-helper;
+          display: flex;
+          flex-grow: 1;
+
+          &:before {
+            display: none;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+          }
+
+
+          &.active {
+            background-color: #e82f4c;
+            color: white;
+            border: 1px solid #e82f4c;
+
+            svg {
+              stroke: white !important;
+
+              path {
+                stroke: white !important;
+              }
+            }
+          }
+
+          svg {
+            margin-right: 35px;
+            transform: scale(0.5);
+            stroke-width: 5;
+
+            @media only screen and (max-width: 640px) {
+              margin-right: 0;
+            }
+
+            path {
+              stroke-width: 5;
+            }
+
+          }
+
+          .sidebar-heading-text {
+            font-weight: 500;
+            font-size: 20px;
+
+            @media only screen and (max-width: 640px) {
+              font-size: 16px;
+            }
+          }
+          &.active .fa-chevron-right {
+            transform: rotate(0deg);
+
+            @media only screen and (max-width: 940px) {
+              transform: rotate(90deg);
+            }
+          }
+          .fa-chevron-right {
+            transform: rotate(90deg);
+            transition: 0.3s ease;
+
+            @media only screen and (max-width: 940px) {
+              transform: rotate(0deg);
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+

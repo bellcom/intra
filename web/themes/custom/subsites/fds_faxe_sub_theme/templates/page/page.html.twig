@@ -1,0 +1,59 @@
+{% include '@fds_faxe_sub_theme/includes/header.html.twig' %}
+
+
+
+<div class="page-container {% if is_front %} page-container-front {% else %} page-container-not-front {% endif %}">
+  <div class="container" id="main-content" role="main">
+    {{ page.highlighted }}
+
+    <div class="row layout--hidden-on-sections">
+
+
+      {% set has_sidebar_first = page.sidebar_first|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+			{% set has_sidebar_second = page.sidebar_second|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+			{% set has_main_content = page.content|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+
+      {%
+        set content_classes = [
+          has_sidebar_first and has_sidebar_second ? 'col-12 col-md-4 content-column',
+          has_sidebar_first is empty and has_sidebar_second  ? 'col-12 col-md-7 content-column',
+          has_sidebar_first and has_sidebar_second is empty ? 'col-12 col-md-7 content-column',
+        ]
+      %}
+
+      {% if has_sidebar_first %}
+        {% block sidebar_first %}
+          <aside class="col-12 col-md-3 sidebar-column">
+            <div class="layout-sidebar-left">
+              {{ page.sidebar_first }}
+            </div>
+          </aside>
+        {% endblock %}
+      {% endif %}
+      {% if has_main_content %}
+        <main {{ content_attributes.addClass(content_classes, 'col-12 ') }}>
+          <div class="layout-content">
+            {{ page.content }}
+          </div>
+        </main>
+      {% endif %}
+      {% if has_sidebar_second %}
+        {% block sidebar_second %}
+          <aside class="col-12 col-md-5 sidebar-column">
+            <div class="layout-sidebar-right">
+              {{ page.sidebar_second }}
+            </div>
+          </aside>
+        {% endblock %}
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  {{ page.featured_bottom_first }}
+</div>
+
+{% include '@fds_faxe_sub_theme/includes/footer.html.twig' %}
+
+{{ page.embedded_code }}

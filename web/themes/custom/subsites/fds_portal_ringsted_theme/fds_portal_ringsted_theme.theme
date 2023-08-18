@@ -1,0 +1,359 @@
+<?php
+
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fds_portal_ringsted_theme_preprocess_page(array &$variables) {
+  $variables['show_action_buttons'] = TRUE;
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if (is_object($node) && $node->bundle() == 'os2web_page') {
+      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+      $menu_link = $menu_link_manager->loadLinksByRoute('entity.node.canonical', array('node' => $node->id()), 'main');
+      $menu_link = reset($menu_link);
+      if ($menu_link) {
+        if ($menu_link->getParent() && count($menu_link_manager->getParentIds($menu_link->getParent())) < 2) {
+          $variables['show_action_buttons'] = FALSE;
+          unset($variables['page']['sidebar_second']['fds_portal_ringsted_theme_sidebar_first__navigation']);
+        }
+      }
+    }
+  }
+  $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
+
+  $variables['theme_settings']['texts']['frontpage_banner_heading'] = theme_get_setting('frontpage_banner_heading');
+  $variables['theme_settings']['texts']['frontpage_banner_subheading'] = theme_get_setting('frontpage_banner_subheading');
+  $variables['theme_settings']['contact_information']['vispaakort'] = theme_get_setting('vispaakort');
+}
+
+/**
+ * Implements hook_form_search_block_form_alter().
+ */
+function fds_portal_ringsted_theme_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  $form['keys']['#attributes']['placeholder'] = t('Find hvad du leder efter');
+}
+
+/**
+ * Implements hook_form_search_form_alter().
+ */
+function fds_portal_ringsted_theme_form_search_form_alter(&$form, FormStateInterface $form_state) {
+  $form['basic']['label'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['search-form-label'],
+    ],
+    'markup' => ['#markup' => $form['basic']['keys']['#title']->render()],
+  ];
+  $form['basic']['keys']['#title'] = '';
+  $form['basic']['#attributes'] = [];
+  $form['basic']['search-line'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['container-inline'],
+    ],
+    'keys' => $form['basic']['keys'],
+    'submit' => $form['basic']['submit'],
+  ];
+
+  unset($form['basic']['keys']);
+  unset($form['basic']['submit']);
+}
+
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_portal_ringsted_theme_preprocess_swiftmailer(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.png';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+/**
+ * Implements template_preprocess_swiftmailer().
+ */
+function fds_portal_ringsted_theme_preprocess_anonymous_subscriptions_notification_email(&$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.png';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_portal_ringsted_theme_preprocess_anonymous_subscriptions_message(array &$variables) {
+  global $base_url;
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $theme = \Drupal::theme()->getActiveTheme();
+  $theme_path = $base_url . '/' . $theme->getPath();
+
+  // Theme settings.
+  $theme_settings = _fds_base_theme_collect_theme_settings();
+  $variables['current_language'] = $language;
+  $variables['base_url'] = $GLOBALS['base_url'] . '/';
+  $variables['logo_url'] = $theme_path . '/dist/images/logo--mail.png';
+  $variables['theme_settings'] = $theme_settings;
+
+  // Header logo.
+  if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
+    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    if (!empty($file)) {
+      $variables['logo_url'] = file_create_url($file->getFileUri());
+    }
+  }
+  $subscription = $variables['subscription'];
+  if (!empty($subscription->type->value) && $subscription->type->value == 'os2web_hearings_hearing_case') {
+    $variables['link'] = Link::fromTextAndUrl(t('Klik her for at gå til høringer og afgørelser'), Url::fromUserInput('/hoeringer-og-afgoerelser'));
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_portal_ringsted_theme_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->bundle() != 'os2web_banner_paragraph') {
+    return;
+  }
+
+  $breadcrumb_manager = Drupal::service('breadcrumb');
+  $route_match = Drupal::service('current_route_match');
+  $variables['breadcrumbs'] = $breadcrumb_manager->build($route_match)
+    ->toRenderable();
+}
+
+/**
+ * Implements hook_preprocess_views_view_summary().
+ */
+function fds_portal_ringsted_theme_preprocess_views_view_summary(&$variables) {
+  if ($variables['view']->id() != 'os2web_news') {
+    return;
+  }
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  switch ($view->build_info['summary_level']) {
+    case 'field_os2web_news_article_date_value_year':
+      /** @var \Drupal\views\ResultRow $row */
+      foreach ($variables['rows'] as $row) {
+        $row->link = t('News @year', ['@year' => $row->link]);
+      }
+      break;
+
+    case 'field_os2web_news_section_target_id':
+      /** @var \Drupal\views\ResultRow $row */
+      foreach ($variables['rows'] as $rid => $row) {
+        /** @var Term $term */
+        if (is_string($row->link) && (int) $row->link && $term = Term::load($row->link)) {
+          $row->link = $term->label();
+        }
+        else {
+          unset($variables['rows'][$rid]);
+        }
+      }
+      break;
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_portal_ringsted_theme_preprocess_node(&$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if ($node->getType() == 'os2web_page' && $variables['view_mode'] == 'full') {
+    $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+    $menu_link = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node->id()]);
+    $menu_link = reset($menu_link);
+    if ($menu_link) {
+      $variables['show_last_update_date'] = TRUE;
+      if (!$menu_link->getParent() || count($menu_link_manager->getParentIds($menu_link->getParent())) < 2) {
+        $variables['show_last_update_date'] = FALSE;
+      }
+    }
+  }
+  if ($node->getType() == 'os2web_meetings_bpa' && $variables['view_mode'] == 'teaser') {
+    $body = $variables['content']['body'][0]['#text'];
+    $body=str_replace(array("\n", "\t"), '', $body);
+    $body = preg_replace("/<((?:style)).*>.*<\/style>/im","",$body);
+    $variables['content']['body'][0]['#text'] = $body;
+
+  }
+}
+
+/**
+ * Prepares variables for office hours templates.
+ *
+ * Default template: office-hours.html.twig.
+ *
+ * @param object $variables
+ *   The variables array.
+ */
+function fds_portal_ringsted_theme_preprocess_office_hours(&$variables) {
+  $office_hours = $variables['office_hours'];
+
+  // Minimum width for day labels. Adjusted when adding new labels.
+  $label_length = 3;
+  $items = [];
+
+  // Schema part.
+  // @todo Move to ..._preprocess_office_hours_schema, or use RDF module's twig.
+  if (isset($office_hours['schema'])) {
+    $schema_items = [];
+    foreach ($office_hours['schema'] as $schema) {
+      $schema_items[] = [
+        'label' => $schema['label'],
+        'slots' => [
+          '#type' => 'markup',
+          '#markup' => $schema['formatted_slots'],
+        ],
+      ];
+    }
+    $variables['schema'] = $schema_items;
+    unset($office_hours['schema']);
+  }
+
+  foreach ($office_hours as $info) {
+    $label = $info['label'];
+    $label_length = max($label_length, mb_strlen($label));
+
+    $items[] = [
+      'label' => $label,
+      'slots' => ['#type' => 'markup', '#markup' => $info['formatted_slots']],
+      'comments' => ['#type' => 'markup', '#markup' => $info['comments']],
+      'suffix' => $variables['item_separator'],
+      // Is open indicator.
+      'is_open' => $info['closed'] == null,
+      // @todo Use $variables['item_separator'] in office-hours.html.twig.
+    ];
+  }
+
+  $variables['items'] = $items;
+  $variables['label_length'] = $label_length;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_portal_ringsted_theme_preprocess_media__os2web_file(array &$variables) {
+  $variables['media_file_url'] = FALSE;
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $media = $variables['media'];
+  /** @var EntityReferenceFieldItemListInterface $field_media_file_1 */
+  $field_media_file_1 = $media->field_media_file_1;
+  if ($field_media_file_1->isEmpty() || !($files = $field_media_file_1->referencedEntities())) {
+    return;
+  }
+  /** @var \Drupal\file\Entity\File $file */
+  $file = $files[0];
+  $variables['media_file_url'] = $file->createFileUrl();
+
+  $mime_type = $file->getMimeType();
+  // Classes to add to the file field for icons.
+  $variables['file_link_classes'] = [
+    'file',
+    // Add a specific class for each and every mime type.
+    'file--mime-' . strtr($mime_type, ['/' => '-', '.' => '-']),
+    // Add a more general class for groups of well known MIME types.
+    'file--' . file_icon_class($mime_type),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function fds_portal_ringsted_theme_preprocess_field__field_os2web_iframe_code(array &$variables) {
+  $document = new DOMDocument();
+  $document->loadHTML($variables['items'][0]['content']['#text']);
+  $lst = $document->getElementsByTagName('iframe');
+  $lst->item(0)->setAttribute('title',$variables['element']['#object']->field_os2web_iframe_heading->value);
+  $variables['items'][0]['content']['#text'] = $document->saveHTML();
+}
+
+/**
+ * Implement hook_preprocess_field().
+ */
+function fds_portal_ringsted_theme_preprocess_field(&$variables) {
+  if (!empty($variables['field_name'])) {
+    switch ($variables['field_name']) {
+      case 'field_os2web_slideshow_image':
+      case 'field_os2web_page_primaryimage':
+        foreach ($variables['items'] as $key => $item) {
+          $variables['items'][$key]['content']['#alt_text'] = $item['content']['#item']->get('alt')->getString();
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_file_link().
+ */
+function fds_portal_ringsted_theme_preprocess_file_link(array &$variables) {
+  $file = $variables['file'];
+  $result = \Drupal::entityQuery('media')
+    ->condition('bundle', 'document')
+    ->condition('field_media_file.target_id', $file->id())
+    ->execute();
+  if (!empty($result)) {
+    $media = \Drupal::entityTypeManager()->getStorage('media')->load(reset($result));
+    $variables['link']['#title'] = $media->label();
+  }
+}
+
+/**
+* Implements hook_preprocess_HOOK().
+*/
+
+function fds_portal_ringsted_theme_preprocess_media(&$variables) {
+  // Fixing the media missed the quick edit attribute.
+  if (!empty($variables["elements"]["#media"])) {
+    $media = $variables["elements"]["#media"];
+    $type = $media->getEntityType()->id();
+    $id = $media->id();
+
+    if (!isset($variables['attributes']['data-quickedit-entity-id'])) {
+      $variables['attributes']['data-quickedit-entity-id'] = $type . '/' . $id;
+    }
+  }
+}
+
+

@@ -1,0 +1,119 @@
+// |--------------------------------------------------------------------------
+// | Lists
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .lists
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin lists-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.accordion-content,
+.field--type-text-long {
+
+  &:not(.field--widget-text-textarea) {
+
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+      color: $color-text;
+      line-height: $body-text-line-height;
+
+      li {
+        margin-top: map-get($spacers, 3);
+        list-style-type: none;
+        position: relative;
+        padding-left: 40px !important;
+        line-height: $body-text-line-height;
+
+        &::before {
+          content: "■";
+          position: absolute;
+          left: 5px;
+          top: -1px;
+          font-size: 2rem;
+          color: $color-blue-001;
+        }
+      }
+    }
+  }
+}
+
+.field--type-text-long {
+
+  a {
+    position: relative;
+    font-weight: $font-weight-normal;
+    color: var(--primary);
+    border-bottom: 1px dotted var(--dark-gray1);
+    &:hover {
+      font-weight: $font-weight-bold;
+
+    }
+    &:after {
+      // position: absolute;
+      // right: 5px;
+      // font-size: 2.2rem;
+      // font-family: "Material Icons";
+      // color: $color-orange-004;
+      // content: "keyboard_backspace";
+      // transform: rotate(180deg);
+      display: none;
+    }
+  }
+  h2, .h2 {
+    line-height: 1;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

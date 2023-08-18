@@ -1,0 +1,13 @@
+diff --git a/js/textfield_counter.js b/js/textfield_counter.js
+index 9f9b4fa..d1f4d14 100644
+--- a/js/textfield_counter.js
++++ b/js/textfield_counter.js
+@@ -90,7 +90,7 @@
+             if (fieldSettings.preventSubmit && settingsIndex === wrapperElement.find(".textfield-counter-element:first").data("field-definition-id")) {
+               e.preventDefault();
+               $("html, body").animate({
+-                scrollTop:wrapperElement.offset().top
++                scrollTop:wrapperElement.offset().top - 100
+               }, 300);
+             }
+           });

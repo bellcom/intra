@@ -1,0 +1,100 @@
+// |--------------------------------------------------------------------------
+// | Search suggestions
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .search-suggestions
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin search-suggestions-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.search-api-autocomplete-search {
+  top: 3px;
+
+  z-index: 500;
+
+  border: 0 !important;
+
+  box-shadow: $box-shadow;
+
+  .ui-menu-item {
+    padding-left: 0;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .ui-menu-item-wrapper {
+
+    .search-api-autocomplete-suggestion {
+      padding: 1px 2px;
+
+      font-family: $font-family;
+      font-size: $base-font-size;
+
+      color: $color-text;
+    }
+
+    &.ui-state-active {
+
+      .search-api-autocomplete-suggestion {
+        color: $color-text;
+
+        background-color: $color-orange-005;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

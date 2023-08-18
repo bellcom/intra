@@ -1,0 +1,30 @@
+diff --git a/modules/printable_pdf/src/Plugin/PrintableFormat/PdfFormat.php b/modules/printable_pdf/src/Plugin/PrintableFormat/PdfFormat.php
+index 3eb8e73..b6fb0dc 100755
+--- a/modules/printable_pdf/src/Plugin/PrintableFormat/PdfFormat.php
++++ b/modules/printable_pdf/src/Plugin/PrintableFormat/PdfFormat.php
+@@ -262,20 +262,20 @@ class PdfFormat extends PrintableFormatBase {
+   /**
+    * Return default headers (may be overridden by the generator).
+    *
+-   * @param string $filename
+-   *   The path to generated file that is sent to the browser.
++   * @param string $filepath
++   *   The path to generated file that is sending to the browser.
+    * @param bool $download
+    *   Whether to download the PDF or display it in the browser.
+    *
+    * @return array
+    *   Default headers for the response object.
+    */
+-  private function getHeaders($filename, $download) {
++  private function getHeaders($filepath, $download) {
+     $disposition = $download ? 'attachment' : 'inline';
+     return [
+       'Content-Type'              => Unicode::mimeHeaderEncode('application/pdf'),
+-      'Content-Disposition'       => $disposition . '; filename="' . basename($filename) . '"',
+-      'Content-Length'            => filesize($filename),
++      'Content-Disposition'       => $disposition . '; filename="' . basename($filepath) . '"',
++      'Content-Length'            => filesize($filepath),
+       'Content-Transfer-Encoding' => 'binary',
+       'Pragma'                    => 'no-cache',
+       'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',

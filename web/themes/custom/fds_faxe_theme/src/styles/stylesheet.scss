@@ -1,0 +1,42 @@
+@import "fonts";
+@import "mixins/loader";
+@import "variables/loader";
+@import "vendor";
+
+@import "overrides/loader";
+@import "theme/loader";
+
+* {
+  font-family: "Lato", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.embedded-entity {
+  line-height: 0 !important;
+}
+
+.embedded-entity.align-left {
+  padding-right: 10px;
+}
+
+.embedded-entity.align-right {
+  padding-left: 10px;
+}
+
+#block-matomopagestatistics {
+  background: white;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  table {
+    td {
+      padding: 5px 15px 0px 15px;
+    }
+    td:nth-child(2) {
+      text-align: right;
+    }
+  }
+}
+

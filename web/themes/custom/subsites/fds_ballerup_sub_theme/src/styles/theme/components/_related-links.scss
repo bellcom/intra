@@ -1,0 +1,91 @@
+// |--------------------------------------------------------------------------
+// | Related links
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .related-links
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin related-links-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+ul.related-links {
+
+  li {
+    padding-left: 35px;
+
+    &:before {
+      top: -1px;
+      left: 0;
+
+      font-size: 2.4rem;
+      font-family: "Material Icons";
+      content: "keyboard_backspace";
+
+      color: $background_color__default;
+
+      transform: rotate(180deg);
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    color: $color-text;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

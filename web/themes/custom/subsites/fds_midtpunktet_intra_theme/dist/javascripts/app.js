@@ -3604,7 +3604,7 @@ jQuery('a').each(function() {
 //menu hide
 //menu hide
 const menuRowBtn = jQuery(".custom-header__button--toggle-megamenu");
-const menuRow = jQuery("#block-fds-portal-ringsted-theme-header-below-navigation");
+const menuRow = jQuery("#block-fds-midtpunktet-intra-theme-header-below-navigation");
 
 jQuery(document).mouseup(function(e) {
   if (

@@ -1,6 +1,6 @@
 <?php
 
-function fds_midtpunktet_intra_theme_form_system_theme_settings_alter(
+function fds_redwhite_theme_form_system_theme_settings_alter(
   &$form,
   Drupal\Core\Form\FormStateInterface $form_state
 ) {

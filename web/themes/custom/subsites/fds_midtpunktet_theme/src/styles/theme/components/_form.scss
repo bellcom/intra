@@ -1,0 +1,382 @@
+// |--------------------------------------------------------------------------
+// | Form
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .form
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$custom-input-top-bottom-padding: 8px;
+$custom-input-left-right-padding: 20px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin form-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.form-input,
+.form-email,
+.form-select {
+  border: 1px solid $color-light-gray2;
+  color: $color-dark-gray2;
+  height: 32px;
+  padding: 20px 10px;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: $color-white;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  margin: 5px 0;
+  border: 1px solid $color-light-gray0;
+  width: 100%;
+  height: 50px;
+}
+.form-select {
+  padding: 0 10px;
+  min-width: 110px;
+}
+.js-form-type-date {
+  .form-label {
+    display: block;
+  }
+  .form-date {
+    border: 1px solid $color-light-gray2;
+    color: $color-dark-gray2;
+    height: 32px;
+    padding: 20px 10px;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: $color-white;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    margin: 5px 0;
+    border: 1px solid $color-light-gray0;
+    width: 100%;
+    height: 50px;
+  }
+}
+#edit-submit {
+  padding: 10px 16px;
+  &:hover, &:focus {
+    background-color: $color-primary;
+    color: $color-white;
+    text-decoration: underline;
+    font-weight: 400;
+  }
+}
+.form-label,
+.form-composite > legend,
+.label {
+  font-size: 1.3rem;
+  font-weight: initial;
+  color: $color-black;
+  margin: 12px 0 0 10px;
+}
+.form-group {
+  margin-top: 0;
+}
+.form-item,
+.form-actions {
+  margin: 0;
+}
+.button[type="submit"],
+.node__links a[type="submit"],
+.button.form-submit,
+.node__links a.form-submit,
+.button.button--primary,
+.node__links a.button--primary {
+  background-color: $color-primary;
+  font-weight: inherit;
+  min-width: auto;
+  min-height: auto;
+  padding: 8px 29px 7px;
+  border: 0;
+  border-radius: 0;
+  font-size: 1.5rem;
+  -webkit-appearance: none;
+  outline: 0;
+  transition: all 0.2s ease-in-out;
+  margin: 15px 0;
+  &:hover,
+  &:focus {
+    background-color: $color-white;
+    color: $color-dark-gray2;
+  }
+}
+
+.form-checkbox,
+.form-radio {
+
+  + label {
+
+    &:before {
+      border: 1px solid $color-light-gray2;
+    }
+  }
+
+  &:checked {
+
+    + label {
+
+      &:before {
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+// Remove max width.
+body {
+
+  .form-input,
+  .form-email,
+  .form-select,
+  .form-hint {
+    max-width: none;
+  }
+}
+
+.form-hint {
+  color: $color-text;
+}
+
+.form-item {
+
+  .form-hint,
+  .form-hint.description {
+    font-size: $base-font-size;
+  }
+}
+
+.form-select {
+  min-width: 250px;
+
+  margin-top: 5px;
+  padding-right: 45px;
+}
+
+.form-input {
+  &:focus, 
+  &.focus {
+    outline: 3px solid #000 !important;
+  }
+
+}
+
+.js input.form-autocomplete{
+  background-image: none;
+}
+
+#views-exposed-form-os2web-meetings-search-os2web-meetings-embed-search-simple {
+
+  .form-item-ar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    .form-label {
+      margin: 0;
+    }
+    .form-select {
+      min-width: unset;
+      max-width: 130px !important;
+    }
+  }
+  .js-form-item-ud {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    .form-label {
+      margin: 0;
+    }
+    .chosen-container-single {
+      height: 50px!important;
+      .chosen-single {
+        background: transparent;
+        display: flex;
+        height: 50px!important;
+        border-radius: 0;
+        border-color: #ccc;
+        & > span {
+          margin: auto 0;
+        }
+        & > div {
+          display: flex;
+          b {
+            display: none;
+            transform: translateY(-10%);
+            margin: auto 0;
+            width: 10px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Search form.
+form {
+  &#views-exposed-form-os2web-meetings-search-page-os2web-meeetings-search-page, 
+  &#views-exposed-form-os2web-search-os2web-search-page {
+    position: relative;
+    .form-actions {
+      position: absolute;
+  
+      top: 0;
+      right: 0;
+      z-index: 500;
+  
+      width: 50px;
+  
+      margin: 0;
+  
+      .form-submit {
+        position: absolute;
+  
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+  
+        z-index: 500;
+  
+        min-width: auto;
+        width: 50px;
+        height: 45px;
+  
+        padding: 0 !important;
+  
+        border: 0;
+  
+        background-color: transparent;
+        cursor: pointer;
+      }
+  
+      &:after {
+        background: transparent url("../images/sprite.png") no-repeat 0px 0px;
+        position: absolute;
+        display: inline-block;
+        top: 5px;
+        right: 15px;
+        text-indent: -999em;
+        z-index: 100;
+        text-transform: uppercase;
+        height: 36px;
+        padding: 0;
+        width: 36px;
+        content: "";
+        color: transparent;
+      }
+    }
+  
+    .form-input {
+      margin: 0;
+      padding: 12px 60px 12px 20px;
+  
+      max-width: unset;
+  
+      border-radius: 25px;
+    }
+  
+    // Remove float from inline form elements.
+    .form--inline {
+  
+      .form-item {
+        float: initial;
+  
+        margin: 0;
+      }
+    }
+  
+    input.form-autocomplete {
+      background-image: none;
+    }
+  }
+}
+
+.form-type-search-api-autocomplete {}
+
+.js-form-item-user-consent {
+  margin-top: 20px;
+}
+.form-checkboxes .term-depth-1 label:before {
+  content: '';
+}
+// Webforms
+.webform-submission-form {
+  .form-item {
+    label,
+    legend {
+      font-size: 1.8rem;
+      margin-left: 0;
+    }
+    .form-hint.description {
+      font-size: 1.3rem;
+    }
+    &.form-type-checkbox {
+      .option {
+        font-size: 1.4rem;
+      }
+    }
+    &.webform-type-fieldset{
+      padding: 25px 25px 0;
+      border: 1px solid #ccc;
+      margin-bottom: 35px;
+      legend {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .form-item:not(.form-type-checkbox) {
+    margin-bottom: 20px;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

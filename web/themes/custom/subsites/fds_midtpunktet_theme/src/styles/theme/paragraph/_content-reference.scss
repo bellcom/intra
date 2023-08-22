@@ -1,0 +1,171 @@
+// |--------------------------------------------------------------------------
+// | Content reference
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .paragraph--type--os2web-content-reference
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin paragraph--type--os2web-content-reference-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.paragraph--type--os2web-content-reference {
+
+  .field--name-field-os2web-content-reference-h {
+    text-align: left;
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+
+      color: $color-text;
+    }
+  }
+  .field--name-field-os2web-content-ref-subhead {
+    text-align: left;
+
+    p {
+      margin: 0;
+    }
+  }
+  .field--name-field-os2web-content-reference {
+
+    [class*="col-"] {
+      display: flex;
+
+      flex-direction: column;
+
+      > * {
+        display: flex;
+
+        flex-grow: 1;
+      }
+    }
+
+    .entity-teaser {
+      cursor: pointer;
+    }
+
+    .entity-teaser__body {
+      padding: 15px;
+    }
+  }
+
+  .field {
+
+    + .field--name-field-os2web-content-reference-h,
+    + .field--name-field-os2web-content-ref-subhead {
+      margin-top: 10px;
+    }
+
+    + .desktop-only,
+    + .mobile-only {
+      margin-top: 0;
+    }
+  }
+
+  .mobile-only {
+    margin: 15px 0;
+
+    box-shadow: $box-shadow;
+
+    .entity-teaser--os2web-page {
+      margin: 0;
+      background: $color-primary;
+      width: auto;
+      display: inline-block;
+      box-shadow: none;
+      border: 1px solid $color-light-gray1;
+      &:hover,
+      &:focus {
+        background: $color-secondary;
+        cursor: pointer;
+      }
+      .fake-link,
+      .field--type-link a {
+        color: $color-white;
+        padding: 0;
+        &::after {
+          content: "";
+        }
+      }
+      .field--type-link {
+        margin: 0;
+      }
+    }
+  }
+  .desktop-only {
+
+    + .mobile-only {
+      margin-top: 40px;
+    }
+  }
+
+  // Tiny slider.
+  button[data-action="start"],
+  button[data-action="stop"] {
+    display: none !important;
+  }
+}
+
+.accordion-content .paragraph--type--os2web-content-reference .entity-teaser--os2web-page {
+  background: transparent;
+  .fake-link,
+  .field--type-link a {
+    color: var(--dark-gray2);
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

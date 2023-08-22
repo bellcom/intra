@@ -1,0 +1,22 @@
+.entity-teaser--os2web-event {
+  .os2web-event-date {
+    padding: 10px 0;
+    text-align: center;
+    background: var(--primary);
+    color: var(--white);
+    font-size: $small-text;
+    max-height: 70px;
+  }
+  .os2web-event-title {
+    min-height: 70px;
+    padding-left: 16px !important;
+    display: flex;
+    h2 {
+      margin-top: 0 !important;
+      margin-right: auto !important;
+      margin-left: 0 !important;
+      margin-bottom: auto !important;
+    }
+  }
+}
+

@@ -1,0 +1,397 @@
+// |--------------------------------------------------------------------------
+// | Menu-link--view-mode--image
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .menu-link-view-mode--image
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.paragraph--menu-link--view-mode--image {
+	background-image: url("/sites/default/files/2021-12/svaner_0.jpg");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: scroll;
+	padding: 40px 0 30px;
+	margin: 5px -16px 0;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.2s ease-in-out;
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		left: -200px;
+		top: -100px;
+		background: url("../images/big-circle.png");
+		background-size: cover;
+		width: 662px;
+		height: 662px;
+		z-index: 1;
+	}
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: -100px;
+		right: -50px;
+		background: url("../images/small-circle.png");
+		background-size: cover;
+		width: 229px;
+		height: 229px;
+		z-index: 1;
+	}
+	.entry {
+		margin: 0 auto 10px;
+		max-width: 632px;
+		.entrywrap {
+			background-color: rgba(255, 255, 255, 0.8);
+			height: 100%;
+			position: relative;
+			z-index: 2;
+			transition: all 0.2s ease-in-out;
+			display: flex;
+			align-items: center;
+			&:hover {
+				background-color: rgba(255, 255, 255, 1);
+				.taxonomy-pic {
+					.menu-icon-wrapper {
+						img {
+							float: left;
+						}
+					}
+				}
+			}
+			.taxonomy-pic {
+				.field--name-field-os2web-icon {
+					padding-top: 0;
+					.field--name-field-os2web-banner-image {
+						margin-top: 0;
+						width: 100px;
+						img {
+							display: block;
+						}
+					}
+				}
+				.menu-icon-wrapper {
+					height: 47px;
+					margin: 0;
+					width: 46px;
+					overflow: hidden;
+					img {
+						max-width: 134px;
+						float: right;
+						width: 92px;
+					}
+				}
+			}
+			.h3 {
+				display: table-cell;
+				font-family: 'Museo 500';
+				font-weight: 500;
+				font-style: normal;
+				vertical-align: middle;
+				height: 60px;
+				padding: 0;
+				width: 100%;
+				color: $color-tertiary;
+				box-sizing: border-box;
+				font-size: 1.8rem;
+				word-break: break-word;
+			}
+			.global-link {
+				display: block;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+			.entry-graphic {
+				float: left;
+				padding: 10px;
+			}
+			.entry-text {
+				padding: 5px;
+				float: left;
+			}
+		}
+	}
+}
+body.path-frontpage {
+	.paragraph--menu-link--view-mode--image {
+		margin: 6px -16px 0;
+	}
+}
+.path-node-2348 {
+	.paragraph--menu-link--view-mode--image {
+		background-image: url("/sites/default/files/2021-12/sne_paa_grangraene_web.jpg");
+		.entry {
+			&:nth-of-type(6) {
+				.entry-graphic {
+					width: 120px;
+					aspect-ratio: auto 500 / 216;
+					overflow: hidden;
+						background-image: url("/sites/default/files/2022-01/flyttil.jpeg");
+						display: block;
+						position: relative;
+						background-size: 82.1% 75%;
+						background-position: center;
+						background-repeat: no-repeat;
+						@include media-breakpoint-up(md) {
+							background-size: cover;
+						}
+				}
+				.entry-text {
+					margin-top: 2px;
+				}
+			}
+			&:nth-of-type(7) {
+				.entry-graphic {
+					width: 120px;
+					aspect-ratio: auto 500 / 216;
+					overflow: hidden;
+						background-image: url("/sites/default/files/2022-01/job_og_karriere_i_ringsted_kommune.jpeg");
+						display: block;
+						position: relative;
+						background-size: 82.1% 75%;
+						background-position: center;
+						background-repeat: no-repeat;
+						@include media-breakpoint-up(md) {
+							background-size: cover;
+						}
+				}
+				.entry-text {
+					margin-top: 2px;
+				}
+			}
+		}
+	}
+}
+
+.rk_cover_arrow_button_wrapper {
+  position: absolute;
+  width: auto;
+  bottom: -20px;
+  z-index: 20;
+  left: 50%;
+  transform: translate(-50%, 0);
+  &::before {
+	bottom: 5px;
+	left: 50%;
+	content: "";
+	position: absolute;
+	width: 100vw;
+	height: 15px;
+	transform: translateX(-50%);
+	background-color: $color-light-gray1;
+	z-index: -1;
+  }
+  .rk_cover_arrow_button {
+    width: 43px;
+    height: 43px;
+    background: $color-white;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid $color-primary;
+    margin: 0 auto;
+    .arrows {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 13px;
+      height: 13px;
+      transform: translate(-37%, -50%);
+      margin-top: -3px;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-left: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+        border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+        transform: translate(3.3333333333px, 13.3333333333px) rotate(-45deg);
+        animation: arrows 3s linear infinite;
+        -webkit-animation: arrows 3s linear infinite;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-left: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+        border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+        transform: translate(6.6666666667px, 0px) rotate(-45deg);
+        animation: arrows 3s linear infinite -1.5s;
+      }
+    }
+  }
+}
+body.domain-businesspark-ringsted-dk .rk_cover_arrow_button,
+body.domain-erhvervsforum-dk .rk_cover_arrow_button {
+  border-color: #4b7891;
+}
+body.domain-pilotnaturpark-ringsted-dk .rk_cover_arrow_button_wrapper {
+  display: none;
+}
+@keyframes arrows {
+  0% {
+    border-left: 3.3333333333px solid rgba(0, 0, 0, 0);
+    border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0);
+    transform: translate(-1.6666666667px, -6.6666666667px) rotate(-45deg);
+  }
+  10%, 90% {
+    border-left: 3.3333333333px solid rgba(0, 0, 0, 0);
+    border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0);
+  }
+  50% {
+    border-left: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+    border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0.8);
+    transform: translate(-1.6666666667px, 0px) rotate(-45deg);
+  }
+  100% {
+    border-left: 3.3333333333px solid rgba(0, 0, 0, 0);
+    border-bottom: 3.3333333333px solid rgba(0, 0, 0, 0);
+    transform: translate(-1.6666666667px, 6.6666666667px) rotate(-45deg);
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {.paragraph--menu-link--view-mode--image {
+	.container {
+		padding: 0 22px;
+	}
+	.entry {
+		margin-bottom: 15px;
+		padding: 0 8px;
+		.entrywrap {
+			text-align: center;
+			padding: 0;
+			flex-direction: column;
+			.h3 {
+				margin: 21px 10px 20px;
+				font-size: 2rem;
+			}
+			.entry-graphic {
+				display: block;
+				padding: 0;
+				float: none;
+			}
+			.entry-text {
+				display: table;
+				width: 100%;
+				float: none;
+			}
+			.taxonomy-pic {
+				.menu-icon-wrapper {
+					height: 68px;
+					width: 67px;
+					margin: 0 auto;
+					img {
+						width: auto;
+					}
+				}
+				.field--name-field-os2web-icon {
+					padding-top: 30px;
+					padding-bottom: 5px;
+					.field--name-field-os2web-banner-image {
+						margin-top: -30px;
+						margin-bottom: -10px;
+						width: auto;
+					}
+				}
+			}
+		}
+	}
+}
+.path-node-2348 {
+	.paragraph--menu-link--view-mode--image {
+		.entry {
+			&:nth-of-type(6) {
+				.entry-graphic {
+					width: 100%;
+				}
+			}
+			&:nth-of-type(7) {
+				.entry-graphic {
+					width: 100%;
+				}
+			}
+		}
+	}
+}}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+@media screen and (min-width: 980px) {
+	body.path-frontpage {
+		.paragraph--menu-link--view-mode--image {
+			margin: 4px -112.4px 0;
+		}
+	}
+	.paragraph--menu-link--view-mode--image {
+		padding: 45px 0 30px;
+		margin: 3px -112.4px 0;
+	}
+}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+@media screen and (min-width: 1200px) {
+	.paragraph--menu-link--view-mode--image {
+		&::before, &::after {
+			display: none;
+		}
+	}
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

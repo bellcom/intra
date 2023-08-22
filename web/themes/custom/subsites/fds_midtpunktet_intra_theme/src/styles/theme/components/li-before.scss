@@ -1,6 +1,0 @@
-@for $i from 1 through 37 {
-    .before-element-top-#{$i}::before {
-        top: $i * 1px!important;
-        transform: translateY(-50%)!important;
-    }
-}

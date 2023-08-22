@@ -7,8 +7,6 @@ jQuery(function ($) {
 (function() {
   var links = document.querySelectorAll('.block-language ul a');
 
-  let a = 'a';
-
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
     var text = 	link.textContent || link.innerText;

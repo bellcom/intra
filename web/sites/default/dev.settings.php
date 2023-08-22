@@ -151,15 +151,15 @@ $settings['skip_permissions_hardening'] = TRUE;
  */
 # $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
 
-$databases['default']['default'] = array (
-  'database' => 'default',
-  'username' => 'root',
-  'password' => 'root',
-  'prefix' => '',
-  'host' => 'db',
-  'port' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
+#$databases['default']['default'] = array (
+#  'database' => 'default',
+#  'username' => 'root',
+#  'password' => 'root',
+#  'prefix' => '',
+#  'host' => 'db',
+#  'port' => '',
+#  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+#  'driver' => 'mysql',
+#);
 
 $settings['file_private_path'] = 'private';

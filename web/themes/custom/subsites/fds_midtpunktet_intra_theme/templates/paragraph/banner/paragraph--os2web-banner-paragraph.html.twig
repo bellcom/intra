@@ -1,0 +1,40 @@
+{% set classes = [
+  'banner',
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }} {% if background_image %} style="background-image: url({{ background_image }})" {% endif %}>
+    <div class="container">
+      {% block content %}
+        <div class="banner__box">
+          {{ breadcrumbs }}
+
+          {% if paragraph.field_os2web_banner_heading.value %}
+            <div role="heading" aria-level="2" aria-label="{{ 'Title' | t }}" class="banner__heading">
+              {{ content.field_os2web_banner_heading }}
+            </div>
+          {% endif %}
+
+          {% if paragraph.field_os2web_banner_subheading.value or paragraph.field_os2web_banner_body.value %}
+            <div class="banner__body">
+              {{ content.field_os2web_banner_subheading }}
+              {{ content.field_os2web_banner_body }}
+            </div>
+          {% endif %}
+
+          {% if paragraph.field_os2web_banner_links.value %}
+            <div class="banner__actions">
+              {{ content.field_os2web_banner_links }}
+            </div>
+          {% endif %}
+
+        </div>
+
+      {% endblock %}
+    </div>
+  </div>
+  <div class="rk_cover_arrow_button_wrapper"><div class="rk_cover_arrow_button"><div class="arrows"></div></div></div>
+{% endblock paragraph %}

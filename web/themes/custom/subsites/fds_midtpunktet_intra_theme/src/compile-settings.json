@@ -1,0 +1,22 @@
+{
+  "javascripts": [
+    "node_modules/dkfds/dist/js/dkfds.js",
+    "src/javascripts/megamenu.js",
+    "src/javascripts/font-resizer.js",
+    "src/javascripts/a11y.js",
+    "src/javascripts/accordion.js",
+    "src/javascripts/app.js",
+    "src/javascripts/new-proposals.js",
+    "src/javascripts/news.js"
+  ],
+  "styles": [
+    "src/styles/stylesheet.scss",
+    "src/styles/css/extra-styles.css"
+  ],
+  "fonts": [
+    "node_modules/font-awesome/fonts/*",
+    "node_modules/dkfds/src/fonts/**/*",
+    "node_modules/material-design-icons/iconfont/MaterialIcons-Regular.*",
+    "src/fonts/**/*"
+  ]
+}

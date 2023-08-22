@@ -1,0 +1,30 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+]
+%}
+{% if node.field_os2web_hearings_start_date.value %}
+  {% set timestampstart = node.field_os2web_hearings_start_date.value|date('U') %}
+{% endif %}
+{% set timestampend = node.field_os2web_hearings_end_date.value|date('U') %}
+
+<div {{ attributes.addClass(classes) }}>
+  <div class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__content">
+    <a href="{{ url }}">{{ content.field_os2web_hearings_heading }}</a>
+  </div>
+
+  {% if node.field_os2web_hearings_tender.target_id != "4563" %}
+  <div class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date">
+    {% if timestampstart %}
+      <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__date">{{ timestampstart | date('d') }}.{{ timestampstart | date('m') }}.{{ timestampstart | date('Y') }}</span>
+    {% endif %}
+    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__til">til</span>
+    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__date">{{ timestampend | date('d') }}.{{ timestampend | date('m') }}.{{ timestampend | date('Y') }}</span>
+  </div>
+  {% endif %}
+
+</div>

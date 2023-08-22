@@ -1,0 +1,166 @@
+// |--------------------------------------------------------------------------
+// | General elements
+// |--------------------------------------------------------------------------
+// |
+// | This file contains override styles of dkfds package for the following:
+// | - General elements
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.page-alert {
+	background: $color-primary;
+	color: $color-white;
+	font-size: 1.5rem;
+	font-weight: normal;
+	opacity: 1;
+	transition: all 0.2S ease-in-out;
+	padding: 0;
+	height: auto;
+	overflow: visible;
+	article.node--type-os2web-system-page {
+		.field--name-title {
+			display: none;
+		}
+	}
+	#block-alert {
+		padding: 30px 0;
+	}
+	article {
+		padding: 30px 0;
+	}
+	.custom-alert {
+		display: block;
+		img {
+			filter: invert(1);
+			max-width: 50px;
+		}
+		h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+			color: inherit;
+			margin: 0;
+			font-family: "Museo 700", sans-serif;
+			font-weight: 700;
+		}
+		p {
+			color: inherit;
+			font-size: inherit;
+			margin: 1.2rem 0 0;
+		}
+		a {
+			color: inherit;
+			border-bottom: 1px dotted $color-white;
+			&:hover, &:focus {
+				color: rgba(255, 255, 255, 0.8);
+			}
+			&::after {
+				display: none;
+			}
+		}
+		.custom-alert__meta {
+			padding: 0 0 15px;
+		}
+		.custom-alert__button {
+			a {
+				display: inline-block;
+				padding: 10px 2rem;
+				text-decoration: none;
+				color: $color-primary;
+				background-color: $color-white;
+				font-weight: inherit;
+				border-bottom: none;
+				min-width: 108px;
+				&:hover, &:focus {
+					color: $color-primary;
+					background: rgba(255, 255, 255, 0.8);
+				}
+			}
+		}
+	}
+	.field--name-field-os2web-page-intro {
+		+ {
+			.field {
+				padding: 0;
+				margin-top: 0;
+			}
+		}
+	}
+	.field--type-text-long a {
+		text-decoration: none;
+		font-weight: inherit;
+		padding: 0;
+	}
+}
+.field--type-text-with-summary {
+	padding: 0;
+	margin-top: 0;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@include media-breakpoint-up(xs) {}
+
+// Mobile - only
+@include media-breakpoint-only(xs, $grid-breakpoints) {}
+
+// Tablet - and up
+@include media-breakpoint-up(sm) {
+  .page-alert {
+		.custom-alert {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			img {
+				max-width: 100%;
+			}
+			.custom-alert__meta {
+				flex-grow: 1;
+				padding: 0 15px 0 30px;
+			}
+		}
+	}
+}
+
+// Tablet - only
+@include media-breakpoint-only(sm, $grid-breakpoints) {}
+
+// Desktop - and up
+@include media-breakpoint-up(md) {}
+
+// Desktop - only
+@include media-breakpoint-only(md, $grid-breakpoints) {}
+
+// Large desktop - and up
+@include media-breakpoint-up(lg) {}
+
+// Large desktop - only
+@include media-breakpoint-only(lg, $grid-breakpoints) {}
+
+// Extra large desktop - and up
+@include media-breakpoint-up(xl) {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

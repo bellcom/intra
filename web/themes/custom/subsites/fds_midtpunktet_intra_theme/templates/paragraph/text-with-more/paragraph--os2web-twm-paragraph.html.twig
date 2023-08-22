@@ -1,0 +1,36 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="row">
+
+        <div class="col-12">
+          {# Begin - heading #}
+          {{ content.field_os2web_twm_heading }}
+          {# End - heading #}
+        </div>
+        <div class="col-12 text_image_content">
+
+
+          {# Begin - subheading #}
+          {{ content.field_os2web_twm_subheading }}
+          {# End - subheading #}
+
+          {# Begin - body #}
+          {{ content.field_os2web_twm_body }}
+          {# End - body #}
+
+          {# Begin - link #}
+          {{ content.field_os2web_twm_link }}
+          {# End - link #}
+
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

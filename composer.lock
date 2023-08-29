@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "074528166d42bd44e7e7ce537fc91b36",
+    "content-hash": "c0c60c677afdb47237c2fd1948e8164e",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7772,6 +7772,118 @@
             }
         },
         {
+            "name": "drupal/ldap_authentication",
+            "version": "4.4.0",
+            "require": {
+                "drupal/core": "^8.7.7 || ^9 || ^10",
+                "drupal/externalauth": "*",
+                "drupal/ldap": "^4",
+                "drupal/ldap_servers": "*",
+                "drupal/ldap_user": "*"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.4",
+                    "datestamp": "1687278867",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dgtlmoon",
+                    "homepage": "https://www.drupal.org/user/25027"
+                },
+                {
+                    "name": "johnbarclay",
+                    "homepage": "https://www.drupal.org/user/225037"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "queenvictoria",
+                    "homepage": "https://www.drupal.org/user/856454"
+                },
+                {
+                    "name": "sergiogsanchez",
+                    "homepage": "https://www.drupal.org/user/2823707"
+                },
+                {
+                    "name": "welly",
+                    "homepage": "https://www.drupal.org/user/354705"
+                }
+            ],
+            "description": "Implements LDAP authentication",
+            "homepage": "https://www.drupal.org/project/ldap",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ldap"
+            }
+        },
+        {
+            "name": "drupal/ldap_query",
+            "version": "4.4.0",
+            "require": {
+                "drupal/core": "^8.7.7 || ^9 || ^10",
+                "drupal/ldap": "^4",
+                "drupal/ldap_servers": "*"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.4",
+                    "datestamp": "1687278867",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dgtlmoon",
+                    "homepage": "https://www.drupal.org/user/25027"
+                },
+                {
+                    "name": "johnbarclay",
+                    "homepage": "https://www.drupal.org/user/225037"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "queenvictoria",
+                    "homepage": "https://www.drupal.org/user/856454"
+                },
+                {
+                    "name": "sergiogsanchez",
+                    "homepage": "https://www.drupal.org/user/2823707"
+                },
+                {
+                    "name": "welly",
+                    "homepage": "https://www.drupal.org/user/354705"
+                }
+            ],
+            "description": "LDAP Query Builder and Storage for queries used by other LDAP modules such as LDAP feeds, LDAP provision, etc",
+            "homepage": "https://www.drupal.org/project/ldap",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ldap"
+            }
+        },
+        {
             "name": "drupal/ldap_servers",
             "version": "4.4.0",
             "require": {
@@ -7821,6 +7933,114 @@
                 }
             ],
             "description": "Implements LDAP Server Configuration",
+            "homepage": "https://www.drupal.org/project/ldap",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ldap"
+            }
+        },
+        {
+            "name": "drupal/ldap_sso",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ldap_sso.git",
+                "reference": "8.x-4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ldap_sso-8.x-4.0.zip",
+                "reference": "8.x-4.0",
+                "shasum": "0c3e94cdca00c4c8b81815abbe520c55e8918db8"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9",
+                "drupal/ldap": "^4.0",
+                "drupal/ldap_authentication": "*",
+                "drupal/ldap_servers": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.0",
+                    "datestamp": "1631644233",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "grahl",
+                    "homepage": "https://www.drupal.org/user/146040"
+                },
+                {
+                    "name": "hotspoons",
+                    "homepage": "https://www.drupal.org/user/343807"
+                }
+            ],
+            "description": "Single-Sign-On (SSO) for Lightweight Directory Access Protocol (LDAP)",
+            "homepage": "https://www.drupal.org/project/ldap_sso",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ldap_sso"
+            }
+        },
+        {
+            "name": "drupal/ldap_user",
+            "version": "4.4.0",
+            "require": {
+                "drupal/core": "^8.7.7 || ^9 || ^10",
+                "drupal/externalauth": "*",
+                "drupal/ldap": "^4",
+                "drupal/ldap_query": "*",
+                "drupal/ldap_servers": "*"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.4",
+                    "datestamp": "1687278867",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dgtlmoon",
+                    "homepage": "https://www.drupal.org/user/25027"
+                },
+                {
+                    "name": "johnbarclay",
+                    "homepage": "https://www.drupal.org/user/225037"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "queenvictoria",
+                    "homepage": "https://www.drupal.org/user/856454"
+                },
+                {
+                    "name": "sergiogsanchez",
+                    "homepage": "https://www.drupal.org/user/2823707"
+                },
+                {
+                    "name": "welly",
+                    "homepage": "https://www.drupal.org/user/354705"
+                }
+            ],
+            "description": "Module for LDAP identified users.  User may be associated via LDAP authentication, LDAP authorization, or from account provisioning.  Configures syncing of LDAP entries to Drupal user properties, fields and the opposite direction.",
             "homepage": "https://www.drupal.org/project/ldap",
             "support": {
                 "source": "https://git.drupalcode.org/project/ldap"

@@ -1,0 +1,38 @@
+{% set classes = [
+  "flag-sidebar-block",
+] %}
+
+{% if config.enabled %}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {% if config.bookmark %}
+  <div class="sidebar-block sidebar-bookmark">
+    <div class="sidebar-bookmark-icon">icon</div>
+    <div class="sidebar-bookmark-list">
+      <ul class="sidebar-bookmark-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if config.shortcut and vars.loggedin %}
+  <div class="sidebar-block sidebar-shortcut">
+    <div class="sidebar-shortcut-icon">icon</div>
+    <div class="sidebar-shortcut-list">
+      <ul class="sidebar-shortcut-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if config.unread and vars.loggedin %}
+  <div class="sidebar-block sidebar-unread">
+    <div class="sidebar-unread-icon">icon</div>
+    <div class="sidebar-unread-list">
+      <ul class="sidebar-unread-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endif %}

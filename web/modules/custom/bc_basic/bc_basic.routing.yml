@@ -1,0 +1,7 @@
+bc_basic.admin_config_bellcom:
+  path: '/admin/config/bellcom'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Bellcom'
+  requirements:
+    _permission: 'access administration pages'

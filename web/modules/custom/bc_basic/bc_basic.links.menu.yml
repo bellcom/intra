@@ -1,0 +1,5 @@
+bc_basic.admin_config_bellcom:
+  title: 'Bellcom'
+  route_name: bc_basic.admin_config_bellcom
+  parent: system.admin_config
+  weight: 99

@@ -1,0 +1,72 @@
+<?php
+
+
+/**
+ * Implements hook_theme().
+ */
+function bc_flag_extension_theme($existing, $type, $theme, $path) {
+file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+
+  $config = \Drupal::config('bc_flag_extension.settings')->get();
+  unset( $config['submit'], $config['form_build_id'], $config['form_token'], $config['form_id'], $config['op']);
+
+  if (!empty($config['enabled'])) {
+
+    $vars = array(
+      'name' => 'tarzan',
+      'loggedin' => null,
+      'bookmarks' => array(),
+      'shortcuts' => array(),
+      'unreads' => array()
+    );
+
+    $vars['loggedin'] = \Drupal::currentUser()->id();
+
+    $items = array(
+      'sidebar' => array(
+        'render element' => 'element',
+        'variables' => array(
+          'vars' => $vars,
+          'config' => $config
+        )
+      )
+    );
+
+    return $items;
+
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function bc_flag_extension_preprocess_page(&$variables) {
+
+  // unflagging unread flag if is node flag is set for this user
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    if (!$user->isAnonymous()) {
+      $flagService = \Drupal::service('flag');
+      $flag = $flagService->getFlagById('unread');
+      $flagging = $flagService->getFlagging($flag, $node, $user);
+      if ($flagging) {
+        $flagService->unflag($flag, $node, $user);
+      }
+    }
+
+    $variables['#attached']['drupalSettings']['data']['nid'] = $node->id();
+
+
+  }
+
+
+}
+
+function bc_flag_extension_preprocess_node(&$variables) {
+  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+
+
+}
+

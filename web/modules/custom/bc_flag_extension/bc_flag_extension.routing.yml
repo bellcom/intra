@@ -1,0 +1,10 @@
+
+bc_flag_extension.settings:
+  path: '/admin/config/bellcom/flag-extension'
+  defaults:
+    _form: '\Drupal\bc_flag_extension\Form\FlagForm'
+    _title: 'Flag extension'
+  requirements:
+    _permission: 'administer site configuration'
+
+

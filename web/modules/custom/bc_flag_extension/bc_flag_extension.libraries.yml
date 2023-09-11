@@ -1,0 +1,7 @@
+flag_sidebar_attachment:
+  version: 1.x
+  css:
+    theme:
+      css/sidebar.css: {}
+  js:
+    js/sidebar.js: {}

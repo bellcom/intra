@@ -1,0 +1,13 @@
+name: 'Bellcom Flag extension'
+type: module
+description: 'Bellcom Flag extension'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Bellcom'
+dependencies:
+  - bc_basic
+  - flag
+  - flag_anon
+  - flag_bookmark
+  - drupal:block
+  - drupal:config

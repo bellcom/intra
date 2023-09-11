@@ -1,0 +1,8 @@
+
+
+bc_flag_extension.settings:
+  title: 'Bellcom Flag extension'
+  route_name: bc_flag_extension.settings
+  description: 'Bellcom flag extension configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

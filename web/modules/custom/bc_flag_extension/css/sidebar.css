@@ -3,5 +3,17 @@ div.flag-sidebar-block {
   position: absolute;
   right: 1px;
 
-  border: 2px solid blue;
+  border: 1px solid blue;
+}
+
+div.flag-sidebar-block img {
+  width: 25px;
+}
+
+div.flag-sidebar-block ul li {
+  padding: 0px !important;
+}
+
+div.flag-sidebar-block ul li:before {
+  content: none !important;
 }

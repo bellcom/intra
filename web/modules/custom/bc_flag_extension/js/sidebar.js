@@ -4,9 +4,10 @@
   const updateFlagSidebar = function() {
     let bookmark = $(".sidebar-block.sidebar-bookmark");
     if (bookmark.length && bookmark.is(":visible")) {
-console.log( drupalSettings.data );
+      let nid = 0;
+      if (drupalSettings.data.nid) nid = drupalSettings.data.nid;
       $.ajaxSetup({cache: false});
-      $.getJSON('/bc_flag_extension/data', function (response) {
+      $.getJSON('/bc_flag_extension/data', {nid: nid}, function (response) {
 
         let uib = $(".sidebar-bookmark-list-ul").empty();
         let uis = $(".sidebar-shortcut-list-ul").empty();

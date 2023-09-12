@@ -4,7 +4,6 @@ namespace Drupal\bc_flag_extension\Plugin\rest\resource;
 
 use Drupal\node\Entity\Node;
 use Drupal\rest\Plugin\ResourceBase;
-//use Drupal\rest\ResourceResponse;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,15 +71,17 @@ class FlagExtensionResource extends ResourceBase {
         ));
         $view->execute();
 
-        foreach($view->result AS $result) {
-          $res = $result->_entity;
-          if ($res->get('entity_type')->value == 'node') {
-            $node = Node::load($res->get('entity_id')->value);
-            $vars['bookmarks'][$node->id()] = array(
-              'title' => $node->getTitle(),
-              'link' => $node->toUrl()->setAbsolute()->toString(),
-              'flag' => $res->get('uuid')->value
-            );
+        if ($view->result) {
+          foreach ($view->result as $result) {
+            $res = $result->_entity;
+            if ($res->get('entity_type')->value == 'node') {
+              $node = Node::load($res->get('entity_id')->value);
+              $vars['bookmarks'][$node->id()] = [
+                'title' => $node->getTitle(),
+                'link' => $node->toUrl()->setAbsolute()->toString(),
+                'flag' => $res->get('uuid')->value
+              ];
+            }
           }
         }
       }
@@ -95,15 +96,17 @@ class FlagExtensionResource extends ResourceBase {
         ));
         $view->execute();
 
-        foreach($view->result AS $result) {
-          $res = $result->_entity;
-          if ($res->get('entity_type')->value == 'node') {
-            $node = Node::load($res->get('entity_id')->value);
+        if ($view->result) {
+          foreach ($view->result as $result) {
+            $res = $result->_entity;
+            if ($res->get('entity_type')->value == 'node') {
+              $node = Node::load($res->get('entity_id')->value);
               $vars['shortcuts'][$node->id()] = [
                 'title' => $node->getTitle(),
                 'link' => $node->toUrl()->setAbsolute()->toString(),
                 'flag' => $res->get('uuid')->value
               ];
+            }
           }
         }
       }
@@ -112,31 +115,34 @@ class FlagExtensionResource extends ResourceBase {
       if (!empty($config['unread']) && $currentUser) {
         $view = Views::getView('flag_extension');
         $view->setDisplay('default');
-        $view->setExposedInput(array(
-          'combine' => ($currentUser ? $currentUser->id():$session_id),
+        $view->setExposedInput([
+          'combine' => ($currentUser ? $currentUser->id() : $session_id),
           'flag_id' => 'unread'
-        ));
+        ]);
         $view->execute();
 
-        foreach($view->result AS $result) {
-          $res = $result->_entity;
-          if ($res->get('entity_type')->value == 'node') {
-            $node = Node::load($res->get('entity_id')->value);
-            if ($currentNode && $currentNode->id() == $node->id() && $currentUser) {
-              $flagService = \Drupal::service('flag');
-              $flag = $flagService->getFlagById('unread');
-              $flagService->unflag($flag, $node, $currentUser);
-              $flagging = $flagService->getFlagging($flag, $node, $currentUser);
-              if ($flagging) {
+        if ($view->result) {
+          foreach ($view->result as $result) {
+            $res = $result->_entity;
+            if ($res->get('entity_type')->value == 'node') {
+              $node = Node::load($res->get('entity_id')->value);
+              if ($currentNode && $currentNode->id() == $node->id() && $currentUser) {
+                $flagService = \Drupal::service('flag');
+                $flag = $flagService->getFlagById('unread');
                 $flagService->unflag($flag, $node, $currentUser);
-                $flagService->save();
+                $flagging = $flagService->getFlagging($flag, $node, $currentUser);
+                if ($flagging) {
+                  $flagService->unflag($flag, $node, $currentUser);
+                  $flagService->save();
+                }
               }
-            } else {
-              $vars['unreads'][$node->id()] = [
-                'title' => $node->getTitle(),
-                'link' => $node->toUrl()->setAbsolute()->toString(),
-                'flag' => $res->get('uuid')->value
-              ];
+              else {
+                $vars['unreads'][$node->id()] = [
+                  'title' => $node->getTitle(),
+                  'link' => $node->toUrl()->setAbsolute()->toString(),
+                  'flag' => $res->get('uuid')->value
+                ];
+              }
             }
           }
         }

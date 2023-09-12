@@ -49,9 +49,11 @@ function bc_flag_extension_preprocess_page(&$variables) {
     if (!$user->isAnonymous()) {
       $flagService = \Drupal::service('flag');
       $flag = $flagService->getFlagById('unread');
-      $flagging = $flagService->getFlagging($flag, $node, $user);
-      if ($flagging) {
-        $flagService->unflag($flag, $node, $user);
+      if ($flag) {
+        $flagging = $flagService->getFlagging($flag, $node, $user);
+        if ($flagging) {
+          $flagService->unflag($flag, $node, $user);
+        }
       }
     }
 

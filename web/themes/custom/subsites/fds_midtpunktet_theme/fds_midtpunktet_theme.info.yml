@@ -15,6 +15,7 @@ regions:
   header__search: 'Header - search'
   header__below: 'Header - below'
   account_menu: 'Account menu'
+  bookmarks: 'Bookmark Menu'
   alert: 'Alert'
   page_top: 'Page top'
   page_bottom: 'Page bottom'

@@ -1,0 +1,17 @@
+langcode: da
+status: true
+dependencies:
+  module:
+    - bc_flag_extension
+    - serialization
+    - user
+id: data
+plugin_id: data
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

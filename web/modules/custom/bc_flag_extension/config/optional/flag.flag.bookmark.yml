@@ -1,0 +1,46 @@
+langcode: da
+status: false
+dependencies:
+  module:
+    - flag_anon
+    - node
+  enforced:
+    module:
+      - flag_bookmark
+third_party_settings:
+  flag_anon:
+    enabled: 1
+    label_display: original
+    popin_title: Attention
+    message: '@login or @register to use this flag.'
+    login_label: Login
+    register_label: Register
+    popup: 0
+    popup_login: '{"width": "auto"}'
+    popup_register: '{"width": "auto"}'
+_core:
+  default_config_hash: vuzrLaRZ3xV-FmT127t2gLy_p8JDLMWtsKsnCwdWR2Y
+id: bookmark
+label: Bookmark
+bundles:
+  - os2web_page
+entity_type: node
+global: false
+flag_short: 'add bookmark'
+flag_long: 'Add this post to your bookmarks'
+flag_message: ''
+unflag_short: 'remove bookmark'
+unflag_long: 'Remove this post from your bookmarks'
+unflag_message: ''
+unflag_denied_text: ''
+weight: 0
+flag_type: 'entity:node'
+link_type: ajax_link
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+linkTypeConfig: {  }

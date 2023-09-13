@@ -67,7 +67,7 @@ class FlagExtensionResource extends ResourceBase {
         $view->setDisplay('default');
         $view->setExposedInput(array(
           'combine' => ($currentUser ? $currentUser->id():$session_id),
-          'flag_id' => 'bookmark'
+          'flag_id' => 'bookmarks'
         ));
         $view->execute();
 
@@ -153,7 +153,4 @@ class FlagExtensionResource extends ResourceBase {
 
     return new ModifiedResourceResponse($response);
   }
-
-
 }
-

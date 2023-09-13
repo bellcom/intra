@@ -1,0 +1,14 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - flag.flag.bookmarks
+  module:
+    - flag
+id: flag_action.bookmarks_unflag
+label: 'Unflag this item'
+type: node
+plugin: 'flag_action:bookmarks_unflag'
+configuration:
+  flag_id: bookmarks
+  flag_action: unflag

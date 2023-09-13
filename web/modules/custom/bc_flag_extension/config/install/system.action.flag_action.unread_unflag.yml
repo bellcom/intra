@@ -1,0 +1,14 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - flag.flag.unread
+  module:
+    - flag
+id: flag_action.unread_unflag
+label: 'Unflag this item'
+type: node
+plugin: 'flag_action:unread_unflag'
+configuration:
+  flag_id: unread
+  flag_action: unflag

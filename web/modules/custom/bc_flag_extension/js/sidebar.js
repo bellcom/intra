@@ -53,3 +53,20 @@
 })(jQuery, Drupal, drupalSettings);
 
 
+(function ($) {
+  Drupal.behaviors.countLiElements = {
+    attach: function (context, settings) {
+      // Wait for the DOM to be ready.
+      $(document).ready(function () {
+        // Find the <ul> element with a specific class or ID.
+        var $ul = $('.sidebar-unread-list-ul'); // Update the selector accordingly.
+
+        // Count the <li> elements inside the <ul>.
+        var liCount = $ul.find('li').length;
+
+        // Display the count in your desired location (e.g., a <span>).
+        $('.li-count').text(liCount); // Update the selector accordingly.
+      });
+    }
+  };
+})(jQuery, Drupal);

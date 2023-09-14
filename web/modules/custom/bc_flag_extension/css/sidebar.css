@@ -58,7 +58,6 @@ div.flag-sidebar-block ul li:before {
 .sidebar-bookmark-icon,
 .sidebar-shortcut-icon,
 .sidebar-unread-icon {
-  margin-right: 10px;
   width: 70px;
   height: 50px;
   display: flex;

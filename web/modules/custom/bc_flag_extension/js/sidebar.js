@@ -54,3 +54,27 @@
 
 
 
+function countAndUpdateLiElements() {
+  var ul = document.getElementById('unread-list');
+  var liElements = ul.getElementsByTagName('li');
+  var itemCount = liElements.length;
+  document.getElementById('item-count').textContent = itemCount;
+}
+
+// Call the function initially to set the count
+countAndUpdateLiElements();
+
+// Add an event listener to respond to changes in the DOM
+// For example, if you're removing an <li> element, call the function again
+// after the removal to update the count.
+// You would call this function whenever you add or remove <li> elements.
+function handleDomChanges() {
+  countAndUpdateLiElements();
+}
+
+// Example: Remove an <li> element and update the count
+var liToRemove = document.querySelector('.remove-li');
+liToRemove.parentNode.removeChild(liToRemove);
+handleDomChanges();
+
+

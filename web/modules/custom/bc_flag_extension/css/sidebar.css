@@ -6,9 +6,13 @@ div.flag-sidebar-block {
   transform: translateY(-50%);
 }
 
+div.flag-sidebar-block img {
+  width: 25px;
+}
 
 div.flag-sidebar-block ul li {
   padding: 0px !important;
+  margin: 0 !important;
 }
 
 div.flag-sidebar-block ul li:before {
@@ -64,6 +68,8 @@ div.flag-sidebar-block ul li:before {
 
 .sidebar-bookmark-icon, .sidebar-shortcut-icon, .sidebar-unread-icon i {
   font-size: 26px;
+  font-family: "FontAwesome";
+  font-style: normal;
 }
 
 .headline {

@@ -8,9 +8,8 @@
 
   {% if config.bookmark %}
   <div class="sidebar-block sidebar-bookmark">
-    <div class="sidebar-bookmark-icon"><i class="fa-solid fa-star"></i></div>
+    <div class="sidebar-bookmark-icon"><img src="/modules/custom/bc_flag_extension/images/star.png"></div>
     <div class="sidebar-bookmark-list">
-      <div class="headline">Mine bogmærker</div>
       <ul class="sidebar-bookmark-list-ul"></ul>
     </div>
   </div>
@@ -18,9 +17,8 @@
 
   {% if config.shortcut and vars.loggedin %}
   <div class="sidebar-block sidebar-shortcut">
-    <div class="sidebar-shortcut-icon"><i class="fa-solid fa-share-from-square"></i></div>
+    <div class="sidebar-shortcut-icon"><img src="/modules/custom/bc_flag_extension/images/shortcut.png"></div>
     <div class="sidebar-shortcut-list">
-      <div class="headline">Smutveje</div>
       <ul class="sidebar-shortcut-list-ul"></ul>
     </div>
   </div>
@@ -28,9 +26,8 @@
 
   {% if config.unread and vars.loggedin %}
   <div class="sidebar-block sidebar-unread">
-    <div class="sidebar-unread-icon"><i class="fa-solid fa-bell"></i></div>
+    <div class="sidebar-unread-icon"><img src="/modules/custom/bc_flag_extension/images/bell.png"></div>
     <div class="sidebar-unread-list">
-      <div class="headline">Du har {{ vars.unreads|length }} ulæste beskeder</div>
       <ul class="sidebar-unread-list-ul"></ul>
     </div>
   </div>

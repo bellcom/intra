@@ -29,8 +29,8 @@
   {% if config.unread and vars.loggedin %}
   <div class="sidebar-block sidebar-unread">
     <div class="sidebar-unread-icon"><img src="/modules/custom/bc_flag_extension/images/bell.png"></div>
-    <div class="sidebar-unread-list" id="unread-list">
-      <div class="headline">Du har&nbsp;<span id="item-count">0</span>&nbsp;ulæste beskeder</div>
+    <div class="sidebar-unread-list">
+      <div class="headline">Du har&nbsp;<span>{{ vars.unreads|length }}</span>&nbsp;ulæste beskeder</div>
       <ul class="sidebar-unread-list-ul"></ul>
     </div>
   </div>

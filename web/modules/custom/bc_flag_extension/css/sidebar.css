@@ -170,4 +170,7 @@ div.flag-sidebar-block ul li:before {
   .sidebar-unread-icon i {
     font-size: 18px;
   }
+  .headline {
+    height: 45px;
+  }
 }

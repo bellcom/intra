@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f087733be2684692af59a949880de11c",
+    "content-hash": "0f47c1043e376919a6665f26a4901ea2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2743,30 +2743,32 @@
             }
         },
         {
-            "name": "drupal/calendar_view",
-            "version": "2.1.3",
+            "name": "drupal/calendar",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/calendar_view.git",
-                "reference": "2.1.3"
+                "url": "https://git.drupalcode.org/project/calendar.git",
+                "reference": "8.x-1.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/calendar_view-2.1.3.zip",
-                "reference": "2.1.3",
-                "shasum": "aba4847e192e5e49dd9bbef8948eea869ba1a30a"
+                "url": "https://ftp.drupal.org/files/projects/calendar-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "e91e0df97e7beac1ca9be8a3521138cca4cea3be"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9 || ^10"
+                "drupal/calendar_datetime": "*",
+                "drupal/core": "^9.4 || ^10",
+                "drupal/views_templates": "^1.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.3",
-                    "datestamp": "1694510664",
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1691500976",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2776,14 +2778,83 @@
             ],
             "authors": [
                 {
-                    "name": "matthieuscarset",
-                    "homepage": "https://www.drupal.org/user/3471281"
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/u/neslee-canil-pinto",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Eric Sol",
+                    "homepage": "https://www.drupal.org/u/solide-echt",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "KarenS",
+                    "homepage": "https://www.drupal.org/user/45874"
+                },
+                {
+                    "name": "paulocs",
+                    "homepage": "https://www.drupal.org/user/3640109"
+                },
+                {
+                    "name": "solide-echt",
+                    "homepage": "https://www.drupal.org/user/46176"
                 }
             ],
-            "description": "Display entities in a filterable calendar View",
-            "homepage": "https://www.drupal.org/project/calendar_view",
+            "description": "Provides a Views plugin to display views containing dates as Calendars.",
+            "homepage": "https://www.drupal.org/project/calendar",
             "support": {
-                "source": "https://git.drupalcode.org/project/calendar_view"
+                "source": "https://git.drupalcode.org/project/calendar",
+                "issues": "https://www.drupal.org/project/issues/calendar"
+            }
+        },
+        {
+            "name": "drupal/calendar_datetime",
+            "version": "1.0.0-beta1",
+            "require": {
+                "drupal/calendar": "^1",
+                "drupal/core": "^9.4 || ^10"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1691500976",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "fizk",
+                    "homepage": "https://www.drupal.org/user/473174"
+                },
+                {
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "KarenS",
+                    "homepage": "https://www.drupal.org/user/45874"
+                },
+                {
+                    "name": "paulocs",
+                    "homepage": "https://www.drupal.org/user/3640109"
+                },
+                {
+                    "name": "solide-echt",
+                    "homepage": "https://www.drupal.org/user/46176"
+                }
+            ],
+            "description": "Provides a calendar specific date time.",
+            "homepage": "https://www.drupal.org/project/calendar",
+            "support": {
+                "source": "https://git.drupalcode.org/project/calendar"
             }
         },
         {
@@ -27805,6 +27876,7 @@
     "stability-flags": {
         "bellcom/fds_base_theme": 20,
         "drupal/anonymous_subscriptions": 20,
+        "drupal/calendar": 10,
         "drupal/ckeditor_balloonpanel": 20,
         "drupal/entity_clone": 10,
         "drupal/entity_update": 5,
@@ -27843,5 +27915,5 @@
         "php": ">=7.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

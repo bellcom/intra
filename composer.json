@@ -53,6 +53,7 @@
         "drupal/admin_audit_trail": "^1.0",
         "drupal/anonymous_subscriptions": "dev-8.x-1.x",
         "drupal/autologout": "^1.4",
+        "drupal/calendar_view": "^2.1",
         "drupal/ckeditor_balloonpanel": "1.x-dev@dev",
         "drupal/ckeditor_iframe": "^2.1",
         "drupal/ckeditor_resize": "^1.3",

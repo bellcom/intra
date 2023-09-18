@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e0fd7818430113c9cbaaa199eb5e460",
+    "content-hash": "1f5e7c2427d851bf0af2387ca150d371",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6693,6 +6693,67 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/field_group",
                 "issues": "https://www.drupal.org/project/issues/field_group"
+            }
+        },
+        {
+            "name": "drupal/field_redirection",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/field_redirection.git",
+                "reference": "8.x-2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/field_redirection-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "fd216c5f24591bcc9fbdab9da33acd30291eb83a"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.2",
+                    "datestamp": "1668806016",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://www.drupal.org/node/1207654/committers",
+                    "role": "Developer"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "pasan.gamage",
+                    "homepage": "https://www.drupal.org/user/3527697"
+                },
+                {
+                    "name": "ultimike",
+                    "homepage": "https://www.drupal.org/user/51132"
+                }
+            ],
+            "description": "Provides a field formatter to redirect the page to a URL. Requires Link module.",
+            "homepage": "https://www.drupal.org/project/field_redirection",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/field_redirection",
+                "issues": "http://drupal.org/project/issues/field_redirection"
             }
         },
         {

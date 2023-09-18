@@ -1,0 +1,46 @@
+<?php
+
+
+/**
+ * Implements hook_node_presave().
+ */
+function bc_mail_smsmail_node_presave($node) {
+
+  $conf = (object) \Drupal::config('bc_mail_smsmail.settings')->get();
+
+  if ($conf->enabled) {
+
+    $currentNodeType = $node->getType();
+    if (isset($conf->contents[$currentNodeType]) && $conf->contents[$currentNodeType]['enabled']) {
+
+      foreach($conf->members AS $member) {
+        if ($member['active']) {
+
+          $message = 'sms text';
+
+          $to = $member['phone'] . '@sms.ringsted.int';
+          $headers = 'From: noreply@ringsted.dk' . "\r\n" .
+            'Content-Type: text/plain; charset=utf-8' . "\r\n" .
+            'Reply-To: noreply@ringsted.dk' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+          $content = "Ny driftbesked fra Midtpunktet" . "\r\n \r\n" . $node->getTitle() . "\r\n \r\n" . strip_tags($message);
+
+          // Send mail via gateway
+//          mail($to, $node->getTitle(), $content, $headers);
+
+          file_put_contents('/var/www/logs/debug.log', $member['name'] . " gogo " . $currentNodeType . "\n", FILE_APPEND);
+          file_put_contents('/var/www/logs/debug.log', $content . "\n", FILE_APPEND);
+        }
+      }
+
+
+
+
+
+
+    }
+  }
+
+}
+

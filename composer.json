@@ -122,6 +122,7 @@
         "drupal/queue_mail": "^1.4",
         "drupal/queue_ui": "^3.1",
         "drupal/quick_node_clone": "^1.14",
+        "drupal/realname": "^2.0@beta",
         "drupal/redirect_after_login": "^2.7",
         "drupal/restui": "^1.21",
         "drupal/scroll_top_button": "^2.0",

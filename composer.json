@@ -52,6 +52,7 @@
         "drupal/access_latest": "^0.0.1",
         "drupal/admin_audit_trail": "^1.0",
         "drupal/anonymous_subscriptions": "dev-8.x-1.x",
+        "drupal/audiofield": "^1.13",
         "drupal/autologout": "^1.4",
         "drupal/bookable_calendar": "^2.2",
         "drupal/calendar": "^1.0@beta",

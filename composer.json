@@ -79,6 +79,7 @@
         "drupal/fancy_file_delete": "^2.0",
         "drupal/field_group": "^3.4",
         "drupal/field_redirection": "^2.2",
+        "drupal/field_validation": "^1.1",
         "drupal/file_management": "1.x-dev@dev",
         "drupal/flag_anon": "^1.1",
         "drupal/flood_control": "^2.2",

@@ -98,6 +98,7 @@
         "drupal/ldap": "^4.4",
         "drupal/ldap_servers": "^4.4",
         "drupal/ldap_sso": "^4.0",
+        "drupal/libraries": "^4.0",
         "drupal/link_field_autocomplete_filter": "^1.14",
         "drupal/linkit_media_library": "^1.0",
         "drupal/mailchimp": "^2.0",

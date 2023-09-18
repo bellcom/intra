@@ -54,6 +54,7 @@
         "drupal/anonymous_subscriptions": "dev-8.x-1.x",
         "drupal/audiofield": "^1.13",
         "drupal/autologout": "^1.4",
+        "drupal/block_title_link": "^1.1",
         "drupal/bookable_calendar": "^2.2",
         "drupal/calendar": "^1.0@beta",
         "drupal/ckeditor_balloonpanel": "1.x-dev@dev",

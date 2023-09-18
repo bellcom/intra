@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fce91889e77a3894bfc8fccb14a87f9",
+    "content-hash": "17e84680278e4de64717aef5808fd512",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2795,6 +2795,55 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/better_exposed_filters",
                 "issues": "https://www.drupal.org/project/issues/better_exposed_filters"
+            }
+        },
+        {
+            "name": "drupal/block_title_link",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/block_title_link.git",
+                "reference": "1.1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/block_title_link-1.1.5.zip",
+                "reference": "1.1.5",
+                "shasum": "f4139a18e518f876b8c911a14a3c856557dc150b"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.1.5",
+                    "datestamp": "1654276532",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                }
+            ],
+            "description": "Adding link to title of blocks.",
+            "homepage": "https://www.drupal.org/project/block_title_link",
+            "keywords": [
+                "Block Title Link",
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/block_title_link",
+                "issues": "https://www.drupal.org/project/issues/block_title_link"
             }
         },
         {

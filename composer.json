@@ -128,6 +128,7 @@
         "drupal/redirect_after_login": "^2.7",
         "drupal/restui": "^1.21",
         "drupal/scroll_top_button": "^2.0",
+        "drupal/simple_mail": "^2.0",
         "drupal/siteimprove": "^1.10",
         "drupal/stage_file_proxy": "^1.0",
         "drupal/textfield_counter": "^2.3",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f71242624389457dc88d151b64f73985",
+    "content-hash": "1d3eda9fa6222994800cbbcf0107d77e",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -11914,6 +11914,72 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/r4032login",
                 "issues": "https://www.drupal.org/project/issues/r4032login"
+            }
+        },
+        {
+            "name": "drupal/radioactivity",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/radioactivity.git",
+                "reference": "4.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/radioactivity-4.0.3.zip",
+                "reference": "4.0.3",
+                "shasum": "24d60175a00bee8f7ecebb8961d8bb19510c6d39"
+            },
+            "require": {
+                "drupal/core": "^9",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "drupal/rules": "^3.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "4.0.3",
+                    "datestamp": "1666084641",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^10"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "matthewmessmer",
+                    "homepage": "https://www.drupal.org/user/2496364"
+                },
+                {
+                    "name": "skiminki",
+                    "homepage": "https://www.drupal.org/user/265179"
+                },
+                {
+                    "name": "Sutharsan",
+                    "homepage": "https://www.drupal.org/user/73854"
+                },
+                {
+                    "name": "thomasdegraaff",
+                    "homepage": "https://www.drupal.org/user/989866"
+                }
+            ],
+            "description": "Provides a field which can be used to track popularity, views, etc.",
+            "homepage": "https://www.drupal.org/project/radioactivity",
+            "support": {
+                "source": "https://git.drupalcode.org/project/radioactivity",
+                "issues": "https://www.drupal.org/project/issues/radioactivity"
             }
         },
         {

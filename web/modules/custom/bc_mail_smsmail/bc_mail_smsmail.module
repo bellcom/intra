@@ -8,7 +8,7 @@ function bc_mail_smsmail_node_presave($node) {
 
   $conf = (object) \Drupal::config('bc_mail_smsmail.settings')->get();
 
-  if ($conf->enabled) {
+  if ($conf->enabled && !empty($conf->gateway)) {
 
     $currentNodeType = $node->getType();
     if (isset($conf->contents[$currentNodeType]) && $conf->contents[$currentNodeType]['enabled']) {
@@ -16,28 +16,26 @@ function bc_mail_smsmail_node_presave($node) {
       foreach($conf->members AS $member) {
         if ($member['active']) {
 
-          $message = 'sms text';
-
-          $to = $member['phone'] . '@sms.ringsted.int';
+          $to = $member['phone'] . $conf->gateway;
           $headers = 'From: noreply@ringsted.dk' . "\r\n" .
             'Content-Type: text/plain; charset=utf-8' . "\r\n" .
             'Reply-To: noreply@ringsted.dk' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
+          $message = '';
+          if ($node->hasField('body')) $message .= $node->body() . "\r\n";
+          if ($node->hasField('field_os2web_page_heading')) $message .= $node->get('field_os2web_page_heading')->value  . "\r\n";
+          if ($node->hasField('field_os2web_page_intro')) $message .= $node->get('field_os2web_page_intro')->value  . "\r\n";
+          if ($node->hasField('field_os2web_page_description')) $message .= $node->get('field_os2web_page_description')->value  . "\r\n";
+          if ($node->hasField('field_os2web_system_page_content')) $message .= $node->get('field_os2web_system_page_content')->value  . "\r\n";
+
           $content = "Ny driftbesked fra Midtpunktet" . "\r\n \r\n" . $node->getTitle() . "\r\n \r\n" . strip_tags($message);
 
           // Send mail via gateway
-//          mail($to, $node->getTitle(), $content, $headers);
+          mail($to, $node->getTitle(), $content, $headers);
 
-          file_put_contents('/var/www/logs/debug.log', $member['name'] . " gogo " . $currentNodeType . "\n", FILE_APPEND);
-          file_put_contents('/var/www/logs/debug.log', $content . "\n", FILE_APPEND);
         }
       }
-
-
-
-
-
 
     }
   }

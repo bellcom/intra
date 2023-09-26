@@ -30,9 +30,16 @@ class SmsMailForm extends ConfigFormBase {
       '#default_value' => $config->get('enabled')
     );
 
+    $form['form']['gateway'] = array(
+      '#type' => 'textfield',
+      '#title' => 'mail sms gateway',
+      '#default_value' => $config->get('gateway'),
+      '#description' => 'the mailaddress that combine with numer send the sms ex "@sms.ringsted.int"'
+    );
+
+
     $form['form']['members'] = array(
       '#type' => 'table',
-      '#caption' => $this->t('table'),
       '#header' => array(
         $this->t('name'),
         $this->t('phone'),
@@ -42,26 +49,28 @@ class SmsMailForm extends ConfigFormBase {
     );
 
     $members = $config->get('members');
-    foreach( $members AS $idx => $member ) {
+    if (!empty($members)) {
+      foreach ($members as $idx => $member) {
 
-      $form['form']['members'][$idx]['name'] = array(
-        '#type' => 'textfield',
-        '#value' => $member['name'] ?? "?",
-      );
+        $form['form']['members'][$idx]['name'] = [
+          '#type' => 'textfield',
+          '#value' => $member['name'] ?? "?",
+        ];
 
-      $form['form']['members'][$idx]['phone'] = array(
-        '#type' => 'textfield',
-        '#value' => $member['phone'] ?? "?"
-      );
+        $form['form']['members'][$idx]['phone'] = [
+          '#type' => 'textfield',
+          '#value' => $member['phone'] ?? "?"
+        ];
 
-      $form['form']['members'][$idx]['active'] = array(
-        '#type' => 'checkbox',
-        '#default_value' => $member['active'] ?? 0
-      );
+        $form['form']['members'][$idx]['active'] = [
+          '#type' => 'checkbox',
+          '#default_value' => $member['active'] ?? 0
+        ];
 
-      $form['form']['members'][$idx]['remove'] = array(
-        '#type' => 'checkbox'
-      );
+        $form['form']['members'][$idx]['remove'] = [
+          '#type' => 'checkbox'
+        ];
+      }
     }
 
     $form['form']['members']['add']['name'] = array(

@@ -1,0 +1,7 @@
+bc_mail_smsmail.settings:
+  path: '/admin/config/bellcom/smsmail'
+  defaults:
+    _form: '\Drupal\bc_mail_smsmail\Form\SmsMailForm'
+    _title: 'Mail to sms mail'
+  requirements:
+    _permission: 'administer site configuration'

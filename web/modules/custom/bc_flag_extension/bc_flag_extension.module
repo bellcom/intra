@@ -21,9 +21,11 @@ function bc_flag_extension_theme($existing, $type, $theme, $path) {
 
     $vars['loggedin'] = \Drupal::currentUser()->id();
 
-    $items = array(
+
+      $items = array(
       'sidebar' => array(
         'render element' => 'element',
+        'template' => 'sidebar',
         'variables' => array(
           'vars' => $vars,
           'config' => $config

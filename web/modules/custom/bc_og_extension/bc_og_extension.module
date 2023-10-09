@@ -1,0 +1,37 @@
+<?php
+
+use Drupal\og\Og;
+
+function bc_og_extension_views_data() {
+
+  $data = array();
+
+  $data['og_membership'] = array(
+    'entity_id' => array(
+      'relationship' => array(
+        'title' => 'OG node relation',
+        'base' => 'node_field_data',
+        'base_field' => 'nid',
+        'field' => 'entity_id',
+        'handler' => 'views_handler_relationship',
+        'id' => 'standard',
+        'help' => 'OG entity ID relation to the node',
+      )
+    ),
+    'uid' => array(
+      'relationship' => array(
+        'title' => 'OG user relation',
+        'base' => 'users_field_data',
+        'base_field' => 'uid',
+        'field' => 'uid',
+        'handler' => 'views_handler_relationship',
+        'id' => 'standard',
+        'help' => 'OG user ID relation to the user',
+      )
+    )
+  );
+
+  return $data;
+
+
+}

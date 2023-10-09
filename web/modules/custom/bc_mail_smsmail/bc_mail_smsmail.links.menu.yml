@@ -1,0 +1,6 @@
+bc_mail_smsmail.settings:
+  title: 'Bellcom Mail to smsmail'
+  route_name: bc_mail_smsmail.settings
+  description: 'Bellcom mail to smsmail configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

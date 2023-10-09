@@ -1,9 +1,9 @@
 
 div.flag-sidebar-block {
-  position: absolute;
-  right: 1px;
-
-  border: 1px solid blue;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 div.flag-sidebar-block img {
@@ -12,8 +12,164 @@ div.flag-sidebar-block img {
 
 div.flag-sidebar-block ul li {
   padding: 0px !important;
+  margin: 0 !important;
 }
 
 div.flag-sidebar-block ul li:before {
   content: none !important;
+}
+
+.sidebar-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-block .sidebar-bookmark-list,
+.sidebar-block .sidebar-shortcut-list,
+.sidebar-block .sidebar-unread-list {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  padding: 0;
+  width: 220px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.sidebar-block:hover .sidebar-bookmark-list,
+.sidebar-block:hover .sidebar-shortcut-list,
+.sidebar-block:hover .sidebar-unread-list {
+  max-height: 315px;
+}
+
+.sidebar-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+
+.sidebar-bookmark-icon,
+.sidebar-shortcut-icon,
+.sidebar-unread-icon {
+  width: 70px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-bookmark-icon, .sidebar-shortcut-icon, .sidebar-unread-icon i {
+  font-size: 26px;
+  font-family: "FontAwesome";
+  font-style: normal;
+}
+
+.headline {
+  font-weight: bold;
+  padding: 14px 10px;
+  height: 50px;
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+.sidebar-bookmark-icon {
+  background-color: #EDCD19;
+}
+
+.sidebar-shortcut-icon {
+  background-color: #0CBED2;
+}
+
+.sidebar-unread-icon {
+  background-color: #adadad;
+}
+
+.sidebar-bookmark-list {
+  background-color: #ffffc8;
+}
+
+.sidebar-shortcut-list {
+  background-color: #CCEFF3;
+}
+
+.sidebar-unread-list {
+  background-color: #eee;
+}
+
+.shortcut-item-link {
+  padding: 4px 10px;
+  display: block;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #333;
+  text-decoration: none;
+}
+
+.shortcut-item-link:hover {
+  background: rgba(255,255,255,0.6);
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+}
+
+.bookmark-item-link {
+  padding: 4px 10px;
+  display: block;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #333;
+  text-decoration: none;
+}
+
+.bookmark-item-link:hover {
+  background: rgba(255,255,255,0.6);
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+}
+
+.unread-item-link {
+  padding: 4px 10px;
+  display: block;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #333;
+  text-decoration: none;
+}
+
+.unread-item-link:hover{
+  background: rgba(255,255,255,0.6);
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+}
+
+@media only screen and (max-width: 740px) {
+  .sidebar-bookmark-icon,
+  .sidebar-shortcut-icon,
+  .sidebar-unread-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .sidebar-bookmark-icon,
+  .sidebar-shortcut-icon,
+  .sidebar-unread-icon i {
+    font-size: 18px;
+  }
+  .headline {
+    height: 45px;
+  }
 }

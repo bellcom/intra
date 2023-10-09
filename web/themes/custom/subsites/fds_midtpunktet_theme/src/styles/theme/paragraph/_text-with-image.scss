@@ -62,7 +62,14 @@
 
 .paragraph--type--os2web-twi-paragraph {
   .row {
-    align-items: flex-start !important
+    align-items: flex-start !important;
+
+    .text_image_heading {
+      padding: 0;
+    }
+    .text_image_content {
+      padding: 12px 0;
+    }
   }
 }
 

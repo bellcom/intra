@@ -8,13 +8,37 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       <div class="row">
-
-        <div class="col-12">
+        <div class="col-12 text_image_heading">
           {# Begin - heading #}
           {{ content.field_os2web_twi_heading }}
           {# End - heading #}
         </div>
-          <div class="col-12 text_image_content">
+
+        {% if image_position == 'left' %}
+          <div class="col-12 col-sm-6 text_image_image">
+
+            {# Begin - image #}
+            {{ content.field_os2web_twi_image }}
+            {# End - image #}
+
+          </div>
+          <div class="col-12 col-sm-6 text_image_content">
+
+            {# Begin - subheading #}
+            {{ content.field_os2web_twi_subheading }}
+            {# End - subheading #}
+
+            {# Begin - body #}
+            {{ content.field_os2web_twi_body }}
+            {# End - body #}
+
+            {# Begin - link #}
+            {{ content.field_os2web_twi_link }}
+            {# End - link #}
+
+          </div>
+        {% else %}
+          <div class="col-12 col-sm-6">
 
 
             {# Begin - subheading #}
@@ -30,6 +54,14 @@
             {# End - link #}
 
           </div>
+          <div class="col-12 col-sm-6">
+
+            {# Begin - image #}
+            {{ content.field_os2web_twi_image }}
+            {# End - image #}
+
+          </div>
+        {% endif %}
       </div>
     {% endblock %}
   </div>

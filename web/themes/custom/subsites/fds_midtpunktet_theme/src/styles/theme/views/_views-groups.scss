@@ -1,0 +1,56 @@
+.paragraph--type--organic-groups {
+  margin-bottom: 50px;
+  .field__item {
+    .viewsreference--view-title {
+      border-bottom: 1px solid #c30a32;
+      padding: 2px 0 0 6px;
+      background-color: #f5f5f5;
+      font-family: "Museo 300", Arial;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .views-element-container {
+      .view {
+        .view-content {
+          border: 1px solid #ccc;
+
+          .views-row {
+            padding: 4px 8px;
+
+            &:nth-child(odd) {
+              background-color: white;
+            }
+            &:nth-child(even) {
+              background-color: #F1F5FA;
+            }
+
+            &:hover {
+              background-color: #FFFEEE;
+            }
+
+            .views-field-title-1, .views-field-title {
+              .field-content {
+                a {
+                  color: #333;
+                  font-size: 14px;
+                  text-decoration: none;
+                  font-family: Arial;
+
+                  &:hover {
+                    text-decoration: underline;
+                    color: #c30a32;
+                  }
+                }
+              }
+            }
+
+            &:not(:last-child) {
+              border-bottom: 1px solid #ccc;
+            }
+          }
+        }
+      }
+    }
+  }
+}

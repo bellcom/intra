@@ -15,14 +15,14 @@
         </div>
 
         {% if image_position == 'left' %}
-          <div class="col-12 col-sm-6 text_image_image">
+          <div class="col-12 text_image_image">
 
             {# Begin - image #}
             {{ content.field_os2web_twi_image }}
             {# End - image #}
 
           </div>
-          <div class="col-12 col-sm-6 text_image_content">
+          <div class="col-12 text_image_content">
 
             {# Begin - subheading #}
             {{ content.field_os2web_twi_subheading }}
@@ -38,7 +38,7 @@
 
           </div>
         {% else %}
-          <div class="col-12 col-sm-6">
+          <div class="col-12">
 
 
             {# Begin - subheading #}
@@ -54,7 +54,7 @@
             {# End - link #}
 
           </div>
-          <div class="col-12 col-sm-6">
+          <div class="col-12 text_image_image">
 
             {# Begin - image #}
             {{ content.field_os2web_twi_image }}

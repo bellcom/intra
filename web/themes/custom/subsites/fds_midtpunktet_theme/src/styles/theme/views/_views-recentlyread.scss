@@ -12,31 +12,34 @@
       }
 
       .views-field-title {
+        position: relative;
+
+        &:after {
+          position: absolute;
+          right: 5px;
+          transition: .3s ease;
+          top: 50%;
+          transform: translateY(-50%);
+          content: '\f105';
+          font-family: FontAwesome;
+        }
         .field-content {
           a {
             color: black;
             font-family: Arial;
             text-decoration: none;
-            position: relative;
+            width: 100%;
+            max-width: 95%;
 
-            &:after {
-              position: absolute;
-              right: 5px;
-              transition: .3s ease;
-              top: 50%;
-              transform: translateY(-50%);
-              content: '\f105';
-              font-family: FontAwesome;
-              width: 100%;
-            }
 
             &:hover {
               text-decoration: underline;
             }
 
-            &:hover:after {
+            &:hover .views-field-title:after {
               right: 0;
             }
+
           }
         }
       }

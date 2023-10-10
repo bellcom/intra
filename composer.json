@@ -118,6 +118,7 @@
         "drupal/modules_weight": "^1.9",
         "drupal/monitoring": "^1.9",
         "drupal/og": "^1.0@alpha",
+        "drupal/og_menu": "^2.0@alpha",
         "drupal/panels": "^4.7",
         "drupal/pdf_api": "^2.0",
         "drupal/permissions_filter": "^1.3",

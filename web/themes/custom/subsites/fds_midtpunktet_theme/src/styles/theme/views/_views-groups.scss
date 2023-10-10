@@ -2,20 +2,21 @@
   margin-bottom: 50px;
   .field__item {
     .viewsreference--view-title {
-      border-bottom: 1px solid #c30a32;
-      padding: 2px 0 0 6px;
-      background-color: #f5f5f5;
+      border-bottom: 2px solid #c30a32;
+      padding: 5px;
+      background-color: #e3e3e3;
       font-family: "Museo 300", Arial;
       font-weight: 600;
+      font-size: 2rem;
       color: #333;
       margin-bottom: 10px;
     }
     .views-element-container {
-      .view {
+      .mine-grupper-view {
+        border: 1px solid #ccc;
         .view-content {
-          border: 1px solid #ccc;
 
-          .views-row {
+          .gruppenavn {
             padding: 4px 8px;
 
             &:nth-child(odd) {

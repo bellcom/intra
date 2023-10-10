@@ -1,0 +1,22 @@
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  paragraph.isPublished() ? null : 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <button class="accordion-button js-accordion-add-link" aria-expanded="false" aria-controls="paragraph-{{ paragraph.id() }}">
+        {# Begin - heading #}
+        {{ content.field_os2web_accordion_item_head }}
+        {# End - heading #}
+      </button>
+      <div id="paragraph-{{ paragraph.id() }}" aria-hidden="true" class="accordion-content">
+        {# Begin - heading #}
+        {{ content.field_os2web_accordion_item_refs }}
+        {# End - heading #}
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,14 +1,14 @@
 .view-recently-read-content {
   .view-content {
     .views-row {
-      border: 1px solid gray;
+      border-bottom: 1px solid gray;
 
       &:not(:first-child) {
-        padding: 20px 0;
+        padding: 10px 0;
       }
 
       &:first-child {
-        padding: 10px 0 20px 0;
+        padding: 0 0 10px 0;
       }
 
       .views-field-title {
@@ -21,11 +21,13 @@
 
             &:after {
               position: absolute;
-              right: 20px;
+              right: 5px;
               transition: .3s ease;
               top: 50%;
               transform: translateY(-50%);
-              content: '\f054';
+              content: '\f105';
+              font-family: FontAwesome;
+              width: 100%;
             }
 
             &:hover {

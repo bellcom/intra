@@ -5,3 +5,77 @@
     font-family: "Museo 500", sans-serif;
   }
 }
+
+
+.nyhedsstream {
+  .view-content {
+    .item-list {
+      ul {
+        li {
+          margin: 0;
+          display: flex;
+          min-height: 130px;
+          gap: 15px;
+
+          &:before {
+            display: none;
+          }
+
+          .views-field-field-os2web-news-primaryimage {
+            width: 30%;
+            display: flex;
+
+            .field-content {
+              a {
+                height: 100%;
+
+                img {
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 5px;
+                }
+              }
+            }
+          }
+          .views-field-field-os2web-news-description {
+            width: 70%;
+
+            .field-content {
+              .nyhedsstream-content-wrapper {
+                display: flex;
+                flex-direction: column;
+
+                a {
+                  color: #333;
+                  font-size: 1.8rem;
+                  text-decoration: none;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+
+                  time {
+                    font-size: 1.3rem;
+                    font-family: Arial, Helvetica, sans-serif;
+                    margin: 5px 0;
+                  }
+
+                  .more-link {
+                    a {
+                      text-decoration: none;
+
+                      &:hover {
+                        text-decoration: underline;
+                        color: #c30a32;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

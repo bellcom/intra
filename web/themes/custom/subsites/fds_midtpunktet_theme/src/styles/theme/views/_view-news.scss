@@ -14,8 +14,18 @@
         li {
           margin: 0;
           display: flex;
-          min-height: 130px;
+          min-height: 150px;
+          max-height: 200px;
           gap: 15px;
+          border-bottom: 1px solid gray;
+
+          &:not(:first-of-type) {
+            padding: 20px 0;
+          }
+
+          &:first-of-type {
+            padding: 10px 0 20px 0;
+          }
 
           &:before {
             display: none;
@@ -54,20 +64,21 @@
                     text-decoration: underline;
                   }
 
-                  time {
-                    font-size: 1.3rem;
-                    font-family: Arial, Helvetica, sans-serif;
-                    margin: 5px 0;
-                  }
+                }
+                time {
+                  font-size: 1.3rem;
+                  font-family: Arial, Helvetica, sans-serif;
+                  margin: 5px 0;
+                }
 
-                  .more-link {
-                    a {
-                      text-decoration: none;
+                .more-link {
+                  a {
+                    text-decoration: none;
+                    color: #c30a32;
+                    font-size: 1.5rem;
 
-                      &:hover {
-                        text-decoration: underline;
-                        color: #c30a32;
-                      }
+                    &:hover {
+                      text-decoration: underline;
                     }
                   }
                 }

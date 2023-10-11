@@ -2,7 +2,7 @@
   <h2>Links</h2>
 </div>
 <ul class="custom-link-list">
-  {% for item in paragraph.field_os2web_link_list_link %}
-    <li><a href="{{ item.uri|url }}"{{ item.options|default('') }}>{{ item.title }}</a></li>
+  {% for item in content.field_os2web_link_list_link %}
+    <li>{{ item }}</li>
   {% endfor %}
 </ul>

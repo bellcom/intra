@@ -183,6 +183,10 @@ body .page-container {
       &.menu-item--expanded {
         list-style-type: none;
         list-style-image: none;
+
+        & > ul {
+          display: none;
+        }
       }
       a {
         color: black;

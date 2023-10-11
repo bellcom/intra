@@ -21,14 +21,21 @@
   document.querySelectorAll('.menu-reference-wrapper .menu-item--expanded').forEach(item => {
     // Create a button element
     const btn = document.createElement('button');
-    btn.innerText = 'Toggle';
+    btn.innerText = '+';  // Initially set to '+'
     btn.addEventListener('click', () => {
       // Find the nested <ul> and toggle its visibility
       const subMenu = item.querySelector('ul');
-      subMenu.style.display = (subMenu.style.display === 'none') ? 'block' : 'none';
+      if(subMenu.style.display === 'none' || subMenu.style.display === '') {
+        subMenu.style.display = 'block';
+        btn.innerText = '-';  // Set to '-' when expanded
+      } else {
+        subMenu.style.display = 'none';
+        btn.innerText = '+';  // Set back to '+' when collapsed
+      }
     });
-    // Insert the button into the <li> before the <a> tag
-    item.insertBefore(btn, item.firstChild);
+    // Find the <a> tag and insert the button after it
+    const aTag = item.querySelector('a');
+    aTag.insertAdjacentElement('afterend', btn);
   });
-  
+
 </script>

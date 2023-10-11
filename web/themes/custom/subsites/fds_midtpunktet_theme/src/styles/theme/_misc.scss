@@ -188,18 +188,15 @@ body .page-container {
           display: none;
         }
       }
+      &.menu-item:not(.menu-item--expanded) > a:only-child:before {
+        content: '• ';
+        color: #000;
+        margin-right: 5px;
+      }
       a {
         color: black;
         text-decoration: none;
         font-family: Arial, Helvetica, sans-serif;
-
-        &:before {
-          content: '\f101';
-          font-size: 14px;
-          font-family: FontAwesome;
-          margin-right: 5px;
-          display: inline-block;
-        }
 
         &:hover {
           text-decoration: underline;

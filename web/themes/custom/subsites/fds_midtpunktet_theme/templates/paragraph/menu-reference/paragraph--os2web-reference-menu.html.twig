@@ -21,21 +21,21 @@
   document.querySelectorAll('.menu-reference-wrapper .menu-item--expanded').forEach(item => {
     // Create a button element
     const btn = document.createElement('button');
-    btn.innerText = '+';  // Initially set to '+'
+    btn.innerText = '+'; // Initially set to '+'
     btn.addEventListener('click', () => {
       // Find the nested <ul> and toggle its visibility
       const subMenu = item.querySelector('ul');
-      if(subMenu.style.display === 'none' || subMenu.style.display === '') {
+      if (subMenu.style.display === 'none' || subMenu.style.display === '') {
         subMenu.style.display = 'block';
-        btn.innerText = '-';  // Set to '-' when expanded
+        btn.innerText = '-'; // Set to '-' when expanded
       } else {
         subMenu.style.display = 'none';
-        btn.innerText = '+';  // Set back to '+' when collapsed
+        btn.innerText = '+'; // Set back to '+' when collapsed
       }
     });
-    // Find the <a> tag and insert the button after it
+    // Find the <a> tag and insert the button before it
     const aTag = item.querySelector('a');
-    aTag.insertAdjacentElement('afterend', btn);
+    aTag.insertAdjacentElement('beforebegin', btn);
   });
 
 </script>

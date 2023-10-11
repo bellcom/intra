@@ -176,11 +176,13 @@ body .page-container {
   }
   .menu {
     li {
+      padding: 0;
       &::before {
         display: none;
       }
-      &::marker {
-        display: none;
+      &.menu-item--expanded {
+        list-style-type: none;
+        list-style-image: none;
       }
       a {
         color: black;
@@ -190,6 +192,8 @@ body .page-container {
         &:before {
           content: '\f101';
           font-size: 14px;
+          font-family: FontAwesome;
+          margin-right: 5px;
         }
 
         &:hover {

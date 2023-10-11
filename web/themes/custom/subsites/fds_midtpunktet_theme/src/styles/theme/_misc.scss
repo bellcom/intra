@@ -191,7 +191,7 @@ body .page-container {
       &.menu-item:not(.menu-item--expanded) > a:only-child:before {
         content: '• ';
         color: #000;
-        margin-right: 5px;
+        margin-right: 9px;
         display: inline-block;
       }
       a {
@@ -215,6 +215,8 @@ body .page-container {
         margin-right: 1px;
         min-width: auto !important;
         min-height: auto !important;
+        margin-left: -4px;
+        margin-right: 5px;
       }
     }
   }

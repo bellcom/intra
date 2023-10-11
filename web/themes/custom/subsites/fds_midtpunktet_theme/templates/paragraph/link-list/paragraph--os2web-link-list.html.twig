@@ -1,8 +1,11 @@
 <div class="link-list-header">
   <h2>Links</h2>
 </div>
+
+{% if paragraph.field_os2web_link_list_link.value %}
 <ul class="custom-link-list">
-  {% for item in content.field_os2web_link_list_link %}
-    <li>{{ item }}</li>
-  {% endfor %}
+
+    {{ content.field_os2web_link_list_link }}
+
 </ul>
+{% endif %}

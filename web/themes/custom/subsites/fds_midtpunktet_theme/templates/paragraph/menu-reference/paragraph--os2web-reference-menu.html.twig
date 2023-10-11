@@ -1,50 +1,12 @@
 {#
 /**
  * @file
- * Template override to display a menu paragraph.
+ * Template override to display the os2web_reference_menu paragraph.
  *
  * Available variables:
- * - paragraph: Full paragraph object.
- * - attributes: HTML attributes for the containing element.
+ * - menu: A render array representing the menu.
  *
- * @see template_preprocess_paragraph()
+ * @see YOURTHEME_preprocess_paragraph__os2web_reference_menu()
  */
 #}
-{% import _self as menus %}
-
-{# Fetch the menu name from the paragraph's field. #}
-{% set menu_name = paragraph.field_os2web_menu_reference.entity.id %}
-
-{# Ideally, you would load your menu items in a preprocess function and pass them to your template. #}
-{# If that's not possible or you prefer not to do so, you may use menu_tree. #}
-{% set items = menu_tree(menu_name).tree %}
-
-{# Render the menu. #}
-{{ menus.menu_links(items, attributes, 0) }}
-
-{% macro menu_links(items, attributes, menu_level) %}
-  {% import _self as menus %}
-  {% if items %}
-    {% if menu_level == 0 %}
-<ul{{ attributes.addClass('menu') }}>
-  {% else %}
-  <ul class="menu">
-    {% endif %}
-    {% for item in items %}
-      {%
-        set classes = [
-        'menu-item',
-        item.hasChildren ? 'menu-item--expanded',
-        item.inActiveTrail ? 'menu-item--active-trail',
-      ]
-      %}
-      <li{{ item.attributes.addClass(classes) }}>
-        {{ link(item.title, item.url) }}
-        {% if item.subtree %}
-          {{ menus.menu_links(item.subtree, attributes, menu_level + 1) }}
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  {% endmacro %}
+{{ menu }}

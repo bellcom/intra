@@ -356,4 +356,26 @@ function fds_midtpunktet_theme_preprocess_media(&$variables) {
   }
 }
 
+function fds_midtpunktet_theme_preprocess_paragraph__os2web_reference_menu(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->hasField('field_os2web_menu_reference') && !$paragraph->field_os2web_menu_reference->isEmpty()) {
+    $menu_name = $paragraph->field_os2web_menu_reference->entity->id();
+
+    // Load the menu tree service, get the tree for your menu.
+    $menu_tree = \Drupal::menuTree();
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+    $tree = $menu_tree->load($menu_name, $parameters);
+
+    // Transform the tree using the manipulators you want.
+    $manipulators = [['callable' => 'menu.default_tree_manipulators:generateIndexAndSort']];
+    $tree = $menu_tree->transform($tree, $manipulators);
+
+    // Finally, build a renderable array using the menu tree.
+    $menu = $menu_tree->build($tree);
+
+    // Assign the built menu to a variable which can be used in your Twig template.
+    $variables['menu'] = $menu;
+  }
+}
+
 

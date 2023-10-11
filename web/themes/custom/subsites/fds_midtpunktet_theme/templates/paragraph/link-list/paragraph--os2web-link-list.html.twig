@@ -2,10 +2,9 @@
 <div class="link-list-header">
   <h2>Links</h2>
 </div>
-{% if content.field_os2web_link_list_link|render|striptags|trim is not empty %}
   <ul class="custom-link-list">
     {% for item in content.field_os2web_link_list_link['#items'] %}
-      <li>{{ item.content|render }}</li>
+      <li>{{ item.content }}</li>
     {% endfor %}
   </ul>
-{% endif %}
+

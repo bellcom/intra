@@ -13,9 +13,10 @@
 {% import _self as menus %}
 
 {# Fetch the menu name from the paragraph's field. #}
-{% set menu_name = paragraph.field_menu.entity.id %}
+{% set menu_name = paragraph.field_os2web_menu_reference.entity.id %}
 
-{# Load the menu items. #}
+{# Ideally, you would load your menu items in a preprocess function and pass them to your template. #}
+{# If that's not possible or you prefer not to do so, you may use menu_tree. #}
 {% set items = menu_tree(menu_name).tree %}
 
 {# Render the menu. #}
@@ -25,9 +26,9 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('menu') }}>
-    {% else %}
-      <ul class="menu">
+<ul{{ attributes.addClass('menu') }}>
+  {% else %}
+  <ul class="menu">
     {% endif %}
     {% for item in items %}
       {%
@@ -44,6 +45,6 @@
         {% endif %}
       </li>
     {% endfor %}
-    </ul>
+  </ul>
   {% endif %}
-{% endmacro %}
+  {% endmacro %}

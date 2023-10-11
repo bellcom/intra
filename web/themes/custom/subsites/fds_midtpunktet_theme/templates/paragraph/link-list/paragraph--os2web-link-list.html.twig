@@ -1,11 +1,13 @@
-<div class="link-list-header">
+<div class="custom-link-list-wrapper">
+  <div class="link-list-header">
   <h2>Links</h2>
-</div>
+  </div>
 
-{% if paragraph.field_os2web_link_list_link.value %}
-<ul class="custom-link-list">
+  {% if paragraph.field_os2web_link_list_link.value %}
+  <ul class="custom-link-list">
 
     {{ content.field_os2web_link_list_link }}
 
-</ul>
-{% endif %}
+  </ul>
+  {% endif %}
+</div>

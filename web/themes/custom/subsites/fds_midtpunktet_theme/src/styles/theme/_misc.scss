@@ -212,6 +212,8 @@ body .page-container {
         box-shadow: none;
         border: 1px solid black;
         margin-right: 1px;
+        min-width: auto !important;
+        min-height: auto !important;
       }
     }
   }

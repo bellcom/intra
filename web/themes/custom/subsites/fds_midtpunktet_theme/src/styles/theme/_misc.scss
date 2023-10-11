@@ -202,6 +202,17 @@ body .page-container {
           text-decoration: underline;
         }
       }
+      button {
+        width: 10px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 16px;
+        background-color: lightgray;
+        box-shadow: none;
+        border: 1px solid black;
+        margin-right: 1px;
+      }
     }
   }
 }

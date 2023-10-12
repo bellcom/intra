@@ -280,6 +280,9 @@
             },
             "drupal/popular_search_keywords" : {
                 "fix deprecated mbstrtolower" : "https://www.drupal.org/files/issues/2023-02-17/deprecated-mbstrtolower-3342692.patch"
+            },
+            "drupal/og_menu" : {
+                "Error: Typed property MenuName accessed before initialization" : "https://www.drupal.org/files/issues/2023-10-05/og_menu-3392055-menuname-property.patch"
             }
         }
     }

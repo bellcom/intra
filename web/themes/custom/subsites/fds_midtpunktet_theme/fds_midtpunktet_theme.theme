@@ -378,7 +378,7 @@ function fds_midtpunktet_theme_preprocess_paragraph__os2web_reference_menu(&$var
   }
 }
 
-function fds_midtpunktet_preprocess_node(&$variables) {
+function fds_midtpunktet_theme_preprocess_node(&$variables) {
   if ($variables['node']->getType() === 'os2web_news' && $variables['view_mode'] === 'full') {
     $view_output = views_embed_view('nyheder', 'block_2');
     $variables['sidebar_view'] = render($view_output);

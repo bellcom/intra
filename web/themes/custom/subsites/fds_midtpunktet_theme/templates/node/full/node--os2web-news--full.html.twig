@@ -85,7 +85,7 @@
   <div class="col-12 col-md-4 sidebar">
     {{ sidebar_view }}
   </div>
-  <div class="col-12 col-md-8">
+  <div class="col-12 col-md-8 main-news-content">
   <article{{ attributes.addClass(classes) }}>
 
     {{ title_prefix }}
@@ -109,17 +109,15 @@
     <div{{ content_attributes.addClass('node__content') }}>
       <div class="news-node-wrapper">
         <div class="news-title-wrapper">
-          {{ content.field_os2web_news_heading }}
+          <span>{{ label }}</span>
         </div>
-        <div class="image-title-news">
-          <div class="image-news">
-            {{ content.field_os2web_news_primaryimage }}
-          </div>
-          <div class="title-news">
-            {{ content.field_os2web_news_heading }}
-            {{ content.field_os2web_news_article_date }}
-            {{ content.field_os2web_news_article_author	}}
-          </div>
+        <div class="image-news">
+          {{ content.field_os2web_news_primaryimage }}
+        </div>
+        <div class="title-news">
+          {{ content.field_os2web_news_heading }}
+          {{ content.field_os2web_news_article_date }}
+          {{ content.field_os2web_news_article_author	}}
         </div>
 
         <div class="news-body">

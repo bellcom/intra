@@ -143,4 +143,25 @@
       }
     }
   }
+  .main-news-content {
+    article {
+      .node__content {
+        .news-node-wrapper {
+          .news-title-wrapper {
+            span {
+              background-color: #e3e3e3;
+              padding: 5px;
+              border-bottom: 2px solid #c30a32;
+              font-weight: 600;
+              font-size: 2rem;
+              color: #231f20;
+              font-family: "Museo 300",sans-serif;
+              margin-bottom: 5px;
+            }
+          }
+
+        }
+      }
+    }
+  }
 }

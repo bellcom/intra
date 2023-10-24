@@ -8,7 +8,9 @@
       border-bottom: 2px solid #c30a32;
       font-weight: 600;
       font-size: 2rem;
-      margin: 0;
+      color: #231f20;
+      font-family: "Museo 300", sans-serif;
+      margin-bottom: 5px;
     }
   }
 
@@ -17,27 +19,29 @@
 
     .field--name-field-os2web-link-list-link {
       .field__item {
-        padding: 10px 0;
-        position: relative;
-        border-bottom: 1px solid gray;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
 
-        &:after {
-          position: absolute;
-          right: 5px;
-          top: 50%;
-          transform: translateY(-50%);
-          content: '\f105';
-          font-family: FontAwesome;
+        &:before {
+          content: '\f0da';
+          position: unset;
+          display: inline-flex;
+          align-items: center;
+          margin-right: 10px;
+          font-family: "FontAwesome";
+          font-size: 20px;
+          color: #c30a32;
+
         }
 
+
         a {
-          font-family: Arial, Helvetica, sans-serif;
-          font-weight: 500;
-          font-size: 16px;
+          color: #000;
           text-decoration: none;
-          padding-right: 0;
-          width: 100%;
-          max-width: 95%;
+          font-size: 14px;
+          font-family: Arial, Helvetica, sans-serif;
 
           &:hover {
             text-decoration: underline;

@@ -153,4 +153,5 @@ class FlagExtensionResource extends ResourceBase {
 
     return new ModifiedResourceResponse($response);
   }
+
 }

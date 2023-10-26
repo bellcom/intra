@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\og\Og;
+use Drupal\views\ViewExecutable;
 
 function bc_og_extension_views_data() {
 
@@ -70,4 +71,43 @@ function bc_og_extension_views_query_alter(\Drupal\views\ViewExecutable $view, \
         }
     }
 
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function bc_og_extension_theme($existing, $type, $theme, $path) {
+    return array(
+        'views_view_unformatted__organic_groups__my_groups_block' => array(
+            'template' => 'views-view-unformatted--organic-groups--my-groups-block',
+            'base hook' => 'view'
+        ),
+        'views_view_unformatted__organic_groups__all_groups_block' => array(
+            'template' => 'views-view-unformatted--organic-groups--all-groups-block',
+            'base hook' => 'view'
+        ),
+        'views_view_unformatted__organic_groups__other_groups_block' => array(
+            'template' => 'views-view-unformatted--organic-groups--other-groups-block',
+            'base hook' => 'view'
+        ),
+    );
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function bc_og_extension_views_pre_render(ViewExecutable $view) {
+    if ($view->id() === 'organic_groups') {
+        foreach ($view->result as $key => $value) {
+            if ($value->_relationship_entities && !empty($value->_relationship_entities['entity_id'])) {
+                $var = $value->_relationship_entities['entity_id'];
+                $value->data = (object) array(
+                    "nid" => $var->id(),
+                    "title" => $var->getTitle()
+                );
+            }
+        }
+    }
 }

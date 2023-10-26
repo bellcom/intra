@@ -37,10 +37,11 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin-top: 3rem;
+  margin: 0;
   font-family: "Museo 300", sans-serif;
   font-weight: normal;
   color: $color-dark-gray2;
+  max-width: none !important;
 
   + p,
   + .body-text {
@@ -59,13 +60,13 @@ h1 {
 
 h2, .h2,
 h3, .h3 {
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin-bottom: .4rem;
+  margin-bottom: 0;
 }
 
 h2, .h2 {

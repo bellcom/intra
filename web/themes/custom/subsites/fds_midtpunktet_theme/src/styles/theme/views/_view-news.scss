@@ -90,3 +90,126 @@
     }
   }
 }
+
+
+.midtpunktet-news-wrapper {
+  .sidebar {
+    .views-element-container {
+      .sidebar-faellesnyheder {
+        .view-header {
+          background-color: #e3e3e3;
+          padding: 5px;
+          border-bottom: 2px solid #c30a32;
+          font-weight: 600;
+          font-size: 2rem;
+          color: #231f20;
+          font-family: "Museo 300", sans-serif;
+          margin-bottom: 5px;
+        }
+
+        .view-content {
+          ul {
+            li {
+              margin: 0;
+              display: flex;
+              align-items: center;
+              border-bottom: 1px solid #ccc;
+
+              &:before {
+                content: '\f0da';
+                position: unset;
+                display: inline-flex;
+                align-items: center;
+                margin-right: 10px;
+                font-family: "FontAwesome";
+                font-size: 20px;
+                color: #c30a32;
+
+              }
+
+              a {
+                color: #000;
+                text-decoration: none;
+                font-size: 14px;
+                font-family: Arial, Helvetica, sans-serif;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .main-news-content {
+    article {
+      .node__content {
+        .news-node-wrapper {
+          .news-title-wrapper {
+            span {
+              background-color: #e3e3e3;
+              padding: 5px;
+              border-bottom: 2px solid #c30a32;
+              font-weight: 600;
+              font-size: 2rem;
+              color: #231f20;
+              font-family: "Museo 300",sans-serif;
+              margin-bottom: 5px;
+              display: flex;
+              width: 100%;
+            }
+          }
+          .image-news {
+            margin: 15px 0;
+
+            .field--name-field-os2web-news-primaryimage {
+              img {
+                border-radius: 5px;
+              }
+            }
+          }
+          .title-news {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+
+            .field--name-field-os2web-news-heading {
+              h1 {
+                margin: 0;
+                font-weight: 600;
+                font-size: 4rem;
+              }
+            }
+            .field--name-field-os2web-news-article-date {
+              margin: 0;
+
+              time {
+                font-style: italic;
+                font-family: Arial, Helvetica, sans-serif;
+              }
+            }
+            .news-author {
+              display: flex;
+              align-items: center;
+              font-family: Arial, Helvetica, sans-serif;
+              font-style: italic;
+              font-size: 13px;
+              gap: 3px;
+            }
+          }
+          .news-body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 15px 0;
+            .news-intro {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -51,7 +51,7 @@ function bc_og_extension_views_query_alter(\Drupal\views\ViewExecutable $view, \
             WHERE
                 uid={$user->id()} AND
                 entity_type='node' AND
-                entity_bundle='group' AND
+                (entity_bundle='group' OR entity_bundle='gruppe') AND
                 (state='active')
             ;";
             $entitieIds = \Drupal::database()

@@ -15,10 +15,14 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
+
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
 {% for row in rows %}
+
+
+
 {% if row['content']['#row'].data %}
   {% set data = row['content']['#row'].data %}
   {%
@@ -29,9 +33,11 @@
   <div{{ row.attributes.addClass(row_classes) }} id="my-group-list-{{ data.nid }}">
     <a href="/node/{{ data.nid }}">{{ data.title }}</a>
     <a href="/group/node/{{ data.nid }}/unsubscribe">
+      {% if not data.is_admin %}
       <span class="og-group og-group-remove" data-nid="{{ data.nid }}">
         <img src="/modules/custom/bc_og_extension/images/delete.svg">
       </span>
+      {% endif %}
     </a>
   </div>
 

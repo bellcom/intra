@@ -102,10 +102,12 @@ function bc_og_extension_views_pre_render(ViewExecutable $view) {
     if ($view->id() === 'organic_groups') {
         foreach ($view->result as $key => $value) {
             if ($value->_relationship_entities && !empty($value->_relationship_entities['entity_id'])) {
+                $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
                 $var = $value->_relationship_entities['entity_id'];
                 $value->data = (object) array(
                     "nid" => $var->id(),
-                    "title" => $var->getTitle()
+                    "title" => $var->getTitle(),
+                    "is_admin" => $isAdmin
                 );
             }
         }

@@ -18,6 +18,14 @@
 
           .gruppenavn {
             padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+
+            .group-name-title {
+              flex-basis: 75%;
+            }
 
             .unsubscribe-group-btn {
               background-color: #ef9494;
@@ -27,6 +35,10 @@
               text-decoration: none;
               font-family: Arial, Helvetica, sans-serif;
               font-size: 14px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-basis: 25%;
             }
 
             &:nth-child(odd) {

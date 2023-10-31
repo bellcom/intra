@@ -31,7 +31,7 @@
   ]
   %}
   <div{{ row.attributes.addClass(row_classes) }} id="my-group-list-{{ data.nid }}">
-    <a href="/node/{{ data.nid }}">{{ data.title }}</a>
+    <a class="group-name-title" href="/node/{{ data.nid }}">{{ data.title }}</a>
     <a class="unsubscribe-group-btn" href="/group/node/{{ data.nid }}/unsubscribe">
       {% if not data.is_admin %}
       Afmeld

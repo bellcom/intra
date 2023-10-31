@@ -32,11 +32,9 @@
   %}
   <div{{ row.attributes.addClass(row_classes) }} id="my-group-list-{{ data.nid }}">
     <a href="/node/{{ data.nid }}">{{ data.title }}</a>
-    <a href="/group/node/{{ data.nid }}/unsubscribe">
+    <a class="unsubscribe-group-btn" href="/group/node/{{ data.nid }}/unsubscribe">
       {% if not data.is_admin %}
-      <span class="og-group og-group-remove" data-nid="{{ data.nid }}">
-        <img src="/modules/custom/bc_og_extension/images/delete.svg">
-      </span>
+      Afmeld
       {% endif %}
     </a>
   </div>

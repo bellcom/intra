@@ -28,10 +28,8 @@
   %}
   <div{{ row.attributes.addClass(row_classes) }}>
     <a href="/node/{{ data.nid }}">{{  data.title }}</a>
-    <a href="/group/node/{{ data.nid }}/subscribe">
-      <span class="og-group og-group-add" data-nid="{{ data.nid }}">
-        <img src="/modules/custom/bc_og_extension/images/add.svg">
-      </span>
+    <a class="subscribe-group-btn" href="/group/node/{{ data.nid }}/subscribe">
+      Tilmeld
     </a>
   </div>
 {% endif %}

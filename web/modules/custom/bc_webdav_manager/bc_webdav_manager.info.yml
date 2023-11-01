@@ -1,0 +1,14 @@
+name: 'Bellcom WebDav manager'
+type: module
+description: 'This module will control access to Webdav. More specifically, it will handle the way files can be edited and check permissions to files before editing.'
+core_version_requirement: ^8 || ^9
+package: 'Bellcom'
+
+stylesheets:
+  - css/rk_webdav_manager_style.css
+
+libraries:
+  - 'rk_webdav_manager/openLink'
+
+dependencies:
+  - drupal:file_entity:file_entity

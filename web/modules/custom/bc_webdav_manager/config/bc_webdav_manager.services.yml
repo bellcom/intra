@@ -1,0 +1,5 @@
+services:
+  bc_webdav_manager.form:
+    class: Drupal\bc_webdav_manager\Form\BcWebdavManagerForm
+    tags:
+      - { name: form_type }

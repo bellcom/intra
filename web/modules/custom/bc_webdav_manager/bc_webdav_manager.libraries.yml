@@ -1,0 +1,5 @@
+bc_webdav_manager_wrapper:
+  version: 1.x
+  css:
+    theme:
+      css/bc_webdav_manager_style.css: {}

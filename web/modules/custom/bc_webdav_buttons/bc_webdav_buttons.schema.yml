@@ -1,0 +1,37 @@
+# bc_webdav_buttons.schema.yml
+
+bc_webdav_buttons_log:
+  description: 'A log of who viewed and edited files using the WebDAV buttons'
+  fields:
+    id:
+      type: serial
+      not null: true
+      unsigned: true
+      description: 'Primary Key: Unique identifier for a log entry.'
+    unix_timestamp:
+      type: int
+      not null: true
+      unsigned: true
+      description: 'Unix timestamp of the log entry.'
+    uid:
+      type: int
+      not null: true
+      unsigned: true
+      description: 'User ID of the log entry.'
+    nid:
+      type: int
+      not null: true
+      unsigned: true
+      description: 'Node ID of the log entry.'
+    fid:
+      type: int
+      not null: true
+      unsigned: true
+      description: 'File ID of the log entry.'
+    action:
+      type: varchar
+      length: 20
+      not null: true
+      description: 'Action performed in the log entry.'
+  primary key:
+    id

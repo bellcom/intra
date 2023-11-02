@@ -1,0 +1,103 @@
+<?php
+
+use Drupal\Core\Database\Connection;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function bc_webdav_buttons_ctools_plugin_directory($module, $plugin_type) {
+  if ($module === 'ctools' && $plugin_type === 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function bc_webdav_buttons_menu() {
+  $items = [];
+
+  $items['admin/config/content/bcwebdavbuttons'] = [
+    'title' => 'BC WebDav Buttons',
+    'description' => 'Turn on the BC WebDav buttons.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => ['administer bc_webdav_buttons settings'],
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['webdav_log'] = [
+    'page callback' => 'bc_webdav_buttons_log',
+    'type' => MENU_CALLBACK,
+    'access arguments' => ['access content'],
+  ];
+
+  $items['webdav_get_log'] = [
+    'page callback' => 'bc_webdav_buttons_get_log',
+    'type' => MENU_CALLBACK,
+    'access callback' => 'user_access',
+    'access arguments' => ['access content'],
+  ];
+
+  $items['webdav_download'] = [
+    'page callback' => 'bc_webdav_download',
+    'type' => MENU_CALLBACK,
+    'access callback' => 'user_access',
+    'access arguments' => ['access content'],
+  ];
+
+  return $items;
+}
+
+/**
+ * Logs actions in the custom table.
+ */
+function bc_webdav_buttons_log($nid, $fid, $action) {
+  $current_user = \Drupal::currentUser();
+
+  $database = \Drupal::database();
+  $database->insert('bc_webdav_buttons_log')
+    ->fields([
+      'unix_timestamp' => \Drupal::time()->getRequestTime(),
+      'nid' => $nid,
+      'uid' => $current_user->id(),
+      'fid' => $fid,
+      'action' => $action,
+    ])
+    ->execute();
+}
+
+/**
+ * Retrieves a log of actions in JSON format.
+ */
+function bc_webdav_buttons_get_log($fid) {
+  $query = \Drupal::database()->select('file_managed', 'fm');
+  $query->fields('fm', ['fid', 'filename']);
+  $query->addExpression("FROM_UNIXTIME(log.unix_timestamp, '%d.%m.%Y %H:%i:%s')", 'timestamp');
+  $query->join('bc_webdav_buttons_log', 'log', 'log.fid = fm.fid AND log.action = :action', [':action' => 'edit']);
+  $query->leftJoin('users', 'u', 'u.uid = log.uid');
+  $query->condition('fm.fid', $fid);
+  $query->orderBy('log.id', 'DESC');
+  $query->range(0, 20);
+
+  $result = $query->execute();
+  $data = $result->fetchAll();
+
+  foreach ($data as &$row) {
+    $row->user_url = \Drupal\Core\Url::fromRoute('entity.user.canonical', ['user' => $row->uid])->toString();
+  }
+
+  return new JsonResponse($data);
+}
+
+/**
+ * Redirects to the download link.
+ */
+function bc_webdav_download($file) {
+  // Download file.
+  // The reason we redirect here instead of just direct linking
+  // is because we want log_access to log the download.
+  $response = new Symfony\Component\HttpFoundation\RedirectResponse('/webdav/' . rawurldecode($file));
+  $response->send();
+  exit;
+}

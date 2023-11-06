@@ -229,7 +229,6 @@ form {
   &#views-exposed-form-os2web-search-os2web-search-page,
   &#views-exposed-form-people-search-people-search{
     position: relative;
-    flex-grow: 1 !important;
     .form-actions {
       position: absolute;
 
@@ -305,7 +304,9 @@ form {
   }
 }
 
-.form-type-search-api-autocomplete {}
+.block-views-exposed-filter-blockos2web-search-os2web-search-page, .block-views-exposed-filter-blockpeople-search-people-search {
+  flex-grow: 1;
+}
 
 .js-form-item-user-consent {
   margin-top: 20px;

@@ -1,0 +1,7 @@
+bc_webdav_manager.settings:
+  path: '/admin/config/system/bc-webdav-manager'
+  defaults:
+    _form: '\Drupal\bc_webdav_manager\Form\BcWebdavManagerForm'
+    _title: 'BC Webdav manager'
+  requirements:
+    _permission: 'administer site configuration'

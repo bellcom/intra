@@ -1,0 +1,22 @@
+#rk_webdav_manager_wrapper {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    background-color: lightgray;
+    font-weight: 900;
+    font-family: inherit;
+    font-size: 16px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 2px lightgrey;
+}
+
+#rk_webdav_manager_wrapper img {
+    max-width: 100%;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 5px 15px grey;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}

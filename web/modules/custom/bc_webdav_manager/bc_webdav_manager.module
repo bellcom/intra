@@ -1,0 +1,66 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Implements hook_menu() for Drupal 9 page callback.
+ */
+function bc_webdav_manager_menu() {
+  $items = [];
+
+  $items['document-handle'] = [
+    'title' => 'Document handling',
+    'description' => 'Document handler page',
+    'route_name' => 'bc_webdav_manager.webdav_controller_page',
+  ];
+
+  $items['admin/config/system/bc-webdav-manager'] = [
+    'title' => 'RK Webdav manager',
+    'description' => 'Specify location for webdav',
+    'page_callback' => 'drupal_get_form',
+    'page_arguments' => ['bc_webdav_manager_form'],
+    'type' => MENU_NORMAL_ITEM,
+    'access_arguments' => ['administer site configuration'],
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_form() for Drupal 9 form.
+ */
+function bc_webdav_manager_form($form, FormStateInterface $form_state) {
+  $config = \Drupal::config('bc_webdav_manager.settings');
+
+  $form['bc_webdav_manager_form_outsite_location_textfield'] = [
+    '#type' => 'textfield',
+    '#title' => t('Webdav location outside'),
+    '#default_value' => $config->get('outsite_location_textfield'),
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+    '#description' => 'The full path the webdav for outside editing eg: http://dev.midtpunktet.ringsted.dk/webdav/',
+  ];
+
+  $form['bc_webdav_manager_form_submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  ];
+
+  return $form;
+}
+
+/**
+ * Form submission handler for the Drupal 9 form.
+ */
+function bc_webdav_manager_form_submit(array $form, FormStateInterface $form_state) {
+  \Drupal::configFactory()
+    ->getEditable('bc_webdav_manager.settings')
+    ->set('outsite_location_textfield', $form_state->getValue('bc_webdav_manager_form_outsite_location_textfield'))
+    ->save();
+
+  $this->messenger()->addMessage("Saved!");
+}
+

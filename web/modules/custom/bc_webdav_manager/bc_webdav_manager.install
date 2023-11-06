@@ -1,0 +1,36 @@
+<?php
+
+use Drupal\Core\Routing\RequestContext;
+use Symfony\Component\Filesystem\Filesystem;
+
+/**
+ * Implements hook_install() for Drupal 9.
+ */
+function rk_webdav_manager_install() {
+  $config = \Drupal::configFactory()->getEditable('rk_webdav_manager.settings');
+
+  // Set a default value for your module's configuration.
+  $config->set('webdav_edit_folder_path', 'sites/default/files/webdav_edit_folder');
+  $config->save();
+}
+
+/**
+ * Implements hook_enable() for Drupal 9.
+ */
+function rk_webdav_manager_enable() {
+  // Get the configuration.
+  $config = \Drupal::config('rk_webdav_manager.settings');
+  $webdavFolderPath = $config->get('webdav_edit_folder_path');
+
+  // Ensure that the edit folder exists.
+  $filesystem = new Filesystem();
+  if (!$filesystem->exists($webdavFolderPath)) {
+    // The folder doesn't exist; create it.
+    $filesystem->mkdir($webdavFolderPath);
+
+    // Set the appropriate file permissions.
+    // Note that the specific ownership and permissions may vary based on your server setup.
+    // You should customize this according to your server's requirements.
+    $filesystem->chown($webdavFolderPath, 'www-data');
+  }
+}

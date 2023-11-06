@@ -1,0 +1,130 @@
+.bc-webdav-file-name-wrapper {
+  display: inline-block;
+  max-width: 43vw;
+  min-height: 100%;
+}
+
+.bc-webdav-button-item-wrapper {
+  display: block;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0 20px 0;
+}
+
+.bc-webdav-button {
+  display: inline-block;
+  opacity: 0.8;
+}
+
+.bc-webdav-button-buttons-wrapper {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+.bc-webdav-button:hover {
+  opacity: 1;
+}
+
+.bc-webdav-button-disabled,
+.bc-webdav-button-disabled:hover {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.bc-webdav-button-view {
+  background: #8CC739;
+}
+
+.bc-webdav-button-download {
+  background: #f4e241;
+}
+
+.bc-webdav-button-edit {
+  background: #2c7bc5;
+}
+
+.bc-webdav-button-icon {
+  width: 34px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.4) no-repeat center;
+}
+
+.bc-webdav-button-download .bc-webdav-button-icon {
+  background-image: url('../icons/download-24.png'); /* Update image path */
+}
+
+.bc-webdav-button-edit .bc-webdav-button-icon {
+  background-image: url('../icons/edit-24.png'); /* Update image path */
+}
+
+.bc-webdav-button-view .bc-webdav-button-icon {
+  background-image: url('../icons/view-24.png'); /* Update image path */
+}
+
+.bc-webdav-button-history .bc-webdav-button-icon {
+  background-image: url('../icons/history-24.png'); /* Update image path */
+}
+
+.bc-webdav-button-text {
+  padding: 6px 0;
+}
+
+#bc-webdav-button-faded {
+  background: #000;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+  display: none;
+}
+
+/* LOG */
+#bc-webdav-button-log {
+  display: none;
+  position: fixed;
+  background: #fff;
+  border: 2px solid #000;
+  width: 95vw;
+  max-width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999999;
+  padding: 20px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+#bc-webdav-button-log .close_button {
+  color: #f00;
+  position: absolute;
+  top: 0;
+  right: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Verdana, sans-serif;
+  cursor: pointer;
+  padding: 8px 15px;
+}
+
+#bc-webdav-button-log .info {
+  margin-bottom: 1em;
+  background: #ff9;
+  padding: 6px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.bc-webdav-button-log-item-wrapper {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.bc-webdav-button-log-item-wrapper .name {
+  font-weight: bold;
+  display: inline-block;
+  width: 100px;
+}

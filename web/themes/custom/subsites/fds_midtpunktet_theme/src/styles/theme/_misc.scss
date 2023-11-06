@@ -222,6 +222,12 @@ body .page-container {
   }
 }
 
+.region-header__search {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------

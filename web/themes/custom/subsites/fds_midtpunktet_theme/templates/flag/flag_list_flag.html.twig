@@ -12,7 +12,6 @@
  * - flagging_collection: The flagging_collection id.
  */
 #}
-<div class="flags-wrapper">
 {% apply spaceless %}
   {# Depending on the flag action, set the appropriate action class. #}
   {% if action == 'unflag' %}
@@ -51,4 +50,3 @@
   {% set attributes = attributes.setAttribute('rel', 'nofollow') %}
     <div class="{{classes|join(' ')}}"><a{{ attributes }}>{{ title }}</a></div>
 {% endapply %}
-</div>

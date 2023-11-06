@@ -165,7 +165,7 @@ body {
 }
 
 .form-input {
-  &:focus, 
+  &:focus,
   &.focus {
     outline: 3px solid #000 !important;
   }
@@ -225,42 +225,43 @@ body {
 
 // Search form.
 form {
-  &#views-exposed-form-os2web-meetings-search-page-os2web-meeetings-search-page, 
-  &#views-exposed-form-os2web-search-os2web-search-page {
+  &#views-exposed-form-os2web-meetings-search-page-os2web-meeetings-search-page,
+  &#views-exposed-form-os2web-search-os2web-search-page,
+  &#views-exposed-form-people-search-people-search{
     position: relative;
     .form-actions {
       position: absolute;
-  
+
       top: 0;
       right: 0;
       z-index: 500;
-  
+
       width: 50px;
-  
+
       margin: 0;
-  
+
       .form-submit {
         position: absolute;
-  
+
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-  
+
         z-index: 500;
-  
+
         min-width: auto;
         width: 50px;
         height: 45px;
-  
+
         padding: 0 !important;
-  
+
         border: 0;
-  
+
         background-color: transparent;
         cursor: pointer;
       }
-  
+
       &:after {
         background: transparent url("../images/sprite.png") no-repeat 0px 0px;
         position: absolute;
@@ -277,26 +278,26 @@ form {
         color: transparent;
       }
     }
-  
+
     .form-input {
       margin: 0;
       padding: 12px 60px 12px 20px;
-  
+
       max-width: unset;
-  
+
       border-radius: 25px;
     }
-  
+
     // Remove float from inline form elements.
     .form--inline {
-  
+
       .form-item {
         float: initial;
-  
+
         margin: 0;
       }
     }
-  
+
     input.form-autocomplete {
       background-image: none;
     }

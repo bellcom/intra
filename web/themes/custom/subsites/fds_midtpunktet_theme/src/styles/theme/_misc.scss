@@ -223,7 +223,7 @@ body .page-container {
 }
 
 .region-header__search {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 20px;
 }

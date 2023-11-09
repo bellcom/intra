@@ -5,3 +5,5 @@ flag_sidebar_attachment:
       css/sidebar.css: {}
   js:
     js/sidebar.js: {}
+  dependencies:
+    - core/jquery

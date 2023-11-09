@@ -12,25 +12,22 @@ function bc_flag_extension_theme($existing, $type, $theme, $path) {
   if (!empty($config['enabled'])) {
 
     $vars = array(
-      'name' => 'tarzan',
-      'loggedin' => null,
+      'name' => '',
+      'loggedin' => false,
       'bookmarks' => array(),
       'shortcuts' => array(),
       'unreads' => array()
     );
 
-    $vars['loggedin'] = \Drupal::currentUser()->id();
-
-
-      $items = array(
-      'sidebar' => array(
-        'render element' => 'element',
-        'template' => 'sidebar',
-        'variables' => array(
-          'vars' => $vars,
-          'config' => $config
+    $items = array(
+        'sidebar' => array(
+            'render element' => 'element',
+            'template' => 'sidebar',
+            'variables' => array(
+                'vars' => $vars,
+                'config' => $config
+            )
         )
-      )
     );
 
     return $items;

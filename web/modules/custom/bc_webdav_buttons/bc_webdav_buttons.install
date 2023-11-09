@@ -1,0 +1,62 @@
+<?php
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Query\SelectInterface;
+
+/**
+ * Implements hook_install().
+ */
+#function bc_webdav_buttons_install() {
+#  Database::getConnection()->schema()->createTable('bc_webdav_buttons_log', bc_webdav_buttons_schema()['bc_webdav_buttons_log']);
+#}
+
+/**
+ * Implements hook_schema().
+ */
+function bc_webdav_buttons_schema() {
+  $schema['bc_webdav_buttons_log'] = array(
+    'description' => 'A log of who viewed and edited files using the WebDAV buttons',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Primary Key: Unique identifier for a log entry.',
+      ),
+      'unix_timestamp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Unix timestamp of the log entry.',
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'User ID of the log entry.',
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Node ID of the log entry.',
+      ),
+      'fid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'File ID of the log entry.',
+      ),
+      'action' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'description' => 'Action performed in the log entry.',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+

@@ -21,10 +21,12 @@ div.flag-sidebar-block ul li:before {
 
 .sidebar-block {
   position: relative;
-  display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
+.sidebar-block.sidebar-bookmark { display: flex; }
+.sidebar-block.sidebar-shortcut { display: none; }
+.sidebar-block.sidebar-unread { display: none; }
 
 .sidebar-block .sidebar-bookmark-list,
 .sidebar-block .sidebar-shortcut-list,
@@ -79,7 +81,10 @@ div.flag-sidebar-block ul li:before {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
 
+.headline span {
+  padding: 0px 3px 0px 3px;
 }
 
 .sidebar-bookmark-icon {

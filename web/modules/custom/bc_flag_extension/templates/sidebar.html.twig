@@ -16,7 +16,7 @@
   </div>
   {% endif %}
 
-  {% if config.shortcut and vars.loggedin %}
+  {% if config.shortcut %}
   <div class="sidebar-block sidebar-shortcut">
     <div class="sidebar-shortcut-icon"><img src="/modules/custom/bc_flag_extension/images/shortcut.png"></div>
     <div class="sidebar-shortcut-list">
@@ -26,11 +26,11 @@
   </div>
   {% endif %}
 
-  {% if config.unread and vars.loggedin %}
+  {% if config.unread %}
   <div class="sidebar-block sidebar-unread">
     <div class="sidebar-unread-icon"><img src="/modules/custom/bc_flag_extension/images/bell.png"></div>
     <div class="sidebar-unread-list">
-      <div class="headline">Du har ulæste beskeder</div>
+      <div class="headline">Du har <span class="unread-number">0</span> ulæste beskeder</div>
       <ul class="sidebar-unread-list-ul"></ul>
     </div>
   </div>

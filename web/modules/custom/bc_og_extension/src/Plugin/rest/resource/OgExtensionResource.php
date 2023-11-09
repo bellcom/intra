@@ -3,18 +3,16 @@
 
 namespace Drupal\bc_og_extension\Plugin\rest\resource;
 
-use Drupal\node\Entity\Node;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ModifiedResourceResponse;
-use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provides a og extension Resource
  *
  * @RestResource(
- *   id = "data",
- *   label = @Translation("Flag extension Resource"),
+ *   id = "membership",
+ *   label = @Translation("bc og extension Resource"),
  *   uri_paths = {
  *     "canonical" = "/bc_og_extension/membership"
  *   }

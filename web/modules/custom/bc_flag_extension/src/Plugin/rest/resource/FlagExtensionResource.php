@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @RestResource(
  *   id = "data",
- *   label = @Translation("Flag extension Resource"),
+ *   label = @Translation("bc flag extension Resource"),
  *   uri_paths = {
  *     "canonical" = "/bc_flag_extension/data"
  *   }

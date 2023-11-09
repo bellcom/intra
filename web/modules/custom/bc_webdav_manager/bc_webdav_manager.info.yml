@@ -10,5 +10,3 @@ stylesheets:
 libraries:
   - 'rk_webdav_manager/openLink'
 
-dependencies:
-  - drupal:file_entity:file_entity

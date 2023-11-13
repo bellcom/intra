@@ -6,9 +6,9 @@ dependencies:
   module:
     - system
   theme:
-    - fds_redwhite_theme
+    - fds_midtpunktet_theme
 id: sidebar_first__navigation
-theme: fds_redwhite_theme
+theme: fds_midtpunktet_theme
 region: sidebar_first
 weight: -10
 provider: null

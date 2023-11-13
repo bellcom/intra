@@ -8,7 +8,7 @@ function bc_mail_smsmail_node_presave($node) {
 
   $conf = (object) \Drupal::config('bc_mail_smsmail.settings')->get();
 
-  if ($conf->enabled && !empty($conf->gateway)) {
+  if (!empty($conf) && is_object($conf) && $conf->enabled && !empty($conf->gateway)) {
 
     $currentNodeType = $node->getType();
     if (isset($conf->contents[$currentNodeType]) && $conf->contents[$currentNodeType]['enabled']) {

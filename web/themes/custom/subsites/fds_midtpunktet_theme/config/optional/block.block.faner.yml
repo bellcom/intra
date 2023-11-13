@@ -2,9 +2,9 @@ langcode: da
 status: true
 dependencies:
   theme:
-    - fds_redwhite_theme
+    - fds_midtpunktet_theme
 id: faner
-theme: fds_redwhite_theme
+theme: fds_midtpunktet_theme
 region: content
 weight: -8
 provider: null

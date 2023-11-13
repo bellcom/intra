@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - fds_redwhite_theme
+    - fds_midtpunktet_theme
 id: main_content
-theme: fds_redwhite_theme
+theme: fds_midtpunktet_theme
 region: content
 weight: -7
 provider: null

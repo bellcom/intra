@@ -2,9 +2,9 @@ langcode: da
 status: true
 dependencies:
   theme:
-    - fds_redwhite_theme
-id: fds_redwhite_theme_local_actions
-theme: fds_redwhite_theme
+    - fds_midtpunktet_theme
+id: fds_midtpunktet_theme_local_actions
+theme: fds_midtpunktet_theme
 region: content
 weight: -9
 provider: null

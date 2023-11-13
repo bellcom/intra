@@ -8,9 +8,9 @@ dependencies:
     - fieldblock
   theme:
     - fds_base_theme
-    - fds_redwhite_theme
+    - fds_midtpunktet_theme
 id: paragraph_wide
-theme: fds_redwhite_theme
+theme: fds_midtpunktet_theme
 region: featured_bottom_first
 weight: 0
 provider: null

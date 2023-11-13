@@ -6,9 +6,9 @@ dependencies:
   module:
     - system
   theme:
-    - fds_redwhite_theme
+    - fds_midtpunktet_theme
 id: sidefod
-theme: fds_redwhite_theme
+theme: fds_midtpunktet_theme
 region: footer_first
 weight: -12
 provider: null

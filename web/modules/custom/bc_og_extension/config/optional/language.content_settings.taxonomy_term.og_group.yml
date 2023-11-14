@@ -1,0 +1,11 @@
+uuid: d355fd82-2618-401c-8d02-3475c06ff407
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.og_group
+id: taxonomy_term.og_group
+target_entity_type_id: taxonomy_term
+target_bundle: og_group
+default_langcode: site_default
+language_alterable: false

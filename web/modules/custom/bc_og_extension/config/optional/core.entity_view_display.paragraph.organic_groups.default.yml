@@ -1,0 +1,24 @@
+uuid: 218710a1-4fe6-4108-8741-d846ecc8c837
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.organic_groups.field_og_view
+    - paragraphs.paragraphs_type.organic_groups
+  module:
+    - viewsreference
+id: paragraph.organic_groups.default
+targetEntityType: paragraph
+bundle: organic_groups
+mode: default
+content:
+  field_og_view:
+    type: viewsreference_formatter
+    label: hidden
+    settings:
+      plugin_types:
+        - block
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

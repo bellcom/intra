@@ -1,0 +1,27 @@
+uuid: ad6c9731-c3aa-440c-82ac-2d835a788f02
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.organic_groups.field_og_view
+    - paragraphs.paragraphs_type.organic_groups
+  module:
+    - viewsreference
+id: paragraph.organic_groups.default
+targetEntityType: paragraph
+bundle: organic_groups
+mode: default
+content:
+  field_og_view:
+    type: viewsreference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

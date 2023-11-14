@@ -9,18 +9,18 @@ function bc_og_extension_views_data() {
   $data = array();
 
   $data['og_membership'] = array(
-    'entity_id' => array(
+    'og_node' => array(
       'relationship' => array(
         'title' => 'OG node relation',
         'base' => 'node_field_data',
-        'base_field' => 'nid',
+        'base field' => 'nid',
         'field' => 'entity_id',
         'handler' => 'views_handler_relationship',
         'id' => 'standard',
         'help' => 'OG entity ID relation to the node',
       )
     ),
-    'uid' => array(
+    'og_user' => array(
       'relationship' => array(
         'title' => 'OG user relation',
         'base' => 'users_field_data',
@@ -40,36 +40,46 @@ function bc_og_extension_views_data() {
 
 
 function bc_og_extension_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
-    if (($view->id() === 'organic_groups') && ($view->current_display == 'other_groups_block')) {
-        $user = \Drupal::currentUser();
-        if (!$user->isAnonymous()) {
-            $sql = "
-            SELECT 
-                entity_id
-            FROM
-                og_membership
-            WHERE
-                uid={$user->id()} AND
-                entity_type='node' AND
-                (entity_bundle='group' OR entity_bundle='gruppe') AND
-                (state='active')
-            ;";
-            $entitieIds = \Drupal::database()
-                ->query($sql)
-                ->fetchAllKeyed(0, 0);
-            if (count($entitieIds)) {
-                $entitieIds = array_values($entitieIds);
-                foreach ($query->where as &$condition_group) {
-                    foreach ($condition_group['conditions'] as &$condition) {
-                        if ($condition['field'] == 'og_membership.entity_id') {
-                            $condition['value'] = $entitieIds;
-                            $condition['operator'] = 'NOT IN';
-                        }
-                    }
-                }
+
+  if (
+    ($view->id() === 'organic_groups') &&
+    (
+      ($view->current_display == 'other_groups_block') ||
+      ($view->current_display == 'other_projects_block')
+    )
+  ) {
+
+    $user = \Drupal::currentUser();
+    if (!$user->isAnonymous()) {
+      $sql = "
+        SELECT 
+            entity_id
+        FROM
+            og_membership
+        WHERE
+            uid={$user->id()} AND
+            entity_type='node' AND
+            (entity_bundle='group' OR entity_bundle='gruppe') AND
+            (state='active')
+        ;";
+
+      $entitieIds = \Drupal::database()
+        ->query($sql)
+        ->fetchAllKeyed(0, 0);
+
+      if (count($entitieIds)) {
+        $entitieIds = array_values($entitieIds);
+        foreach ($query->where as &$condition_group) {
+          foreach ($condition_group['conditions'] as &$condition) {
+            if ($condition['field'] == 'og_membership.entity_id') {
+              $condition['value'] = $entitieIds;
+              $condition['operator'] = 'NOT IN';
             }
+          }
         }
+      }
     }
+  }
 
 }
 
@@ -78,20 +88,33 @@ function bc_og_extension_views_query_alter(\Drupal\views\ViewExecutable $view, \
  * Implements hook_theme().
  */
 function bc_og_extension_theme($existing, $type, $theme, $path) {
-    return array(
-        'views_view_unformatted__organic_groups__my_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--my-groups-block',
-            'base hook' => 'view'
-        ),
-        'views_view_unformatted__organic_groups__all_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--all-groups-block',
-            'base hook' => 'view'
-        ),
-        'views_view_unformatted__organic_groups__other_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--other-groups-block',
-            'base hook' => 'view'
-        ),
-    );
+  return array(
+    'views_view_unformatted__organic_groups__my_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--my-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__all_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--all-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__other_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--other-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__my_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--my-projects-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__all_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--all-projects-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__other_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--other-projects-block',
+      'base hook' => 'view'
+    ),
+  );
+
 }
 
 
@@ -99,18 +122,30 @@ function bc_og_extension_theme($existing, $type, $theme, $path) {
  * Implements hook_theme().
  */
 function bc_og_extension_views_pre_render(ViewExecutable $view) {
-    if ($view->id() === 'organic_groups') {
-        foreach ($view->result as $key => $value) {
-            if ($value->_relationship_entities && !empty($value->_relationship_entities['entity_id'])) {
-                $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
-                $var = $value->_relationship_entities['entity_id'];
-                $value->data = (object) array(
-                    "nid" => $var->id(),
-                    "title" => $var->getTitle(),
-                    "is_admin" => $isAdmin
-                );
-            }
-        }
+
+  if ($view->id() === 'organic_groups') {
+    foreach ($view->result as $key => $value) {
+
+      if ($value->_relationship_entities && !empty($value->_relationship_entities['og_node'])) {
+        $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
+        $node = $value->_relationship_entities['og_node'];
+        $value->data = (object) array(
+          "nid" => $node->id(),
+          "title" => $node->getTitle(),
+          "is_admin" => $isAdmin
+        );
+
+      } else if ($value->_relationship_entities && !empty($value->_relationship_entities['entity_id'])) {
+        $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
+        $var = $value->_relationship_entities['entity_id'];
+        $value->data = (object) array(
+          "nid" => $var->id(),
+          "title" => $var->getTitle(),
+          "is_admin" => $isAdmin
+        );
+      }
     }
+  }
+
 }
 

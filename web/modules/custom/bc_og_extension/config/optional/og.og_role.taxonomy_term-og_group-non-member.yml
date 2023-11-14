@@ -1,0 +1,16 @@
+uuid: f96e2098-9c86-4cf9-ad92-fd64ac2b174d
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.og_group
+id: taxonomy_term-og_group-non-member
+label: Non-member
+weight: 3
+group_id: null
+group_type: taxonomy_term
+group_bundle: og_group
+is_admin: null
+permissions:
+  - subscribe
+role_type: required

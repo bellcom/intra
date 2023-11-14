@@ -1,0 +1,11 @@
+uuid: 37c80256-7275-4324-8129-cd7142375ce3
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.og_group_content
+id: node.og_group_content
+target_entity_type_id: node
+target_bundle: og_group_content
+default_langcode: site_default
+language_alterable: false

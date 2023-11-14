@@ -1,0 +1,23 @@
+uuid: a305ff80-4e79-41c9-a03a-d9893daac1cc
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.og_group_content
+  module:
+    - text
+id: node.og_group_content.body
+field_name: body
+entity_type: node
+bundle: og_group_content
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

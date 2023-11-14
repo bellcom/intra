@@ -1,0 +1,15 @@
+uuid: 221ba5e4-d376-42a7-83ee-625724206733
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.og_group
+id: taxonomy_term-og_group-member
+label: Member
+weight: 4
+group_id: null
+group_type: taxonomy_term
+group_bundle: og_group
+is_admin: null
+permissions: {  }
+role_type: required

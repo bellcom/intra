@@ -1,0 +1,60 @@
+uuid: c02ee863-5cb0-4ca1-89b9-1d455ffec84d
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_og_view
+    - paragraphs.paragraphs_type.organic_groups
+  module:
+    - viewsreference
+id: paragraph.organic_groups.field_og_view
+field_name: field_og_view
+entity_type: paragraph
+bundle: organic_groups
+label: 'View gruppe'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: 0
+  plugin_types:
+    block: block
+    default: 0
+    page: 0
+    feed: 0
+    embed: 0
+  preselect_views:
+    block_content: 0
+    content: 0
+    content_recent: 0
+    feeds_feed: 0
+    files: 0
+    flag_bookmark: 0
+    flag_extension: 0
+    frontpage: 0
+    media: 0
+    media_library: 0
+    moderated_content: 0
+    og_members_overview: 0
+    organic_groups: 0
+    os2web_keyword_paragraph_pages_search: 0
+    os2web_logging_access_logs: 0
+    os2web_page_content: 0
+    os2web_pi: 0
+    redirect: 0
+    scheduler_scheduled_content: 0
+    taxonomy_term: 0
+    user_admin_people: 0
+    watchdog: 0
+    webform_submissions: 0
+    who_s_new: 0
+    who_s_online: 0
+    workbench_current_user: 0
+    workbench_edited: 0
+    workbench_recent_content: 0
+field_type: viewsreference

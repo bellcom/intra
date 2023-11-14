@@ -29,6 +29,11 @@
               font-size: 14px;
               text-decoration: none;
               font-family: Arial;
+
+              &:hover {
+                text-decoration: underline;
+                color: #c30a32;
+              }
             }
 
             .unsubscribe-group-btn {

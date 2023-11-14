@@ -1,3 +1,5 @@
 <div class="test-flag-wrapper">
-  {{ content }}
+  {% if content %}
+    {{- content -}}
+  {% endif %}
 </div>

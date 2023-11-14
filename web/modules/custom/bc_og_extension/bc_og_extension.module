@@ -88,20 +88,33 @@ function bc_og_extension_views_query_alter(\Drupal\views\ViewExecutable $view, \
  * Implements hook_theme().
  */
 function bc_og_extension_theme($existing, $type, $theme, $path) {
-    return array(
-        'views_view_unformatted__organic_groups__my_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--my-groups-block',
-            'base hook' => 'view'
-        ),
-        'views_view_unformatted__organic_groups__all_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--all-groups-block',
-            'base hook' => 'view'
-        ),
-        'views_view_unformatted__organic_groups__other_groups_block' => array(
-            'template' => 'views-view-unformatted--organic-groups--other-groups-block',
-            'base hook' => 'view'
-        ),
-    );
+  return array(
+    'views_view_unformatted__organic_groups__my_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--my-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__all_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--all-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__other_groups_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--other-groups-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__my_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--my-projects-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__all_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--all-projects-block',
+      'base hook' => 'view'
+    ),
+    'views_view_unformatted__organic_groups__other_projects_block' => array(
+      'template' => 'views-view-unformatted--organic-groups--other-projects-block',
+      'base hook' => 'view'
+    ),
+  );
+
 }
 
 

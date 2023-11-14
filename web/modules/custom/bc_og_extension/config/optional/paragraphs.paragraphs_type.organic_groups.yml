@@ -1,0 +1,10 @@
+uuid: 777ef30f-893f-4103-8459-dc6ed5973e28
+langcode: da
+status: true
+dependencies: {  }
+id: organic_groups
+label: Gruppe
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

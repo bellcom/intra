@@ -125,6 +125,7 @@
         "drupal/photoswipe": "^3.1",
         "drupal/poll": "^1.6",
         "drupal/popular_search_keywords": "^1.0",
+        "drupal/publication_date": "^2.0@beta",
         "drupal/queue_mail": "^1.4",
         "drupal/queue_ui": "^3.1",
         "drupal/quick_node_clone": "^1.14",

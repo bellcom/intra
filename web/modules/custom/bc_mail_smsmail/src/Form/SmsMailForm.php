@@ -26,17 +26,48 @@ class SmsMailForm extends ConfigFormBase {
 
     $form['form']['enabled'] = array(
       '#type' => 'checkbox',
-      '#title' => 'this is enabled',
+      '#title' => $this->t('this is enabled'),
       '#default_value' => $config->get('enabled')
     );
 
     $form['form']['gateway'] = array(
       '#type' => 'textfield',
-      '#title' => 'mail sms gateway',
+      '#title' => $this->t('mail sms gateway'),
       '#default_value' => $config->get('gateway'),
-      '#description' => 'the mailaddress that combine with numer send the sms ex "@sms.ringsted.int"'
+      '#description' => 'the mailaddress that combine with number send the sms ex "@sms.ringsted.int"',
+      '#required' => true,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="enabled"]' => array('checked' => true)
+        )
+      )
     );
 
+    $form['form']['from'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('the from address'),
+      '#default_value' => $config->get('from'),
+      '#description' => $this->t('the mailaddress to use for FROM'),
+      '#required' => true,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="enabled"]' => array('checked' => true)
+        )
+      )
+    );
+
+    $form['form']['reply'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('the reply to address'),
+      '#default_value' => $config->get('reply'),
+      '#description' => $this->t('the mailaddress to use for reply to'),
+      '#required' => true,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="enabled"]' => array('checked' => true)
+        )
+      )
+    );
 
     $form['form']['members'] = array(
       '#type' => 'table',
@@ -90,7 +121,7 @@ class SmsMailForm extends ConfigFormBase {
       '#type' => 'table',
       '#capiton' => 'content types',
       '#header' => array(
-        $this->t('enabled'),
+        $this->t('enabled for content type'),
       )
     );
 
@@ -105,7 +136,7 @@ class SmsMailForm extends ConfigFormBase {
 
       $form['form']['contents'][$idx]['enabled'] = array(
         '#type' => 'checkbox',
-        '#title' => $idx,
+        '#title' => $contentType->label() . " (" . $idx . ")",
         '#default_value' => $value
       );
     }

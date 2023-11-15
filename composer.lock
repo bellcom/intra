@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9424e11a4307fea0cc53838ccf409f12",
+    "content-hash": "a3648bea30e4b79ec344acfc929e45f7",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4881,6 +4881,56 @@
                 "source": "https://github.com/drupal/core-recommended/tree/9.5.8"
             },
             "time": "2023-04-19T16:14:39+00:00"
+        },
+        {
+            "name": "drupal/core_views_facets",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/core_views_facets.git",
+                "reference": "2.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/core_views_facets-2.0.3.zip",
+                "reference": "2.0.3",
+                "shasum": "80269950079d9e012207d1823dff469950f26674"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10.0",
+                "drupal/facets": "^2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.3",
+                    "datestamp": "1695825987",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "See all contributors",
+                    "homepage": "https://www.drupal.org/node/2666804/committers"
+                },
+                {
+                    "name": "slasher13",
+                    "homepage": "https://www.drupal.org/user/3054025"
+                }
+            ],
+            "description": "The Core Views Facets module allows site builders to easily create and manage faceted views interfaces.",
+            "homepage": "https://www.drupal.org/project/core_views_facets",
+            "support": {
+                "source": "git://git.drupal.org/project/core_views_facets.git",
+                "issues": "https://www.drupal.org/project/issues/facets"
+            }
         },
         {
             "name": "drupal/crop",
@@ -11271,6 +11321,81 @@
             }
         },
         {
+            "name": "drupal/page_manager",
+            "version": "4.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/page_manager.git",
+                "reference": "8.x-4.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/page_manager-8.x-4.0-rc2.zip",
+                "reference": "8.x-4.0-rc2",
+                "shasum": "4a1e96284c5775343fbb4612072a2abfc83ebc33"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10",
+                "drupal/ctools": "^3.11 || ^4.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.0-rc2",
+                    "datestamp": "1671210021",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                },
+                "branch-alias": {
+                    "dev-8.x-4.x": "4.x-dev"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Plunkett",
+                    "homepage": "https://www.drupal.org/u/tim.plunkett",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "EclipseGc",
+                    "homepage": "https://www.drupal.org/user/61203"
+                },
+                {
+                    "name": "ivnish",
+                    "homepage": "https://www.drupal.org/user/3547706"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "manuel.adan",
+                    "homepage": "https://www.drupal.org/user/516420"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                }
+            ],
+            "description": "Provides a way to place blocks on a custom page.",
+            "homepage": "https://www.drupal.org/project/page_manager",
+            "support": {
+                "source": "https://git.drupal.org/project/page_manager.git",
+                "issues": "https://www.drupal.org/project/issues/page_manager",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
             "name": "drupal/panels",
             "version": "4.7.0",
             "source": {
@@ -11897,6 +12022,70 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/printable",
                 "issues": "https://www.drupal.org/project/issues/printable"
+            }
+        },
+        {
+            "name": "drupal/publication_date",
+            "version": "2.0.0-beta7",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/publication_date.git",
+                "reference": "8.x-2.0-beta7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/publication_date-8.x-2.0-beta7.zip",
+                "reference": "8.x-2.0-beta7",
+                "shasum": "699232945890528f97b83f49a31ea7c7831c3ca8"
+            },
+            "require": {
+                "drupal/core": "^9.1 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0-beta7",
+                    "datestamp": "1669679282",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Clever Age",
+                    "homepage": "https://www.drupal.org/user/547746"
+                },
+                {
+                    "name": "dgtlmoon",
+                    "homepage": "https://www.drupal.org/user/25027"
+                },
+                {
+                    "name": "jstoller",
+                    "homepage": "https://www.drupal.org/user/99012"
+                },
+                {
+                    "name": "Sheldon Rampton",
+                    "homepage": "https://www.drupal.org/user/13085"
+                },
+                {
+                    "name": "tmarly",
+                    "homepage": "https://www.drupal.org/user/159040"
+                },
+                {
+                    "name": "webflo",
+                    "homepage": "https://www.drupal.org/user/254778"
+                }
+            ],
+            "description": "Add a field containing the publication date.",
+            "homepage": "https://www.drupal.org/project/publication_date",
+            "support": {
+                "source": "https://git.drupalcode.org/project/publication_date"
             }
         },
         {
@@ -30223,7 +30412,6 @@
         "drupal/calendar": 10,
         "drupal/ckeditor_balloonpanel": 20,
         "drupal/entity_clone": 10,
-        "drupal/entity_update": 5,
         "drupal/file_management": 20,
         "drupal/filefield_sources": 15,
         "drupal/forum_notifications_subscription": 15,
@@ -30232,6 +30420,8 @@
         "drupal/menu_token": 15,
         "drupal/og": 15,
         "drupal/og_menu": 15,
+        "drupal/page_manager": 5,
+        "drupal/publication_date": 10,
         "drupal/realname": 10,
         "drupal/upgrade_rector": 15,
         "drupal/video": 15,

@@ -124,27 +124,41 @@ function bc_og_extension_theme($existing, $type, $theme, $path) {
 function bc_og_extension_views_pre_render(ViewExecutable $view) {
 
   if ($view->id() === 'organic_groups') {
+    $currentUser = \Drupal::currentUser();
+    $currentUserId = null;
+    if (!$currentUser->isAnonymous()) {
+      $currentUser = \Drupal\user\Entity\User::load($currentUser->id());
+      $currentUserId = $currentUser->id();
+    }
+
     foreach ($view->result as $key => $value) {
 
       if ($value->_relationship_entities && !empty($value->_relationship_entities['og_node'])) {
-        $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
         $node = $value->_relationship_entities['og_node'];
+        $isMember = false;
+        $isAdmin = false;
+        $member_status = null;
+        if ($currentUserId) {
+          $isMember = Og::isMember($node, $currentUser);
+          if ($isMember) {
+            $memberShip = Og::getMembership($node, $currentUser);
+            $isAdmin = $memberShip->hasRole('node-group-administrator');
+            $member_status = $memberShip->getState();
+          }
+        }
+
         $value->data = (object) array(
           "nid" => $node->id(),
           "title" => $node->getTitle(),
-          "is_admin" => $isAdmin
+          "cuid" => $currentUserId,
+          "is_admin" => $isAdmin,
+          "is_member" => $isMember,
+          "member_status" => $member_status
         );
 
-      } else if ($value->_relationship_entities && !empty($value->_relationship_entities['entity_id'])) {
-        $isAdmin = $value->_entity->hasRole('node-group-administrator') ?? false;
-        $var = $value->_relationship_entities['entity_id'];
-        $value->data = (object) array(
-          "nid" => $var->id(),
-          "title" => $var->getTitle(),
-          "is_admin" => $isAdmin
-        );
       }
     }
+
   }
 
 }

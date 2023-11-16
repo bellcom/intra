@@ -32,7 +32,7 @@
     <a class="group-name-title" href="/node/{{ data.nid }}">{{ data.title }}</a>
     <a class="unsubscribe-group-btn" href="/group/node/{{ data.nid }}/unsubscribe">
       {% if not data.is_admin %}
-      Afmeld
+      {{ "Afmeld"|trans }}
       {% endif %}
     </a>
   </div>

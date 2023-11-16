@@ -19,12 +19,27 @@
   <h3>{{ title }}</h3>
 {% endif %}
 {% for row in rows %}
-  {%
-    set row_classes = [
-      default_row_class ? 'views-row',
-    ]
-  %}
-  <div{{ row.attributes.addClass(row_classes) }}>
-    {{- row.content -}}
-  </div>
+
+  {% set row_classes = [default_row_class ? 'views-row', ] %}
+
+  {% if row['content']['#row'].data %}
+    {% set data = row['content']['#row'].data %}
+    <div{{ row.attributes.addClass(row_classes) }} id="all-group-list-{{ data.nid }}">
+      <a class="group-name-title" href="/node/{{ data.nid }}">{{ data.title }}</a>
+
+      {% if data.is_member and not data.is_admin %}
+        <a class="unsubscribe-group-btn" href="/group/node/{{ data.nid }}/unsubscribe">{{ "Afmeld"|trans }} </a>
+      {% elseif not data.is_member %}
+        <a class="subscribe-group-btn" href="/group/node/{{ data.nid }}/subscribe">{{ "Tilmeld"|trans }} </a>
+      {% endif %}
+    </div>
+
+  {% else %}
+    <div{{ row.attributes.addClass(row_classes) }}>
+      {{- row.content -}}
+    </div>
+  {% endif %}
+
+
+
 {% endfor %}

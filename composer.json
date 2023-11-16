@@ -68,9 +68,9 @@
         "drupal/content_access": "^1.0",
         "drupal/content_moderation_notifications": "^3.6",
         "drupal/cookieinformation": "^2.0",
-        "drupal/core-composer-scaffold": "9.5.8",
-        "drupal/core-project-message": "9.5.8",
-        "drupal/core-recommended": "9.5.8",
+        "drupal/core-composer-scaffold": "9.5.11",
+        "drupal/core-project-message": "9.5.11",
+        "drupal/core-recommended": "9.5.11",
         "drupal/core_views_facets": "^2.0",
         "drupal/csv_importer": "^1.12",
         "drupal/devel": "^5.1",
@@ -275,7 +275,6 @@
             },
             "drupal/forum_notifications_subscription" : {
                 "Error sending email, subscribe button is not displayed correctly" : "https://www.drupal.org/files/issues/2023-02-22/forum_notifications_subscription.patch",
-                "Warning on user form submission when no forums or topics subscribed to" : "https://www.drupal.org/files/issues/2023-04-14/prevent-foreach.patch",
                 "Anonym user subscription prevention": "./patches/forum_notifications_subscription-anonym-user-subscription.diff"
             },
 	        "drupal/color" :  {

@@ -3,6 +3,7 @@
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\og\Og;
 use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
 
 function bc_og_extension_views_data() {
 
@@ -163,3 +164,92 @@ function bc_og_extension_views_pre_render(ViewExecutable $view) {
 
 }
 
+
+/**
+ * Implements hook_form_alter().
+ */
+function bc_og_extension_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  $input = $form_state->getUserInput();
+  if (!empty($input) && !empty($input['confirm'])) {
+
+    if ($form_id == 'og_subscribe_confirm_form') {
+
+      $formObject = $form_state->getFormObject()->getEntity();
+      $nodeId = $formObject->get('entity_id')->value;
+      $userId = $formObject->get('uid')->target_id;
+
+      $node = $node = \Drupal::entityTypeManager()->getStorage('node')->load($nodeId);
+      $user = \Drupal\user\Entity\User::load($userId);
+
+      if (Og::isGroup($node->getEntityTypeId(), 'group')) {
+
+        $config = \Drupal::config('bc_og_extension.settings')->get();
+        if ($config['default_active']) {
+          $form['state']['widget']['#default_value'] = 'Active';
+        }
+
+        $view = Views::getView('organic_group_content');
+        if (is_object($view)) {
+          $view->setDisplay('list');
+          $view->setArguments(array($node->id()));
+          $view->execute();
+
+          $flagService = \Drupal::service('flag');
+          $flag = $flagService->getFlagById('unread');
+          if ($flag) {
+            foreach ($view->result as $row) {
+
+              $group_content = \Drupal::entityTypeManager()
+                ->getStorage('node')
+                ->load($row->nid);
+
+              $flagging = $flagService->getFlagging($flag, $group_content, $user);
+              if (!$flagging) {
+                $flagService->flag($flag, $group_content, $user);
+              }
+            }
+          }
+        }
+      }
+
+    } elseif ($form_id == 'og_unsubscribe_confirm_form') {
+
+      $formObject = $form_state->getFormObject()->getEntity();
+      $nodeId = $formObject->get('entity_id')->value;
+      $userId = $formObject->get('uid')->target_id;
+
+      $node = $node = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->load($nodeId);
+      $user = \Drupal\user\Entity\User::load($userId);
+
+      if (Og::isGroup($node->getEntityTypeId(), 'group')) {
+
+        $view = Views::getView('organic_group_content');
+        if (is_object($view)) {
+          $view->setDisplay('list');
+          $view->setArguments([$node->id()]);
+          $view->execute();
+
+          $flagService = \Drupal::service('flag');
+          $flag = $flagService->getFlagById('unread');
+          if ($flag) {
+            foreach ($view->result as $row) {
+
+              $group_content = \Drupal::entityTypeManager()
+                ->getStorage('node')
+                ->load($row->nid);
+
+              $flagging = $flagService->getFlagging($flag, $group_content, $user);
+              if ($flagging) {
+                $flagService->unflag($flag, $group_content, $user);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

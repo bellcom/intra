@@ -1,0 +1,10 @@
+
+bc_og_extension.settings:
+  path: '/admin/config/bellcom/og-extension'
+  defaults:
+    _form: '\Drupal\bc_og_extension\Form\OgForm'
+    _title: 'Og extension'
+  requirements:
+    _permission: 'administer site configuration'
+
+

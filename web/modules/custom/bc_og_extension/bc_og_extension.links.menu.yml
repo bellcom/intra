@@ -1,0 +1,6 @@
+bc_og_extension.settings:
+  title: 'Bellcom Og extension'
+  route_name: bc_og_extension.settings
+  description: 'Bellcom og extension configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

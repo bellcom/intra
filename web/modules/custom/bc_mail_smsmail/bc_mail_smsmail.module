@@ -18,36 +18,55 @@ function bc_mail_smsmail_node_presave($node) {
       // if sms is enabled on the node and the node is new
       if ($node->hasField('field_text') && $node->get('field_text')->value && $node->isNew()) {
 
+        $body = '';
+        if ($node->hasField('body')) {
+          $body .= $node->get('body')->value . "\r\n";
+        }
+        if ($node->hasField('field_os2web_page_heading')) {
+          $body .= $node->get('field_os2web_page_heading')->value . "\r\n";
+        }
+        if ($node->hasField('field_os2web_page_intro')) {
+          $body .= $node->get('field_os2web_page_intro')->value . "\r\n";
+        }
+        if ($node->hasField('field_os2web_page_description')) {
+          $body .= $node->get('field_os2web_page_description')->value . "\r\n";
+        }
+        if ($node->hasField('field_os2web_system_page_content')) {
+          $body .= $node->get('field_os2web_system_page_content')->value . "\r\n";
+        }
+
+        $body = "Ny driftbesked fra Midtpunktet" . "\r\n \r\n" .  strip_tags($body);
+
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        $params = array(
+          'subject' => 'Ny driftbesked fra Midtpunktet.',
+          'body' => $body,
+          'headers' => array(
+            'From: ' . $conf->from,
+            'Content-Type:' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+            'Reply-To: ' . $conf->reply . 'noreply@ringsted.dk',
+            'X-Mailer: PHP/' . phpversion()
+          )
+        );
+
         foreach ($conf->members as $member) {
           if ($member['active']) {
 
-            $to = $member['phone'] . $conf->gateway;
-            $headers = 'From: "' . $conf->from . '"' .  "\r\n" .
-              'Content-Type: text/plain; charset=utf-8' . "\r\n" .
-              'Reply-To: ' . $conf->reply . 'noreply@ringsted.dk' . "\r\n" .
-              'X-Mailer: PHP/' . phpversion();
+            $result = $mailManager->mail(
+              'bc_mail_smsmail',
+              'operation',
+              $member['phone'] . $conf->gateway,
+              'da',
+              $params,
+              null,
+              true
+            );
 
-            $message = '';
-            if ($node->hasField('body')) {
-              $message .= $node->get('body')->value . "\r\n";
+            if ($result['result'] !== true) {
+              \Drupal::logger('bc_mail_smsmail')->notice('operations sms not be sent to ' . $member['phone']);
+            } else {
+              \Drupal::logger('bc_mail_smsmail')->notice('operations sms is sent to ' . $member['phone']);
             }
-            if ($node->hasField('field_os2web_page_heading')) {
-              $message .= $node->get('field_os2web_page_heading')->value . "\r\n";
-            }
-            if ($node->hasField('field_os2web_page_intro')) {
-              $message .= $node->get('field_os2web_page_intro')->value . "\r\n";
-            }
-            if ($node->hasField('field_os2web_page_description')) {
-              $message .= $node->get('field_os2web_page_description')->value . "\r\n";
-            }
-            if ($node->hasField('field_os2web_system_page_content')) {
-              $message .= $node->get('field_os2web_system_page_content')->value . "\r\n";
-            }
-
-            $content = "Ny driftbesked fra Midtpunktet" . "\r\n \r\n" .  strip_tags($message);
-
-            // Send mail via gateway
-             mail($to, $node->getTitle(), $content, $headers);
 
           }
         }

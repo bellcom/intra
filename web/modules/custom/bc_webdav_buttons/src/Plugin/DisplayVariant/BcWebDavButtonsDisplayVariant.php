@@ -37,7 +37,7 @@ class BCWebDavButtonsBlock extends BlockBase {
     $user_is_member = false;
 
     if ($node) {
-      $user_is_member = $this->rkWebDavButtonsSpecialUsersPermissions($node, $user);
+      $user_is_member = $this->bcWebDavButtonsSpecialUsersPermissions($node, $user);
 
       if (!$user_is_member) {
         $group_ids = [];
@@ -85,9 +85,9 @@ class BCWebDavButtonsBlock extends BlockBase {
     $build = [];
 
     if ($node) {
-      $build['#markup'] = '<div class="rk-webdav-buttons-pane-title">' . $this->t('File management') . '</div>';
-      $build['#markup'] .= '<div id="rk-webdav-button-faded"></div>';
-      $build['#markup'] .= '<div id="rk-webdav-button-log"></div>';
+      $build['#markup'] = '<div class="bc-webdav-buttons-pane-title">' . $this->t('File management') . '</div>';
+      $build['#markup'] .= '<div id="bc-webdav-button-faded"></div>';
+      $build['#markup'] .= '<div id="bc-webdav-button-log"></div>';
 
       if ($node->getType() === 'file') {
         foreach ($node->get('field_file')->referencedEntities() as $file) {
@@ -129,28 +129,28 @@ class BCWebDavButtonsBlock extends BlockBase {
     $icon_directory = \Drupal::config('file.settings')->get('icon_directory');
     $icon = theme('file_icon', ['file' => $file, 'icon_directory' => $icon_directory]);
 
-    $content = '<div class="rk-webdav-button-item-wrapper">';
-    $content .= '<div class="rk-webdav-file-name-wrapper">' . $icon . ' ' . $file->getFilename() . '</div>';
-    $content .= '<div class="rk-webdav-button-buttons-wrapper">';
+    $content = '<div class="bc-webdav-button-item-wrapper">';
+    $content .= '<div class="bc-webdav-file-name-wrapper">' . $icon . ' ' . $file->getFilename() . '</div>';
+    $content .= '<div class="bc-webdav-button-buttons-wrapper">';
 
     // Download button
-    $content .= '<a href="' . $base_url . $file_path . '" class="rk-webdav-button rk-webdav-button-download" title="' . $this->t('Download') . '">';
-    $content .= '<div class="rk-webdav-button-icon"></div>';
+    $content .= '<a href="' . $base_url . $file_path . '" class="bc-webdav-button bc-webdav-button-download" title="' . $this->t('Download') . '">';
+    $content .= '<div class="bc-webdav-button-icon"></div>';
     $content .= '</a>';
 
     // View button
-    $content .= '<a href="' . $base_url . '/document-handle?scheme=' . $scheme_to_use . '&mode=view&filepath=' . urlencode($file_path) . '&nid=' . $node->id() . '" class="rk-webdav-button rk-webdav-button-view" data-nid="' . $node->id() . '" data-fid="' . $file->id() . '" title="' . $this->t('View') . '">';
-    $content .= '<div class="rk-webdav-button-icon"></div>';
+    $content .= '<a href="' . $base_url . '/document-handle?scheme=' . $scheme_to_use . '&mode=view&filepath=' . urlencode($file_path) . '&nid=' . $node->id() . '" class="bc-webdav-button bc-webdav-button-view" data-nid="' . $node->id() . '" data-fid="' . $file->id() . '" title="' . $this->t('View') . '">';
+    $content .= '<div class="bc-webdav-button-icon"></div>';
     $content .= '</a>';
 
     // Edit button
-    $content .= '<a href="' . $base_url . '/document-handle?scheme=' . $scheme_to_use . '&mode=edit&filepath=' . urlencode($file_path) . '&nid=' . $node->id() . '" class="rk-webdav-button rk-webdav-button-edit ' . (!$user_is_member ? 'rk-webdav-button-disabled' : '') . '" data-nid="' . $node->id() . '" data-fid="' . $file->id() . '" title="' . ($user_is_member ? $this->t('Edit') : $this->t('You don\'t have access to edit this file, contact the file owner to get access.')) . '">';
-    $content .= '<div class="rk-webdav-button-icon"></div>';
+    $content .= '<a href="' . $base_url . '/document-handle?scheme=' . $scheme_to_use . '&mode=edit&filepath=' . urlencode($file_path) . '&nid=' . $node->id() . '" class="bc-webdav-button bc-webdav-button-edit ' . (!$user_is_member ? 'bc-webdav-button-disabled' : '') . '" data-nid="' . $node->id() . '" data-fid="' . $file->id() . '" title="' . ($user_is_member ? $this->t('Edit') : $this->t('You don\'t have access to edit this file, contact the file owner to get access.')) . '">';
+    $content .= '<div class="bc-webdav-button-icon"></div>';
     $content .= '</a>';
 
     // History button
-    $content .= '<a href="#" class="rk-webdav-button rk-webdav-button-history" title="' . $this->t('History') . '" data-fid="' . $file->id() . '">';
-    $content .= '<div class="rk-webdav-button-icon"></div>';
+    $content .= '<a href="#" class="bc-webdav-button bc-webdav-button-history" title="' . $this->t('History') . '" data-fid="' . $file->id() . '">';
+    $content .= '<div class="bc-webdav-button-icon"></div>';
     $content .= '</a>';
 
     $content .= '</div>';
@@ -171,7 +171,7 @@ class BCWebDavButtonsBlock extends BlockBase {
    * @return bool
    *   TRUE if the user has special permissions, FALSE otherwise.
    */
-  protected function rkWebDavButtonsSpecialUsersPermissions($node, $user) {
+  protected function bcWebDavButtonsSpecialUsersPermissions($node, $user) {
     if ($node->getOwnerId() == $user->id()) {
       return TRUE;
     }

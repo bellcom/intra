@@ -253,3 +253,46 @@ function bc_og_extension_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
   }
 
 }
+
+
+
+function bc_og_extension_node_insert(\Drupal\node\NodeInterface $node) {
+
+  // if new group content, add to user in this group unread list
+  if (Og::isGroupContent($node->getEntityTypeId(), $node->getType())) {
+    $groupID = $node->get('og_audience')->target_id;
+    $group = \Drupal::entityTypeManager()->getStorage('node')->load($groupID);
+    if ($group) {
+      $sql = "
+        SELECT 
+            uid
+        FROM
+            og_membership
+        WHERE
+            entity_id={$group->id()} AND
+            entity_type='node' AND
+            entity_bundle='group' AND            
+            (state='active')
+        ;";
+
+      $userIds = \Drupal::database()
+        ->query($sql)
+        ->fetchAllKeyed(0, 0);
+
+      if (count($userIds) > 0) {
+        $flagService = \Drupal::service('flag');
+        $flag = $flagService->getFlagById('unread');
+        if ($flag) {
+          foreach ($userIds as $userId) {
+            $user = \Drupal\user\Entity\User::load($userId);
+            $flagging = $flagService->getFlagging($flag, $node, $user);
+            if (!$flagging) {
+              $flagService->flag($flag, $node, $user);
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

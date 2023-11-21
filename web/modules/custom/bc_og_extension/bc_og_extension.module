@@ -132,19 +132,42 @@ function bc_og_extension_views_pre_render(ViewExecutable $view) {
       $currentUserId = $currentUser->id();
     }
 
+    $flagService = \Drupal::service('flag');
+    $unreadFlag = $flagService->getFlagById('unread');
+
     foreach ($view->result as $key => $value) {
 
       if ($value->_relationship_entities && !empty($value->_relationship_entities['og_node'])) {
+
         $node = $value->_relationship_entities['og_node'];
         $isMember = false;
         $isAdmin = false;
         $member_status = null;
+        $unread = 0;
+
         if ($currentUserId) {
           $isMember = Og::isMember($node, $currentUser);
           if ($isMember) {
             $memberShip = Og::getMembership($node, $currentUser);
             $isAdmin = $memberShip->hasRole('node-group-administrator');
             $member_status = $memberShip->getState();
+
+            if ($view->current_display === 'my_groups_block') {
+              $groupcontents = \Drupal::entityTypeManager()
+                ->getStorage('node')
+                ->loadByProperties([
+                  'type' => 'og_group_content',
+                  'og_audience' => $node->id(),
+                ]);
+
+              if (count($groupcontents) > 0) {
+                foreach ($groupcontents as $groupcontent) {
+                  $hasContentFlag = $flagService->getFlagging($unreadFlag, $groupcontent, $currentUser);
+                  if ($hasContentFlag) $unread++;
+                }
+              }
+
+            }
           }
         }
 
@@ -154,7 +177,8 @@ function bc_og_extension_views_pre_render(ViewExecutable $view) {
           "cuid" => $currentUserId,
           "is_admin" => $isAdmin,
           "is_member" => $isMember,
-          "member_status" => $member_status
+          "member_status" => $member_status,
+          "unread" => $unread
         );
 
       }
@@ -260,6 +284,7 @@ function bc_og_extension_node_insert(\Drupal\node\NodeInterface $node) {
 
   // if new group content, add to user in this group unread list
   if (Og::isGroupContent($node->getEntityTypeId(), $node->getType())) {
+
     $groupID = $node->get('og_audience')->target_id;
     $group = \Drupal::entityTypeManager()->getStorage('node')->load($groupID);
     if ($group) {

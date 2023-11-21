@@ -69,52 +69,6 @@ class SmsMailForm extends ConfigFormBase {
       )
     );
 
-    $form['form']['members'] = array(
-      '#type' => 'table',
-      '#header' => array(
-        $this->t('name'),
-        $this->t('phone'),
-        $this->t('active'),
-        $this->t('remove')
-      )
-    );
-
-    $members = $config->get('members');
-    if (!empty($members)) {
-      foreach ($members as $idx => $member) {
-
-        $form['form']['members'][$idx]['name'] = [
-          '#type' => 'textfield',
-          '#value' => $member['name'] ?? "?",
-        ];
-
-        $form['form']['members'][$idx]['phone'] = [
-          '#type' => 'textfield',
-          '#value' => $member['phone'] ?? "?"
-        ];
-
-        $form['form']['members'][$idx]['active'] = [
-          '#type' => 'checkbox',
-          '#default_value' => $member['active'] ?? 0
-        ];
-
-        $form['form']['members'][$idx]['remove'] = [
-          '#type' => 'checkbox'
-        ];
-      }
-    }
-
-    $form['form']['members']['add']['name'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Add'),
-    );
-
-    $form['form']['members']['add']['phone'] = array(
-      '#type' => 'textfield',
-      '#title' => '&nbsp;',
-      '#value' => ''
-    );
-
     $configContents = $config->get('contents');
 
     $form['form']['contents'] = array(
@@ -151,34 +105,7 @@ class SmsMailForm extends ConfigFormBase {
     $values = $form_state->getValues();
     $config = $this->config(SmsMailForm::$configName);
 
-    $members = array();
-    foreach ($values['members'] as $key => $member) {
-
-      if (isset($member['remove']) && !is_object($member['remove']) && !empty($member['remove'])) {
-        // do nothing if remove
-      } else if ($key == 'add') {
-
-        unset($values['members'][$key]);
-
-        if (!empty($member['name']) && !empty($member['phone'])) {
-          $new = array(
-            'name' => $member['name'],
-            'phone' => $member['phone'],
-            'active' => 1
-          );
-          $members[] = $new;
-        }
-      } else {
-        unset( $member['remove'] );
-        $members[] = $member;
-      }
-    }
-    $values['members'] = $members;
-
     foreach ($values as $key => $value) {
-      if ($key == 'members') {
-        $config->clear('members');
-      }
       $config->set($key, $value);
     }
 

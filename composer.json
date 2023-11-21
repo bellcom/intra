@@ -89,6 +89,7 @@
         "drupal/field_validation": "^1.1",
         "drupal/file_management": "1.x-dev@dev",
         "drupal/filefield_sources": "^1.0@alpha",
+        "drupal/flag": "^4.0",
         "drupal/flag_anon": "^1.1",
         "drupal/flag_lists": "^4.0",
         "drupal/flood_control": "^2.2",

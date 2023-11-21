@@ -43,22 +43,40 @@ function bc_mail_smsmail_node_presave($node) {
           'body' => $body,
           'headers' => array(
             'From: ' . $conf->from,
-            'Content-Type:' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
-            'Reply-To: ' . $conf->reply . 'noreply@ringsted.dk',
-            'X-Mailer: PHP/' . phpversion()
+            'Content-Type:' . 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+            'Reply-to: ' . $conf->reply . 'noreply@ringsted.dk',
+            'X-Mailer: ' . 'PHP/' . phpversion()
           )
         );
 
-        foreach ($conf->members as $member) {
-          if ($member['active']) {
+        $sql = "
+        SELECT 
+            users_field_data.name,
+            users_field_data.mail,
+            users_field_data.status,
+            field_driftbeskeder_sms_mobil_nr_value as mobil            
+        FROM
+            user__field_driftbeskeder_sms_mobil_nr
+            RIGHT JOIN users_field_data ON (users_field_data.uid=user__field_driftbeskeder_sms_mobil_nr.entity_id)
+        WHERE
+            field_driftbeskeder_sms_mobil_nr_value IS NOT NULL AND
+            deleted=0
+        ;";
+
+        $mobiles = \Drupal::database()
+          ->query($sql)
+          ->fetchAll();
+
+        foreach ($mobiles as $member) {
+          if ($member->status) {
 
             $result = $mailManager->mail(
               'bc_mail_smsmail',
               'operation',
-              $member['phone'] . $conf->gateway,
+              $member->mobil . $conf->gateway,
               'da',
               $params,
-              null,
+              $conf->reply,
               true
             );
 

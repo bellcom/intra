@@ -7,7 +7,7 @@ use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
-
+use Drupal\taxonomy\Entity\Term;
 /**
  * Provides a flag extension Resource
  *
@@ -122,6 +122,7 @@ class FlagExtensionResource extends ResourceBase {
         $view->execute();
 
         if ($view->result) {
+          $count = array();
           foreach ($view->result as $result) {
             $res = $result->_entity;
             if ($res->get('entity_type')->value == 'node') {
@@ -135,16 +136,49 @@ class FlagExtensionResource extends ResourceBase {
                   $flagService->unflag($flag, $node, $currentUser);
                   $flagService->save();
                 }
-              }
-              else {
+
+              } else {
+
+                $gtype = null;
+                if ($node->hasField('og_audience')) {
+                  $tid = $node->get('og_audience')->target_id;
+                  if ($tid) {
+                    $parentnode = Node::load($tid);
+                    if ($parentnode && $parentnode->hasField('field_og_group_type')) {
+                      $term = Term::load($parentnode->get('field_og_group_type')->target_id);
+                      if ($term) {
+                        file_put_contents('/var/www/logs/debug.log', $term->getName() . "\n", FILE_APPEND);
+                        $gtype = $term->getName();
+                      }
+                    }
+                  }
+                }
+
+                if (empty($count[$node->getType()])) {
+                  $count[$node->getType()]['count'] = 1;
+                  if ($gtype) {
+                    $count[$node->getType()]['type'][$gtype] = 1;
+                  }
+
+                } else {
+                  $count[$node->getType()]['count']++;
+                  if ($gtype) {
+                    $count[$node->getType()]['type'][$gtype]++;
+                  }
+                }
+
                 $vars['unreads'][$node->id()] = [
                   'title' => $node->getTitle(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
-                  'flag' => $res->get('uuid')->value
+                  'flag' => $res->get('uuid')->value,
                 ];
               }
             }
           }
+
+          $vars['unreads_count'] = $count;
+
+
         }
       }
     }

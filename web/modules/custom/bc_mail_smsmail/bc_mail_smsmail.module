@@ -67,7 +67,8 @@ function bc_mail_smsmail_node_presave($node) {
           ->query($sql)
           ->fetchAll();
 
-        foreach ($mobiles as $member) {
+        foreach ($mobiles as $idx => $member) {
+
           if ($member->status) {
 
             $result = $mailManager->mail(
@@ -81,13 +82,14 @@ function bc_mail_smsmail_node_presave($node) {
             );
 
             if ($result['result'] !== true) {
-              \Drupal::logger('bc_mail_smsmail')->notice('operations sms not be sent to ' . $member['phone']);
+              \Drupal::logger('bc_mail_smsmail')->notice('operations sms not be sent to ' . $member->name . " , " .$member->mobil);
             } else {
-              \Drupal::logger('bc_mail_smsmail')->notice('operations sms is sent to ' . $member['phone']);
+              \Drupal::logger('bc_mail_smsmail')->notice('operations sms is sent to ' . $member->name . " , " . $member->mobil);
             }
 
           }
         }
+        
       }
     }
   }

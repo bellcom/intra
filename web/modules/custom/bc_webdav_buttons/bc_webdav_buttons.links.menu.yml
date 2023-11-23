@@ -1,0 +1,6 @@
+bc_webdav_buttons.settings:
+  title: 'BC WebDav Buttons'
+  route_name: bc_webdav_buttons.settings
+  description: 'Bellcom WebDAV Configuration'
+  parent: Turn on the BC WebDav buttons
+  weight: 99

@@ -111,9 +111,11 @@
                 class="custom-header__button custom-header__button--toggle-megamenu d-sm-none" aria-label="{{ 'Åbn menu' | t }}">
                 <span class="menutoggletitle">Menu</span><span class="icon fa fa-bars"></span>
               </button>
+            {% if is_logged_in %}
             <button class="custom-header__button custom-header__button--toggle-search js-toggle-searchy" aria-label="{{ 'Åbn søgning' | t }}">
               <span class="searchy-label">Søg</span><span class="icon fa fa-search"></span>
             </button>
+            {% endif %}
               <!-- End - toggle -->
             {{ page.header__below }}
             <!-- End - below -->

@@ -131,11 +131,11 @@
     </div>
 </header>
 
+{% if is_logged_in %}
 <div class="bookmarks">
 {{ page.bookmarks }}
 </div>
-
-
+{% endif %}
 <div class="page-alert" data-font-resize-wrapper id="">
   <div class="container">
     {{ page.alert }}

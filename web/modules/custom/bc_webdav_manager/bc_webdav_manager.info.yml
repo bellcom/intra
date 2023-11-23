@@ -5,8 +5,7 @@ core_version_requirement: ^8 || ^9
 package: 'Bellcom'
 
 stylesheets:
-  - css/rk_webdav_manager_style.css
+  - css/bc_webdav_manager_style.css
 
 libraries:
-  - 'rk_webdav_manager/openLink'
-
+  - 'bc_webdav_manager/openLink'

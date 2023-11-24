@@ -20,7 +20,7 @@
       font-size: 13px;
 
       .views-field {
-        background-color: #ddd;
+        background-color: #f2f2f2;
         min-height: 35px;
         display: flex;
         align-items: center;
@@ -33,7 +33,7 @@
         }
         .field-content {
           a {
-            padding: 0;
+            padding: 0 !important;
           }
         }
       }

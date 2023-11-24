@@ -16,6 +16,7 @@
         padding: 11px;
         color: black;
         transition: .3s;
+        text-decoration: none;
 
         &:hover {
           color: white;
@@ -29,7 +30,10 @@
         &.is-active {
           background-color: #c30a32;
           color: white;
-          font-weight: bold;
+          text-decoration: none;
+        }
+        .facet-item__status {
+          display: none;
         }
       }
     }

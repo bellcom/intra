@@ -1,6 +1,8 @@
 .facets-widget-links {
   .item-list__links {
-    border: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 
     li.facet-item {
       padding: 0;
@@ -17,14 +19,11 @@
         color: black;
         transition: .3s;
         text-decoration: none;
+        border-bottom: 1px solid #ccc;
 
         &:hover {
-          color: white;
+          color: white !important;
           background-color: #c30a32;
-        }
-
-        &:not(:last-child) {
-          border-bottom: 1px solid #ccc;
         }
 
         &.is-active {
@@ -33,6 +32,7 @@
           &:after {
             background: url("../../../images/svg-icons/check.svg");
             fill: #c30a32;
+            content: '';
           }
         }
         .facet-item__status {

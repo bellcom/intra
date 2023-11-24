@@ -17,6 +17,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+      font-size: 13px;
 
       .views-field {
         background-color: #ddd;
@@ -30,8 +31,10 @@
           font-weight: bold;
           margin-right: 5px;
         }
-        a {
-          padding: 0;
+        .field-content {
+          a {
+            padding: 0;
+          }
         }
       }
     }

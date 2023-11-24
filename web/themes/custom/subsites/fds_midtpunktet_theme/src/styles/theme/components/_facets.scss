@@ -28,9 +28,10 @@
         }
 
         &.is-active {
-          background-color: #c30a32;
-          color: white;
-          text-decoration: none;
+          color: #c30a32;
+
+          background: url("../../../images/svg-icons/check.svg");
+          fill: #c30a32;
         }
         .facet-item__status {
           display: none;

@@ -37,6 +37,25 @@
           }
         }
       }
+      .views-field-display-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .field-content {
+          font-family: "MuseoSans", "Helvetica", "Arial",  sans-serif;
+
+          a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
     }
   }
 }

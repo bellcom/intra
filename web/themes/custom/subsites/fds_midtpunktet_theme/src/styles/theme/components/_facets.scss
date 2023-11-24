@@ -28,12 +28,6 @@
 
         &.is-active {
           color: #c30a32;
-
-          &:after {
-            background: url("../../../images/svg-icons/check.svg");
-            fill: #c30a32;
-            content: '';
-          }
         }
         .facet-item__status {
           display: none;

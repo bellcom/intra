@@ -28,6 +28,19 @@
 
         &.is-active {
           color: #c30a32;
+          position: relative;
+
+          &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            background: url('../images/svg-icons/check.svg');
+            width: 20px;
+            height: 20px;
+          }
         }
         .facet-item__status {
           display: none;

@@ -6,8 +6,8 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Implements hook_install() for Drupal 9.
  */
-function rk_webdav_manager_install() {
-  $config = \Drupal::configFactory()->getEditable('rk_webdav_manager.settings');
+function bc_webdav_manager_install() {
+  $config = \Drupal::configFactory()->getEditable('bc_webdav_manager.settings');
 
   // Set a default value for your module's configuration.
   $config->set('webdav_edit_folder_path', 'sites/default/files/webdav_edit_folder');
@@ -17,9 +17,9 @@ function rk_webdav_manager_install() {
 /**
  * Implements hook_enable() for Drupal 9.
  */
-function rk_webdav_manager_enable() {
+function bc_webdav_manager_enable() {
   // Get the configuration.
-  $config = \Drupal::config('rk_webdav_manager.settings');
+  $config = \Drupal::config('bc_webdav_manager.settings');
   $webdavFolderPath = $config->get('webdav_edit_folder_path');
 
   // Ensure that the edit folder exists.

@@ -4,13 +4,6 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\SelectInterface;
 
 /**
- * Implements hook_install().
- */
-#function bc_webdav_buttons_install() {
-#  Database::getConnection()->schema()->createTable('bc_webdav_buttons_log', bc_webdav_buttons_schema()['bc_webdav_buttons_log']);
-#}
-
-/**
  * Implements hook_schema().
  */
 function bc_webdav_buttons_schema() {
@@ -59,4 +52,3 @@ function bc_webdav_buttons_schema() {
 
   return $schema;
 }
-

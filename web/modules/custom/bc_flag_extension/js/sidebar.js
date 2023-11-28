@@ -15,28 +15,28 @@
         let uis = $(".sidebar-shortcut-list-ul").empty();
         let uiu = $(".sidebar-unread-list-ul").empty();
 
-        if (Object.keys(response.bookmarks).length > 0) {
+        if (Object.keys(response.bookmark).length > 0) {
           $(".sidebar-block.sidebar-bookmark").css("display", "flex");
-          $.each(response.bookmarks, function (id, item) {
+          $.each(response.bookmark, function (id, item) {
             uib.append($('<li/>').addClass('bookmark-item').attr("data-id", item.flag)
               .append($('<a/>').addClass("bookmark-item-link").attr("href", item.link).text(item.title))
             );
           });
         }
 
-        if (Object.keys(response.shortcuts).length > 0) {
+        if (Object.keys(response.shortcut).length > 0) {
           $(".sidebar-block.sidebar-shortcut").css("display", "flex");
-          $.each(response.shortcuts, function (id, item) {
+          $.each(response.shortcut, function (id, item) {
             uis.append($('<li/>').addClass('shortcut-item').attr("data-id", item.flag)
               .append($('<a/>').addClass("shortcut-item-link").attr("href", item.link).text(item.title))
             );
           });
         }
 
-        if (Object.keys(response.unreads).length > 0) {
+        if (Object.keys(response.unread).length > 0) {
           $(".sidebar-block.sidebar-unread").css("display", "flex");
-          $(".unread-number").html(Object.keys(response.unreads).length);
-          $.each(response.unreads, function (id, item) {
+          $(".unread-number").html(Object.keys(response.unread).length);
+          $.each(response.unread, function (id, item) {
 
             uiu.append($('<li/>').addClass('unread-item').attr("data-id", item.flag)
               .append($('<a/>').addClass("unread-item-link").attr("href", item.link).text(item.title))

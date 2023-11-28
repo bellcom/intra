@@ -157,6 +157,7 @@
         </div>
       </div>
     {% endif %}
+    {{ page.breadcrumb }}
 
 
       {% set drupalTag = '<drupal-render-placeholder>'%}
@@ -190,7 +191,6 @@
 
         {% if has_main_content %}
           <main {{ content_attributes.addClass(content_classes) }}>
-              {{ page.breadcrumb }}
             {{ page.content }}
           </main>
         {% endif %}

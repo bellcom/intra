@@ -36,9 +36,9 @@ class FlagExtensionResource extends ResourceBase {
 
     $vars = array(
       'loggedin' => NULL,
-      'bookmark' => [],
-      'shortcut' => [],
-      'unread' => []
+      'bookmarks' => [],
+      'shortcuts' => [],
+      'unreads' => []
     );
 
     if (!empty($config['enabled'])) {
@@ -67,7 +67,7 @@ class FlagExtensionResource extends ResourceBase {
         $view->setDisplay('default');
         $view->setExposedInput(array(
           'combine' => ($currentUser ? $currentUser->id():$session_id),
-          'flag_id' => 'bookmark'
+          'flag_id' => 'bookmarks'
         ));
         $view->execute();
 
@@ -76,7 +76,7 @@ class FlagExtensionResource extends ResourceBase {
             $res = $result->_entity;
             if ($res->get('entity_type')->value == 'node') {
               $node = Node::load($res->get('entity_id')->value);
-              $vars['bookmark'][$node->id()] = [
+              $vars['bookmarks'][$node->id()] = [
                 'title' => $node->getTitle(),
                 'link' => $node->toUrl()->setAbsolute()->toString(),
                 'flag' => $res->get('uuid')->value
@@ -101,7 +101,7 @@ class FlagExtensionResource extends ResourceBase {
             $res = $result->_entity;
             if ($res->get('entity_type')->value == 'node') {
               $node = Node::load($res->get('entity_id')->value);
-              $vars['shortcut'][$node->id()] = [
+              $vars['shortcuts'][$node->id()] = [
                 'title' => $node->getTitle(),
                 'link' => $node->toUrl()->setAbsolute()->toString(),
                 'flag' => $res->get('uuid')->value
@@ -167,7 +167,7 @@ class FlagExtensionResource extends ResourceBase {
                   }
                 }
 
-                $vars['unread'][$node->id()] = [
+                $vars['unreads'][$node->id()] = [
                   'title' => $node->getTitle(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'flag' => $res->get('uuid')->value,
@@ -176,7 +176,7 @@ class FlagExtensionResource extends ResourceBase {
             }
           }
 
-          $vars['unread_count'] = $count;
+          $vars['unreads_count'] = $count;
 
 
         }

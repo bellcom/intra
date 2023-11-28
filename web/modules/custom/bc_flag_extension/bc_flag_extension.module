@@ -14,9 +14,9 @@ function bc_flag_extension_theme($existing, $type, $theme, $path) {
     $vars = array(
       'name' => '',
       'loggedin' => false,
-      'bookmark' => array(),
-      'shortcut' => array(),
-      'unread' => array()
+      'bookmarks' => array(),
+      'shortcuts' => array(),
+      'unreads' => array()
     );
 
     $items = array(

@@ -226,9 +226,14 @@
 }
 
 .node--type-group {
+
+  .node__meta {
+    display: none;
+  }
   .field--name-body {
     padding-bottom: 0.5em;
     margin-bottom: 1em;
+    margin-top: 0;
     .field__label {
       border-bottom: 1px solid #c30a32;
       padding: 2px 0 0 6px;

@@ -298,27 +298,6 @@ $sidenav-list-dot-spacing: 22px;
 ////////
 
 
-.layout-sidebar-left {
-	margin-top: 10px;
-}
-
-.layout-sidebar-right {
-	margin-top: 10px;
-	& > .box {
-		& > .box__body {
-			& > .region {
-				& > * {
-					&:last-child {
-						padding-bottom: 0;
-					}
-					&:first-child {
-						padding-top: 0;
-					}
-				}
-			}
-		}
-	}
-}
 
 .sub-link-sub {
 	float: left;
@@ -365,12 +344,6 @@ ul.limited-height >  .limited-height__toggle {
 @include media-breakpoint-only(sm, $grid-breakpoints) {}
 
 // Desktop - and up
-@include media-breakpoint-up(md) {
-  .layout-sidebar-left,
-  .layout-sidebar-right {
-    margin-top: 100px;
-  }
-}
 
 // Desktop - only
 @include media-breakpoint-only(md, $grid-breakpoints) {}

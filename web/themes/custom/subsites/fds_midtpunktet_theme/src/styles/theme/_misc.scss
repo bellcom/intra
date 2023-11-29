@@ -92,40 +92,6 @@ body .page-container {
   }
 }
 
-.layout-sidebar-right {
-  padding-top: $grid-gutter-width;
-
-  .os2web_contact {
-
-    .field {
-
-      + .field {
-        margin-top: 2.8rem; // Same distance as between <p> <p>
-      }
-    }
-  }
-
-  > .box {
-
-    > .box__body {
-      padding-top: 0;
-      padding-bottom: 0;
-
-      > .region {
-
-        > * {
-
-          &:first-child {
-            padding-top: 30px;
-          }
-          &:last-child {
-            padding-bottom: 30px;
-          }
-        }
-      }
-    }
-  }
-}
 
 .button--primary {
 

@@ -9,7 +9,7 @@
 }
 
 .flag-bookmarks a, .flag-shortcut a, .flag-unread a {
-  background-color: #c30a32;
+  text-shadow: 1px 1px 2px #333;
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   color: white;
@@ -20,6 +20,18 @@
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   margin: 15px 0;
   border-radius: 5px;
+}
+
+.flag-bookmarks a {
+  background-color: #EDCD19;
+}
+
+.flag-shortcut a {
+  background-color: #0CBED2;
+}
+
+.flag-unread a {
+  background-color: #adadad;
 }
 
 .flag-bookmarks .ajax-progress, .flag-shortcut .ajax-progress, .flag-unread .ajax-progress {

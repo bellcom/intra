@@ -38,13 +38,33 @@
   display: none;
 }
 
-.flag-bookmarks a:hover, .flag-shortcut a:hover, .flag-unread a:hover {
-  background-color: #940726;
+.flag-bookmarks a:hover {
+  background-color: #bda313;
   color: white;
 }
 
-.flag-bookmarks a:focus, .flag-shortcut a:focus, .flag-unread a:focus {
-  background-color: #940726;
+.flag-shortcut a:hover {
+  background-color: #087a87;
+  color: white;
+}
+
+.flag-unread a:hover {
+  background-color: #6e6e6e;
+  color: white;
+}
+
+.flag-bookmarks a:focus {
+  background-color: #bda313;
+  color: white;
+}
+
+.flag-shortcut a:focus {
+  background-color: #087a87;
+  color: white;
+}
+
+.flag-unread a:focus {
+  background-color: #6e6e6e;
   color: white;
 }
 

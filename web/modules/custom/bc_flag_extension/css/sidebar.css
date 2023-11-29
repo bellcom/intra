@@ -11,6 +11,15 @@
   text-decoration: none;
   color: white;
   padding: 5px 12px;
+  padding-bottom: 5px !important;
+  padding-top: 5px !important;
+  transition: .3s;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.flag-bookmarks a:hover, .flag-shortcut a:hover, .flag-unread a:hover {
+  background-color: black;
+  color: white;
 }
 
 .flag-bookmarks a:before {

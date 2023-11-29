@@ -15,9 +15,19 @@
   padding-top: 5px !important;
   transition: .3s;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  margin: 15px 0;
+}
+
+.flag-bookmarks .ajax-progress, .flag-shortcut .ajax-progress, .flag-unread .ajax-progress {
+  display: none;
 }
 
 .flag-bookmarks a:hover, .flag-shortcut a:hover, .flag-unread a:hover {
+  background-color: black;
+  color: white;
+}
+
+.flag-bookmarks a:focus, .flag-shortcut a:focus, .flag-unread a:focus {
   background-color: black;
   color: white;
 }

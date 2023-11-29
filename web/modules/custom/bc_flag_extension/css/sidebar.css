@@ -25,8 +25,6 @@ div.flag-sidebar-block ul li:before {
   margin-bottom: 20px;
 }
 .sidebar-block.sidebar-bookmark { display: flex; }
-.sidebar-block.sidebar-shortcut { display: none; }
-.sidebar-block.sidebar-unread { display: none; }
 
 .sidebar-block .sidebar-bookmark-list,
 .sidebar-block .sidebar-shortcut-list,

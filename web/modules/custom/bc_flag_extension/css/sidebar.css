@@ -3,6 +3,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 30px;
+  max-width: 1000px;
+  padding: 0 30px;
+  margin: 0 auto;
 }
 
 .flag-bookmarks a, .flag-shortcut a, .flag-unread a {

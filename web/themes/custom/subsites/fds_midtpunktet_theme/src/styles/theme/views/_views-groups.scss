@@ -201,12 +201,17 @@
         margin: 0;
         padding: 20px 10px;
 
+        &:before {
+          display: none;
+        }
+
         &:nth-child(even) {
           background-color: #F1F5FA;
 
-          &:hover {
-            background-color: #FFFEEE;
-          }
+        }
+
+        &:hover {
+          background-color: #FFFEEE;
         }
 
         a {

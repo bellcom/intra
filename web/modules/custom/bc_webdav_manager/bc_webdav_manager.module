@@ -104,30 +104,30 @@ function bc_webdav_manager_node_view(array &$build,
   // Generate download link
   if ($entity->bundle() === 'file'
     && $display->getComponent('download_link')) {
-    $file_uri = $node->field_file->entity->getFileUri();
-    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+#    $file_uri = $node->field_file->entity->getFileUri();
+#    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
 
     // Build the link
-    $build['download_link'] = [
-      '#url' => \Drupal\Core\Url::fromUri($file_url),
-      '#title' => "Download",
-      '#type' => 'link',
-    ];
+#    $build['download_link'] = [
+#      '#url' => \Drupal\Core\Url::fromUri($file_url),
+#      '#title' => "Download",
+#      '#type' => 'link',
+#    ];
   }
 
   // Generate view link
   if ($entity->bundle() === 'file'
     && $display->getComponent('view_link')) {
 
-    $file_uri = $node->field_file->entity->getFileUri();
-    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
-
-    // Build the link
-    $build['view_link'] = [
-      '#url' => \Drupal\Core\Url::fromUri($file_url),
-      '#title' => "View",
-      '#type' => 'link',
-    ];
+#    $file_uri = $node->field_file->entity->getFileUri();
+#    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+#
+#    // Build the link
+#    $build['view_link'] = [
+#      '#url' => \Drupal\Core\Url::fromUri($file_url),
+#      '#title' => "View",
+#      '#type' => 'link',
+#    ];
 
   }
 
@@ -135,15 +135,15 @@ function bc_webdav_manager_node_view(array &$build,
   if ($entity->bundle() === 'file'
     && $display->getComponent('edit_link')) {
 
-    $file_uri = $node->field_file->entity->getFileUri();
-    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+#    $file_uri = $node->field_file->entity->getFileUri();
+#    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
 
-    // Build the link
-    $build['view_link'] = [
-      '#url' => 'ms-word:ofe|u|' . $file_url,
-      '#title' => "Edit",
-      '#type' => 'link',
-    ];
+#    // Build the link
+#    $build['view_link'] = [
+#      '#url' => 'ms-word:ofe|u|' . $file_url,
+#      '#title' => "Edit",
+#      '#type' => 'link',
+#    ];
 
   }
 }

@@ -86,53 +86,32 @@ class FlagExtensionResource extends ResourceBase {
         }
       }
 
-//      // shortcut
-//      if (!empty($config['shortcut']) && $currentUser) {
-//        $view = Views::getView('flag_extension');
-//        $view->setDisplay('default');
-//        $view->setExposedInput(array(
-//          'combine' => ($currentUser ? $currentUser->id():$session_id),
-//          'flag_id' => 'shortcut'
-//        ));
-//        $view->execute();
-//
-//        if ($view->result) {
-//          foreach ($view->result as $result) {
-//            $res = $result->_entity;
-//            if ($res->get('entity_type')->value == 'node') {
-//              $node = Node::load($res->get('entity_id')->value);
-//              $vars['shortcuts'][$node->id()] = [
-//                'title' => $node->getTitle(),
-//                'link' => $node->toUrl()->setAbsolute()->toString(),
-//                'flag' => $res->get('uuid')->value
-//              ];
-//            }
-//          }
-//        }
-//      }
-
       // shortcut
-      if (!empty($config['shortcut'])) {
+      if (!empty($config['shortcut']) && $currentUser) {
         $view = Views::getView('flag_extension');
         $view->setDisplay('default');
+        $view->setExposedInput(array(
+          'combine' => ($currentUser ? $currentUser->id():$session_id),
+          'flag_id' => 'shortcut'
+        ));
         $view->execute();
 
         if ($view->result) {
           foreach ($view->result as $result) {
             $res = $result->_entity;
-            if ($res && $res->get('entity_type')->value == 'node') {
+            if ($res->get('entity_type')->value == 'node') {
               $node = Node::load($res->get('entity_id')->value);
-              if ($node) {
-                $vars['shortcuts'][$node->id()] = [
-                  'title' => $node->getTitle(),
-                  'link' => $node->toUrl()->setAbsolute()->toString(),
-                  'flag' => $res->get('uuid')->value
-                ];
-              }
+              $vars['shortcuts'][$node->id()] = [
+                'title' => $node->getTitle(),
+                'link' => $node->toUrl()->setAbsolute()->toString(),
+                'flag' => $res->get('uuid')->value
+              ];
             }
           }
         }
       }
+
+
 
       // unread
       if (!empty($config['unread']) && $currentUser) {

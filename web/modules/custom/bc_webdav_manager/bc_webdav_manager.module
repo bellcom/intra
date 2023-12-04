@@ -64,3 +64,86 @@ function bc_webdav_manager_form_submit(array $form, FormStateInterface $form_sta
   $this->messenger()->addMessage("Saved!");
 }
 
+function bc_webdav_manager_entity_extra_field_info () {
+  return [
+    'node' => [
+      'file' => [
+        'display' => [
+          'download_link' => [
+            'label' => t('Download link'),
+            'description' => t('Download link'),
+            'weight' => 100,
+            'visible' => TRUE,
+          ],
+          'view_link' => [
+            'label' => t('View link'),
+            'description' => t('View link'),
+            'weight' => 101,
+            'visible' => TRUE,
+          ],
+          'edit_link' => [
+            'label' => t('Edit link'),
+            'description' => t('Edit link'),
+            'weight' => 102,
+            'visible' => TRUE,
+          ],
+        ],
+      ],
+    ],
+  ];
+}
+
+function bc_webdav_manager_node_view(array &$build,
+                                    \Drupal\Core\Entity\EntityInterface $entity,
+                                    \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display,
+                                    $view_mode) {
+
+  // Get the node
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  // Generate download link
+  if ($entity->bundle() === 'file'
+    && $display->getComponent('download_link')) {
+    $file_uri = $node->field_file->entity->getFileUri();
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+
+    // Build the link
+    $build['download_link'] = [
+      '#url' => \Drupal\Core\Url::fromUri($file_url),
+      '#title' => "Download",
+      '#type' => 'link',
+    ];
+  }
+
+  // Generate view link
+  if ($entity->bundle() === 'file'
+    && $display->getComponent('view_link')) {
+
+    $file_uri = $node->field_file->entity->getFileUri();
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+
+    // Build the link
+    $build['view_link'] = [
+      '#url' => \Drupal\Core\Url::fromUri($file_url),
+      '#title' => "View",
+      '#type' => 'link',
+    ];
+
+  }
+
+  // Generate view link
+  if ($entity->bundle() === 'file'
+    && $display->getComponent('edit_link')) {
+
+    $file_uri = $node->field_file->entity->getFileUri();
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+
+    // Build the link
+    $build['view_link'] = [
+      '#url' => 'ms-word:ofe|u|' . $file_url,
+      '#title' => "Edit",
+      '#type' => 'link',
+    ];
+
+  }
+}

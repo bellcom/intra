@@ -4,6 +4,7 @@
 
     h2 {
       font-weight: bold;
+      color: #333;
     }
   }
   .view-content {
@@ -19,7 +20,7 @@
       gap: 2px;
       font-size: 13px;
 
-      .views-field {
+      .views-field:not(.views-field-field-brugerbillede) {
         background-color: #f2f2f2;
         min-height: 35px;
         display: flex;
@@ -30,10 +31,33 @@
         .views-label {
           font-weight: bold;
           margin-right: 5px;
+          color: #333;
         }
         .field-content {
           a {
             padding: 0 !important;
+          }
+        }
+      }
+      .views-field-field-brugerbillede {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        background-color: transparent;
+
+        .field-content {
+          a {
+            padding: 0 !important;
+
+            &:before {
+              display: none;
+            }
+
+            img {
+              border: 1px solid darkgray;
+              border-radius: 100%;
+            }
           }
         }
       }
@@ -76,6 +100,7 @@
     margin: 0 0 10px;
     font-size: 16px;
     font-weight: 600;
+    color: #333;
   }
   .view-content {
     .item-list {
@@ -115,6 +140,7 @@
       margin: 0 0 10px;
       font-size: 16px;
       font-weight: 600;
+      color: #333;
     }
     .field__item {
       color: #333;

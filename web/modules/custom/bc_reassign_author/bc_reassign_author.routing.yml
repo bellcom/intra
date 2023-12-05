@@ -1,0 +1,7 @@
+bc_reassign_author.settings:
+  path: '/admin/config/bellcom/reassign-author'
+  defaults:
+    _form: '\Drupal\bc_reassign_author\Form\ReassignAuthorForm'
+    _title: 'Re-assign author'
+  requirements:
+    _permission: 'administer site configuration'

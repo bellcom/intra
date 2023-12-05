@@ -1,0 +1,8 @@
+name: 'Bellcom reassign author'
+type: module
+description: 'Bellcom reassign nodes where author is missing/deleted'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Bellcom'
+dependencies:
+  - bc_basic

@@ -148,6 +148,7 @@
         "drupal/unique_content_field_validation": "^1.1",
         "drupal/upgrade_rector": "^1.0@alpha",
         "drupal/upgrade_status": "^3.5",
+        "drupal/user_delete_reassign": "1.x-dev@dev",
         "drupal/user_display_name": "^1.1",
         "drupal/video": "^1.5@alpha",
         "drupal/views_local_tasks": "^1.0",

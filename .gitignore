@@ -58,3 +58,7 @@ sessions/*
 
 # Ignore FederationMetadata.xml files
 [Ff]ederation[Mm]etadata.xml
+
+# Ignore webdav files
+DavLock
+digest-password

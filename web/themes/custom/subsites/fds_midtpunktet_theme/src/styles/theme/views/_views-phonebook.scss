@@ -4,6 +4,7 @@
 
     h2 {
       font-weight: bold;
+      color: #333;
     }
   }
   .view-content {
@@ -19,7 +20,7 @@
       gap: 2px;
       font-size: 13px;
 
-      .views-field {
+      .views-field:not(.views-field-field-brugerbillede) {
         background-color: #f2f2f2;
         min-height: 35px;
         display: flex;
@@ -30,6 +31,7 @@
         .views-label {
           font-weight: bold;
           margin-right: 5px;
+          color: #333;
         }
         .field-content {
           a {
@@ -37,11 +39,33 @@
           }
         }
       }
+      .views-field-field-brugerbillede {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        background-color: transparent;
+
+        .field-content {
+          a {
+            padding: 0 !important;
+
+            &:before {
+              display: none !important;
+            }
+
+            img {
+              border: 1px solid darkgray;
+              border-radius: 100%;
+            }
+          }
+        }
+      }
       .views-field-display-name {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: transparent;
+        background-color: transparent !important;
 
         .field-content {
           font-family: "MuseoSans", "Helvetica", "Arial",  sans-serif;
@@ -60,9 +84,9 @@
       }
       .views-field-field-info {
         display: flex;
-        background-color: transparent;
+        background-color: transparent !important;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start !important;
       }
     }
   }
@@ -76,6 +100,7 @@
     margin: 0 0 10px;
     font-size: 16px;
     font-weight: 600;
+    color: #333;
   }
   .view-content {
     .item-list {
@@ -115,6 +140,7 @@
       margin: 0 0 10px;
       font-size: 16px;
       font-weight: 600;
+      color: #333;
     }
     .field__item {
       color: #333;

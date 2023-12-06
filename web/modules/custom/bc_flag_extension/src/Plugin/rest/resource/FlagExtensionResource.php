@@ -32,13 +32,25 @@ class FlagExtensionResource extends ResourceBase {
   public function get(Request $request) {
     $nid = $request->get('nid') ?? 0;
     $config = \Drupal::config('bc_flag_extension.settings')->get();
+
     unset( $config['submit'], $config['form_build_id'], $config['form_token'], $config['form_id'], $config['op']);
+
+    $counters = array();
+    if (!empty($config['menu_counter'])) {
+      foreach ( $config['menu_counter'] AS $nodeID => $counter ) {
+        if (!empty($counter['counter_type'])) {
+          $counters[$counter['counter_type']]['node'] = $nodeID;
+          $counters[$counter['counter_type']]['count'] = 0;
+        }
+      }
+    }
 
     $vars = array(
       'loggedin' => NULL,
       'bookmarks' => [],
       'shortcuts' => [],
-      'unreads' => []
+      'unreads' => [],
+      'menu_counters' => $counters
     );
 
     if (!empty($config['enabled'])) {
@@ -90,12 +102,9 @@ class FlagExtensionResource extends ResourceBase {
       if (!empty($config['shortcut'])) {
         $view = Views::getView('flag_extension');
         $view->setDisplay('default');
-
-
         $view->setExposedInput(array(
           'flag_id' => 'shortcut'
         ));
-
         $view->execute();
 
         if ($view->result) {
@@ -115,8 +124,6 @@ class FlagExtensionResource extends ResourceBase {
         }
       }
 
-
-
       // unread
       if (!empty($config['unread']) && $currentUser) {
         $view = Views::getView('flag_extension');
@@ -129,10 +136,13 @@ class FlagExtensionResource extends ResourceBase {
 
         if ($view->result) {
           $count = array();
-          foreach ($view->result as $result) {
+          foreach ($view->result as $idx => $result) {
+
             $res = $result->_entity;
             if ($res->get('entity_type')->value == 'node') {
+
               $node = Node::load($res->get('entity_id')->value);
+
               if ($currentNode && $currentNode->id() == $node->id() && $currentUser) {
                 $flagService = \Drupal::service('flag');
                 $flag = $flagService->getFlagById('unread');
@@ -142,18 +152,17 @@ class FlagExtensionResource extends ResourceBase {
                   $flagService->unflag($flag, $node, $currentUser);
                   $flagService->save();
                 }
-
               } else {
 
                 $gtype = null;
                 if ($node->hasField('og_audience')) {
+
                   $tid = $node->get('og_audience')->target_id;
                   if ($tid) {
                     $parentnode = Node::load($tid);
                     if ($parentnode && $parentnode->hasField('field_og_group_type')) {
                       $term = Term::load($parentnode->get('field_og_group_type')->target_id);
                       if ($term) {
-                        file_put_contents('/var/www/logs/debug.log', $term->getName() . "\n", FILE_APPEND);
                         $gtype = $term->getName();
                       }
                     }
@@ -177,13 +186,24 @@ class FlagExtensionResource extends ResourceBase {
                   'title' => $node->getTitle(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'flag' => $res->get('uuid')->value,
+                  'type' => $node->getEntityTypeId(),
+                  'bundle' => $node->bundle()
                 ];
+
+                if (!empty($vars['menu_counters']['unread_group_content']) && $node->bundle() === 'og_group_content') {
+                  $vars['menu_counters']['unread_group_content']['count']++;
+                }
+                elseif (!empty($vars['menu_counters']['unread_news_content']) && $node->bundle() === 'os2web_news') {
+                  $vars['menu_counters']['unread_news_content']['count']++;
+                }
+                elseif (!empty($vars['menu_counters']['unread_organisation_content']) && $node->bundle() === 'TODO') {
+                  $vars['menu_counters']['unread_organisation_content']['count']++;
+                }
               }
             }
           }
 
           $vars['unreads_count'] = $count;
-
 
         }
       }

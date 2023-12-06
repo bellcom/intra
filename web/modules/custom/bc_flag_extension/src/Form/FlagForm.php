@@ -56,92 +56,53 @@ class FlagForm extends ConfigFormBase {
     );
     $tree = $menu_tree->transform($tree, $manipulators);
 
-    $nids = array();
+    $mainMenu = array();
     foreach ($tree as $item) {
       if ($item->link->isEnabled()) {
-        $parm = $item->link->getRouteParameters();
-        if (!empty($parm['node'])) {
-          $nids[] = $parm['node'];
+        $param = $item->link->getRouteParameters();
+        if (!empty($param['node'])) {
+          $mainMenu[$param['node']] = (string) $item->link->getTitle();
         }
       }
     }
 
-    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
-    $option_node = array('' => $this->t('none'));
-    foreach ( $nodes AS $_node ) {
-      $option_node[$_node->id()] = $_node->getTitle() . ' (' . $_node->id() . ')';
-    }
-
-    $option_type = array('', $this->t('none'));
-    $contents_types = \Drupal\node\Entity\NodeType::loadMultiple();
-    foreach ( $contents_types AS $type ) {
-      $option_type[$type->id()] = $type->label();
-    }
-
-    $node_select = $config->get('node_select');
-
-//    for ($i = 0; $i < 3; $i++) {
-//
-//      $form['form']['node_select'][$i] = [
-//        '#type' => 'select',
-//        '#title' => $this->t('Main menu links'),
-//        '#default_value' => null, //$config->get('node_select'),
-//        '#options' => $option_node,
-//      ];
-//
-//      $form['form']['type_select'][$i] = [
-//        '#type' => 'select',
-//        '#title' => $this->t('content type counter'),
-//        '#default_value' => null, // $config->get('type_select'),
-//        '#options' => $option_type,
-//      ];
-//    }
-
-    $multi = $config->get('multi');
-    $multiCount = count($multi);
-
-    $form['multi']['#tree'] = true;
-
-    foreach( $multi AS $idx => $item )
-    {
-      $form['multi'][$idx]['name'] = array(
-        '#type' => 'textfield',
-        '#title' => 'name ' . $idx ,
-        '#default_value' => $multi[$idx]
-      );
-    }
-
-    $form['multi'][$multiCount]['name'] = array(
-      '#type' => 'textfield',
-      '#title' => 'name new '
-    );
-
-    $_form['multi'][$multiCount]['first'] = array(
-      '#type' => 'textfield',
-      '#title' => 'first new '
-    );
-
-    $_form['multi'][$multiCount]['last'] = array(
-      '#type' => 'textfield',
-      '#title' => 'last new '
-    );
-
-
-    $form['table'] = array(
+    $form['menu_counter'] = array(
       '#type' => 'table',
+      '#caption' => $this->t('<br>Add counter number to main menu :<br><br>'),
       '#title' => 'menu counter',
       '#header' => array(
-        'Menu item',
-        'content type'
-      ),
-      '#rows' => array(
-        array(1,2),
-        array(5,3)
-      ),
-      '#prefix' => '<div id="single-table-wrapper">',
-      '#suffix' => '</div>',
+        $this->t('menu item'),
+        $this->t('counter type')
+      )
     );
 
+    $menu_counter = $config->get('menu_counter');
+    foreach ( $mainMenu AS $nodeID => $title ) {
+
+      $form['menu_counter'][$nodeID]['menu_item'] = array(
+        '#type' => 'item',
+        '#title' => $title,
+        '#default_value' => $title
+      );
+
+      $default_value = '';
+      if (!empty($menu_counter)) {
+        if (!empty($menu_counter[$nodeID]['counter_type'])) {
+          $default_value = $menu_counter[$nodeID]['counter_type'];
+        }
+      }
+
+      $form['menu_counter'][$nodeID]['counter_type'] = array(
+        '#type' => 'select',
+        '#options' => array(
+          '' => '',
+          'unread_group_content' => $this->t('Unread group content'),
+          'unread_news_content' => $this->t('Unread news content'),
+          'unread_organisation_content' => $this->t('Unread organisation content')
+        ),
+        '#default_value' => $default_value
+      );
+    }
 
     return parent::buildForm($form, $form_state);
   }
@@ -153,16 +114,7 @@ class FlagForm extends ConfigFormBase {
     $config = $this->config(FlagForm::$configName);
 
     foreach ($values as $key => $value) {
-      if ($key == 'multi') {
-        $new_values = array();
-        foreach ( $value AS $name ) {
-          if (!empty($name['name'])) $new_values[] = $name['name'];
-        }
-        $config->set($key, $new_values);
-
-      } else {
         $config->set($key, $value);
-      }
     }
 
     $config->save();

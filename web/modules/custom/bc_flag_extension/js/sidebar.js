@@ -47,10 +47,12 @@
       }).done(function(response) {
 
         if ( typeof(response.menu_counters) !== "undefined") {
-          $.each(response.menu_counters, function(id, item){
-            let menuitem = $('.menu-item *[data-drupal-link-system-path="node/' + item.node + '"]').first();
-            if (menuitem.length === 1) {
-              menuitem.text( menuitem.text() + ' (' + item.count + ')');
+          $.each(response.menu_counters, function(id, item) {
+            if (item.count > 0) {
+              let menuitem = $('.menu-item *[data-drupal-link-system-path="node/' + item.node + '"]').first();
+              if (menuitem.length === 1) {
+                menuitem.text(menuitem.text() + ' (' + item.count + ')');
+              }
             }
           });
         }

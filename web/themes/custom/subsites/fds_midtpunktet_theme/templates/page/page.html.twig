@@ -174,7 +174,7 @@
         has_sidebar_first and has_sidebar_second is empty ? 'sideblock-venstre d-print-none',
       ] %}
       {% if has_sidebar_first %}
-        <aside {{ attributes.addClass(sidebar_first_classes) }}>
+        <aside class="{{ sidebar_first_classes | join(' ') }}">
           <div class="layout-sidebar-left">
             {{ page.sidebar_first }}
           </div>
@@ -200,7 +200,7 @@
         has_sidebar_first is empty and has_sidebar_second ? 'sideblock-hojre d-print-none',
       ] %}
       {% if has_sidebar_second %}
-        <aside {{ attributes.addClass(sidebar_second_classes) }}>
+        <aside class="{{ sidebar_second_classes | join(' ') }}">
           <div class="layout-sidebar-right">
             <div class="box">
               <div class="box__body">

@@ -170,7 +170,7 @@
       {% set has_sidebar_second = page.sidebar_second|render|striptags(drupalTag)|trim is not empty %}
 
       {% set sidebar_first_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3 sidebar-first',
         has_sidebar_first and has_sidebar_second is empty ? 'sideblock-venstre d-print-none',
       ] %}
       {% if has_sidebar_first %}
@@ -182,7 +182,7 @@
       {% endif %}
 
       {% set content_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-6',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-6 content-main',
         has_sidebar_first and has_sidebar_second is empty ? 'hovedindhold-hojre',
         has_sidebar_second and has_sidebar_first is empty ? 'hovedindhold-venstre',
         has_sidebar_first is empty and has_sidebar_second is empty ? ''
@@ -196,7 +196,7 @@
         {% endif %}
 
       {% set sidebar_second_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3 sidebar-second',
         has_sidebar_first is empty and has_sidebar_second ? 'sideblock-hojre d-print-none',
       ] %}
       {% if has_sidebar_second %}

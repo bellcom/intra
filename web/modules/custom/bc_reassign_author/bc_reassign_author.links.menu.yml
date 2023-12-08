@@ -1,0 +1,6 @@
+bc_reassign_author.settings:
+  title: 'Bellcom re-assign author'
+  route_name: bc_reassign_author.settings
+  description: 'Bellcom re-assign author configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

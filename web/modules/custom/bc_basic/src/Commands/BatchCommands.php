@@ -9,13 +9,13 @@ Class BatchCommands extends DrushCommands
 {
 
   /**
-   * test script, put whatever you want here
+   * create 5 users bellcomX
    *
-   * @command bc:test
-   * @aliases bct
+   * @command bc:b
+   * @aliases bcb
    * @options $options arr AN option that takes multiple values.
    */
-  public function test($options=array())
+  public function testb($options=array())
   {
 
     $userIds = array("A", "B", "C", "D");
@@ -33,10 +33,10 @@ Class BatchCommands extends DrushCommands
   }
 
   /**
-   * test script, put whatever you want here
+   * create a user with a node and delete user
    *
-   * @command bc:testa
-   * @aliases bcta
+   * @command bc:a
+   * @aliases bca
    * @options $options arr AN option that takes multiple values.
    */
   public function testa($options=array()) {
@@ -53,39 +53,24 @@ Class BatchCommands extends DrushCommands
 
     echo "new user id " . $user->id() . "\n";
 
-
     $new = \Drupal\node\Entity\Node::create(['type' => 'os2web_page']);
     $new->setTitle('new programmatically node');
     $new->setOwnerId($user->id());
     $new->setPublished();
-//    $new->set('status', 1);
     $new->save();
 
     echo "new node id " . $new->id() . "\n";
 
+    $nids = \Drupal::entityQuery('node')
+      ->condition('uid', $user->id())
+      ->execute();
 
+    echo count($nids) . " nodes \n";
+
+    $this->confirm('continue ');
     $user->delete();
 
   }
-
-
-
-
-
-  /**
-   * List all hooks
-   *
-   * @command bc:hooks
-   * @aliases bch
-   * @options $options arr AN option that takes multiple values.
-   */
-  public function showHooks($options=array())
-  {
-
-
-
-  }
-
 
 
 }

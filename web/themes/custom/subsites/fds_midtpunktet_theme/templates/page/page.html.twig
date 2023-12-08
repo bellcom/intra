@@ -163,18 +163,18 @@
       {% set drupalTag = '<drupal-render-placeholder>'%}
       {% set has_main_content = page.content|render|striptags(drupalTag)|trim is not empty %}
      {% if has_main_content %}
-    <div class="row row-no-flex">
+    <div class="row">
       {#  Wayaround for determining visibility for regions with lazybuilder.
       @See https://www.drupal.org/project/drupal/issues/953034 for more info. #}
       {% set has_sidebar_first = page.sidebar_first|render|striptags(drupalTag)|trim is not empty %}
       {% set has_sidebar_second = page.sidebar_second|render|striptags(drupalTag)|trim is not empty %}
 
       {% set sidebar_first_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3 sidebar-first',
         has_sidebar_first and has_sidebar_second is empty ? 'sideblock-venstre d-print-none',
       ] %}
       {% if has_sidebar_first %}
-        <aside {{ attributes.addClass(sidebar_first_classes) }}>
+        <aside class="{{ sidebar_first_classes | join(' ') }}">
           <div class="layout-sidebar-left">
             {{ page.sidebar_first }}
           </div>
@@ -182,10 +182,10 @@
       {% endif %}
 
       {% set content_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-6',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-6 content-main',
         has_sidebar_first and has_sidebar_second is empty ? 'hovedindhold-hojre',
         has_sidebar_second and has_sidebar_first is empty ? 'hovedindhold-venstre',
-        has_sidebar_first is empty and has_sidebar_second is empty ? 'col-12'
+        has_sidebar_first is empty and has_sidebar_second is empty ? ''
       ] %}
 
 
@@ -196,11 +196,11 @@
         {% endif %}
 
       {% set sidebar_second_classes = [
-        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3',
+        has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3 sidebar-second',
         has_sidebar_first is empty and has_sidebar_second ? 'sideblock-hojre d-print-none',
       ] %}
       {% if has_sidebar_second %}
-        <aside {{ attributes.addClass(sidebar_second_classes) }}>
+        <aside class="{{ sidebar_second_classes | join(' ') }}">
           <div class="layout-sidebar-right">
             <div class="box">
               <div class="box__body">

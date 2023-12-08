@@ -161,6 +161,7 @@ body {
       font-weight: normal;
     }
     .region-header__below {
+      width: 100%;
       .block-menu.menu--main {
         top: 50px;
         left: 0;
@@ -327,7 +328,7 @@ body {
     padding: 0;
     max-width: none;
     text-align: center;
-    display: block;
+    justify-content: space-between;
 
     > li {
       flex-basis: auto;

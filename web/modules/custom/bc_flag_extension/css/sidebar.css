@@ -90,7 +90,7 @@ div.flag-sidebar-block {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 200;
+  z-index: 302;
 }
 
 div.flag-sidebar-block img {

@@ -30,6 +30,14 @@ function fds_midtpunktet_theme_preprocess_page(array &$variables) {
   $variables['theme_settings']['texts']['frontpage_banner_heading'] = theme_get_setting('frontpage_banner_heading');
   $variables['theme_settings']['texts']['frontpage_banner_subheading'] = theme_get_setting('frontpage_banner_subheading');
   $variables['theme_settings']['contact_information']['vispaakort'] = theme_get_setting('vispaakort');
+
+  if (isset($variables['page']['breaking_news'])) {
+      $view = views_get_view('breaking_news');
+      $view->set_display('breaking_news');
+      $view->execute();
+
+      $variables['has_breaking_news'] = $view->result ? true : false;
+    }
 }
 
 /**

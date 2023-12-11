@@ -52,7 +52,16 @@
                 .views-field-field-breaking-news-link {
                   .field-content {
                     a {
-                      color: #000;
+                      color: white;
+                      background-color: #c30a32;
+                      border-radius: 5px;
+                      padding: 5px 12px;
+                      text-decoration: none;
+                      transition: .3s;
+
+                      &:hover {
+                        background-color: #ab092c;
+                      }
                     }
                   }
                 }

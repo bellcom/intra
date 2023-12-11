@@ -133,6 +133,9 @@
 
 {% if is_logged_in %}
 <div class="breaking-news">
+  <div class="dismiss-bn-btn">
+    <button id="dismiss-breaking-news">Dismiss</button>
+  </div>
 {{ page.breaking_news }}
 </div>
 {% endif %}

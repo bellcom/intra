@@ -65,7 +65,7 @@
 
       }
     }
-    .breaking-news-visible {
+    &.breaking-news-visible {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);

@@ -3696,20 +3696,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to show the breaking news
   function showBreakingNews() {
-    breakingNewsWrapper.style.display = 'block'; // Show the element
+    breakingNewsWrapper.style.display = 'block';
     showButton.style.display = 'none';
     document.cookie = "breakingNewsDismissed=false; path=/";
   }
 
   // Function to hide the breaking news
   function hideBreakingNews() {
-    breakingNewsWrapper.style.display = 'none'; // Hide the element
+    breakingNewsWrapper.style.display = 'none';
     showButton.style.display = 'block';
     document.cookie = "breakingNewsDismissed=true; max-age=86400; path=/"; // Expires in 1 day
   }
 
   // Check if the banner was previously dismissed
-  if (document.cookie.indexOf('breakingNewsDismissed=true') === -1) {
+  if (document.cookie.indexOf('breakingNewsDismissed=true') !== -1) {
+    hideBreakingNews();
+  } else {
     showBreakingNews();
   }
 
@@ -3717,6 +3719,7 @@ document.addEventListener('DOMContentLoaded', function () {
   dismissButton.addEventListener('click', hideBreakingNews);
   showButton.addEventListener('click', showBreakingNews);
 });
+
 
 // Proposals form toggle.
 (function($) {

@@ -1,0 +1,19 @@
+.breaking-news-wrapper {
+  position: fixed;
+  z-index: 1000;
+
+  .breaking-news {
+    background-color: #fad643;
+    padding: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 20px 25px -5px rgb(0, 0, 0 / 0.1), 0 8px 10px -6px rgb(0, 0, 0 / 0.1);
+    position: relative;
+
+    .dismiss-bn-btn {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+  }
+}

@@ -132,11 +132,14 @@
 </header>
 
 {% if is_logged_in %}
-<div class="breaking-news">
-  <div class="dismiss-bn-btn">
-    <button id="dismiss-breaking-news">Dismiss</button>
+<div class="breaking-news-wrapper">
+  <div class="breaking-news">
+    <div class="dismiss-bn-btn">
+      <button id="dismiss-breaking-news">Dismiss</button>
+    </div>
+  {{ page.breaking_news }}
   </div>
-{{ page.breaking_news }}
+  <button id="show-breaking-news" style="display:none;">Show Breaking News</button>
 </div>
 {% endif %}
 

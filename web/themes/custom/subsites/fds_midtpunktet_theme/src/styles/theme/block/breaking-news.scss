@@ -70,9 +70,6 @@
       visibility: visible;
       transform: translateY(0);
       transition: opacity .5s, transform .5s;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
   }
   #show-breaking-news {
@@ -90,6 +87,9 @@
     transform: translateX(-100%);
     transition: opacity 0.5s, transform 0.5s;
     transition-delay: 0.5s;
+    position: absolute;
+    top: 0;
+    left: 0;
 
     &.show-breaking-news-visible {
       opacity: 1;

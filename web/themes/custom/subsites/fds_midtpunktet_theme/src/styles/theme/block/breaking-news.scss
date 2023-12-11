@@ -3,7 +3,7 @@
   z-index: 300;
 
   .breaking-news {
-    background-color: #fad643;
+    background: linear-gradient(45deg, #fad643 49.5%, #f3cd3a 49.5%, #f3cd3a 50.5%, #edc531 50.5%);
     padding: 20px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -11,6 +11,7 @@
     position: relative;
     max-width: 400px;
     min-width: 300px;
+    border: 1px solid white;
 
     @media only screen and (max-width: 768px) {
       max-width: 300px;
@@ -41,10 +42,15 @@
                     color: #000;
                     font-weight: 600;
                     margin-bottom: 10px;
+                    max-width: 90%;
                   }
                 }
                 .views-field-field-breaking-news-link {
-                  color: #000;
+                  .field-content {
+                    a {
+                      color: #000;
+                    }
+                  }
                 }
               }
             }

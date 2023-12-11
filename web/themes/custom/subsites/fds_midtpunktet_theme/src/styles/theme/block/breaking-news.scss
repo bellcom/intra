@@ -12,6 +12,7 @@
     max-width: 400px;
     min-width: 300px;
     border: 1px solid white;
+    display: none;
 
     @media only screen and (max-width: 768px) {
       max-width: 300px;

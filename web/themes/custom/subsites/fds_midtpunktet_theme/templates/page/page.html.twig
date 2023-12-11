@@ -131,7 +131,7 @@
     </div>
 </header>
 
-{% if is_logged_in %}
+{% if is_logged_in and page.breaking_news is not empty %}
 <div class="breaking-news-wrapper">
   <div class="breaking-news">
     <div class="dismiss-bn-btn">

@@ -190,7 +190,7 @@
 
 
         {% if has_main_content %}
-          <main {{ content_classes | join(' ') }}>
+          <main class="{{ content_classes | join(' ') }}">
             {{ page.content }}
           </main>
         {% endif %}

@@ -3694,18 +3694,16 @@ document.addEventListener('DOMContentLoaded', function () {
   var showButton = document.getElementById('show-breaking-news');
   var breakingNewsWrapper = document.querySelector('.breaking-news');
 
-  // Function to show the breaking news
   function showBreakingNews() {
     breakingNewsWrapper.classList.add('breaking-news-visible');
-    showButton.style.display = 'none';
+    showButton.classList.remove('show-breaking-news-visible'); // Remove the visible class
     document.cookie = "breakingNewsDismissed=false; path=/";
   }
 
-// Function to hide the breaking news
   function hideBreakingNews() {
     breakingNewsWrapper.classList.remove('breaking-news-visible');
-    showButton.style.display = 'block';
-    document.cookie = "breakingNewsDismissed=true; max-age=86400; path=/"; // Expires in 1 day
+    showButton.classList.add('show-breaking-news-visible'); // Add the visible class
+    document.cookie = "breakingNewsDismissed=true; max-age=86400; path=/";
   }
 
   // Check if the banner was previously dismissed

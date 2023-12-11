@@ -82,5 +82,16 @@
     min-height: 0 !important;
     min-width: 0 !important;
     font-size: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition: opacity 0.5s, transform 0.5s;
+    transition-delay: 0.5s;
+
+    &.show-breaking-news-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
   }
 }

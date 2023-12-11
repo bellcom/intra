@@ -131,7 +131,8 @@
     </div>
 </header>
 
-{% if is_logged_in and page.breaking_news is not empty %}
+{% set breaking_news_content = page.breaking_news|render|striptags|trim %}
+{% if is_logged_in and breaking_news_content is not empty %}
 <div class="breaking-news-wrapper">
   <div class="breaking-news">
     <div class="dismiss-bn-btn">

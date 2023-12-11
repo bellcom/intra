@@ -12,7 +12,10 @@
     max-width: 400px;
     min-width: 300px;
     border: 1px solid white;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity .5s, transform .5s, visibility 0s, linear .5s;
 
     @media only screen and (max-width: 768px) {
       max-width: 300px;
@@ -61,6 +64,12 @@
 
 
       }
+    }
+    .breaking-news-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity .5s, transform .5s;
     }
   }
   #show-breaking-news {

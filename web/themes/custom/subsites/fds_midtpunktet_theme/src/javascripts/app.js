@@ -382,14 +382,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to show the breaking news
   function showBreakingNews() {
-    breakingNewsWrapper.style.display = 'block';
+    breakingNewsWrapper.classList.add('breaking-news-visible');
     showButton.style.display = 'none';
     document.cookie = "breakingNewsDismissed=false; path=/";
   }
 
-  // Function to hide the breaking news
+// Function to hide the breaking news
   function hideBreakingNews() {
-    breakingNewsWrapper.style.display = 'none';
+    breakingNewsWrapper.classList.remove('breaking-news-visible');
     showButton.style.display = 'block';
     document.cookie = "breakingNewsDismissed=true; max-age=86400; path=/"; // Expires in 1 day
   }

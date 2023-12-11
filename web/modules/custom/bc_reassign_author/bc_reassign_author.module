@@ -1,0 +1,79 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @param $currentUserID
+ * @param $toUserId
+ *
+ * @return void
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function _reassing_nodes($currentUserID, $toUserId) {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('uid', $currentUserID)
+    ->execute();
+
+  if (count($nids) > 0) {
+    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    foreach ( $nodes AS $node ) {
+      $node->setOwnerId($toUserId);
+      $node->save();
+    }
+  }
+}
+
+
+function bc_reassign_author_entity_predelete(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() === 'node') {
+
+    $config = (object) \Drupal::config('bc_reassign_author.settings')->get();
+    if ($config->enabled && !empty($config->default)) {
+
+      $typeMatch = false;
+      if (!empty($config->content_types)) {
+        foreach ($config->content_types as $type) {
+          if ($entity->bundle() === $type) {
+            $typeMatch = true;
+          }
+        }
+      }
+
+      $user = \Drupal\user\Entity\User::load($entity->getOwnerId());
+      if ($user) {
+        $currentUserAdmin = false;
+        $currentUser = Drupal::currentUser();
+        if ($currentUser) {
+          $currentUser = \Drupal\user\Entity\User::load($currentUser->id());
+          if ($currentUser) {
+            $currentUserAdmin = $currentUser->hasRole('administrator');
+          }
+        }
+
+        $roleMatch = false;
+        if (!empty($config->exclude)) {
+          foreach ($config->exclude as $role) {
+            if ($user->hasRole($role)) {
+              $roleMatch = TRUE;
+            }
+          }
+        }
+
+        if (!$roleMatch && !$currentUserAdmin) {
+          $node = $entity->createDuplicate();
+          $node->setOwnerId($config->default);
+          $node->save();
+        }
+
+      // if no valid author on node
+      } else {
+        $node = $entity->createDuplicate();
+        $node->setOwnerId($config->default);
+        $node->save();
+      }
+    }
+
+  }
+
+}

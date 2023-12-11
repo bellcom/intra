@@ -190,7 +190,7 @@
 
 
         {% if has_main_content %}
-          <main {{ content_attributes.addClass(content_classes) }}>
+          <main {{ content_classes | join(' ') }}>
             {{ page.content }}
           </main>
         {% endif %}

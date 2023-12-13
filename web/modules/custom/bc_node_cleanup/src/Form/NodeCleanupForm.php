@@ -24,7 +24,7 @@ class NodeCleanupForm extends ConfigFormBase {
 
     $form['form']['enabled'] = array(
       '#type' => 'checkbox',
-      '#title' => 'this is enabled',
+      '#title' => $this->t('this is enabled'),
       '#default_value' => $config->get('enabled'),
       '#weight' => 1
     );
@@ -85,7 +85,7 @@ class NodeCleanupForm extends ConfigFormBase {
 
       $form['form']['checkvalues'][$checkID]['mail'] = array(
         '#type' => 'checkbox',
-        '#title' => 'send mail to author/admin',
+        '#title' => $this->t('send mail to author/admin'),
         '#default_value' => ($checkvalues[$checkID]['mail'] ?? '')
       );
 

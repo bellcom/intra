@@ -1,0 +1,166 @@
+<?php
+
+use Drupal\Core\Datetime\DrupalDateTime;
+
+/**
+ * Implements hook_cron().
+ */
+function bc_node_cleanup_cron() {
+
+  $config = \Drupal::service('config.factory')->getEditable('bc_node_cleanup.settings');
+
+  if ($config->get('enabled')) {
+
+    if (!empty($config->get('lastrun'))) {
+      $last = strtotime($config->get('lastrun'));
+      $now = time();
+      $run = $config->get('run');
+
+      switch ($run) {
+        case 1 : $next = strtotime("+1 day", $last); break;
+        case 7 : $next = strtotime("+7 days", $last); break;
+        case 30 : $next = strtotime("next month", $last); break;
+        case 182 : $next = strtotime("+6 month", $last); break;
+        case 365 : $next = strtotime("next year", $last); break;
+        default: $next = 0;
+      }
+
+      if ($next < $now) {
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        foreach ( $config->get('checkvalues') AS $type => $check ) {
+          $check = (object) $check;
+
+          if ($check->check_type) {
+            switch ($check->check_value) {
+              case 1 : $time = strtotime("-1 day", $now); break;
+              case 7 : $time = strtotime("-7 days", $now); break;
+              case 30 : $time = strtotime("-1 month", $now); break;
+              case 182 : $time = strtotime("-6 month", $now); break;
+              case 365 : $time = strtotime("-1 year", $now); break;
+              default: $time = 0;
+            }
+
+            $nodes = array();
+            if ($type == 'no_update') {
+              $nids = \Drupal::entityTypeManager()
+                ->getStorage('node')
+                ->getQuery()
+                  ->condition('changed', $time, '<')
+                ->execute();
+
+              if (count($nids)) {
+                $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+              }
+            } else if ($type == 'not_published') {
+              $nids = \Drupal::entityTypeManager()
+                ->getStorage('node')
+                ->getQuery()
+                ->condition('status', 0)
+                ->condition('changed', $time, '<')
+                ->execute();
+
+              if (count($nids)) {
+                $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+              }
+
+            }  else if ($type == 'no_author') {
+              $nids = \Drupal::entityTypeManager()
+              ->getStorage('node')
+                ->getQuery()
+                ->condition('uid', 0)
+                ->condition('changed', $time, '<')
+                ->execute();
+              if (count($nids)) {
+                $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+              }
+
+            }
+
+            if (count($nodes)) {
+
+              foreach ( $nodes AS $node ) {
+
+                if (!$check->mail) {
+                  $node->delete();
+
+                } else {
+
+                  $mailTo = null;
+                  // try node author
+                  $uid = $node->getOwnerId();
+                  $user = \Drupal\user\Entity\User::load($uid);
+                  if ($user && !$user->isAnonymous() && !empty($user->get('mail')->value)) {
+                    $mailTo = $user->get('mail')->value;
+                  } else {
+                    // try default user
+                    $defaultAuthor = $config->get('author');
+                    if ($defaultAuthor) {
+                      $user = \Drupal\user\Entity\User::load($defaultAuthor);
+                      if ($user && !empty($user->get('mail')->value)) {
+                        $mailTo = $user->get('mail')->value;
+                      }
+                    }
+                  }
+
+                  if ($mailTo) {
+
+                    $body = array();
+                    $body[] = "Attention";
+
+                    switch ($type) {
+                      case 'no_update': $body[] = 'need to be updated'; break;
+                      case 'not_published': $body[] = 'has not been published for long time'; break;
+                      case 'no_author': $body[] = 'missing author'; break;
+                    }
+
+                    $body[] = $node->getTitle();
+                    $body[] = $node->toUrl()->setAbsolute()->toString();
+
+                    $params = array(
+                      'subject' => '>Node need attention',
+                      'body' => $body,
+                      'headers' => array(
+                        'From: drupal@bellcom.dk',
+                        'Content-Type:' . 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+                        'Reply-to: noreply@bellcom.dk',
+                        'X-Mailer: ' . 'PHP/' . phpversion()
+                      )
+                    );
+
+                    $result = $mailManager->mail(
+                      'bc_node_cleanup',
+                      'notification',
+                      $mailTo,
+                      'da',
+                      $params,
+                      'noreply@bellcom.dk',
+                      true
+                    );
+
+                  }
+                }
+              } // foreach 
+            }
+          }
+        } // foreach
+      }
+    }
+
+    $config->set('lastrun', date('Y/m/d H:i:s'));
+    $config->set('lastrun', date('2023/01/01 00:00:00'));
+    $config->save();
+
+  }
+}
+
+
+
+function bc_node_cleanup_mail($key, &$message, $params) {
+
+  if ($key === 'notification') {
+    if (!empty($params['subject'])) $message['subject'] = $params['subject'];
+    if (!empty($params['body']) && is_array($params['body'])) $message['body'] = $params['body'];
+  }
+
+}
+

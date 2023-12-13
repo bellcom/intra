@@ -1,0 +1,10 @@
+
+bc_node_cleanup.settings:
+  path: '/admin/config/bellcom/node-cleanup'
+  defaults:
+    _form: '\Drupal\bc_node_cleanup\Form\NodeCleanupForm'
+    _title: 'Node cleanup'
+  requirements:
+    _permission: 'administer site configuration'
+
+

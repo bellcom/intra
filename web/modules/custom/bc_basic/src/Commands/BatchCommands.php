@@ -72,5 +72,16 @@ Class BatchCommands extends DrushCommands
 
   }
 
+  /**
+   * create a log message
+   *
+   * @command bc:c
+   * @aliases bcc
+   * @options $options arr AN option that takes multiple values.
+   */
+  public function testc($options=array()) {
+    \Drupal::logger('bc_basic')->info('just a log mgs');
+  }
+
 
 }

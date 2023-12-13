@@ -70,15 +70,19 @@ function bc_mail_smsmail_node_presave($node) {
 
           if ($member->status) {
 
-            $result = $mailManager->mail(
-              'bc_mail_smsmail',
-              'operation',
-              $member->mobil . $conf->gateway,
-              'da',
-              $params,
-              $conf->reply,
-              true
-            );
+            try {
+              $result = $mailManager->mail(
+                'bc_mail_smsmail',
+                'operation',
+                trim($member->mobil . $conf->gateway),
+                'da',
+                $params,
+                $conf->reply,
+                TRUE
+              );
+            } catch (Exception $e) {
+
+            }
 
             if ($result['result'] !== true) {
               \Drupal::logger('bc_mail_smsmail')->notice('operations sms not be sent to ' . $member->name . " , " .$member->mobil);

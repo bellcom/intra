@@ -11,7 +11,6 @@
       $.ajaxSetup({cache: false});
       $.getJSON('/bc_flag_extension/data', {nid: nid}, function (response) {
 
-
         let uib = $(".sidebar-bookmark-list-ul").empty();
         let uis = $(".sidebar-shortcut-list-ul").empty();
         let uiu = $(".sidebar-unread-list-ul").empty();
@@ -42,6 +41,23 @@
               .append($('<a/>').addClass("unread-item-link").attr("href", item.link).text(item.title))
             );
           });
+
+          if (uiu.find("li").length > 0) {
+              uiu.prepend( $('<li/>')
+                  .append( $('<span/>')
+                    .addClass('unread-read-all')
+                    .text("set alle til læst") )
+              );
+
+              $(".unread-read-all").on("click", function() {
+                $.getJSON('/bc_flag_extension/set/unread', {action: "unreadall"}, function (response) {
+                  if (response.success) {
+                    uiu.empty();
+                    $(".sidebar-block.sidebar-unread").css("display", "none");
+                  }
+                });
+              });
+          }
         }
 
       }).done(function(response) {

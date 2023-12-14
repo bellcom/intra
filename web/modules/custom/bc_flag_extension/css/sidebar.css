@@ -251,6 +251,24 @@ div.flag-sidebar-block ul li:before {
   letter-spacing: -0.3px;
 }
 
+.unread-read-all {
+  cursor: pointer;
+  padding: 4px 10px;
+  display: block;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #333;
+  text-decoration: none;
+}
+.unread-read-all:hover{
+  background: rgba(255,255,255,0.6);
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+}
+
+
 @media only screen and (max-width: 740px) {
   .sidebar-bookmark-icon,
   .sidebar-shortcut-icon,

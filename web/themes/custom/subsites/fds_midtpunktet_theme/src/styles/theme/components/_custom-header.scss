@@ -21,6 +21,16 @@
 // Styling
 // --------------------------------------------------
 
+.region-alert {
+  .field--type-text-with-summary {
+    margin-top: 0;
+
+    * {
+      color: white;
+    }
+  }
+}
+
 .custom-header {
 
   button,

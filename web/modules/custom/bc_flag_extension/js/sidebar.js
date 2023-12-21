@@ -46,7 +46,7 @@
               uiu.prepend( $('<li/>')
                   .append( $('<span/>')
                     .addClass('unread-read-all')
-                    .text("set alle til læst") )
+                    .text("Markér alt som læst") )
               );
 
               $(".unread-read-all").on("click", function() {

@@ -176,7 +176,7 @@
       {% set drupalTag = '<drupal-render-placeholder>'%}
       {% set has_main_content = page.content|render|striptags(drupalTag)|trim is not empty %}
      {% if has_main_content %}
-    <div class="row">
+    <div class="row row-no-flex">
       {#  Wayaround for determining visibility for regions with lazybuilder.
       @See https://www.drupal.org/project/drupal/issues/953034 for more info. #}
       {% set has_sidebar_first = page.sidebar_first|render|striptags(drupalTag)|trim is not empty %}
@@ -185,7 +185,7 @@
       {% set sidebar_first_classes = [
         has_sidebar_first and has_sidebar_second ? 'col-12 col-md-3 sidebar-first',
         has_sidebar_first and has_sidebar_second is empty ? 'sideblock-venstre d-print-none',
-      ] %}
+      ] %}h
       {% if has_sidebar_first %}
         <aside class="{{ sidebar_first_classes | join(' ') }}">
           <div class="layout-sidebar-left">

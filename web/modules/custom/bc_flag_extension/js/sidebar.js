@@ -62,12 +62,22 @@
 
       }).done(function(response) {
 
-        if ( typeof(response.menu_counters) !== "undefined") {
+        if (typeof(response.menu_counters) !== "undefined") {
           $.each(response.menu_counters, function(id, item) {
             if (item.count > 0) {
               let menuitem = $('.menu-item *[data-drupal-link-system-path="node/' + item.node + '"]').first();
               if (menuitem.length === 1) {
-                menuitem.text(menuitem.text() + ' (' + item.count + ')');
+                // Create a new span element for the counter
+                let counterSpan = $('<span/>').addClass('menu-counter').text(' (' + item.count + ')');
+
+                // Optionally, create an additional element, like an icon
+                let iconSpan = $('<span/>').addClass('menu-icon').html('🔔'); // Example using an emoji as an icon
+
+                // Clear previous appended elements to avoid duplication
+                menuitem.find('.menu-counter, .menu-icon').remove();
+
+                // Append the new elements to the menu item
+                menuitem.append(counterSpan).append(iconSpan);
               }
             }
           });

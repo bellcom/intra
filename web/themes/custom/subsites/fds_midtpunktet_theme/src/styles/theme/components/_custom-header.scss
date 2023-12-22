@@ -365,7 +365,11 @@ body {
         &.is-active {
           background: $color-light-gray1;
           color: #c30a32;
-          font-weight: 600;
+          font-weight: 600 !important;
+
+          &:hover {
+            color: #c30a32;
+          }
         }
 
         .menu-icon {
@@ -373,6 +377,9 @@ body {
           font-size: 10px;
           top: 5px;
           right: 5px;
+        }
+        .menu-counter {
+          margin-left: 5px;
         }
       }
 

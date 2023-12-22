@@ -11,6 +11,8 @@
   .view-content {
     .item-list {
       ul {
+        width: 100%;
+        max-width: none;
         li {
           margin: 0;
           display: flex;

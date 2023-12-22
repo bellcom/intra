@@ -291,6 +291,10 @@ body {
     margin: 0 -10px;
     padding: 0;
 
+    @media only screen and (max-width: 575px) {
+      display: block;
+    }
+
     li {
       flex-basis: 50%;
 
@@ -340,6 +344,9 @@ body {
     max-width: none;
     text-align: center;
     justify-content: space-between;
+    @media only screen and (max-width: 575px) {
+      display: block;
+    }
 
     > li {
       flex-basis: auto;
@@ -362,9 +369,6 @@ body {
         text-transform: uppercase;
         display: flex;
 
-        @media only screen and (max-width: 575px) {
-          display: block;
-        }
         &.is-active {
           background: $color-light-gray1;
           color: #c30a32;

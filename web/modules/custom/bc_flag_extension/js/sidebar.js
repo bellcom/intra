@@ -70,20 +70,18 @@
                 // Create a new span element for the counter
                 let counterSpan = $('<span/>').addClass('menu-counter').text(item.count);
 
-                // Create a div element to wrap the counter
-                let counterDiv = $('<div/>').addClass('menu-icon').append(counterSpan);
-
                 // Clear previous appended elements to avoid duplication
-                menuitem.find('.menu-counter, .menu-icon').remove();
+                menuitem.find('.menu-counter').remove();
 
-                // Append the new div to the menu item
-                menuitem.append(counterDiv);
+                // Append the new span to the menu item
+                menuitem.append(counterSpan);
               }
             }
           });
         }
 
       });
+
 
 
   };

@@ -349,7 +349,6 @@ body {
 
       > a {
         position: relative;
-        display: block;
         height: initial;
         margin: 0;
         padding: 16px 15px;
@@ -362,6 +361,10 @@ body {
         color: $color-dark-gray2;
         text-transform: uppercase;
         display: flex;
+
+        @media only screen and (max-width: 575px) {
+          display: block;
+        }
         &.is-active {
           background: $color-light-gray1;
           color: #c30a32;

@@ -349,7 +349,6 @@ body {
 
       > a {
         position: relative;
-        display: block;
         height: initial;
         margin: 0;
         padding: 16px 15px;
@@ -361,6 +360,8 @@ body {
         text-decoration: none;
         color: $color-dark-gray2;
         text-transform: uppercase;
+        display: flex;
+        gap: 5px;
         &.is-active {
           background: $color-light-gray1;
         }

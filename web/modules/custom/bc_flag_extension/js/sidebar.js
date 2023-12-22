@@ -68,7 +68,7 @@
               let menuitem = $('.menu-item *[data-drupal-link-system-path="node/' + item.node + '"]').first();
               if (menuitem.length === 1) {
                 // Create a new span element for the counter
-                let counterSpan = $('<span/>').addClass('menu-counter').text(' (' + item.count + ')');
+                let counterSpan = $('<span/>').addClass('menu-counter').text(  item.count  );
 
                 // Create a div element to wrap the counter
                 let counterDiv = $('<div/>').addClass('menu-icon').append(counterSpan);

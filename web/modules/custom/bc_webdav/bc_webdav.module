@@ -1,0 +1,82 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Drupal\Core\Link;
+
+
+function bc_webdav_theme($existing, $type, $theme, $path) {
+  return array(
+    'file_link_webdav' => array(
+      'template' => 'file-link-webdav',
+      'base hook' => 'file link'
+    ),
+  );
+
+}
+
+function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variables, $hook) {
+
+  if ($hook === 'file_link') {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface && $node->bundle() == 'group_file') {
+      if ($node->hasField('field_webdav') && $node->get('field_webdav')->value) {
+
+        $file = $variables['file'];
+
+        $mime_type = strtr($file->getMimeType(), ['/' => '-', '.' => '-']);
+
+        $icon_classes = array(
+          'file',
+          'file--mime-' . $mime_type,
+          'file--' . file_icon_class($mime_type),
+          'webdav-file-link'
+        );
+        $variables['icon_classes'] = $icon_classes;
+
+        $options = [];
+        $options['attributes']['type'] = $file->getMimeType();
+
+        if (empty($variables['description'])) {
+          $link_text = $file->getFilename();
+
+        } else {
+          $link_text = $variables['description'];
+          $options['attributes']['title'] = $file->getFilename();
+        }
+
+        $variables['link_text'] = $link_text;
+
+        $file_url_generator = \Drupal::service('file_url_generator');
+        $url = $file_url_generator->generate($file->getFileUri());
+
+        $link = Link::fromTextAndUrl($link_text, $url->mergeOptions($options))->toRenderable();
+
+        $variables['link'] = $link;
+
+        $buttons = '<div class="webdav-buttons">';
+        $buttons .= '<div class="webdav-button webdav-download" data-action="download" data-link="" data-id="' . $file->uuid() . '"></div>';
+        $buttons .= '<div class="webdav-button webdav-view" data-action="view" data-link="" data-id="' . $file->uuid() . '"></div>';
+        $buttons .= '<div class="webdav-button webdav-edit" data-action="edit" data-link="" data-id="' . $file->uuid() . '"></div>';
+        $buttons .= '<div class="webdav-button webdav-history" data-action="history" data-link="" data-id="' . $file->uuid() . '"></div>';
+        $buttons .= '<iframe id="webdavframe" src="/webdavhandler" style="display:none"></iframe>';
+        $buttons .= '</div>';
+
+        $variables['buttons'] = array(
+          '#type' => 'inline_template',
+          '#template' => $buttons
+        );
+
+        $suggestions = array($hook . '_' . 'webdav');
+      }
+    }
+  }
+}
+
+
+
+function bc_webdav_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'bc_webdav/webdav-styling';
+}

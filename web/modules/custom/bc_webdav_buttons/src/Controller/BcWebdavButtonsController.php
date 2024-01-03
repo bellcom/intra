@@ -16,10 +16,10 @@ class BcWebdavButtonsController extends ControllerBase {
     $query = \Drupal::database()->insert('bc_webdav_buttons_log')
       ->fields([
         'unix_timestamp' => REQUEST_TIME,
-        'nid' => \Drupal::request()->query->get('nid'),
+        'nid' => \Drupal::request()->query->get('nid') ?? 0,
         'uid' => $user->id(),
-        'fid' => \Drupal::request()->query->get('fid'),
-        'action' => \Drupal::request()->query->get('action'),
+        'fid' => \Drupal::request()->query->get('fid') ?? 0,
+        'action' => \Drupal::request()->query->get('action') ?? 'none',
       ])
       ->execute();
 

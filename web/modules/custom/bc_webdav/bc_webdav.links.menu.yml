@@ -1,0 +1,6 @@
+bc_webdav.settings:
+  title: 'Bellcom Webdav'
+  route_name: bc_webdav.settings
+  description: 'Bellcom Webdav extension configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

@@ -1,17 +1,12 @@
-name: 'BC WebDav Buttons'
+name: 'Bellcom WebDav Buttons'
 type: module
 description: 'Bellcom: WebDav Buttons for editing and viewing files.'
 core_version_requirement: ^8 || ^9
-package: Custom
+package: 'Bellcom'
 dependencies:
-  - drupal:ctools
-  - drupal:panels
-  - drupal:page_manager
-
+  - bc_basic
 stylesheets:
   all:
     - src/css/bc_webdav_buttons.css
 scripts:
   - src/js/bc_webdav_buttons.js
-
-configure: 'admin/config/content/bcwebdavbuttons'

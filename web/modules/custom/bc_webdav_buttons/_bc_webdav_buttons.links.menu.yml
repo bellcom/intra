@@ -3,7 +3,7 @@ bc_webdav_buttons.settings:
   parent: system.admin_config_content
   weight: 100
   menu_name: admin-menu
-  link_path: 'admin/config/content/bcwebdavbuttons'
+  link_path: 'admin/config/content/bc_webdav_buttons'
   options:
     _title: 'BC WebDav Buttons'
   route_parameters:
@@ -26,7 +26,7 @@ bc_webdav_buttons.edit_form:
   parent: system.admin_config_content
   weight: 100
   menu_name: admin-menu
-  link_path: 'admin/config/content/bcwebdavbuttons'
+  link_path: 'admin/config/content/bc_webdav_buttons'
   options:
     _title: 'BC WebDav Buttons Edit Form'
   route_parameters:

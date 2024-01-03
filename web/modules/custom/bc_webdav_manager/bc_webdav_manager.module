@@ -61,7 +61,7 @@ function bc_webdav_manager_form_submit(array $form, FormStateInterface $form_sta
     ->set('outsite_location_textfield', $form_state->getValue('bc_webdav_manager_form_outsite_location_textfield'))
     ->save();
 
-  $this->messenger()->addMessage("Saved!");
+
 }
 
 function bc_webdav_manager_entity_extra_field_info () {

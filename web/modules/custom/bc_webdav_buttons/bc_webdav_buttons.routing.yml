@@ -1,23 +1,17 @@
+
 bc_webdav_buttons.settings:
-  path: '/admin/config/content/bcwebdavbuttons'
+  path: '/admin/config/bellcom/webdav-buttons'
   defaults:
-    _form: '\Drupal\bc_webdav_buttons\Form\BcWebdavButtonsSettingsForm'
-    _title: 'BC WebDav Buttons'
+    _form: '\Drupal\bc_webdav_buttons\Form\BcWebdavButtonsForm'
+    _title: 'Bellcom webdav buttons'
   requirements:
-    _permission: 'administer BC WebDav Buttons settings'
+    _permission: 'administer site configuration'
 
 bc_webdav_buttons.log:
-  path: '/webdav/log'
+  path: '/admin/config/bellcom/webdav-log'
   defaults:
     _controller: '\Drupal\bc_webdav_buttons\Controller\BcWebdavButtonsController::log'
     _title: 'WebDav Log'
   requirements:
     _permission: 'access content'
 
-entity.bc_webdav_buttons.edit_form:
-  path: '/admin/config/content/bcwebdavbuttons'
-  defaults:
-    _entity_form: 'bc_webdav_buttons.edit_form'
-    _title: 'BC WebDav Buttons Edit Form'
-  requirements:
-    _permission: 'administer site configuration'

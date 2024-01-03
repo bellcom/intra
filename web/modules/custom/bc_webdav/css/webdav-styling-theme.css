@@ -1,0 +1,44 @@
+
+.webdav-file-link {
+  display: block;
+  height: 46px;
+  border-top: 1px solid lightgrey;
+  cursor: default;
+}
+
+.webdav-buttons {
+  float: right;
+}
+
+.webdav-button {
+  width: 46px;
+  height: 46px;
+  background-color: cadetblue;
+  display: inline-flex;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.webdav-button.webdav-download {
+  background-image: url('/modules/custom/bc_webdav/images/download-24.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.webdav-button.webdav-view {
+  background-image: url('/modules/custom/bc_webdav/images/view-24.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.webdav-button.webdav-edit {
+  background-image: url('/modules/custom/bc_webdav/images/edit-24.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.webdav-button.webdav-history {
+  background-image: url('/modules/custom/bc_webdav/images/history-24.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}

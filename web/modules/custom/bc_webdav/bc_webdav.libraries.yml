@@ -1,0 +1,10 @@
+webdav-styling:
+  version: VERSION
+  css:
+    theme:
+      css/webdav-styling-theme.css: {}
+  js:
+    js/webdav-styling.js: {}
+
+  dependencies:
+    - core/jquery

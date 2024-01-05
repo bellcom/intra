@@ -1,0 +1,16 @@
+bc_webdav.settings:
+  path: '/admin/config/bellcom/webdav'
+  defaults:
+    _form: '\Drupal\bc_webdav\Form\BcWebdavForm'
+    _title: 'Bellcom Webdav'
+  requirements:
+    _permission: 'administer site configuration'
+
+
+bc_webdav.handler:
+  path: '/webdavhandler'
+  defaults:
+    _controller: '\Drupal\bc_webdav\Controller\WebdavHandlerController::HandlerPage'
+    _title: 'Webdav file handler'
+  requirements:
+    _permission: 'access content'

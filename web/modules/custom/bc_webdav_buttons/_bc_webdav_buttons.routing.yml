@@ -1,0 +1,23 @@
+bc_webdav_buttons.settings:
+  path: '/admin/config/content/bcwebdavbuttons'
+  defaults:
+    _form: '\Drupal\bc_webdav_buttons\Form\BcWebdavButtonsSettingsForm'
+    _title: 'BC WebDav Buttons'
+  requirements:
+    _permission: 'administer BC WebDav Buttons settings'
+
+bc_webdav_buttons.log:
+  path: '/webdav/log'
+  defaults:
+    _controller: '\Drupal\bc_webdav_buttons\Controller\BcWebdavButtonsController::log'
+    _title: 'WebDav Log'
+  requirements:
+    _permission: 'access content'
+
+entity.bc_webdav_buttons.edit_form:
+  path: '/admin/config/content/bc_webdav_buttons'
+  defaults:
+    _entity_form: 'bc_webdav_buttons.edit_form'
+    _title: 'BC WebDav Buttons Edit Form'
+  requirements:
+    _permission: 'administer site configuration'

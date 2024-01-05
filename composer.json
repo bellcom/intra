@@ -81,6 +81,7 @@
         "drupal/entity": "^1.4",
         "drupal/entity_clone": "^2.0@beta",
         "drupal/entity_update": "^3.0",
+        "drupal/environment_indicator": "^4.0",
         "drupal/extlink": "^1.7",
         "drupal/fancy_file_delete": "^2.0",
         "drupal/faqfield": "^7.1",

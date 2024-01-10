@@ -1,0 +1,10 @@
+
+bc_anonymous_subscriptions_extension.settings:
+  path: '/admin/config/bellcom/anonymous_subscriptions'
+  defaults:
+    _form: '\Drupal\bc_anonymous_subscriptions_extension\Form\ASEForm'
+    _title: 'anonymous_subscriptions extension'
+  requirements:
+    _permission: 'administer site configuration'
+
+

@@ -16,6 +16,12 @@ function bc_webdav_theme($existing, $type, $theme, $path) {
 
 }
 
+
+function bc_webdav_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'bc_webdav/webdav-styling';
+}
+
+
 function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variables, $hook) {
 
   if ($hook === 'file_link') {
@@ -51,17 +57,16 @@ function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variable
 
         $file_url_generator = \Drupal::service('file_url_generator');
         $url = $file_url_generator->generate($file->getFileUri());
-
         $link = Link::fromTextAndUrl($link_text, $url->mergeOptions($options))->toRenderable();
 
         $variables['link'] = $link;
 
         $buttons = '<div class="webdav-buttons">';
-        $buttons .= '<div class="webdav-button webdav-download" data-action="download" data-link="" data-id="' . $file->uuid() . '"></div>';
-        $buttons .= '<div class="webdav-button webdav-view" data-action="view" data-link="" data-id="' . $file->uuid() . '"></div>';
-        $buttons .= '<div class="webdav-button webdav-edit" data-action="edit" data-link="" data-id="' . $file->uuid() . '"></div>';
-        $buttons .= '<div class="webdav-button webdav-history" data-action="history" data-link="" data-id="' . $file->uuid() . '"></div>';
-        $buttons .= '<iframe id="webdavframe" src="/webdavhandler" style="display:none"></iframe>';
+        $buttons .= '<div class="webdav-button webdav-download" data-action="download" data-link="" data-id="' . $file->uuid() . '" title="download"></div>';
+        $buttons .= '<div class="webdav-button webdav-view" data-action="view" data-link="" data-id="' . $file->uuid() . '" title="view"></div>';
+        $buttons .= '<div class="webdav-button webdav-edit" data-action="edit" data-link="" data-id="' . $file->uuid() . '" data-locked="" title="edit"></div>';
+        $buttons .= '<div class="webdav-button webdav-history" data-action="history" data-link="" data-id="' . $file->uuid() . '" title="history"></div>';
+        $buttons .= '<iframe id="webdavframe" src="/webdavhandler" style="display:block"></iframe>';
         $buttons .= '</div>';
 
         $variables['buttons'] = array(
@@ -76,7 +81,18 @@ function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variable
 }
 
 
+/**
+ * Implements hook_cron().
+ */
+function bc_webdav_cron() {
+  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
 
-function bc_webdav_page_attachments(array &$page) {
-  $page['#attached']['library'][] = 'bc_webdav/webdav-styling';
+  $config = (object) \Drupal::config('bc_webdav.settings')->get();
+  if ($config->enabled && !empty($config->folder)) {
+    $folder = $config->folder;
+    foreach( glob($folder . '/*') as $file) {
+
+
+    }
+  }
 }

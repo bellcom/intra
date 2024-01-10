@@ -7,7 +7,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-
+use Drupal\Core\File\FileSystemInterface;
 
 Class WebdavHandlerController extends ControllerBase {
 
@@ -50,12 +50,40 @@ Class WebdavHandlerController extends ControllerBase {
   }
 
 
-
   private function editFile($fileId=null) {
 
+    $html = '<script> alert(" something went wrong ! "); </script>';
+    $config = (object) \Drupal::config('bc_webdav.settings')->get();
+    if ($config->enabled && !empty($config->folder)) {
+
+      $files = \Drupal::entityTypeManager()
+        ->getStorage('file')
+        ->loadByProperties(['uuid' => $fileId]);
+
+      if (!empty($files)) {
+
+        $file = reset($files);
+        $file_uri = $file->uri->value;
+        $file_name = $file->filename->value;
+
+        if (file_exists($config->folder) && is_writable($config->folder) && !file_exists($config->folder . '/' . $file_name)) {
+
+          $file_system = \Drupal::service('file_system');
+          $file_system->copy($file_uri, $config->folder . '/' . $file_name, FileSystemInterface::EXISTS_REPLACE);
+
+          if (file_exists($config->folder . '/' . $file_name)) {
+            file_put_contents($config->folder . '/id.' . $file_name, trim($file->id()) . "\n");
+            $html = '<script> alert(" ready "); </script>';
+          }
+        } elseif (file_exists($config->folder . '/' . $file_name)) {
+          $html = '<script> alert(" file is edit by a other user, try later "); </script>';
+        }
+      }
+    }
+
+    return new HtmlResponse($html);
 
   }
-
 
   private function historyFile($fileId=null) {
 
@@ -76,7 +104,7 @@ Class WebdavHandlerController extends ControllerBase {
 
     if ($action === 'download') return $this->downloadFile($fileId);
     else if ($action === 'view') return $this->viewFile($fileId);
-
+    else if ($action === 'edit') return $this->editFile($fileId);
 
     return new JsonResponse(array(
       'data' => array(

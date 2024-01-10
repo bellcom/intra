@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_node_insert().
+ */
+function bc_anonymous_subscriptions_extension_node_insert(\Drupal\node\NodeInterface $node) {
+
+  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+
+
+  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function bc_anonymous_subscriptions_extension_user_insert(&$edit, $account) {
+
+  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+
+  file_put_contents('/var/www/logs/debug.log', $account->id() . "\n" . $account->getEmail(). "\n", FILE_APPEND);
+
+}
+
+

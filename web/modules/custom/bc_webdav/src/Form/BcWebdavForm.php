@@ -34,11 +34,18 @@ class BcWebdavForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Webdav location'),
       '#default_value' => $config->get('url'),
-      '#size' => 60,
-      '#maxlength' => 128,
       '#required' => TRUE,
       '#description' => $this->t('The full path to the webdav for outside editing, e.g., http://example.com/webdav/'),
     ];
+
+    $form['form']['folder'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Webdav local location'),
+      '#default_value' => $config->get('folder'),
+      '#required' => TRUE,
+      '#description' => $this->t('The full path to the webdav folder localy, /var/www/webdav'),
+    ];
+
 
     $form['form']['ext'] = [
       '#type' => 'textfield',

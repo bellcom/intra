@@ -1,0 +1,7 @@
+
+bc_anonymous_subscriptions_extension.settings:
+  title: 'Bellcom anonymous subscriptions extension'
+  route_name: bc_anonymous_subscriptions_extension.settings
+  description: 'Bellcom anonymous subscriptions extension configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

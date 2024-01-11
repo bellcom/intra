@@ -65,6 +65,7 @@ Class WebdavHandlerController extends ControllerBase {
         $file = reset($files);
         $file_uri = $file->uri->value;
         $file_name = $file->filename->value;
+        $user = $this->currentUser();
 
         if (file_exists($config->folder) && is_writable($config->folder) && !file_exists($config->folder . '/' . $file_name)) {
 
@@ -72,11 +73,10 @@ Class WebdavHandlerController extends ControllerBase {
           $file_system->copy($file_uri, $config->folder . '/' . $file_name, FileSystemInterface::EXISTS_REPLACE);
 
           if (file_exists($config->folder . '/' . $file_name)) {
-            file_put_contents($config->folder . '/id.' . $file_name, trim($file->id()) . "\n");
             $html = '<script> alert(" ready "); </script>';
           }
         } elseif (file_exists($config->folder . '/' . $file_name)) {
-          $html = '<script> alert(" file is edit by a other user, try later "); </script>';
+          $html = '<script> alert(" file is edit by another user, try later "); </script>';
         }
       }
     }

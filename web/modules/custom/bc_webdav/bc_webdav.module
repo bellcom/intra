@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,10 +90,48 @@ function bc_webdav_cron() {
 
   $config = (object) \Drupal::config('bc_webdav.settings')->get();
   if ($config->enabled && !empty($config->folder)) {
-    $folder = $config->folder;
-    foreach( glob($folder . '/*') as $file) {
 
+    foreach( glob($config->folder . '/*') as $filename) {
+      if (!preg_match('/id./', $filename)) {
 
+        $base = basename($filename);
+        $dir = dirname($filename);
+
+        $lastmodified = filemtime($filename);
+        // waite at least 30 min before update
+        if (time() < ($lastmodified + 1800)) {
+          continue;
+        }
+
+        if (!file_exists($dir . '/id.' . $base)) {
+          unlink($filename);
+        } else {
+
+          [$FileId, $UserId] = explode(":", file_get_contents($dir . '/id.' . $base));
+
+          if (is_int(intval($FileId)) && is_int(intval($UserId))) {
+
+            $files = \Drupal::entityTypeManager()
+              ->getStorage('file')
+              ->loadByProperties(['fid' => intval($FileId)]);
+
+            if (!empty($files)) {
+
+              $file = reset($files);
+              if ($file->label() === $base) {
+
+                $fileRepository = \Drupal::service('file.repository');
+                $result = $fileRepository->writeData(file_get_contents($filename), $file->uri->value, FileSystemInterface::EXISTS_REPLACE);
+                $result->save();
+
+                unlink($filename);
+              }
+            } else unlink($filename);
+          } else unlink($filename);
+        }
+
+      }
     }
   }
+
 }

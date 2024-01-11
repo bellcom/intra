@@ -1,0 +1,48 @@
+<?php
+
+/**
+* Implements hook_schema().
+*/
+function bc_webdav_schema() {
+
+  $schema['bc_webdav_log'] = array(
+    'description' => 'A table to store bellcom webdav file history',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'File id',
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User id',
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'action' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'stamp' => array(
+        'mysql_type' => 'timestamp',
+        'not null' => true
+      )
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'fid_normal_index' => array('fid'),
+    )
+  );
+
+  return $schema;
+
+}

@@ -67,7 +67,7 @@ function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variable
         $buttons .= '<div class="webdav-button webdav-view" data-action="view" data-link="" data-id="' . $file->uuid() . '" title="view"></div>';
         $buttons .= '<div class="webdav-button webdav-edit" data-action="edit" data-link="" data-id="' . $file->uuid() . '" data-locked="" title="edit"></div>';
         $buttons .= '<div class="webdav-button webdav-history" data-action="history" data-link="" data-id="' . $file->uuid() . '" title="history"></div>';
-        $buttons .= '<iframe id="webdavframe" src="/webdavhandler" style="display:block"></iframe>';
+        $buttons .= '<iframe id="webdavframe" src="/webdavhandler" style="display:none"></iframe>';
         $buttons .= '</div>';
 
         $variables['buttons'] = array(

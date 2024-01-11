@@ -86,7 +86,6 @@ function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variable
  * Implements hook_cron().
  */
 function bc_webdav_cron() {
-  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
 
   $config = (object) \Drupal::config('bc_webdav.settings')->get();
   if ($config->enabled && !empty($config->folder)) {
@@ -125,6 +124,18 @@ function bc_webdav_cron() {
                 $result->save();
 
                 unlink($filename);
+
+                $account = \Drupal\user\Entity\User::load(intval($UserId));
+
+                $connection = \Drupal::service('database');
+                $connection->insert('bc_webdav_log')
+                  ->fields([
+                    'fid' => $file->id(),
+                    'uid' => $account->id(),
+                    'action' => 'update'
+                  ])
+                  ->execute();
+
               }
             } else unlink($filename);
           } else unlink($filename);

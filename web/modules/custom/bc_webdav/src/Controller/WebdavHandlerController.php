@@ -174,20 +174,7 @@ Class WebdavHandlerController extends ControllerBase {
     else if ($action === 'edit') return $this->editFile($fileId);
     else if ($action === 'history') return $this->historyFile($fileId);
 
-    return new JsonResponse(array(
-      'data' => array(
-        'history' => "",
-        'request' => $_REQUEST,
-        'get' => $_GET,
-        'post' => $_POST,
-        'time' => time(),
-        'action' => $action
-      )
-    ));
-
-//    $response = new Response();
-//    return $response;
-
+    return new HtmlResponse('');
   }
 
 

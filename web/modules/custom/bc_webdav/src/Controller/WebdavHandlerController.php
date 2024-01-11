@@ -26,6 +26,15 @@ Class WebdavHandlerController extends ControllerBase {
         'Cache-Control' => 'private'
       );
 
+      $connection = \Drupal::service('database');
+      $connection->insert('bc_webdav_log')
+        ->fields([
+          'fid' => $file->id(),
+          'uid' => $this->currentUser()->id(),
+          'action' => 'download'
+        ])
+        ->execute();
+
       return new BinaryFileResponse($file->uri->value, 200, $headers, true );
 
     }
@@ -43,6 +52,16 @@ Class WebdavHandlerController extends ControllerBase {
       $file = reset($files);
       $html = '<a id="webdavfilelink" href="' . $file->createFileUrl(FALSE) . '" target="_blank">#</a>';
       $html .= '<script> document.getElementById("webdavfilelink").click(); </script>';
+
+      $connection = \Drupal::service('database');
+      $connection->insert('bc_webdav_log')
+        ->fields([
+          'fid' => $file->id(),
+          'uid' => $this->currentUser()->id(),
+          'action' => 'view'
+        ])
+        ->execute();
+
     }
 
     return new HtmlResponse($html);
@@ -65,7 +84,6 @@ Class WebdavHandlerController extends ControllerBase {
         $file = reset($files);
         $file_uri = $file->uri->value;
         $file_name = $file->filename->value;
-        $user = $this->currentUser();
 
         if (file_exists($config->folder) && is_writable($config->folder) && !file_exists($config->folder . '/' . $file_name)) {
 
@@ -74,6 +92,16 @@ Class WebdavHandlerController extends ControllerBase {
 
           if (file_exists($config->folder . '/' . $file_name)) {
             $html = '<script> alert(" ready "); </script>';
+
+            $connection = \Drupal::service('database');
+            $connection->insert('bc_webdav_log')
+              ->fields([
+                'fid' => $file->id(),
+                'uid' => $this->currentUser()->id(),
+                'action' => 'preparing edit'
+              ])
+              ->execute();
+
           }
         } elseif (file_exists($config->folder . '/' . $file_name)) {
           $html = '<script> alert(" file is edit by another user, try later "); </script>';
@@ -86,8 +114,47 @@ Class WebdavHandlerController extends ControllerBase {
   }
 
   private function historyFile($fileId=null) {
+    $return = (object) array(
+      "success" => false,
+      "data" => array()
+    );
 
+    $html = '';
 
+    $config = (object) \Drupal::config('bc_webdav.settings')->get();
+    if ($config->enabled && !empty($config->folder)) {
+
+      $files = \Drupal::entityTypeManager()
+        ->getStorage('file')
+        ->loadByProperties(['uuid' => $fileId]);
+
+      if (!empty($files)) {
+
+        $return->success = true;
+        $file = reset($files);
+
+        $result = \Drupal::database()->query('SELECT DISTINCT * FROM bc_webdav_log')->fetchAll();
+        foreach( $result AS $row ) {
+
+          $account = \Drupal\user\Entity\User::load($row->uid);
+          $stamp = date('d-m-Y H:i:s', strtotime($row->stamp));
+
+          $return->data[] = array(
+            "user" => $account->getDisplayName(),
+            "action" => $row->action,
+            "time" => $stamp
+          );
+
+          if (count($return->data) > 0) {
+              $html = '<script>';
+              $html .= 'window.top.showBcWebdavLogData(' . json_encode($return) . ')';
+              $html .= '</script>';
+          }
+        }
+      }
+    }
+
+    return new HtmlResponse($html);
   }
 
 
@@ -105,6 +172,7 @@ Class WebdavHandlerController extends ControllerBase {
     if ($action === 'download') return $this->downloadFile($fileId);
     else if ($action === 'view') return $this->viewFile($fileId);
     else if ($action === 'edit') return $this->editFile($fileId);
+    else if ($action === 'history') return $this->historyFile($fileId);
 
     return new JsonResponse(array(
       'data' => array(

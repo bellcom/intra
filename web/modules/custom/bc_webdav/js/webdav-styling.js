@@ -5,4 +5,14 @@
     $("#webdavframe").attr("src", '/webdavhandler/?action=' + $(this).data('action') + '&id=' + $(this).data('id'));
   });
 
+
 })(jQuery, Drupal, drupalSettings);
+
+
+function showBcWebdavLogData(json) {
+  if (json.success) {
+    json.data.forEach((row) => {
+      console.log( row );
+    });
+  }
+}

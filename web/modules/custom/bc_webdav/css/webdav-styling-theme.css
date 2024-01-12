@@ -45,26 +45,19 @@
 
 /* The Modal (background) */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 399; /* Lower than the overlay */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
   padding: 20px;
-  border: 1px solid #888;
   width: 95vw;
   max-width: 500px;
-  max-height: 95vh;
+  max-height: 80vh;
   z-index: 401; /* Higher than the overlay */
   position: relative;
   border: 2px solid black;
@@ -99,3 +92,14 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+
+.history-entry {
+  display: flex;
+  gap: 25px;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0 5px 0;
+}
+
+.history-user p {
+  font-weight: bold;
+}

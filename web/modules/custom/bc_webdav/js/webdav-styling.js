@@ -17,8 +17,9 @@
 
       modalBody.html(contentHtml);
       $('#customHistoryModal').show();
+      $('#customHistoryModalOverlay').show();
     } else {
-      modalBody.html('<p>No history data available.</p>');
+      modalBody.html('<p>Ingen historie er tilgængelig for denne fil.</p>');
     }
   };
 

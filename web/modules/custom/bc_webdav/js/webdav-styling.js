@@ -1,10 +1,14 @@
 (function($, Drupal, drupalSettings) {
-  $(".webdav-buttons .webdav-button").on("click", function(event) {
+  // Using event delegation to ensure event binding even on dynamically generated elements
+  $(document).on("click", ".webdav-buttons .webdav-button", function(event) {
     var action = $(this).data('action');
     var fileId = $(this).data('id');
 
+    console.log('Button clicked, Action: ' + action + ', File ID: ' + fileId);
+
     if (action === 'history') {
       event.preventDefault();
+      console.log('Fetching history for File ID: ' + fileId);
       fetchHistoryData(fileId);
     } else {
       $("#webdavframe").attr("src", '/webdavhandler/?action=' + action + '&id=' + fileId);
@@ -16,12 +20,13 @@
       url: '/webdavhandler/?action=history&id=' + fileId,
       dataType: 'json',
       success: function(response) {
+        console.log('History data received:', response);
         if (response.success) {
           showHistoryModal(response.data);
         }
       },
-      error: function() {
-        alert('Error fetching history');
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error fetching history:', textStatus, errorThrown);
       }
     });
   }
@@ -35,7 +40,8 @@
     $('#customHistoryModal').show();
   }
 
-  $('#customHistoryModal .close').on('click', function() {
+  // Close modal functionality
+  $(document).on('click', '#customHistoryModal .close', function() {
     $('#customHistoryModal').hide();
   });
 

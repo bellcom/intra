@@ -1,3 +1,5 @@
+console.log('webdav js loaded');
+
 (function($, Drupal, drupalSettings) {
   $(document).ready(function() {
     $(document).on("click", ".webdav-buttons .webdav-button", function(event) {

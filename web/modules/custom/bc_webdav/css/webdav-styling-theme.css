@@ -47,13 +47,13 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1; /* Lower than the overlay */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Content */
@@ -63,6 +63,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  z-index: 2; /* Higher than the overlay */
 }
 
 /* The Close Button */
@@ -79,3 +80,16 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Modal Overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 3; /* Higher than the modal content */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+

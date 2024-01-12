@@ -1,39 +1,35 @@
-console.log('webdav js loaded');
 
 (function($, Drupal, drupalSettings) {
-  $(document).on("click", ".webdav-button.webdav-history", function(event) {
-    event.preventDefault();
-    var fileId = $(this).data('id');
-    fetchHistoryData(fileId);
+
+  $(".webdav-buttons .webdav-button").on("click", function() {
+    $("#webdavframe").attr("src", '/webdavhandler/?action=' + $(this).data('action') + '&id=' + $(this).data('id'));
   });
 
-  function fetchHistoryData(fileId) {
-    $.ajax({
-      url: '/webdavhandler/?action=history&id=' + fileId,
-      dataType: 'json',
-      success: function(response) {
-        showBcWebdavLogData(response);
-      },
-      error: function() {
-        alert('Error fetching history');
-      }
-    });
-  }
 
-  function showBcWebdavLogData(json) {
-    if (json.success) {
-      var modalContent = '';
-      json.data.forEach((row) => {
-        modalContent += '<p>User: ' + row.user + ', Action: ' + row.action + ', Time: ' + row.time + '</p>';
-      });
-      $('#customHistoryModal .modal-body').html(modalContent);
-      $('#customHistoryModal').show();
-    }
-  }
-
-  $(document).ready(function() {
-    $('#customHistoryModal .close').on('click', function() {
-      $('#customHistoryModal').hide();
-    });
-  });
 })(jQuery, Drupal, drupalSettings);
+
+
+function showBcWebdavLogData(json) {
+  var modalBody = $('#customHistoryModal .modal-body');
+
+  if (json.success) {
+    var contentHtml = '';
+    json.data.forEach((row) => {
+      // Construct the HTML content from each row
+      contentHtml += '<div class="history-entry">';
+      contentHtml += '<p>Time: ' + row.time + '</p>'; // Use the 'time' field
+      contentHtml += '<p>User: ' + row.user + '</p>'; // Use the 'user' field
+      contentHtml += '<p>Action: ' + row.action + '</p>'; // Use the 'action' field
+      contentHtml += '</div>';
+    });
+
+    // Set the modal body's content
+    modalBody.html(contentHtml);
+
+    // Open the modal
+    $('#customHistoryModal').show();
+  } else {
+    modalBody.html('<p>No history data available.</p>');
+  }
+}
+

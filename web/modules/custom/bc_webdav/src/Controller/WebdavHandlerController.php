@@ -115,41 +115,48 @@ Class WebdavHandlerController extends ControllerBase {
 
   }
 
-  private function historyFile($fileId = null) {
-    $return = (object) [
+  private function historyFile($fileId=null) {
+    $return = (object) array(
       "success" => false,
-      "data" => []
-    ];
+      "data" => array()
+    );
 
-    if ($fileId) {
-      // Fetch the file entity using the provided file ID (UUID)
-      $fileEntities = \Drupal::entityTypeManager()
+    $html = '';
+
+    $config = (object) \Drupal::config('bc_webdav.settings')->get();
+    if ($config->enabled && !empty($config->folder)) {
+
+      $files = \Drupal::entityTypeManager()
         ->getStorage('file')
         ->loadByProperties(['uuid' => $fileId]);
 
-      if ($file = reset($fileEntities)) {
-        // Query the bc_webdav_log table for entries related to this file
-        $result = \Drupal::database()->select('bc_webdav_log', 'log')
-          ->fields('log', ['uid', 'action', 'stamp'])
-          ->condition('fid', $file->id())  // Assuming 'fid' is used to store the file ID
-          ->execute();
+      if (!empty($files)) {
 
-        foreach ($result as $row) {
+        $return->success = true;
+        $file = reset($files);
+
+        $result = \Drupal::database()->query('SELECT DISTINCT * FROM bc_webdav_log')->fetchAll();
+        foreach( $result AS $row ) {
+
           $account = \Drupal\user\Entity\User::load($row->uid);
-          $return->data[] = [
-            "user" => $account ? $account->getDisplayName() : 'Unknown',
-            "action" => $row->action,
-            "time" => format_date($row->stamp, 'custom', 'Y-m-d H:i:s')
-          ];
-        }
+          $stamp = date('d-m-Y H:i:s', strtotime($row->stamp));
 
-        if (!empty($return->data)) {
-          $return->success = true;
+          $return->data[] = array(
+            "user" => $account->getDisplayName(),
+            "action" => $row->action,
+            "time" => $stamp
+          );
+
+          if (count($return->data) > 0) {
+            $html = '<script>';
+            $html .= 'window.top.showBcWebdavLogData(' . json_encode($return) . ')';
+            $html .= '</script>';
+          }
         }
       }
     }
 
-    return new JsonResponse($return);
+    return new HtmlResponse($html);
   }
 
 

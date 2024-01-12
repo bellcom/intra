@@ -45,6 +45,7 @@
 
 /* The Modal (background) */
 .modal {
+  display: none;
 }
 
 /* Modal Content */

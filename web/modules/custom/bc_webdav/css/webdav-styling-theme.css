@@ -62,15 +62,20 @@
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 95vw;
+  max-width: 500px;
+  max-height: 95vh;
   z-index: 401; /* Higher than the overlay */
   position: relative;
+  border: 2px solid black;
 }
 
 /* The Close Button */
 .close {
   color: #aaa;
-  float: right;
+  position: absolute;
+  right: 20px;
+  top: 10px;
   font-size: 28px;
   font-weight: bold;
 }

@@ -19,12 +19,14 @@
         var modalBody = $('#customHistoryModal .modal-body');
 
         if (json.success) {
-          var contentHtml = '';
+          var filename = json.filename;
+          var contentHtml = '<h2>' + filename + '</h2>'; // Display the filename
+          contentHtml += '<div class="history-entries">';
           json.data.forEach((row) => {
             contentHtml += '<div class="history-entry">';
-            contentHtml += '<p>Time: ' + row.time + '</p>';
-            contentHtml += '<p>User: ' + row.user + '</p>';
-            contentHtml += '<p>Action: ' + row.action + '</p>';
+            contentHtml += '<div class="history-user"><p>' + row.user + '</p></div>';
+            contentHtml += '<div class="history-time"><p>' + row.time + '</p></div>';
+            contentHtml += '<div class="history-action"><p>' + row.action + '</p></div>';
             contentHtml += '</div>';
           });
 

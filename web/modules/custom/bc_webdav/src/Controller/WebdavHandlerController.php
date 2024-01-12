@@ -118,7 +118,8 @@ Class WebdavHandlerController extends ControllerBase {
   private function historyFile($fileId=null) {
     $return = (object) array(
       "success" => false,
-      "data" => array()
+      "data" => array(),
+      "filename" => ""
     );
 
     $html = '';
@@ -153,6 +154,7 @@ Class WebdavHandlerController extends ControllerBase {
             $html .= '</script>';
           }
         }
+        $return->filename = $file->filename->value;
       }
     }
 

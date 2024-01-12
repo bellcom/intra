@@ -47,7 +47,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1; /* Lower than the overlay */
+  z-index: 399; /* Lower than the overlay */
   left: 0;
   top: 0;
   width: 100%;
@@ -63,7 +63,8 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  z-index: 2; /* Higher than the overlay */
+  z-index: 401; /* Higher than the overlay */
+  position: relative;
 }
 
 /* The Close Button */
@@ -85,7 +86,7 @@
 .modal-overlay {
   display: none;
   position: fixed;
-  z-index: 3; /* Higher than the modal content */
+  z-index: 400; /* Higher than the modal content */
   left: 0;
   top: 0;
   width: 100%;

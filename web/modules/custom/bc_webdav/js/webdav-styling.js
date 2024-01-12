@@ -1,6 +1,7 @@
 (function($, Drupal, drupalSettings) {
   $(document).ready(function() {
     $(document).on("click", ".webdav-buttons .webdav-button", function(event) {
+      console.log("Button clicked", this);
       var action = $(this).data('action');
       var fileId = $(this).data('id');
 

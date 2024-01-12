@@ -135,7 +135,7 @@ Class WebdavHandlerController extends ControllerBase {
 
         $return->success = true;
         $file = reset($files);
-
+        $return->filename = $file->label();
         $result = \Drupal::database()->query('SELECT DISTINCT * FROM bc_webdav_log')->fetchAll();
         foreach( $result AS $row ) {
 
@@ -154,7 +154,6 @@ Class WebdavHandlerController extends ControllerBase {
             $html .= '</script>';
           }
         }
-        $return->filename = $file->filename->value;
       }
     }
 

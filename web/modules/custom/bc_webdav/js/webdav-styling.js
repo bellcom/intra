@@ -1,33 +1,39 @@
-console.log('loaded');
+console.log('webdav js loaded');
 
 (function($, Drupal, drupalSettings) {
-
-  $(".webdav-buttons .webdav-button").on("click", function() {
-    $("#webdavframe").attr("src", '/webdavhandler/?action=' + $(this).data('action') + '&id=' + $(this).data('id'));
+  $(document).on("click", ".webdav-button.webdav-history", function(event) {
+    event.preventDefault();
+    var fileId = $(this).data('id');
+    fetchHistoryData(fileId);
   });
 
-
-})(jQuery, Drupal, drupalSettings);
-
-
-function showBcWebdavLogData(json) {
-  if (json.success) {
-    var modalContent = '';
-    json.data.forEach((row) => {
-      // Construct the content to be displayed in the modal
-      modalContent += '<p>User: ' + row.user + ', Action: ' + row.action + ', Time: ' + row.time + '</p>';
+  function fetchHistoryData(fileId) {
+    $.ajax({
+      url: '/webdavhandler/?action=history&id=' + fileId,
+      dataType: 'json',
+      success: function(response) {
+        showBcWebdavLogData(response);
+      },
+      error: function() {
+        alert('Error fetching history');
+      }
     });
-
-    // Populate the modal's body with the constructed content
-    $('#customHistoryModal .modal-body').html(modalContent);
-
-    // Show the modal
-    $('#customHistoryModal').show();
   }
-}
 
-// Add event listener for closing the modal
-$('#customHistoryModal .close').on('click', function() {
-  $('#customHistoryModal').hide();
-});
+  function showBcWebdavLogData(json) {
+    if (json.success) {
+      var modalContent = '';
+      json.data.forEach((row) => {
+        modalContent += '<p>User: ' + row.user + ', Action: ' + row.action + ', Time: ' + row.time + '</p>';
+      });
+      $('#customHistoryModal .modal-body').html(modalContent);
+      $('#customHistoryModal').show();
+    }
+  }
 
+  $(document).ready(function() {
+    $('#customHistoryModal .close').on('click', function() {
+      $('#customHistoryModal').hide();
+    });
+  });
+})(jQuery, Drupal, drupalSettings);

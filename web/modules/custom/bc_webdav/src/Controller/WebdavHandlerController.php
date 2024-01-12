@@ -115,49 +115,38 @@ Class WebdavHandlerController extends ControllerBase {
 
   }
 
-  private function historyFile($fileId=null) {
-    $return = (object) array(
+  private function historyFile($fileId = null) {
+    $return = (object) [
       "success" => false,
-      "data" => array()
-    );
+      "data" => []
+    ];
 
-    $html = '';
+    if ($fileId) {
+      $connection = \Drupal::database();
+      $query = $connection->select('bc_webdav_log', 'log')
+        ->fields('log', ['uid', 'action', 'timestamp'])
+        ->condition('fid', $fileId)
+        ->execute();
 
-    $config = (object) \Drupal::config('bc_webdav.settings')->get();
-    if ($config->enabled && !empty($config->folder)) {
-
-      $files = \Drupal::entityTypeManager()
-        ->getStorage('file')
-        ->loadByProperties(['uuid' => $fileId]);
-
-      if (!empty($files)) {
-
-        $return->success = true;
-        $file = reset($files);
-
-        $result = \Drupal::database()->query('SELECT DISTINCT * FROM bc_webdav_log')->fetchAll();
-        foreach( $result AS $row ) {
-
-          $account = \Drupal\user\Entity\User::load($row->uid);
-          $stamp = date('d-m-Y H:i:s', strtotime($row->stamp));
-
-          $return->data[] = array(
-            "user" => $account->getDisplayName(),
-            "action" => $row->action,
-            "time" => $stamp
-          );
-
-          if (count($return->data) > 0) {
-              $html = '<script>';
-              $html .= 'window.top.showBcWebdavLogData(' . json_encode($return) . ')';
-              $html .= '</script>';
-          }
+      while ($row = $query->fetchAssoc()) {
+        $user = \Drupal\user\Entity\User::load($row['uid']);
+        if ($user) {
+          $return->data[] = [
+            "user" => $user->getDisplayName(),
+            "action" => $row['action'],
+            "time" => format_date($row['timestamp'], 'custom', 'Y-m-d H:i:s')
+          ];
         }
+      }
+
+      if (!empty($return->data)) {
+        $return->success = true;
       }
     }
 
-    return new HtmlResponse($html);
+    return new JsonResponse($return);
   }
+
 
 
   /**

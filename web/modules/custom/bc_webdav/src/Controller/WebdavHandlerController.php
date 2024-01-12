@@ -122,30 +122,36 @@ Class WebdavHandlerController extends ControllerBase {
     ];
 
     if ($fileId) {
-      $connection = \Drupal::database();
-      $query = $connection->select('bc_webdav_log', 'log')
-        ->fields('log', ['uid', 'action', 'timestamp'])
-        ->condition('fid', $fileId)
-        ->execute();
+      // Fetch the file entity using the provided file ID (UUID)
+      $fileEntities = \Drupal::entityTypeManager()
+        ->getStorage('file')
+        ->loadByProperties(['uuid' => $fileId]);
 
-      while ($row = $query->fetchAssoc()) {
-        $user = \Drupal\user\Entity\User::load($row['uid']);
-        if ($user) {
+      if ($file = reset($fileEntities)) {
+        // Query the bc_webdav_log table for entries related to this file
+        $result = \Drupal::database()->select('bc_webdav_log', 'log')
+          ->fields('log', ['uid', 'action', 'stamp'])
+          ->condition('fid', $file->id())  // Assuming 'fid' is used to store the file ID
+          ->execute();
+
+        foreach ($result as $row) {
+          $account = \Drupal\user\Entity\User::load($row->uid);
           $return->data[] = [
-            "user" => $user->getDisplayName(),
-            "action" => $row['action'],
-            "time" => format_date($row['timestamp'], 'custom', 'Y-m-d H:i:s')
+            "user" => $account ? $account->getDisplayName() : 'Unknown',
+            "action" => $row->action,
+            "time" => format_date($row->stamp, 'custom', 'Y-m-d H:i:s')
           ];
         }
-      }
 
-      if (!empty($return->data)) {
-        $return->success = true;
+        if (!empty($return->data)) {
+          $return->success = true;
+        }
       }
     }
 
     return new JsonResponse($return);
   }
+
 
 
 

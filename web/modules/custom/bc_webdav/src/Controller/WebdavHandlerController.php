@@ -93,6 +93,8 @@ Class WebdavHandlerController extends ControllerBase {
           if (file_exists($config->folder . '/' . $file_name)) {
             $html = '<script> alert(" ready "); </script>';
 
+            file_put_contents($config->folder . '/id.' . $file_name, $file->id() . ":" . $this->currentUser()->id() . "\n");
+
             $connection = \Drupal::service('database');
             $connection->insert('bc_webdav_log')
               ->fields([

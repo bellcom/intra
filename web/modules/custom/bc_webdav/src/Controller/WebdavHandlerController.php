@@ -154,7 +154,7 @@ Class WebdavHandlerController extends ControllerBase {
       }
     }
 
-    return new HtmlResponse($html);
+    return new JsonResponse($return);
   }
 
 

@@ -175,7 +175,7 @@ function fds_midtpunktet_theme_preprocess_views_view_summary(&$variables) {
     case 'field_os2web_news_article_date_value_year':
       /** @var \Drupal\views\ResultRow $row */
       foreach ($variables['rows'] as $row) {
-        $row->link = t('News @year', ['@year' => $row->link]);
+        $row->link = t('Nyheder @year', ['@year' => $row->link]);
       }
       break;
 

@@ -38,35 +38,6 @@ $sidenav-list-dot-spacing: 22px;
 		+ {
 			div {
 				margin-top: 0;
-				padding-top: 45px;
-				padding-bottom: 35px !important;
-				border-bottom: 1px solid $color-dark-gray2;
-				ul {
-					li {
-						padding: 0;
-						border-bottom: 1px solid $color-light-gray1;
-						background-color: transparent;
-						position: relative;
-						margin-top: 0;
-						&::before {
-							display: none;
-						}
-						a {
-							display: block;
-							color: $color-dark-gray2;
-							text-decoration: none;
-							font-size: 1.6rem;
-							font-family: "Museo 500", sans-serif;
-							font-weight: 500;
-							padding: 16px 20px;
-							transition: all 0.2s ease-in-out;
-							&:hover, &:focus {
-								background: $color-primary;
-								color: $color-white;
-							}
-						}
-					}
-				}
 				.facet-item {
 					display: block;
 					position: relative;

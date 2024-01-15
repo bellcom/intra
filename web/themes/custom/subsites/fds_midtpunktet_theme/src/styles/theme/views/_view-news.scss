@@ -6,6 +6,21 @@
   }
 }
 
+.faellesnyheder-archive {
+  .view-content {
+    .item-list {
+      .views-summary {
+        .before-element-top-22 {
+          margin: 0;
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
 .nyhedsstream {
   .view-content {
     .views-row {
@@ -14,6 +29,12 @@
       max-height: 200px;
       gap: 15px;
       border-bottom: 1px solid gray;
+
+      @media only screen and (max-width: 640px) {
+        flex-direction: column;
+        max-height: none;
+        min-height: auto;
+      }
 
 
       &:first-of-type {
@@ -26,6 +47,10 @@
       .views-field-field-os2web-news-primaryimage {
         width: 30%;
         display: flex;
+
+        @media only screen and (max-width: 640px) {
+          width: 100%;
+        }
 
         .field-content {
           a {
@@ -41,6 +66,10 @@
       }
       .views-field-field-os2web-news-description {
         width: 70%;
+
+        @media only screen and (max-width: 640px) {
+          width: 100%;
+        }
 
         .field-content {
           .nyhedsstream-content-wrapper {
@@ -97,6 +126,12 @@
           gap: 15px;
           border-bottom: 1px solid gray;
 
+          @media only screen and (max-width: 640px) {
+            min-height: auto;
+            max-height: none;
+            flex-direction: column;
+          }
+
           &:not(:first-of-type) {
             padding: 20px 0;
           }
@@ -113,6 +148,10 @@
             width: 30%;
             display: flex;
 
+            @media only screen and (max-width: 640px) {
+              width: 100%;
+            }
+
             .field-content {
               a {
                 height: 100%;
@@ -127,6 +166,10 @@
           }
           .views-field-field-os2web-news-description {
             width: 70%;
+
+            @media only screen and (max-width: 640px) {
+              width: 100%;
+            }
 
             .field-content {
               .nyhedsstream-content-wrapper {

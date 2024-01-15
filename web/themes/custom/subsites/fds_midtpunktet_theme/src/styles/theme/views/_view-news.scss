@@ -5,8 +5,7 @@
     font-family: "Museo 500", sans-serif;
   }
 }
-
-.faellesnyheder-archive {
+.block-views-blocknyheder-archive-block {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding: 45px 0;
@@ -15,13 +14,17 @@
   @media only screen and (max-width: 768px) {
     margin-bottom: 55px;
   }
-  .view-content {
-    .item-list {
-      .views-summary {
-        .before-element-top-22 {
-          margin: 0;
-          &:before {
-            display: none;
+
+  .faellesnyheder-archive {
+    .view-content {
+      .item-list {
+        .views-summary {
+          .before-element-top-22 {
+            margin: 0;
+
+            &:before {
+              display: none;
+            }
           }
         }
       }

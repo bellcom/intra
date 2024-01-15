@@ -1,4 +1,5 @@
 .block-bc-og-extension {
+
   h2 {
     border-bottom: 1px solid #c30a32;
     padding: 2px 0 0 6px !important;
@@ -37,4 +38,49 @@
       }
     }
   }
+}
+
+.block-og-recent-group-content {
+  h2 {
+    border-bottom: 1px solid #c30a32;
+    padding: 2px 0 0 6px!important;
+    background-color: #f5f5f5;
+    margin: 0!important;
+    font-size: 16px!important;
+    font-weight: 600;
+  }
+
+  .item-list {
+    ul {
+      margin: 0;
+      padding: 0;
+      background-color: #eee;
+      li {
+        margin: 0;
+
+        &:before {
+          content: '\f0da';
+          display: inline-flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          margin-right: 10px;
+          font-family: "FontAwesome";
+          font-size: 20px;
+          color: #c30a32;
+        }
+
+        a {
+          color: black;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+
 }

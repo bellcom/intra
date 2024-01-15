@@ -166,7 +166,7 @@ function fds_midtpunktet_theme_preprocess_paragraph(&$variables) {
  * Implements hook_preprocess_views_view_summary().
  */
 function fds_midtpunktet_theme_preprocess_views_view_summary(&$variables) {
-  if ($variables['view']->id() != 'os2web_news') {
+  if ($variables['view']->id() != 'nyheder') {
     return;
   }
   /** @var \Drupal\views\ViewExecutable $view */

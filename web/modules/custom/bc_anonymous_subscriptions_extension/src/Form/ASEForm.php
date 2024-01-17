@@ -33,6 +33,23 @@ class ASEForm extends ConfigFormBase {
       '#default_value' => $config->get('all_news')
     ];
 
+    $form['form']['group_notification'] = array(
+      '#type' => 'checkboxes',
+      '#options' => array(),
+      '#title' => $this->t('Group notifications :'),
+      '#description' => $this->t('The checked groups above will send notification on new content in the group to the group members.<br>Enable the Group node type in Anonymous subscriptions config and fill out the template.'),
+      '#default_value' => array()
+    );
+
+    $nids = \Drupal::entityQuery('node')->condition('type','group')->execute();
+    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    foreach ( $nodes AS $node ) {
+      $form['form']['group_notification']['#options'][$node->id()] = $node->getTitle();
+      if ($config->get('group_notification')[$node->id()] ?? null) {
+        $form['form']['group_notification']['#default_value'][$node->id()] = $node->id();
+      }
+    }
+
     return parent::buildForm($form, $form_state);
   }
 

@@ -4,6 +4,6 @@ description: 'Bellcom anonymous subscriptions extension'
 core: 8.x
 core_version_requirement: ^8 || ^9
 package: 'Bellcom'
-dependencies:dependencies:
+dependencies:
   - bc_basic
   - anonymous_subscriptions

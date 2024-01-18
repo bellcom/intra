@@ -280,6 +280,31 @@ function bc_og_extension_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     }
   }
 
+  if ($form['#id'] == 'views-exposed-form-organic-groups-og-group-member') {
+    if (isset($form['groupselect'])) {
+
+      $view = \Drupal\views\Views::getView('organic_groups');
+      $view->setDisplay('all_groups_block');
+      $view->execute();
+      $groups = array('gruppe valg');
+      foreach ($view->result as $fid => $row) {
+
+        $nid = null;
+        $name = null;
+        foreach ($view->field as $fid => $field) {
+          if ($fid == 'title') $name = $field->getValue($row);
+          if ($fid == 'nid') $nid = $field->getValue($row);
+        }
+        if ($nid && $name)  $groups[$nid] = $name;
+      }
+    }
+
+    $form['groupselect']['#type'] = 'select';
+    $form['groupselect']['#options'] = $groups;
+    $form['groupselect']['#size'] = 1;
+    $form['groupselect']['#default_value'] = 0;
+  }
+
 }
 
 

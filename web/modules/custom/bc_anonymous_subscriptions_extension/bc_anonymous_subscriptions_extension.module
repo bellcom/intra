@@ -1,26 +1,130 @@
 <?php
 
+use Drupal\anonymous_subscriptions\DefaultService;
+use \Drupal\anonymous_subscriptions\Entity\Subscription;
+use Drupal\Component\Utility\Crypt;
+
 /**
- * Implements hook_node_insert().
+ * Implements hook_entity_insert().
  */
-function bc_anonymous_subscriptions_extension_node_insert(\Drupal\node\NodeInterface $node) {
+function bc_anonymous_subscriptions_extension_entity_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
 
-  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+  if ($entity->getEntityTypeId() === 'user') {
+    $account = \Drupal\user\Entity\User::load($entity->id());
+    if (!empty($account->getEmail())) {
 
+      $config = (object) \Drupal::config('bc_anonymous_subscriptions_extension.settings')->get();
+      if ($config->enabled && $config->all_os2web_news) {
+        $subscription = Subscription::create([
+          'email' => $account->getEmail(),
+          'code' => Crypt::randomBytesBase64(20),
+          'entity_bundle' => 'os2web_news',
+          'entity_type' => 'node',
+          'verified' => TRUE,
+        ]);
+        $subscription->save();
+      }
+    }
+  }
 
-  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+  if ($entity->getEntityTypeId() === 'node') {
+    $config = (object) \Drupal::config('bc_anonymous_subscriptions_extension.settings')->get();
+    if ($config->enabled) {
+      $new_node = \Drupal::entityTypeManager()->getStorage('node')->load($entity->id());
+      if  ($new_node->hasField('og_audience'))
+      {
+        // Get group ids of the node
+        $audience_ids = array_filter(
+          array_column($new_node->get('og_audience')->getValue(), 'target_id')
+        );
+
+        // Get what groups that should be notified
+        $notified_ids = array_filter($config->group_notification);
+
+        // Get the matching ids
+        $match_ids = array_values(
+          array_intersect($notified_ids, $audience_ids)
+        );
+
+        if (count($match_ids) > 0)
+        {
+          $memberIds = array();
+          foreach ($match_ids AS $groupID ) {
+            $group =  \Drupal::entityTypeManager()->getStorage('node')->load($groupID);
+            // TODO check node status ( online / offline )
+
+            $sql = <<<EOD
+            SELECT uid FROM og_membership
+            WHERE
+                entity_id={$group->id()} AND
+                entity_type='node' AND
+                entity_bundle='{$group->bundle()}' AND
+                (state='active');
+            EOD;
+
+            $members = \Drupal::database()
+              ->query($sql)
+              ->fetchAllKeyed(0, 0);
+
+            $memberIds[$groupID] = $members;
+          }
+
+          if (count($memberIds) > 0) {
+
+            // preparing anonymous subscriptions to send out notification for this new node
+            $tempStore = \Drupal::service('tempstore.shared')->get('anonymous_subscriptions');
+            $tempStore->set('send_mail:' . $new_node->getType() . ':' . $new_node->id(), 'send_mail:' . $new_node->getType() . ':new');
+
+            // foreach Group
+            foreach ($memberIds AS $groupID => $members ) {
+
+              $group =  \Drupal::entityTypeManager()->getStorage('node')->load($groupID);
+              // cleanup the subscriber list
+              \Drupal::database()->query("DELETE FROM anonymous_subscription WHERE entity_bundle='{$new_node->bundle()}' AND entity_id={$new_node->id()};");
+              // foreach user in group
+              foreach ( $members AS $memberID ) {
+                $account = \Drupal\user\Entity\User::load($memberID);
+                if (!empty($account->getEmail())) {
+
+                  // insert anonymous subscriptions subscriber the the new node
+                  $subscription = Subscription::create([
+                    'email' => 'ht@bellcom.dk',
+                    'code' => Crypt::randomBytesBase64(20),
+                    'entity_bundle' => $new_node->bundle(),
+                    'entity_type' => 'node',
+                    'entity_id' => $new_node->id(),
+                    'verified' => 1,
+                  ]);
+                  $subscription->save();
+                }
+              }
+              \Drupal::service('anonymous_subscriptions.default')->addPendingEmails($new_node);
+              \Drupal::database()->query("DELETE FROM anonymous_subscription WHERE entity_bundle='{$new_node->bundle()}' AND entity_id={$new_node->id()};");
+            }
+          }
+        }
+      }
+    }
+  }
 
 }
 
 /**
- * Implements hook_user_insert().
+ * Implements hook_entity_delete().
  */
-function bc_anonymous_subscriptions_extension_user_insert(&$edit, $account) {
+function bc_anonymous_subscriptions_extension_entity_delete(\Drupal\Core\Entity\EntityInterface $entity) {
 
-  file_put_contents('/var/www/logs/debug.log', __METHOD__ . "\n", FILE_APPEND);
+  if ($entity->getEntityTypeId() === 'user' && !empty($entity->mail->value)) {
 
-  file_put_contents('/var/www/logs/debug.log', $account->id() . "\n" . $account->getEmail(). "\n", FILE_APPEND);
+    $config = (object) \Drupal::config('bc_anonymous_subscriptions_extension.settings')->get();
+    if ($config->enabled && $config->all_os2web_news) {
+      $connection = \Drupal::database();
+      $num_deleted = $connection->delete('anonymous_subscription')
+        ->condition('email', $entity->mail->value)
+        ->condition('entity_type', 'node')
+        ->condition('entity_bundle', 'os2web_news')
+        ->execute();
+    }
 
+  }
 }
-
-

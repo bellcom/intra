@@ -4,6 +4,8 @@ namespace Drupal\bc_anonymous_subscriptions_extension\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use \Drupal\anonymous_subscriptions\Entity\Subscription;
+use Drupal\Component\Utility\Crypt;
 
 class ASEForm extends ConfigFormBase {
 
@@ -27,11 +29,16 @@ class ASEForm extends ConfigFormBase {
       '#default_value' => $config->get('enabled')
     ];
 
-    $form['form']['all_os2web_news'] = [
+    $form['form']['all_os2web_news'] = array(
       '#type' => 'checkbox',
       '#title' => 'Set automatic all users as member of anonymous subscriptions os2web_news',
-      '#default_value' => $config->get('all_news')
-    ];
+      '#default_value' => $config->get('all_os2web_news')
+    );
+
+    $form['form']['all_os2web_news_now'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Set all users as member of anonymous subscriptions os2web_news now',
+    );
 
     $form['form']['group_notification'] = array(
       '#type' => 'checkboxes',
@@ -65,9 +72,41 @@ class ASEForm extends ConfigFormBase {
 
     $config->save();
 
+    if (!empty($values['all_os2web_news_now'])) {
+
+      $userStorage = \Drupal::entityTypeManager()->getStorage('user');
+      $query = $userStorage->getQuery();
+      $uids = $query
+        ->condition('status', '1')
+        ->execute();
+      $users = $userStorage->loadMultiple($uids);
+
+      if (count($uids) > 0) {
+        foreach ($users as $user) {
+          if (!empty($user->get('mail')->value)) {
+            $email = $user->get('mail')->value;
+
+            $query = \Drupal::entityQuery('anonymous_subscription')
+              ->condition('email', $email)
+              ->condition('entity_type', 'node')
+              ->condition('entity_bundle', 'os2web_news');
+            $ids = $query->execute();
+            if (count($ids) == 0) {
+              $subscription = Subscription::create([
+                'email' => $user->get('mail')->value,
+                'code' => Crypt::randomBytesBase64(20),
+                'entity_bundle' => 'os2web_news',
+                'entity_type' => 'node',
+                'verified' => 1,
+              ]);
+              $subscription->save();
+            }
+          }
+        }
+      }
+    }
+
     parent::submitForm($form, $form_state);
 
   }
-
-
 }

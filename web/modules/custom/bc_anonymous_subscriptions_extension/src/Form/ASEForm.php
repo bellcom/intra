@@ -37,7 +37,7 @@ class ASEForm extends ConfigFormBase {
 
     $form['form']['all_os2web_news_now'] = array(
       '#type' => 'checkbox',
-      '#title' => 'Set all users as member of anonymous subscriptions os2web_news now',
+      '#title' => 'Set all users as member of anonymous subscriptions os2web_news now and flag active news if user is not already subscribed',
     );
 
     $form['form']['group_notification'] = array(
@@ -79,13 +79,25 @@ class ASEForm extends ConfigFormBase {
       $uids = $query
         ->condition('status', '1')
         ->execute();
-      $users = $userStorage->loadMultiple($uids);
 
       if (count($uids) > 0) {
+
+        // get unread flag + service
+        $flagService = \Drupal::service('flag');
+        $flag = $flagService->getFlagById('unread');
+
+        // get all active news
+        $nids = \Drupal::entityQuery('node')
+          ->condition('type','os2web_news')
+          ->condition('status', 1)
+          ->execute();
+        $news = \Drupal\node\Entity\Node::loadMultiple($nids);
+
+        $users = $userStorage->loadMultiple($uids);
         foreach ($users as $user) {
           if (!empty($user->get('mail')->value)) {
+            // set user subscription to news if not already subscribed
             $email = $user->get('mail')->value;
-
             $query = \Drupal::entityQuery('anonymous_subscription')
               ->condition('email', $email)
               ->condition('entity_type', 'node')
@@ -100,9 +112,20 @@ class ASEForm extends ConfigFormBase {
                 'verified' => 1,
               ]);
               $subscription->save();
+
+              // flag unread news to new subscribed user
+              if ($flag) {
+                foreach ($news as $node) {
+                  $flagging = $flagService->getFlagging($flag, $node, $user);
+                  if (!$flagging) {
+                    $flagService->flag($flag, $node, $user);
+                  }
+                }
+              }
             }
           }
         }
+
       }
     }
 

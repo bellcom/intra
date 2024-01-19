@@ -37,10 +37,9 @@ function bc_flag_extension_theme($existing, $type, $theme, $path) {
 
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_page().
  */
 function bc_flag_extension_preprocess_page(&$variables) {
-
   // unflagging unread flag if is node flag is set for this user
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof \Drupal\node\NodeInterface) {
@@ -58,7 +57,97 @@ function bc_flag_extension_preprocess_page(&$variables) {
 
     $variables['#attached']['drupalSettings']['data']['nid'] = $node->id();
 
-
   }
+}
+
+
+/**
+ * Implements hook_node_insert().
+ */
+function bc_flag_extension_node_insert(\Drupal\node\NodeInterface $node) {
+
+  $config = (object) \Drupal::config('bc_flag_extension.settings')->get();
+  if ($config->unread) {
+    $menu_counter = array_filter(
+      array_column($config->menu_counter, 'counter_type')
+    );
+
+    // if node is group content, there must be set a unread flag on this node
+    // on all user members of the group(s)
+    if (in_array('unread_group_content', $menu_counter) && $node->bundle() == 'og_group_content') {
+
+      if  ($node->hasField('og_audience')) {
+        // Get group ids of the node
+        $audience_ids = array_filter(
+          array_column($node->get('og_audience')->getValue(), 'target_id')
+        );
+
+        foreach ( $audience_ids AS $groupID ) {
+          $group =  \Drupal::entityTypeManager()->getStorage('node')->load($groupID);
+
+          $sql = <<<EOD
+            SELECT uid FROM og_membership
+            WHERE
+                entity_id={$group->id()} AND
+                entity_type='node' AND
+                entity_bundle='{$group->bundle()}' AND
+                (state='active');
+            EOD;
+
+          $members = \Drupal::database()
+            ->query($sql)
+            ->fetchAllKeyed(0, 0);
+
+          if (count($members) > 0) {
+            $current_user = \Drupal::currentUser();
+            $flagService = \Drupal::service('flag');
+            $flag = $flagService->getFlagById('unread');
+            if ($flag) {
+              foreach ($members as $memberID) {
+                $account = \Drupal\user\Entity\User::load($memberID);
+                if ($current_user->id() !== $account->id()) {
+                  $flagging = $flagService->getFlagging($flag, $node, $account);
+                  if (!$flagging) {
+                    $flagService->flag($flag, $node, $account);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+
+    // if new node is os2web_news and unread_news_content count is set, a unread flag must be set
+    //  on all users to display the counter in the menu
+    if (in_array('unread_news_content', $menu_counter) && $node->bundle() == 'os2web_news') {
+      $current_user = \Drupal::currentUser();
+      $userStorage = \Drupal::entityTypeManager()->getStorage('user');
+      $query = $userStorage->getQuery();
+      $uids = $query
+        ->condition('status', '1')
+        ->execute();
+
+      if (count($uids) > 0) {
+        $users = $userStorage->loadMultiple($uids);
+        $flagService = \Drupal::service('flag');
+        $flag = $flagService->getFlagById('unread');
+
+        if ($flag) {
+          foreach ($users as $user) {
+            if ($current_user->id() != $user->id()) {
+              $flagging = $flagService->getFlagging($flag, $node, $user);
+              if (!$flagging) {
+                $flagService->flag($flag, $node, $user);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
 

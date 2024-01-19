@@ -9,10 +9,10 @@ use Drupal\Component\Utility\Crypt;
  */
 function bc_anonymous_subscriptions_extension_entity_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
 
+  // set new users to news subscriber
   if ($entity->getEntityTypeId() === 'user') {
     $account = \Drupal\user\Entity\User::load($entity->id());
     if (!empty($account->getEmail())) {
-
       $config = (object) \Drupal::config('bc_anonymous_subscriptions_extension.settings')->get();
       if ($config->enabled && $config->all_os2web_news) {
         $subscription = Subscription::create([
@@ -29,6 +29,7 @@ function bc_anonymous_subscriptions_extension_entity_insert(\Drupal\Core\Entity\
 
   if ($entity->getEntityTypeId() === 'node') {
     $config = (object) \Drupal::config('bc_anonymous_subscriptions_extension.settings')->get();
+
     if ($config->enabled) {
       $new_node = \Drupal::entityTypeManager()->getStorage('node')->load($entity->id());
       if  ($new_node->hasField('og_audience'))

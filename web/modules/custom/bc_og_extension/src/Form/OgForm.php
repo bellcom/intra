@@ -27,13 +27,7 @@ class OgForm extends ConfigFormBase {
       '#title' => $this->t('Set group membership active by default ( default is pending )'),
       '#default_value' => $config->get('default_active')
     ];
-
-    $form['form']['notifications'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('If send out notification to group on new content and files.'),
-      '#default_value' => $config->get('notifications')
-    ];
-
+    
     return parent::buildForm($form, $form_state);
   }
 

@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function bc_node_tabs_menu_local_tasks_alter(&$data, $route_name, \Drupal\Core\Cache\RefinableCacheableDependencyInterface &$cacheability) {
+  $config = (object) \Drupal::config('bc_node_tabs.settings')->get();
+  if ($config->enabled) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node) {
+      foreach ($config->tabs AS $tab ) {
+        if ($node->bundle() == $tab['node_type']) {
+          if (!empty($data['tabs'][0])) {
+            $route = str_replace('{node}', $node->id(), $tab['route']);
+            try {
+              $display = \Drupal\Core\Url::fromUserInput($route);
+            } catch (InvalidArgumentException $e) {
+              $display = null;
+            }
+
+            if ($display) {
+              $data['tabs'][0][] = array(
+                '#theme' => 'menu_local_task',
+                '#link' => array(
+                  'title' => t($tab['title']),
+                  'url' => $display
+                ),
+                '#active' => null,
+                '#weight' => (int) $tab['weight']
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+}

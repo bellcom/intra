@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\bc_basic\Debug;
+
 /**
  * Implements hook_menu_local_tasks_alter().
  */
@@ -7,7 +9,7 @@ function bc_node_tabs_menu_local_tasks_alter(&$data, $route_name, \Drupal\Core\C
   $config = (object) \Drupal::config('bc_node_tabs.settings')->get();
   if ($config->enabled) {
     $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node) {
+    if (!empty($node) && $node instanceof \Drupal\node\NodeInterface) {
       foreach ($config->tabs AS $tab ) {
         if ($node->bundle() == $tab['node_type']) {
           if (!empty($data['tabs'][0])) {

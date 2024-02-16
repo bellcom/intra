@@ -12,7 +12,7 @@ source:
 process:
   type:
     plugin: default_value
-    default_value: os2web_group
+    default_value: group
   langcode:
     plugin: default_value
     source: language

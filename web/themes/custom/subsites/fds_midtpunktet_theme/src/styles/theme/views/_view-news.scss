@@ -49,7 +49,7 @@
               &:hover {
                 text-decoration: underline;
               }
-              &:hover {
+              &:before {
                 content: '\f0da';
                 display: inline-flex;
                 align-items: center;
@@ -68,9 +68,14 @@
 
 .nyhedsstream {
   .view-header {
-    border-bottom: 1px solid #c30a32;
-    padding: 2px 0 0 6px;
-    background-color: #f5f5f5;
+    background-color: #e3e3e3;
+    padding: 5px;
+    border-bottom: 2px solid #c30a32;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #231f20;
+    font-family: "Museo 300",sans-serif;
+    margin-bottom: 5px;
   }
   .view-content {
     .views-row {

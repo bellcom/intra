@@ -6,16 +6,17 @@
   }
 }
 .block-views-blocknyheder-archive-block {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  padding: 45px 0;
-
 
   @media only screen and (max-width: 768px) {
     margin-bottom: 55px;
   }
 
   .archive-block {
+    .view-header {
+      border-bottom: 1px solid #c30a32;
+      padding: 2px 0 0 6px;
+      background-color: #f5f5f5;
+    }
     .view-content {
       .item-list {
         .views-summary {
@@ -29,6 +30,7 @@
 
             a {
               text-decoration: none;
+              text-transform: capitalize;
 
               &:hover {
                 text-decoration: underline;
@@ -42,6 +44,11 @@
 }
 
 .nyhedsstream {
+  .view-header {
+    border-bottom: 1px solid #c30a32;
+    padding: 2px 0 0 6px;
+    background-color: #f5f5f5;
+  }
   .view-content {
     .views-row {
       display: flex;

@@ -1,0 +1,18 @@
+
+bc_node_tabs.settings:
+  path: '/admin/config/bellcom/node-tabs'
+  defaults:
+    _form: '\Drupal\bc_node_tabs\Form\NodeTabsForm'
+    _title: 'Node tabs'
+  requirements:
+    _permission: 'administer site configuration'
+
+
+bc_node_tabs.autocomplete:
+  path: '/admin/config/bellcom/autocomplete'
+  defaults:
+    _title: "Autocomplete Controller"
+    _controller: '\Drupal\bc_node_tabs\Controller\AutocompleteController::handlerAutocomplete'
+  requirements:
+    _permission: 'administer site configuration'
+

@@ -1,0 +1,8 @@
+
+
+bc_node_tabs.settings:
+  title: 'Bellcom Node tabs'
+  route_name: bc_node_tabs.settings
+  description: 'Bellcom node tabs configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

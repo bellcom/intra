@@ -1,8 +1,13 @@
 .view-display-id-embed_1 {
   .view-header {
-    margin-bottom: 20px;
-    font-size: 2.6rem;
-    font-family: "Museo 500", sans-serif;
+    background-color: #e3e3e3;
+    padding: 5px;
+    border-bottom: 2px solid #c30a32;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #231f20;
+    font-family: "Museo 300",sans-serif;
+    margin-bottom: 5px;
   }
 }
 .block-views-blocknyheder-archive-block {
@@ -13,19 +18,28 @@
 
   .archive-block {
     .view-header {
-      border-bottom: 1px solid #c30a32;
-      padding: 2px 0 0 6px;
-      background-color: #f5f5f5;
+      background-color: #e3e3e3;
+      padding: 5px;
+      border-bottom: 2px solid #c30a32;
+      font-weight: 600;
+      font-size: 2rem;
+      color: #231f20;
+      font-family: "Museo 300",sans-serif;
+      margin-bottom: 5px;
     }
     .view-content {
       .item-list {
         .views-summary {
-          margin: 0;
+          margin: 20px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
           .before-element-top-22 {
             margin: 0;
 
             &:before {
-              display: none;
+              content: '\f0da';
+
             }
 
             a {
@@ -34,6 +48,15 @@
 
               &:hover {
                 text-decoration: underline;
+              }
+              &:hover {
+                content: '\f0da';
+                display: inline-flex;
+                align-items: center;
+                margin-right: 10px;
+                font-family: "FontAwesome";
+                font-size: 20px;
+                color: #c30a32;
               }
             }
           }

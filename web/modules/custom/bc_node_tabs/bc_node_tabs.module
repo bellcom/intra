@@ -8,12 +8,22 @@ use Drupal\bc_basic\Debug;
 function bc_node_tabs_menu_local_tasks_alter(&$data, $route_name, \Drupal\Core\Cache\RefinableCacheableDependencyInterface &$cacheability) {
   $config = (object) \Drupal::config('bc_node_tabs.settings')->get();
   if ($config->enabled) {
+
     $node = \Drupal::routeMatch()->getParameter('node');
     if (!empty($node) && $node instanceof \Drupal\node\NodeInterface) {
+
+      $nodeuri = $node->id();
+      $nodeUriName = $url = explode('/', $node->toUrl('canonical')->toString());
+      $nodeUriName = array_pop($nodeUriName);
+
       foreach ($config->tabs AS $tab ) {
         if ($node->bundle() == $tab['node_type']) {
           if (!empty($data['tabs'][0])) {
-            $route = str_replace('{node}', $node->id(), $tab['route']);
+
+            $route = $tab['route'];
+            $route = str_replace('{node:title}', $nodeUriName, $route);
+            $route = str_replace('{node}', $nodeuri, $route);
+
             try {
               $display = \Drupal\Core\Url::fromUserInput($route);
             } catch (InvalidArgumentException $e) {

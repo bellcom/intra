@@ -7,7 +7,7 @@
     font-size: 2rem;
     color: #231f20;
     font-family: "Museo 300",sans-serif;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 }
 .block-views-blocknyheder-archive-block {
@@ -36,6 +36,7 @@
           gap: 10px;
           .before-element-top-22 {
             margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
 
             &:before {
               display: none;
@@ -151,6 +152,7 @@
 
             .trimmed-desc {
               font-size: 16px;
+              font-family: Arial, Helvetica, sans-serif;
 
               a {
                 font-size: 16px;
@@ -257,6 +259,7 @@
 
                 .trimmed-desc {
                   font-size: 16px;
+                  font-family: Arial, Helvetica, sans-serif;
 
                   a {
                     font-size: 16px;

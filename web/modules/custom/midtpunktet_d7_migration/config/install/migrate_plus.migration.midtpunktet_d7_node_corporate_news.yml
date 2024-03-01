@@ -54,7 +54,7 @@ process:
       default_value: ''
   field_os2web_news_primaryimage:
     - plugin: sub_process
-      source: field_file
+      source: field_image
       process:
         migrate_file_url_source:
           - plugin: callback

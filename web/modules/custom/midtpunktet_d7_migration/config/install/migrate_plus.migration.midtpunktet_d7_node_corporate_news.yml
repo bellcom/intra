@@ -50,14 +50,9 @@ process:
           plugin: default_value
           default_value: 'wysiwyg_tekst'
   field_os2web_news_intro:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: body/0/value
-    -
-      plugin: substr
-      start: 0
-      length: 199
+    - plugin: default_value
+      source: language
+      default_value: ''
   field_os2web_news_primaryimage:
     - plugin: sub_process
       source: field_file

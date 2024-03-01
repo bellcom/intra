@@ -2,9 +2,15 @@
 
 namespace Drupal\midtpunktet_d7_migration\Utility;
 
+use Drupal\Core\Database\Database;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+
 class MigrationHelper {
 
   public static $siteUrl = 'http://midtpunktet.ringsted.dk/';
+
+  public static $fileFolderPath = 'default';
 
   /**
    * Helper static function to populate menu link.
@@ -63,5 +69,171 @@ class MigrationHelper {
     }
 
     return NULL;
+  }
+
+  /**
+   * Gets a downloadable file URL.
+   *
+   * @param mix $field
+   *   Array coming from migration source.
+   *
+   * @return string
+   *   File downloadable URL.
+   */
+  static function getFileDownloadUrl($field) {
+    $fileUrl = NULL;
+    if ($field) {
+      $fid = is_array($field) ? $field['fid'] : $field;
+
+      // Getting connection to migrate database.
+      $connection = Database::getConnection('default', 'migrate');
+
+      // Getting file url.
+      $fileUrl = $connection->select('file_managed', 'f')
+        ->fields('f', array('uri'))
+        ->condition('f.fid', $fid)
+        ->condition('f.status', 1)
+        ->execute()
+        ->fetchField();
+      if ($fileUrl) {
+        //replacing public:// to http://midtpunktet.ringsted.dk/sites/default/files/
+        $fileUrl = preg_replace('/(public:\/\/)/', self::$siteUrl . '/sites/'. self::$fileFolderPath .'/files/', $fileUrl);
+      }
+    }
+    return $fileUrl;
+  }
+
+  /**
+   * Generates file destination URI.
+   *
+   * @param mix $field
+   *   Array coming from migration source.
+   *
+   * @return string
+   *   File destination URL.
+   */
+  static function generateFileDestinationPath($field) {
+    $fileUrl = '';
+    if ($field) {
+      $fid = is_array($field) ? $field['fid'] : $field;
+      // Getting connection to migrate database.
+      $connection = Database::getConnection('default', 'migrate');
+
+      // Getting file url.
+      $fileUrl = $connection->select('file_managed', 'f')
+        ->fields('f', array('uri'))
+        ->condition('f.fid', $fid)
+        ->condition('f.status', 1)
+        ->execute()
+        ->fetchField();
+    }
+    return $fileUrl;
+  }
+
+  /**
+   * Creates the file based on the URI or finds an existing one.
+   *
+   * @param string $uri
+   *   Uri of the file.
+   *
+   * @return int
+   *   File ID.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  static function createFileManaged($uri) {
+    $properties['uri'] = $uri;
+    $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties($properties);
+    $file = reset($files);
+
+    if (empty($file)) {
+      $filesystem = \Drupal::service('file_system');
+      // Create file entity.
+      $file = File::create();
+      $file->setFileUri($uri);
+      $file->setOwnerId(\Drupal::currentUser()->id());
+      $file->setMimeType(\Drupal::service('file.mime_type.guesser')->guess($uri));
+      $file->setFileName($filesystem->basename($uri));
+      $file->setPermanent();
+      $file->save();
+    }
+    $file->setMimeType(\Drupal::service('file.mime_type.guesser')->guess($uri));
+    $file->save();
+    return $file->id();
+  }
+
+  /**
+   * Gets a file Name.
+   *
+   * @param mix $field
+   *   Array coming from migration source.
+   *
+   * @return string
+   *   File title.
+   */
+  static function getFileName($field) {
+    $fileName = NULL;
+    if ($field) {
+      $fid = is_array($field) ? $field['fid'] : $field;
+
+      // Getting connection to migrate database.
+      $connection = Database::getConnection('default', 'migrate');
+
+      // Getting file url.
+      $fileName = $connection->select('file_managed', 'f')
+        ->fields('f', array('filename'))
+        ->condition('f.fid', $fid)
+        ->condition('f.status', 1)
+        ->execute()
+        ->fetchField();
+
+    }
+    return $fileName;
+  }
+
+  /**
+   * Creates the media entity based on file id.
+   *
+   * @param string $uri
+   *   Uri of the file.
+   *
+   * @return int
+   *   File ID.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  static function createMediaEntity($id, $filename) {
+    $media = Media::create([
+      'bundle' => 'document',
+      'uid' => '0',
+      'field_media_file' => [
+        'target_id' => $id,
+      ],
+      'status' => 1
+    ]);
+
+    $media->setName($filename)
+      ->save();
+    return $media->id();
+  }
+
+  /**
+   * Sets the moderation state for the node based on a status.
+   *
+   * @param $status
+   *
+   * @return string
+   */
+  static function setModerationState($status) {
+    if ($status) {
+      return 'published';
+    }
+    else {
+      return 'draft';
+    }
   }
 }

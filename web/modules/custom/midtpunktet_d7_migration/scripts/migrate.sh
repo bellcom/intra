@@ -16,4 +16,14 @@ drush migrate:reset midtpunktet_d7_organisation_menu
 drush migrate:import midtpunktet_d7_organisation_menu
 echo "Migration midtpunktet_d7_organisation_menu - END"
 
+echo "Migration midtpunktet_d7_node_corporate_news_paragraph_files - START"
+drush migrate:reset midtpunktet_d7_node_corporate_news_paragraph_files
+drush migrate:import midtpunktet_d7_node_corporate_news_paragraph_files
+echo "Migration midtpunktet_d7_node_corporate_news_paragraph_files - END"
+
+echo "Migration midtpunktet_d7_node_corporate_news - START"
+drush migrate:reset midtpunktet_d7_node_corporate_news
+drush migrate:import midtpunktet_d7_node_corporate_news
+echo "Migration midtpunktet_d7_node_corporate_news - END"
+
 echo "Migration finished"

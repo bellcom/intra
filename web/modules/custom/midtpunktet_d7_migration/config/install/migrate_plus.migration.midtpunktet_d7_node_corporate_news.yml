@@ -51,7 +51,6 @@ process:
           default_value: 'wysiwyg_tekst'
   field_os2web_news_intro:
     - plugin: default_value
-      source: language
       default_value: ''
   field_os2web_news_primaryimage:
     - plugin: sub_process

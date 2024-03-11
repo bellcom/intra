@@ -1,3 +1,6 @@
+
+
+
 .view-display-id-embed_1 {
   .view-header {
     background-color: #e3e3e3;
@@ -69,6 +72,35 @@
 }
 
 .nyhedsstream {
+  .view-filters {
+    .views-exposed-form {
+      .form--inline {
+        display: flex;
+        align-items: center;
+        background-color: #e3e3e3;
+        padding: 10px;
+        border-radius: 5px;
+
+        .form-group {
+          font-family: Arial, Helvetica, sans-serif;
+          .form-label {
+            padding: 0;
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          .button {
+            border-radius: 5px;
+          }
+          .description {
+            font-style: italic;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
   .view-header {
     background-color: #e3e3e3;
     padding: 5px;

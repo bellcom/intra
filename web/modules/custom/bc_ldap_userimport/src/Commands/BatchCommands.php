@@ -29,6 +29,11 @@ Class BatchCommands extends DrushCommands
     	ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
 	$justthese = array('samaccountname', 'dn');
+	$justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
+	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
+	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'mailnickname','displayname');
+
+
 
 	if (function_exists('ldap_control_paged_result')) {
 	}

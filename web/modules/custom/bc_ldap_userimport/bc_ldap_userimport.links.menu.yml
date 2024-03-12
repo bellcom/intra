@@ -1,0 +1,8 @@
+
+
+bc_ldap_userimport.settings:
+  title: 'Bellcom Ldap userimport'
+  route_name: bc_ldap_userimport.settings
+  description: 'Bellcom ldap userimport configuration'
+  parent: bc_basic.admin_config_bellcom
+  weight: 99

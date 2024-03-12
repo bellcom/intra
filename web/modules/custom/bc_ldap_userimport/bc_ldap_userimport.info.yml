@@ -1,0 +1,6 @@
+name: 'Bellcom ldap user import'
+type: module
+description: 'Bellcom ldap user import'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Bellcom'

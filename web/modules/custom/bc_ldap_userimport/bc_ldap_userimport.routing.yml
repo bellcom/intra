@@ -1,0 +1,9 @@
+bc_ldap_userimport.settings:
+  path: '/admin/config/bellcom/ldap-userimport'
+  defaults:
+    _form: '\Drupal\bc_ldap_userimport\Form\LdapUserimportForm'
+    _title: 'Ldap user import'
+  requirements:
+    _permission: 'administer site configuration'
+
+

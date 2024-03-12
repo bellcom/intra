@@ -1,0 +1,6 @@
+services:
+  bc_ldap_userimport.commands:
+    class: \Drupal\bc_ldap_userimport\Commands\BatchCommands
+    tags:
+      - { name: drush.command }
+    arguments: ['@entity_type.manager', '@logger.factory']

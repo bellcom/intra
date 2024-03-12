@@ -23,8 +23,32 @@ Class BatchCommands extends DrushCommands
         $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
         $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
 
-        print_r( ldap_error($ldapconn) );
+        print_r( ldap_error($ldapconn) ); echo "\n";
 
+	ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    	ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
+	$justthese = array('samaccountname', 'dn');
+
+	if (function_exists('ldap_control_paged_result')) {
+	}
+       	else echo "no ldap paged function\n";
+
+	$result  = ldap_search($ldapconn, $config->dn, $config->filter, $justthese);
+	$entries = ldap_get_entries($ldapconn, $result);
+	
+	foreach ($entries as $ldap_entry) {
+
+		if(!isset($ldap_entry['samaccountname']))
+			continue;
+      
+		if(!isset($ldap_entry['samaccountname'][0]))
+            		continue;
+
+		print_r( $ldap_entry );		
+	}
+
+	echo count($entries);
 
       }
   }

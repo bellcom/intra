@@ -89,7 +89,7 @@ function bc_anonymous_subscriptions_extension_entity_insert(\Drupal\Core\Entity\
 
                   // insert anonymous subscriptions subscriber the the new node
                   $subscription = Subscription::create([
-                    'email' => 'ht@bellcom.dk',
+                    'email' => $account->getEmail(),
                     'code' => Crypt::randomBytesBase64(20),
                     'entity_bundle' => $new_node->bundle(),
                     'entity_type' => 'node',

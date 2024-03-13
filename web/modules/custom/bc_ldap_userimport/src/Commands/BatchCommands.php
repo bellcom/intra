@@ -29,7 +29,7 @@ Class BatchCommands extends DrushCommands
 	ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
     	ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
-	$justthese = array('samaccountname', 'dn', 'name');
+	$justthese = array('samaccountname', 'dn', 'name', 'mail', 'name', 'nickname', 'displayname', 'memberof', 'thumbnailphoto');
 //	$justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
 //	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
 //	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'mailnickname','displayname');
@@ -57,11 +57,11 @@ Class BatchCommands extends DrushCommands
 			if (isset($value['count']) && $value['count'] == 1) {
 
 				$key = utf8_encode($key);
-				// echo $key . "\n";
-				$value = $value[0];
-				// echo $value . "\n";
-				$value = utf8_encode($value);
-				// echo "#\n";
+				if ($key === 'thumbnailphoto') {
+					$value = base64_encode($value[0]);
+				} else {
+					$value = utf8_encode($value[0]);
+				}
 
 				if (empty($key) || empty($value) ) {
 					print_r( $value );
@@ -74,21 +74,24 @@ Class BatchCommands extends DrushCommands
 				if (!empty($value)) {
 					$entry->dn = $value;
 				}
+			} else if ($key == 'memberof' && is_array($value)) {
+				$groups = array();
+				foreach ( $value AS $idx => $group ) {
+					if ($idx == 'count') continue;
+					$groups[] = utf8_encode($group);
+				}
+				$entry->memberof = $groups;
 			}
 		}
 
 		if (!empty((array) $entry)) {
-//			print_r( $entry );
 			$list[] = $entry;	
 		}
 	}
-$bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
-file_put_contents(__DIR__ . '/output.json' , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
-// echo json_encode($list);
-echo json_last_error_msg() . "\n";
 
-//	echo count($entries) . "\n";
-//	echo count( $list ) . "\n";
+	$bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
+	file_put_contents(__DIR__ . '/ldap_output.json' , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+	echo json_last_error_msg() . "\n";
 
       }
   }

@@ -112,12 +112,22 @@ Class BatchCommands extends DrushCommands
   /**
    * ldap export user json object to --file
    *
+   * @description file export file
    * @command bc:ldapexport
    * @aliases bclexp
    * @options $options arr AN option that takes multiple values.
+   * @option file filename on file to export to
    */
 
   public function ldapexport($options=array('file'=>null)) {
+
+    if (empty($options['file'])) $options['file'] = sys_get_temp_dir() . '/ldap_user.json';
+
+    if (!is_writeable(dirname($options['file']))) {
+      echo $options['file'] . " is not writeable\n";
+      return;
+    }
+
     $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
     if ($config->enabled) {
       $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
@@ -183,8 +193,13 @@ Class BatchCommands extends DrushCommands
         }
       }
 
-
-
+      $content = json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
+      if (!json_last_error()) {
+        $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
+        file_put_contents($options['file'] , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+      } else {
+        echo json_last_error_msg() . "\n";
+      }
     }
   }
 

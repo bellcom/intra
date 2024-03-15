@@ -7,6 +7,18 @@ use Drupal\user\Entity\User;
 Class BatchCommands extends DrushCommands
 {
 
+  private $justthese = array(
+      'samaccountname',
+      'dn',
+      'name',
+      'mail',
+      'name',
+      'nickname',
+      'displayname',
+      'memberof',
+      'thumbnailphoto'
+  );
+
   /**
    * ldap check
    *
@@ -26,8 +38,8 @@ Class BatchCommands extends DrushCommands
 
         print_r( ldap_error($ldapconn) ); echo "\n";
 
-	ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-    	ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+	      ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    	  ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
 	$justthese = array('samaccountname', 'dn', 'name', 'mail', 'name', 'nickname', 'displayname', 'memberof', 'thumbnailphoto');
 //	$justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
@@ -94,6 +106,86 @@ Class BatchCommands extends DrushCommands
 	echo json_last_error_msg() . "\n";
 
       }
+  }
+
+
+  /**
+   * ldap export user json object to --file
+   *
+   * @command bc:ldapexport
+   * @aliases bclexp
+   * @options $options arr AN option that takes multiple values.
+   */
+
+  public function ldapexport($options=array('file'=>null)) {
+    $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
+    if ($config->enabled) {
+      $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
+      $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
+
+      ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+      ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
+      $result = ldap_search($ldapconn, $config->dn, $config->filter, $this->justthese);
+      $entries = ldap_get_entries($ldapconn, $result);
+
+      $list = [];
+      foreach ($entries as $ldap_entry) {
+
+        if (!isset($ldap_entry['samaccountname'])) {
+          continue;
+        }
+        if (!isset($ldap_entry['samaccountname'][0])) {
+          continue;
+        }
+
+        $entry = new \stdClass();
+        foreach ($ldap_entry as $key => $value) {
+
+
+          if (isset($value['count']) && $value['count'] == 1) {
+
+            $key = utf8_encode($key);
+            if ($key === 'thumbnailphoto') {
+              $value = base64_encode($value[0]);
+            } else {
+              $value = utf8_encode($value[0]);
+            }
+
+            if (!empty($key)) {
+              $entry->{$key} = $value;
+            }
+
+          } else {
+            if ($key == 'dn' && is_string($value)) {
+              $value = utf8_encode($value);
+              if (!empty($value)) {
+                $entry->dn = $value;
+              }
+            } else {
+              if ($key == 'memberof' && is_array($value)) {
+                $groups = [];
+                foreach ($value as $idx => $group) {
+                  if ($idx == 'count') {
+                    continue;
+                  }
+                  $groups[] = utf8_encode($group);
+                }
+                $entry->memberof = $groups;
+              }
+            }
+          }
+
+          if (!empty((array) $entry)) {
+            $list[] = $entry;
+          }
+
+        }
+      }
+
+
+
+    }
   }
 
 }

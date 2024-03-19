@@ -31,15 +31,13 @@ Class BatchCommands extends DrushCommands
 	  header('Content-Type: text/html; charset=utf-8');
       $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
       if ($config->enabled) {
-        print_r($config);
+//        print_r($config);
 
-        $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
+	$ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
+	ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+	ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
         $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
-
-        print_r( ldap_error($ldapconn) ); echo "\n";
-
-	      ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-    	  ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
 	$justthese = array('samaccountname', 'dn', 'name', 'mail', 'name', 'nickname', 'displayname', 'memberof', 'thumbnailphoto');
 //	$justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
@@ -47,9 +45,41 @@ Class BatchCommands extends DrushCommands
 //	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'mailnickname','displayname');
 
 	// $justthese = array();
+	$idx = 1;
+	$counter = 0;
+	$cookie = '';
+	do {
+		$result  = ldap_search(
+			$ldapconn, 
+			$config->dn, 
+			$config->filter, 
+			$justthese, 
+			0, 
+			0, 
+			0, 
+			LDAP_DEREF_NEVER,
+			[['oid' => LDAP_CONTROL_PAGEDRESULTS, 'value' => ['size' => 250, 'cookie' => $cookie]]]
+		);
 
-	$result  = ldap_search($ldapconn, $config->dn, $config->filter, $justthese);
-	$entries = ldap_get_entries($ldapconn, $result);
+		ldap_parse_result($ldapconn, $result, $errcode , $matcheddn , $errmsg , $referrals, $controls);
+
+		$entries = ldap_get_entries($ldapconn, $result);
+		echo count($entries) . "\n";
+		$counter += count($entries);	
+
+		if (isset($controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'])) {
+        		// You need to pass the cookie from the last call to the next one
+	        	$cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
+	    	} else {
+    		    $cookie = '';
+	    	}	
+
+	} while (strlen($cookie) > 0);
+
+	echo $counter . "\n";
+
+	return;
+
 
 	$list = array();
 	$errorcount = 0;
@@ -136,8 +166,11 @@ Class BatchCommands extends DrushCommands
       ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
       ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
-      $result = ldap_search($ldapconn, $config->dn, $config->filter, $this->justthese);
+      $result = ldap_search($ldapconn, $config->dn, $config->filter, $this->justthese, 0, -1);
       $entries = ldap_get_entries($ldapconn, $result);
+
+echo count($entries) . "\n";
+
 
       $list = [];
       foreach ($entries as $ldap_entry) {
@@ -196,7 +229,8 @@ Class BatchCommands extends DrushCommands
       $content = json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
       if (!json_last_error()) {
         $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
-        file_put_contents($options['file'] , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+        file_put_contents($options['file'] , json_encode( $list, JSON_UNESCAPED_UNICODE) );
+
       } else {
         echo json_last_error_msg() . "\n";
       }

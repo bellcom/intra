@@ -29,7 +29,6 @@ Class BatchCommands extends DrushCommands
   public function ldapcheck($options=array())
   {
 
-
   }
 
 

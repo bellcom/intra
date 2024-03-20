@@ -28,84 +28,8 @@ Class BatchCommands extends DrushCommands
    */
   public function ldapcheck($options=array())
   {
-	  header('Content-Type: text/html; charset=utf-8');
-      $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
-      if ($config->enabled) {
-        print_r($config);
 
-        $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
-        $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
 
-        print_r( ldap_error($ldapconn) ); echo "\n";
-
-	      ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-    	  ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
-
-	$justthese = array('samaccountname', 'dn', 'name', 'mail', 'name', 'nickname', 'displayname', 'memberof', 'thumbnailphoto');
-//	$justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
-//	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
-//	$justthese = array('samaccountname', 'dn', 'mail', 'manager', 'name', 'mailnickname','displayname');
-
-	// $justthese = array();
-
-	$result  = ldap_search($ldapconn, $config->dn, $config->filter, $justthese);
-	$entries = ldap_get_entries($ldapconn, $result);
-
-	$list = array();
-	$errorcount = 0;
-	foreach ($entries as $ldap_entry) {
-
-		if(!isset($ldap_entry['samaccountname']))
-			continue;
-      
-		if(!isset($ldap_entry['samaccountname'][0]))
-            		continue;
-
-		$entry = new \stdClass();
-		foreach ( $ldap_entry AS $key => $value ) {
-			if (is_numeric($key)) continue;
-			if ($key === 'count') continue;
-
-			if (isset($value['count']) && $value['count'] == 1) {
-
-				$key = utf8_encode($key);
-				if ($key === 'thumbnailphoto') {
-					$value = base64_encode($value[0]);
-				} else {
-					$value = utf8_encode($value[0]);
-				}
-
-				if (empty($key) || empty($value) ) {
-					print_r( $value );
-				} else {
-					$entry->{$key} = $value;	
-				}
-
-			} else if ($key == 'dn' && is_string($value)) {
-				$value = utf8_encode($value);
-				if (!empty($value)) {
-					$entry->dn = $value;
-				}
-			} else if ($key == 'memberof' && is_array($value)) {
-				$groups = array();
-				foreach ( $value AS $idx => $group ) {
-					if ($idx == 'count') continue;
-					$groups[] = utf8_encode($group);
-				}
-				$entry->memberof = $groups;
-			}
-		}
-
-		if (!empty((array) $entry)) {
-			$list[] = $entry;	
-		}
-	}
-
-	$bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
-	file_put_contents(__DIR__ . '/ldap_output.json' , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
-	echo json_last_error_msg() . "\n";
-
-      }
   }
 
 
@@ -118,7 +42,6 @@ Class BatchCommands extends DrushCommands
    * @options $options arr AN option that takes multiple values.
    * @option file filename on file to export to
    */
-
   public function ldapexport($options=array('file'=>null)) {
 
     if (empty($options['file'])) $options['file'] = sys_get_temp_dir() . '/ldap_user.json';
@@ -128,79 +51,50 @@ Class BatchCommands extends DrushCommands
       return;
     }
 
-    $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
-    if ($config->enabled) {
-      $ldapconn = ldap_connect($config->host) or die("Could not connect to LDAP server.");
-      $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
+    $li = new \Drupal\bc_ldap_userimport\Controller\LdapImport();
+    $data = $li->getData();
+    $data = $li->trimData($data);
 
-      ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-      ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+//    $config = (object) \Drupal::config('bc_ldap_userimport.settings')->get();
+//    if ($config->enabled) {
 
-      $result = ldap_search($ldapconn, $config->dn, $config->filter, $this->justthese);
-      $entries = ldap_get_entries($ldapconn, $result);
-
-      $list = [];
-      foreach ($entries as $ldap_entry) {
-
-        if (!isset($ldap_entry['samaccountname'])) {
-          continue;
-        }
-        if (!isset($ldap_entry['samaccountname'][0])) {
-          continue;
-        }
-
-        $entry = new \stdClass();
-        foreach ($ldap_entry as $key => $value) {
-
-
-          if (isset($value['count']) && $value['count'] == 1) {
-
-            $key = utf8_encode($key);
-            if ($key === 'thumbnailphoto') {
-              $value = base64_encode($value[0]);
-            } else {
-              $value = utf8_encode($value[0]);
-            }
-
-            if (!empty($key)) {
-              $entry->{$key} = $value;
-            }
-
-          } else {
-            if ($key == 'dn' && is_string($value)) {
-              $value = utf8_encode($value);
-              if (!empty($value)) {
-                $entry->dn = $value;
-              }
-            } else {
-              if ($key == 'memberof' && is_array($value)) {
-                $groups = [];
-                foreach ($value as $idx => $group) {
-                  if ($idx == 'count') {
-                    continue;
-                  }
-                  $groups[] = utf8_encode($group);
-                }
-                $entry->memberof = $groups;
-              }
-            }
-          }
-
-          if (!empty((array) $entry)) {
-            $list[] = $entry;
-          }
-
-        }
-      }
-
-      $content = json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
+      $content = json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
       if (!json_last_error()) {
         $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
-        file_put_contents($options['file'] , $bom . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+        file_put_contents($options['file'] , $bom . json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
       } else {
         echo json_last_error_msg() . "\n";
       }
+//    }
+  }
+
+
+  /**
+   * ldap import user json object from --file
+   *
+   * @description file export file
+   * @command bc:ldapimport
+   * @aliases bclimp
+   * @options $options arr AN option that takes multiple values.
+   * @option file filename to import from
+   */
+  public function ldapimport($options=array('file' => '/tmp/ldap_user.json')) {
+
+    if (!is_readable($options['file'])) {
+      echo "no file " . $options['file'] . "\n";
+      return;
     }
+
+    $json = file_get_contents($options['file']);
+    $json = json_decode($json);
+
+    if (json_last_error()) {
+      echo "json : " . json_last_error_msg() . "\n";
+      return;
+    }
+
+    print_r( $json );
+
   }
 
 }

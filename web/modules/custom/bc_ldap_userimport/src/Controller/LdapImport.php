@@ -56,14 +56,14 @@ Class LdapImport {
   public function trimData($results=array()) {
 
     $list = [];
-    foreach ($results as $result) {
+    foreach ($results as $idx => $result) {
 
       if (!isset($result['samaccountname'])) continue;
       if (!isset($result['samaccountname'][0])) continue;
-     
+
+      $entry = new \stdClass(); 
       foreach ($result as $key => $value) {
 
-	$entry = new \stdClass();
         if (isset($value['count']) && $value['count'] == 1) {
 
           $key = utf8_encode($key);
@@ -96,12 +96,13 @@ Class LdapImport {
             }
           }
         }
-
-        if (!empty((array) $entry)) {
-          $list[] = $entry;
-        }
-
       }
+
+      if (!empty((array) $entry)) {
+          $list[] = $entry;
+      }
+
+      
     }
 
     return $list;

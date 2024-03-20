@@ -1,0 +1,9 @@
+<?php
+
+
+function bc_ldap_userimport_cron() {
+
+
+}
+
+

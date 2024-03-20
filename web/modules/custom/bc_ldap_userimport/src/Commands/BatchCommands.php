@@ -50,6 +50,9 @@ Class BatchCommands extends DrushCommands
       return;
     }
 
+    header('Content-Type: text/html; charset=utf-8');
+
+
     $li = new \Drupal\bc_ldap_userimport\Controller\LdapImport();
     $data = $li->getData();
     $data = $li->trimData($data);
@@ -60,7 +63,7 @@ Class BatchCommands extends DrushCommands
       $content = json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
       if (!json_last_error()) {
         $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) );
-        file_put_contents($options['file'] , $bom . json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+	file_put_contents($options['file'] ,  json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
       } else {
         echo json_last_error_msg() . "\n";
       }

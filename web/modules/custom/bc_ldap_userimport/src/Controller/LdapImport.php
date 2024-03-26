@@ -18,9 +18,6 @@ Class LdapImport {
       $ldapbind = ldap_bind($ldapconn, $config->rdn, $config->pass) or die("Could not bind to ldap");
 
       $justthese = array('samaccountname', 'dn', 'name', 'mail', 'name', 'nickname', 'displayname', 'memberof', 'thumbnailphoto');
-      //   $justthese = array('samaccountname', 'dn', 'thumbnailphoto', 'mail', 'manager', 'name', 'nickname', 'mailnickname', 'memberof', 'displayname');
-      $idx = 1;
-      $counter = 0;
       $cookie = '';
       do {
         $result = ldap_search($ldapconn, $config->dn, $config->filter, $justthese, 0, 0, 0, LDAP_DEREF_NEVER,
@@ -31,16 +28,13 @@ Class LdapImport {
         $entries = ldap_get_entries($ldapconn, $result);
 
         foreach ($entries as $entry) {
-		if (is_array($entry) && !empty($entry)) {
-		  	if (!empty($entry['mail'][0])) { $results[] = $entry; }
-          	}
+		      if (is_array($entry) && !empty($entry)) {
+		  	    if (!empty($entry['mail'][0])) { $results[] = $entry; }
+          }
         }
 
-	echo count($entries) . "\n";
-
-        $counter += count($entries);
         if (isset($controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'])) {
-		$cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
+		      $cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
         } else {
           $cookie = '';
         }
@@ -105,11 +99,9 @@ Class LdapImport {
           $list[] = $entry;
       }
 
-      
     }
 
     return $list;
   }
-
-
+  
 }

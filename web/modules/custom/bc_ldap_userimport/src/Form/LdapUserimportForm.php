@@ -28,7 +28,6 @@ class LdapUserimportForm extends ConfigFormBase {
       '#default_value' => $config->get('enabled')
     ];
 
-
     $form['form']['cron'] = [
       '#type' => 'checkbox',
       '#title' => 'cron',
@@ -44,6 +43,11 @@ class LdapUserimportForm extends ConfigFormBase {
         'month' => $this->t('monthly')
       ),
       '#default_value' => $config->get('run')
+    );
+
+    $form['form']['lastrun'] = array(
+      '#type' => 'value',
+      '#default_value' => $config->get('lastrun')
     );
 
     $form['form']['rdn'] = [
@@ -79,8 +83,6 @@ class LdapUserimportForm extends ConfigFormBase {
       '#title' => 'ldap filter',
       '#default_value' => $config->get('filter')
     ];
-
-
 
     return parent::buildForm($form, $form_state);
   }

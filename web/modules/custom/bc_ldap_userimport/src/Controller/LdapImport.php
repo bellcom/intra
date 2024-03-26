@@ -52,7 +52,6 @@ Class LdapImport {
 
   }
 
-
   public function trimData($results=array()) {
 
     $list = [];
@@ -71,6 +70,10 @@ Class LdapImport {
             $value = base64_encode($value[0]);
           } else {
             $value = utf8_encode($value[0]);
+          }
+
+          if ($key = 'mail') {
+            $value = strtolower(utf8_encode($value[0]));
           }
 
           if (!empty($key)) {
@@ -107,5 +110,6 @@ Class LdapImport {
 
     return $list;
   }
+
 
 }

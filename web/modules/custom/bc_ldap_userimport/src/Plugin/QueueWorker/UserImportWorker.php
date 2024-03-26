@@ -94,7 +94,6 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
   public function processItem($data) {
 
     // Processing of queue items logic goes here.
-//print_r( $data );
     $users = \Drupal::entityTypeManager()
       ->getStorage('user')
       ->loadByProperties([
@@ -103,7 +102,6 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
 
     if ($users) {
       $user = reset($users);
-
       $user->set('name', $data->samaccountname);
       $user->set('display_name', $data->name);
       $user->set('field_displayname', $data->name);

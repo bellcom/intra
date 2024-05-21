@@ -93,18 +93,18 @@ Class BatchCommands extends DrushCommands
     $queue = \Drupal::service('queue')->get('ldap_user_import_queue');
     foreach ( $json AS $idx => $user ) {
 
-      if (!empty($user->samaccountname)) $user->samaccountname = strtolower(utf8_decode($user->samaccountname));
-      if (!empty($user->mail)) $user->mail = strtolower(utf8_decode($user->mail));
-      if (!empty($user->displayname)) $user->displayname = utf8_decode($user->displayname);
+      if (!empty($user->samaccountname)) $user->samaccountname = strtolower(($user->samaccountname));
+      if (!empty($user->mail)) $user->mail = strtolower(($user->mail));
+      if (!empty($user->displayname)) $user->displayname = ($user->displayname);
       if (!empty($user->name)) $user->name = utf8_decode($user->name);
       if (!empty($user->dn)) $user->dn = utf8_decode($user->dn);
-      if (!empty($user->samaccountname)) $user->samaccountname = utf8_decode($user->samaccountname);
+      if (!empty($user->samaccountname)) $user->samaccountname = ($user->samaccountname);
       if (!empty($user->memberof) && is_array($user->memberof)) {
-        foreach ( $user->memberof AS &$member ) $member = utf8_decode($member);
+        foreach ( $user->memberof AS &$member ) $member = ($member);
       }
 
       if ( $idx < 2 ) {
-        $queue->createItem($user);
+        $queue->createItem((array) $user);
       }
 
     }

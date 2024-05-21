@@ -103,9 +103,9 @@ Class BatchCommands extends DrushCommands
         foreach ( $user->memberof AS &$member ) $member = ($member);
       }
 
-      if ( $idx < 2 ) {
+//      if ( $idx < 2 ) {
         $queue->createItem((array) $user);
-      }
+//      }
 
     }
   }

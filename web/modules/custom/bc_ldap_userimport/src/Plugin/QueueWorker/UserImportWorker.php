@@ -105,8 +105,8 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
     if ($users) {
       $user = reset($users);
       $user->set('name', $data->samaccountname);
-      $user->set('display_name', $data->name);
-      $user->set('field_displayname', $data->name);
+      $user->set('display_name', utf8_encode($data->name));
+      $user->set('field_displayname', utf8_encode($data->name));
       $user->set('field_email', $data->mail);
 
       if (!empty($data->thumbnailphoto)) {
@@ -132,8 +132,8 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
       $user = User::create();
       $user->setUsername($data->samaccountname);
       $user->setEmail($data->mail);
-      $user->set('display_name', $data->name);
-      $user->set('field_displayname', $data->name);
+      $user->set('display_name', utf8_encode($data->name));
+      $user->set('field_displayname', utf8_encode($data->name));
       $user->set('field_email', $data->mail);
       $user->set('field_vis_telefon_i_email_signat', 'hide_both');
 

@@ -93,6 +93,8 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
    */
   public function processItem($data) {
 
+	if (is_array($data)) $data = (object) $data;
+
     // Processing of queue items logic goes here.
     $users = \Drupal::entityTypeManager()
       ->getStorage('user')
@@ -118,8 +120,8 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
 
         $user->set('field_brugerbillede', array(
           'target_id' => $file->id(),
-          'alt' => 'userpicture',
-          'title' => 'create user with imagefield'
+          'alt' => $data->samaccountname,
+          'title' => $data->samaccountname
         ));
       }
 
@@ -146,8 +148,8 @@ final class UserImportWorker extends QueueWorkerBase implements ContainerFactory
 
         $user->set('field_brugerbillede', array(
           'target_id' => $file->id(),
-          'alt' => 'userpicture',
-          'title' => 'create user with imagefield'
+          'alt' => $data->samaccountname,
+          'title' => $data->samaccountname
         ));
       }
 

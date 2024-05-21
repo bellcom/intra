@@ -59,19 +59,27 @@ Class LdapImport {
 
         if (isset($value['count']) && $value['count'] == 1) {
 
-          $key = utf8_encode($key);
+
           if ($key === 'thumbnailphoto') {
             $value = base64_encode($value[0]);
           } else {
             $value = utf8_encode($value[0]);
           }
 
-          if ($key = 'mail') {
-            $value = strtolower(utf8_encode($value[0]));
+          if ($key === 'mail') {
+            	$value = strtolower(utf8_encode($value));
           }
 
+	  if ($key === 'displayname') {
+		$value = utf8_decode($value);
+	  }
+
+	  if ($key === 'name') {
+		$value = utf8_decode($value);
+	  }
+
           if (!empty($key)) {
-            $entry->{$key} = $value;
+            	$entry->{$key} = $value;
           }
 
         } else {
@@ -86,10 +94,14 @@ Class LdapImport {
               foreach ($value as $idx => $group) {
                 if ($idx == 'count') {
                   continue;
-                }
-                $groups[] = utf8_encode($group);
-              }
-              $entry->memberof = $groups;
+		}
+		if (preg_match("/Netv/", $group)) echo $group . "\n";
+
+                $groups[] = $group;
+	      }
+
+	      $entry->memberof = $groups;
+
             }
           }
         }

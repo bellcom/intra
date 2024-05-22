@@ -151,9 +151,10 @@ Class BatchCommands extends DrushCommands
             if (!empty($user->dn)) $user->dn = utf8_decode($user->dn);
             if (!empty($user->memberof) && is_array($user->memberof)) {
               foreach ( $user->memberof AS &$member ) $member = utf8_decode($member);
-	    }
+	        }
 
-             $queue->createItem($user);
+            $queue->createItem($user);
+
           }
 
           $saveConfig = \Drupal::configFactory()->getEditable('bc_ldap_userimport.settings');

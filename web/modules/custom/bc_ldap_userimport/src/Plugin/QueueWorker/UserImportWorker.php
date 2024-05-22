@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @QueueWorker(
  *   id = "ldap_user_import_queue",
  *   title = @Translation("Ldap user import Queue"),
- *   cron = {"time" = 60}
+ *   cron = {"time" = 300}
  * )
  */
 final class UserImportWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface {

@@ -95,7 +95,6 @@ Class LdapImport {
                 if ($idx == 'count') {
                   continue;
 		}
-		if (preg_match("/Netv/", $group)) echo $group . "\n";
 
                 $groups[] = $group;
 	      }

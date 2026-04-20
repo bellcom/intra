@@ -21,10 +21,10 @@ bundles:
   - os2web_page
 entity_type: node
 global: false
-flag_short: 'add bookmark'
+flag_short: 'Tilføj bogmærke'
 flag_long: ''
 flag_message: ''
-unflag_short: 'remove bookmark'
+unflag_short: 'Fjern bogmærke'
 unflag_long: ''
 unflag_message: ''
 unflag_denied_text: ''

@@ -9,10 +9,10 @@ bundles:
   - os2web_page
 entity_type: node
 global: false
-flag_short: 'add shortcut'
+flag_short: 'Tilføj genvej'
 flag_long: ''
 flag_message: ''
-unflag_short: 'remove shortcut'
+unflag_short: 'Fjern genvej'
 unflag_long: ''
 unflag_message: ''
 unflag_denied_text: ''

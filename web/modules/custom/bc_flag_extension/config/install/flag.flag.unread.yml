@@ -9,10 +9,10 @@ bundles:
   - os2web_page
 entity_type: node
 global: false
-flag_short: 'add unread'
+flag_short: 'Tilføj til ulæste'
 flag_long: ''
 flag_message: ''
-unflag_short: 'remove unread'
+unflag_short: 'Fjern fra ulæste'
 unflag_long: ''
 unflag_message: ''
 unflag_denied_text: ''

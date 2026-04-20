@@ -1429,3 +1429,11 @@ a .field--type-string h3.h4 {
     line-height: 2.5rem;
   }
 }
+
+
+.flags-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-bottom: 10px;
+}

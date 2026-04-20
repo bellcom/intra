@@ -11,7 +11,7 @@
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   color: #333;
-  padding: 8px 16px;
+  padding: 8px 16px !important;
   transition: .3s;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   margin: 0 0 15px 0;
@@ -299,4 +299,11 @@ div.flag-sidebar-block ul li:before {
   .headline {
     height: 45px;
   }
+}
+
+.flags-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-bottom: 10px;
 }

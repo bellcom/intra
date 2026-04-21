@@ -371,11 +371,11 @@ body {
 
         &.is-active {
           background: $color-light-gray1;
-          color: #c30a32;
+          color: #333;
           font-weight: 600 !important;
 
           &:hover {
-            color: #c30a32;
+            color: #333;
           }
         }
 

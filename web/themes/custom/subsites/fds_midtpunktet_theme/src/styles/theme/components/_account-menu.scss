@@ -1,5 +1,5 @@
 .header-account-menu {
-  background-color: #c30a32;
+  background-color: #333;
 
   .container {
     .account-menu-btn {
@@ -9,7 +9,7 @@
       font-family: "Museo 300", sans-serif;
       display: none;
       .icon {
-        color: #c30a32;
+        color: white;
       }
     }
     .region-account-menu {
@@ -56,7 +56,7 @@
         top: 45px;
         z-index: 99;
         width: 100%;
-        background-color: #c30a32;
+        background-color: #333;
         left: 0;
         transform: translateX(-110%);
         transition: transform 0.3s ease-in-out;

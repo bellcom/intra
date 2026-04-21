@@ -23,11 +23,11 @@
 
         &:hover {
           color: white !important;
-          background-color: #c30a32;
+          background-color: #333;
         }
 
         &.is-active {
-          color: #c30a32;
+          color: #333;
           position: relative;
 
           &:after {

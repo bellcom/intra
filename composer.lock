@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da16051b4fb119b7db3b935908ebd1f3",
+    "content-hash": "0286fb1672015de8f1b7decb06ab08e1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2069,40 +2069,6 @@
             "time": "2026-01-02T16:01:13+00:00"
         },
         {
-            "name": "drupal-ckeditor-libraries-group/fakeobjects",
-            "version": "4.22.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/drupal-ckeditor-libraries-group/fakeobjects.git",
-                "reference": "a1de732aa3dbc63349f8b4653b1c7788c93ae25c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drupal-ckeditor-libraries-group/fakeobjects/zipball/a1de732aa3dbc63349f8b4653b1c7788c93ae25c",
-                "reference": "a1de732aa3dbc63349f8b4653b1c7788c93ae25c",
-                "shasum": ""
-            },
-            "type": "drupal-library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later",
-                "LGPL-2.1-or-later",
-                "MPL-1.1"
-            ],
-            "description": "CKEditor 4 fakeobjects plugin",
-            "homepage": "https://ckeditor.com/cke4/addon/fakeobjects",
-            "keywords": [
-                "CKEditor",
-                "fakeobjects",
-                "plugin"
-            ],
-            "support": {
-                "issues": "https://github.com/ckeditor/ckeditor4/issues",
-                "source": "https://github.com/ckeditor/ckeditor4/tree/master/plugins/fakeobjects"
-            },
-            "time": "2023-02-08T14:53:49+00:00"
-        },
-        {
             "name": "drupal/access_latest",
             "version": "0.0.1",
             "source": {
@@ -3196,143 +3162,6 @@
             }
         },
         {
-            "name": "drupal/ckeditor",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ckeditor.git",
-                "reference": "1.0.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor-1.0.2.zip",
-                "reference": "1.0.2",
-                "shasum": "fec2ca9ad852a00c7b9584cb6040dc860364c481"
-            },
-            "require": {
-                "drupal/core": "^9.4 || ^10"
-            },
-            "require-dev": {
-                "drupal/classy": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.0.2",
-                    "datestamp": "1695740655",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "hass",
-                    "homepage": "https://www.drupal.org/user/85918"
-                },
-                {
-                    "name": "jcisio",
-                    "homepage": "https://www.drupal.org/user/210762"
-                },
-                {
-                    "name": "Jorrit",
-                    "homepage": "https://www.drupal.org/user/161217"
-                },
-                {
-                    "name": "lauriii",
-                    "homepage": "https://www.drupal.org/user/1078742"
-                },
-                {
-                    "name": "magnus",
-                    "homepage": "https://www.drupal.org/user/73919"
-                },
-                {
-                    "name": "nod_",
-                    "homepage": "https://www.drupal.org/user/598310"
-                },
-                {
-                    "name": "p.wiaderny",
-                    "homepage": "https://www.drupal.org/user/2956619"
-                },
-                {
-                    "name": "vokiel",
-                    "homepage": "https://www.drupal.org/user/2793801"
-                },
-                {
-                    "name": "wim leers",
-                    "homepage": "https://www.drupal.org/user/99777"
-                },
-                {
-                    "name": "wwalc",
-                    "homepage": "https://www.drupal.org/user/184556"
-                },
-                {
-                    "name": "xjm",
-                    "homepage": "https://www.drupal.org/user/65776"
-                }
-            ],
-            "description": "WYSIWYG editing for rich text fields using CKEditor.",
-            "homepage": "https://www.drupal.org/project/ckeditor",
-            "support": {
-                "source": "https://git.drupalcode.org/project/ckeditor"
-            }
-        },
-        {
-            "name": "drupal/ckeditor_entity_link",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ckeditor_entity_link.git",
-                "reference": "6ea274834362b02ccaa216d9368390c6fc28dffd"
-            },
-            "require": {
-                "drupal/ckeditor": "*",
-                "drupal/core": "^9.3 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.3+1-dev",
-                    "datestamp": "1703080983",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "baskaran",
-                    "homepage": "https://www.drupal.org/user/2423304"
-                },
-                {
-                    "name": "dealancer",
-                    "homepage": "https://www.drupal.org/user/243418"
-                },
-                {
-                    "name": "kuhikar",
-                    "homepage": "https://www.drupal.org/user/3241981"
-                }
-            ],
-            "description": "This module allows to insert links to Drupal entities (content, files, tags, etc...) when using CKEditor.",
-            "homepage": "http://drupal.org/project/ckeditor_entity_link",
-            "support": {
-                "source": "https://git.drupalcode.org/project/ckeditor_entity_link"
-            }
-        },
-        {
             "name": "drupal/ckeditor_iframe",
             "version": "3.1.2",
             "source": {
@@ -3388,55 +3217,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/ckeditor_iframe",
                 "issues": "https://drupal.org/project/issues/ckeditor_iframe"
-            }
-        },
-        {
-            "name": "drupal/ckeditor_resize",
-            "version": "1.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ckeditor_resize.git",
-                "reference": "8.x-1.6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor_resize-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "a800ca6c357708b1e34f596c9cda6236db6f5a38"
-            },
-            "require": {
-                "drupal/ckeditor": "*",
-                "drupal/core": "^9.3 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1687880594",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "julien",
-                    "homepage": "https://www.drupal.org/user/177445"
-                },
-                {
-                    "name": "m.abdulqader",
-                    "homepage": "https://www.drupal.org/user/1281252"
-                }
-            ],
-            "description": "Adds the Resize plugin to CKEditor.",
-            "homepage": "https://www.drupal.org/project/ckeditor_resize",
-            "support": {
-                "source": "https://git.drupalcode.org/project/ckeditor_resize"
             }
         },
         {
@@ -5237,50 +5017,6 @@
             }
         },
         {
-            "name": "drupal/editor_file",
-            "version": "2.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/editor_file.git",
-                "reference": "2.1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/editor_file-2.1.2.zip",
-                "reference": "2.1.2",
-                "shasum": "200c1ade610c385a4ee0504f9920a174bb4cc686"
-            },
-            "require": {
-                "drupal/core": "^10.5 || ^11.2"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.2",
-                    "datestamp": "1751421089",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "duaelfr",
-                    "homepage": "https://www.drupal.org/user/931394"
-                }
-            ],
-            "description": "Editor File upload",
-            "homepage": "https://www.drupal.org/project/editor_file",
-            "support": {
-                "source": "https://git.drupalcode.org/project/editor_file"
-            }
-        },
-        {
             "name": "drupal/embed",
             "version": "1.10.0",
             "source": {
@@ -6129,64 +5865,6 @@
                 "source": "https://git.drupalcode.org/project/facets",
                 "issues": "https://www.drupal.org/project/issues/facets",
                 "irc": "irc://irc.freenode.org/drupal-search-api"
-            }
-        },
-        {
-            "name": "drupal/fakeobjects",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/fakeobjects.git",
-                "reference": "8.x-1.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/fakeobjects-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "3d809e634f334681664e01c57fbff013e18b428e"
-            },
-            "require": {
-                "drupal-ckeditor-libraries-group/fakeobjects": "^4.5.11",
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1740013102",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Quillen (kevinquillen)",
-                    "homepage": "https://www.drupal.org/u/kevinquillen",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "kevinquillen",
-                    "homepage": "https://www.drupal.org/user/317279"
-                },
-                {
-                    "name": "xmacinfo",
-                    "homepage": "https://www.drupal.org/user/12131"
-                }
-            ],
-            "description": "Adds the FakeObjects plugin to CKEditor. This plugin is a utility plugin that is required by certain user-facing CKEditor plugins.",
-            "homepage": "http://drupal.org/project/fakeobjects",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/fakeobjects",
-                "issues": "http://drupal.org/project/issues/fakeobjects"
             }
         },
         {
@@ -17870,12 +17548,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:bellcom/os2core.git",
-                "reference": "7a197a6488af2499854eeb449e81637b0bf91653"
+                "reference": "998edc4a1effe4efb1386e680ff4149e0a534ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bellcom/os2core/zipball/7a197a6488af2499854eeb449e81637b0bf91653",
-                "reference": "7a197a6488af2499854eeb449e81637b0bf91653",
+                "url": "https://api.github.com/repos/bellcom/os2core/zipball/998edc4a1effe4efb1386e680ff4149e0a534ac0",
+                "reference": "998edc4a1effe4efb1386e680ff4149e0a534ac0",
                 "shasum": ""
             },
             "require": {
@@ -17883,7 +17561,6 @@
                 "drupal/admin_toolbar": "^3.0",
                 "drupal/better_exposed_filters": "^6.0",
                 "drupal/chosen": "^3.0 || ^4.0",
-                "drupal/ckeditor_entity_link": "dev-1.x",
                 "drupal/config_ignore": "^2.1",
                 "drupal/config_split": "^2.0@beta",
                 "drupal/core": "^8.7 || ^9 || ^10",
@@ -17920,7 +17597,7 @@
                 "EUPL-1.2"
             ],
             "description": "Wrapper over contrib modules used for OS2 Drupal solutions",
-            "time": "2026-08-20T19:11:10+00:00"
+            "time": "2026-08-21T08:53:31+00:00"
         },
         {
             "name": "os2web/os2web",
@@ -24853,30 +24530,29 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "c6222283fa3f4ac679f8b9ced9a4e23f163e80d0"
+                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
-                "reference": "c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/23da848e1a2308728fe5fdddabf4be17ff9720c7",
+                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.4"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^11",
+                "doctrine/coding-standard": "^14",
                 "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^1.9.4",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^9.5.27",
-                "vimeo/psalm": "^5.4"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5.58"
             },
             "type": "library",
             "autoload": {
@@ -24903,7 +24579,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/2.0.0"
+                "source": "https://github.com/doctrine/instantiator/tree/2.1.0"
             },
             "funding": [
                 {
@@ -24919,7 +24595,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-30T00:23:10+00:00"
+            "time": "2026-01-05T06:47:08+00:00"
         },
         {
             "name": "drupal/core-dev",

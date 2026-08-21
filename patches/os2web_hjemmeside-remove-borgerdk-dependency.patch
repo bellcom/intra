@@ -1,0 +1,8 @@
+--- a/os2web_hjemmeside.info.yml
++++ b/os2web_hjemmeside.info.yml
+@@ -24,5 +24,4 @@
+   - save_edit
+   - menu_link_content
+   # os2web
+-  - os2web_borgerdk
+ 

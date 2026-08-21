@@ -841,3 +841,12 @@ switch ($settings['project_env']) {
     }
     break;
 }
+
+// Load OS2Web Logging generated settings.
+if (file_exists($app_root . '/' . $site_path . '/os2web_logging.settings.php')) {
+  include $app_root . '/' . $site_path . '/os2web_logging.settings.php';
+}
+if (file_exists($app_root . '/' . $site_path . '/os2web_logging.watchdog_settings.php')) {
+  include $app_root . '/' . $site_path . '/os2web_logging.watchdog_settings.php';
+}
+

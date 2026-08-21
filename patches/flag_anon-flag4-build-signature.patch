@@ -1,0 +1,20 @@
+--- a/src/FlagAnonLinkBuilder.php
++++ b/src/FlagAnonLinkBuilder.php
+@@ -70,7 +70,7 @@
+   /**
+    * {@inheritdoc}
+    */
+-  public function build($entity_type_id, $entity_id, $flag_id) {
++  public function build($entity_type_id, $entity_id, $flag_id, $view_mode = NULL) {
+     $flag = $this->flagService->getFlagById($flag_id);
+ 
+     if ($flag->getThirdPartySetting('flag_anon', 'enabled', 0) && $this->currentUser->isAnonymous()) {
+@@ -84,7 +84,7 @@
+       }
+     }
+ 
+-    return parent::build($entity_type_id, $entity_id, $flag_id);
++    return parent::build($entity_type_id, $entity_id, $flag_id, $view_mode);
+   }
+ 
+   /**

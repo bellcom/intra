@@ -3,17 +3,23 @@
     "description": "Drupal 8 project for OS2Web Hjemmeside",
     "type": "project",
     "license": "EUPL-1.2",
-    "repositories": [
-        {
+    "repositories": {
+        "os2core": {
+            "type": "vcs",
+            "url": "git@github.com:bellcom/os2core.git"
+        },
+        "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8",
-            "exclude": ["drupal/anonymous_subscriptions"]
+            "exclude": [
+                "drupal/anonymous_subscriptions"
+            ]
         },
-        {
+        "1": {
             "type": "vcs",
             "url": "https://github.com/bellcom/fds_base_theme"
         },
-        {
+        "2": {
             "type": "package",
             "package": {
                 "name": "harvesthq/chosen",
@@ -26,7 +32,7 @@
                 }
             }
         },
-        {
+        "3": {
             "type": "package",
             "package": {
                 "name": "drupal/access_latest",
@@ -39,19 +45,20 @@
                 }
             }
         },
-        {
+        "4": {
             "type": "vcs",
             "url": "https://github.com/bellcom/anonymous_subscriptions"
         }
-    ],
+    },
     "require": {
         "php": ">=7.1",
-        "bellcom/fds_base_theme": "dev-stable/drupal-8.x",
+        "bellcom/fds_base_theme": "dev-drupal10",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/access_latest": "^0.0.1",
         "drupal/admin_audit_trail": "^1.0",
-        "drupal/anonymous_subscriptions": "dev-8.x-1.x",
+        "drupal/aggregator": "^2.2",
+        "drupal/anonymous_subscriptions": "dev-drupal10",
         "drupal/audiofield": "^1.13",
         "drupal/autologout": "^1.4",
         "drupal/block_title_link": "^1.1",
@@ -60,6 +67,7 @@
         "drupal/calendar": "^1.0@beta",
         "drupal/ckeditor_iframe": "^3.1",
         "drupal/ckeditor_resize": "^1.3",
+        "drupal/classy": "^2.0",
         "drupal/coder": "^8.3",
         "drupal/color": "^1.0",
         "drupal/config_delete": "^2.0",
@@ -72,7 +80,7 @@
         "drupal/core_views_facets": "^2.0",
         "drupal/csv_importer": "^1.12",
         "drupal/devel": "^5.1",
-        "drupal/diff": "^1.1",
+        "drupal/diff": "^2.1.1",
         "drupal/disable_field": "^3.0",
         "drupal/ds": "^3.15",
         "drupal/editor_file": "^2.1",
@@ -105,7 +113,7 @@
         "drupal/ldap_sso": "^4.2",
         "drupal/libraries": "^4.0",
         "drupal/link_field_autocomplete_filter": "^2.0",
-        "drupal/linkit_media_library": "^1.0",
+        "drupal/linkit": "^7.0",
         "drupal/mailchimp": "^2.0",
         "drupal/matomo": "^1.22",
         "drupal/matomo_reports": "^1.3",
@@ -119,7 +127,8 @@
         "drupal/module_missing_message_fixer": "^2.0",
         "drupal/modules_weight": "^3.0",
         "drupal/monitoring": "^1.9",
-        "drupal/og": "^1.0@alpha",
+        "drupal/og": "^2.0",
+        "drupal/og_access": "^2.0",
         "drupal/page_manager": "^4.0@RC",
         "drupal/panels": "^4.7",
         "drupal/pdf_api": "^2.0",
@@ -133,14 +142,18 @@
         "drupal/queue_mail": "^1.4",
         "drupal/queue_ui": "^3.1",
         "drupal/quick_node_clone": "^1.14",
+        "drupal/quickedit": "^2.0",
         "drupal/r4032login": "^2.2",
         "drupal/radioactivity": "^4.1",
+        "drupal/rdf": "^2.1",
         "drupal/realname": "^2.0@beta",
         "drupal/recently_read": "^1.3",
         "drupal/redirect_after_login": "^2.7",
         "drupal/restui": "^1.21",
+        "drupal/scheduler_content_moderation_integration": "^3.0",
         "drupal/scroll_top_button": "^2.0",
         "drupal/search_api": "^1.29",
+        "drupal/seven": "^1.0",
         "drupal/simple_mail": "^2.0",
         "drupal/siteimprove": "^3.0",
         "drupal/subpathauto": "^1.3",
@@ -161,6 +174,7 @@
         "drush/drush": "^12.4.3",
         "league/flysystem-webdav": "^3.0",
         "mglaman/drupal-check": "^1.1",
+        "os2core/os2core": "dev-drupal10-linkit7 as dev-drupal10",
         "os2web/os2web": "dev-drupal10",
         "os2web/os2web_contact": "dev-drupal10",
         "os2web/os2web_embedded_code": "dev-drupal10",
@@ -186,21 +200,26 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/installers": true,
             "cweagans/composer-patches": true,
-            "simplesamlphp/composer-module-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/console-extend-plugin": false,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
-            "zaporylie/composer-drupal-optimizations": true,
-            "drupal/console-extend-plugin": false
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "simplesamlphp/composer-module-installer": false,
+            "tbachert/spi": true,
+            "zaporylie/composer-drupal-optimizations": true
         }
     },
     "autoload": {
         "classmap": [
             "scripts/composer/ScriptHandler.php"
         ],
-        "files": ["load.environment.php"]
+        "files": [
+            "load.environment.php"
+        ]
     },
     "scripts": {
         "pre-install-cmd": [
@@ -210,13 +229,10 @@
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "scripts/og_access_install.sh"
-
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "scripts/og_access_install.sh"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ]
     },
     "extra": {
@@ -230,52 +246,48 @@
             }
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
         },
         "enable-patching": true,
         "patches": {
-            "drupal/field_group" : {
-                "HTML5 Validation Prevents Submission in Tabs" : "https://www.drupal.org/files/issues/2019-10-04/field_group-HTML5_validation_prevents_submission_in_tabs-2969051-9.patch"
-            },
             "drupal/better_exposed_filters": {
                 "allow the date format to be set from the bef interface": "https://www.drupal.org/files/issues/2020-12-21/better_exposed_filters_allow_the_date_format-2858610-23_1.patch"
             },
             "drupal/core": {
-                "Notice: Undefined index: value in Drupal\\views\\Plugin\\views\\filter\\NumericFilter->acceptExposedInput()" : "https://www.drupal.org/files/issues/2020-06-04/2825860-exposed-filter-notice-38.patch",
-                "Allow edit Media items from Media Library modal dialog in CKEditor" : "https://www.drupal.org/files/issues/2021-04-21/3168868-13_0.patch",
-                "Notice: Undefined index: type in Drupal\\Core\\Render\\Element\\Date::processDate()" : "https://www.drupal.org/files/issues/2022-06-28/3189302-18.patch",
-                "Provide a way for fields with computed or custom storage to decide how to impact entity queries." : "https://www.drupal.org/files/issues/2021-12-06/3025164-33.patch",
-                "TypeError: Argument 1 passed to Drupal\\Core\\File\\FileUrlGenerator::generateString() must be of the type string, null given" : "https://www.drupal.org/files/issues/2021-12-18/file-url-generator-3254245-34.patch"
+                "Allow edit Media items from Media Library modal dialog in CKEditor": "https://www.drupal.org/files/issues/2021-04-21/3168868-13_0.patch",
+                "Provide a way for fields with computed or custom storage to decide how to impact entity queries.": "https://www.drupal.org/files/issues/2021-12-06/3025164-33.patch"
             },
-            "drupal/printable": {
-                 "3214729 PDF filename is generated with it's location" : "./patches/3214729_pdf_filename_generated_with_its_location.patch"
+            "drupal/csv_importer": {
+                "Custom patch to get anonymous subscription support on csv_import": "./patches/anonymous_subscriptions_csv_import.patch"
             },
-            "drupal/csv_importer" : {
-                "Custom patch to get anonymous subscription support on csv_import" : "./patches/anonymous_subscriptions_csv_import.patch"
+            "drupal/facets": {
+                "Add option to reset other facets on value change": "https://www.drupal.org/files/issues/2023-01-25/3190289-22-reroll.patch"
             },
-            "drupal/menu_block" : {
-                "Menu block renders when tree is empty" : "https://www.drupal.org/files/issues/2022-04-29/menu_block_rendered_empty-3271218-17.patch"
+            "drupal/color": {
+                "fix color php8 issues ": "./patches/20230320-color-php8.patch"
             },
-            "drupal/content_access" : {
-                "deprecated php functions " : "https://www.drupal.org/files/issues/2022-07-22/3258804-14.patch"
+            "drupal/flag_anon": {
+                "Flag 4 build method signature compatibility": "./patches/flag_anon-flag4-build-signature.patch"
             },
-            "drupal/facets" : {
-                "Add option to reset other facets on value change" : "https://www.drupal.org/files/issues/2023-01-25/3190289-22-reroll.patch"
-            },
-            "drupal/forum_notifications_subscription" : {
-                "Error sending email, subscribe button is not displayed correctly" : "https://www.drupal.org/files/issues/2023-02-22/forum_notifications_subscription.patch",
-                "Anonym user subscription prevention": "./patches/forum_notifications_subscription-anonym-user-subscription.diff"
-            },
-	        "drupal/color" :  {
-		        "fix color php8 issues " : "./patches/20230320-color-php8.patch"
-            },
-            "drupal/popular_search_keywords" : {
-                "fix deprecated mbstrtolower" : "https://www.drupal.org/files/issues/2023-02-17/deprecated-mbstrtolower-3342692.patch"
+            "os2web/os2web_hjemmeside": {
+                "Remove unused os2web_borgerdk dependency": "./patches/os2web_hjemmeside-remove-borgerdk-dependency.patch"
             }
         }
     }

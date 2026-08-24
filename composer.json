@@ -107,6 +107,7 @@
         "bellcom/fds_base_theme": "dev-drupal10",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
+        "drupal/action": "^0.2",
         "drupal/admin_audit_trail": "^1.0",
         "drupal/aggregator": "^2.2",
         "drupal/anonymous_subscriptions": "dev-drupal10",
@@ -309,10 +310,14 @@
                 "Drupal 11 compatibility": "./patches/popular_search_keywords-drupal11.patch"
             },
             "drupal/anonymous_subscriptions": {
-                "Drupal 11 and PHP 8.4 compatibility": "./patches/anonymous_subscriptions-drupal11-php84.patch"
+                "Drupal 11 and PHP 8.4 compatibility": "./patches/anonymous_subscriptions-drupal11-php84.patch",
+                "Drupal 11 ConfigFormBase typed config manager compatibility": "./patches/anonymous_subscriptions-drupal11-settingsform.patch"
             },
             "bellcom/fds_base_theme": {
                 "Drupal 11 compatibility": "./patches/fds_base_theme-drupal11.patch"
+            },
+            "drupal/search_api_synonym": {
+                "Remove obsolete Drupal Console command for Drupal 11": "./patches/search_api_synonym-remove-drupal-console.patch"
             }
         }
     }

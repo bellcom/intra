@@ -82,9 +82,9 @@ function fds_portal_ringsted_theme_preprocess_swiftmailer(&$variables) {
 
   // Header logo.
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
-    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    $file = \Drupal\file\Entity\File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = $file->createFileUrl(FALSE);
     }
   }
 }
@@ -106,9 +106,9 @@ function fds_portal_ringsted_theme_preprocess_anonymous_subscriptions_notificati
 
   // Header logo.
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
-    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    $file = \Drupal\file\Entity\File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = $file->createFileUrl(FALSE);
     }
   }
 }
@@ -131,9 +131,9 @@ function fds_portal_ringsted_theme_preprocess_anonymous_subscriptions_message(ar
 
   // Header logo.
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
-    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    $file = \Drupal\file\Entity\File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = $file->createFileUrl(FALSE);
     }
   }
   $subscription = $variables['subscription'];
@@ -293,7 +293,7 @@ function fds_portal_ringsted_theme_preprocess_media__os2web_file(array &$variabl
     // Add a specific class for each and every mime type.
     'file--mime-' . strtr($mime_type, ['/' => '-', '.' => '-']),
     // Add a more general class for groups of well known MIME types.
-    'file--' . file_icon_class($mime_type),
+    'file--' . \Drupal\file\IconMimeTypes::getIconClass($mime_type),
   ];
 }
 
@@ -330,6 +330,7 @@ function fds_portal_ringsted_theme_preprocess_field(&$variables) {
 function fds_portal_ringsted_theme_preprocess_file_link(array &$variables) {
   $file = $variables['file'];
   $result = \Drupal::entityQuery('media')
+    ->accessCheck(TRUE)
     ->condition('bundle', 'document')
     ->condition('field_media_file.target_id', $file->id())
     ->execute();

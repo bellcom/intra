@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function _reassing_nodes($currentUserID, $toUserId) {
   $nids = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->condition('uid', $currentUserID)
     ->execute();
 

@@ -64,9 +64,9 @@ function fds_custom_theme_preprocess_swiftmailer(&$variables) {
 
   // Header logo.
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
-    $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
+    $file = \Drupal\file\Entity\File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = $file->createFileUrl(FALSE);
     }
   }
 }

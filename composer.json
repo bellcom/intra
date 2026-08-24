@@ -8,11 +8,63 @@
             "type": "vcs",
             "url": "git@github.com:bellcom/os2core.git"
         },
+        "user_delete_reassign_drupal11": {
+            "type": "package",
+            "package": {
+                "name": "drupal/user_delete_reassign",
+                "version": "dev-drupal11",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://git.drupalcode.org/project/user_delete_reassign.git",
+                    "type": "git",
+                    "reference": "065c8f2227a70ad679354ffb0de4d4bad2c85c04"
+                },
+                "require": {
+                    "drupal/core": "^11.3"
+                }
+            }
+        },
+        "file_management_drupal11": {
+            "type": "package",
+            "package": {
+                "name": "drupal/file_management",
+                "version": "dev-drupal11",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://git.drupalcode.org/project/file_management.git",
+                    "type": "git",
+                    "reference": "8.x-2.1"
+                },
+                "require": {
+                    "drupal/core": "^11"
+                }
+            }
+        },
+        "popular_search_keywords_drupal11": {
+            "type": "package",
+            "package": {
+                "name": "drupal/popular_search_keywords",
+                "version": "dev-drupal11",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://git.drupalcode.org/project/popular_search_keywords.git",
+                    "type": "git",
+                    "reference": "5c87c76cada9dcbe6385c3bb5af8139b0a4fd050"
+                },
+                "require": {
+                    "drupal/core": "^10.3 || ^11",
+                    "drupal/search_api": "^1.0"
+                }
+            }
+        },
         "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8",
             "exclude": [
-                "drupal/anonymous_subscriptions"
+                "drupal/anonymous_subscriptions",
+                "drupal/user_delete_reassign",
+                "drupal/file_management",
+                "drupal/popular_search_keywords"
             ]
         },
         "1": {
@@ -55,125 +107,93 @@
         "bellcom/fds_base_theme": "dev-drupal10",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
-        "drupal/access_latest": "^0.0.1",
         "drupal/admin_audit_trail": "^1.0",
         "drupal/aggregator": "^2.2",
         "drupal/anonymous_subscriptions": "dev-drupal10",
-        "drupal/audiofield": "^1.13",
-        "drupal/autologout": "^1.4",
         "drupal/block_title_link": "^1.1",
         "drupal/block_visibility_groups": "^2.0",
-        "drupal/bookable_calendar": "^2.2",
         "drupal/calendar": "^1.0@beta",
         "drupal/ckeditor_iframe": "^3.1",
         "drupal/classy": "^2.0",
         "drupal/coder": "^8.3",
-        "drupal/color": "^1.0",
-        "drupal/config_delete": "^2.0",
-        "drupal/content_access": "^2.1",
-        "drupal/content_moderation_notifications": "^3.6",
-        "drupal/cookieinformation": "^2.0",
-        "drupal/core-composer-scaffold": "^10.6",
-        "drupal/core-project-message": "^10.6",
-        "drupal/core-recommended": "^10.6",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-project-message": "^11.4",
+        "drupal/core-recommended": "^11.4",
         "drupal/core_views_facets": "^2.0",
-        "drupal/csv_importer": "^1.12",
         "drupal/devel": "^5.1",
         "drupal/diff": "^2.1.1",
         "drupal/disable_field": "^3.0",
-        "drupal/ds": "^3.15",
         "drupal/editor_advanced_link": "^2.3",
         "drupal/entity": "^1.4",
-        "drupal/entity_clone": "^2.0@beta",
         "drupal/entity_update": "^3.0",
         "drupal/environment_indicator": "^4.0",
         "drupal/extlink": "^2.0",
-        "drupal/fancy_file_delete": "^2.0",
-        "drupal/faqfield": "^7.1",
+        "drupal/faqfield": "^8.0",
         "drupal/field_group": "^3.4",
         "drupal/field_redirection": "^2.2",
-        "drupal/field_validation": "^1.1",
-        "drupal/file_management": "^2.1",
+        "drupal/field_validation": "^3.0@beta",
+        "drupal/file_management": "dev-drupal11 as 2.1.0",
         "drupal/filefield_sources": "2.0.x-dev@dev",
         "drupal/flag": "^4.0",
-        "drupal/flag_anon": "^1.1",
+        "drupal/flag_anon": "1.x-dev@dev",
         "drupal/flag_lists": "^4.0.5",
-        "drupal/flood_control": "^3.0",
-        "drupal/form_options_attributes": "^2.1",
-        "drupal/forum_notifications_subscription": "^2.1",
-        "drupal/gdpr": "^3.0@alpha",
-        "drupal/gin": "^3.0",
-        "drupal/gin_login": "^1.0@RC",
-        "drupal/image_effects": "^3.4",
+        "drupal/jquery_ui_datepicker": "^2.1",
         "drupal/jquery_ui_menu": "^2.0",
+        "drupal/jquery_ui_slider": "^2.1",
+        "drupal/jquery_ui_touch_punch": "^1.1",
         "drupal/ldap": "^4.4",
         "drupal/ldap_servers": "^4.4",
         "drupal/ldap_sso": "^4.2",
         "drupal/libraries": "^4.0",
-        "drupal/link_field_autocomplete_filter": "^2.0",
         "drupal/linkit": "^7.0",
-        "drupal/mailchimp": "^2.0",
         "drupal/matomo": "^1.22",
-        "drupal/matomo_reports": "^1.3",
         "drupal/media_directories": "^3.0@beta",
         "drupal/memcache": "^2.2",
         "drupal/menu_block": "^1.10",
-        "drupal/menu_breadcrumb": "^2.0",
         "drupal/menu_items_visibility": "^1.1",
-        "drupal/menu_link_attributes": "^1.3",
         "drupal/menu_token": "9.1.x-dev@dev",
         "drupal/module_missing_message_fixer": "^2.0",
-        "drupal/modules_weight": "^3.0",
-        "drupal/monitoring": "^1.9",
         "drupal/og": "^2.0",
         "drupal/og_access": "^2.0",
         "drupal/page_manager": "^4.0@RC",
         "drupal/panels": "^4.7",
-        "drupal/pdf_api": "^2.0",
-        "drupal/permissions_filter": "^1.3",
-        "drupal/photoswipe": "^3.1",
-        "drupal/poll": "^1.6",
-        "drupal/popular_search_keywords": "^1.0",
+        "drupal/poll": "^2.0@alpha",
+        "drupal/popular_search_keywords": "dev-drupal11 as 1.0.7",
         "drupal/prepopulate": "^2.4",
-        "drupal/publication_date": "^2.0@beta",
+        "drupal/publication_date": "^3.1",
         "drupal/purge_users": "^4.0@beta",
-        "drupal/queue_mail": "^1.4",
         "drupal/queue_ui": "^3.1",
-        "drupal/quick_node_clone": "^1.14",
         "drupal/quickedit": "^2.0",
         "drupal/r4032login": "^2.2",
         "drupal/radioactivity": "^4.1",
-        "drupal/rdf": "^2.1",
+        "drupal/rdf": "^3.0@beta",
         "drupal/realname": "^2.0@beta",
         "drupal/recently_read": "^1.3",
-        "drupal/redirect_after_login": "^2.7",
         "drupal/restui": "^1.21",
         "drupal/scheduler_content_moderation_integration": "^3.0",
-        "drupal/scroll_top_button": "^2.0",
         "drupal/search_api": "^1.29",
-        "drupal/seven": "^1.0",
+        "drupal/search_api_synonym": "^3.0@beta",
         "drupal/simple_mail": "^2.0",
-        "drupal/siteimprove": "^3.0",
+        "drupal/smart_date": "^4.3",
         "drupal/subpathauto": "^1.3",
         "drupal/textfield_counter": "^2.3",
-        "drupal/unique_content_field_validation": "^1.1",
+        "drupal/unique_content_field_validation": "^2.0@RC",
         "drupal/upgrade_status": "^4.3",
-        "drupal/user_delete_reassign": "1.x-dev@dev",
+        "drupal/user_delete_reassign": "dev-drupal11 as 1.x-dev",
         "drupal/user_display_name": "^1.1",
         "drupal/video": "^3.1",
-        "drupal/views_local_tasks": "^1.0",
+        "drupal/views_bulk_operations": "^4.4",
         "drupal/views_show_more": "^2.0",
         "drupal/views_templates": "^1.3",
-        "drupal/viewsreference": "^1.8",
+        "drupal/viewsreference": "^2.0@beta",
         "drupal/votingapi": "^3.0@beta",
         "drupal/webform": "^6.1",
         "drupal/workbench": "^1.3",
-        "drupal/workbench_access": "^2.0",
-        "drush/drush": "^12.4.3",
+        "drush/drush": "^13",
         "league/flysystem-webdav": "^3.0",
         "mglaman/drupal-check": "^1.1",
-        "os2core/os2core": "dev-drupal10-linkit7 as dev-drupal10",
-        "os2web/os2web": "dev-drupal10",
+        "os2core/os2core": "dev-drupal11",
+        "os2web/os2web": "dev-drupal11",
         "os2web/os2web_contact": "dev-drupal10",
         "os2web/os2web_embedded_code": "dev-drupal10",
         "os2web/os2web_events": "dev-drupal10",
@@ -188,7 +208,7 @@
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "drupal/core-dev": "^10.6"
+        "drupal/core-dev": "^11.4"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -208,7 +228,8 @@
             "phpstan/extension-installer": true,
             "simplesamlphp/composer-module-installer": false,
             "tbachert/spi": true,
-            "zaporylie/composer-drupal-optimizations": true
+            "zaporylie/composer-drupal-optimizations": true,
+            "symfony/runtime": true
         }
     },
     "autoload": {
@@ -265,27 +286,33 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/better_exposed_filters": {
-                "allow the date format to be set from the bef interface": "https://www.drupal.org/files/issues/2020-12-21/better_exposed_filters_allow_the_date_format-2858610-23_1.patch"
-            },
             "drupal/core": {
-                "Allow edit Media items from Media Library modal dialog in CKEditor": "https://www.drupal.org/files/issues/2021-04-21/3168868-13_0.patch",
                 "Provide a way for fields with computed or custom storage to decide how to impact entity queries.": "https://www.drupal.org/files/issues/2021-12-06/3025164-33.patch"
-            },
-            "drupal/csv_importer": {
-                "Custom patch to get anonymous subscription support on csv_import": "./patches/anonymous_subscriptions_csv_import.patch"
             },
             "drupal/facets": {
                 "Add option to reset other facets on value change": "https://www.drupal.org/files/issues/2023-01-25/3190289-22-reroll.patch"
-            },
-            "drupal/color": {
-                "fix color php8 issues ": "./patches/20230320-color-php8.patch"
             },
             "drupal/flag_anon": {
                 "Flag 4 build method signature compatibility": "./patches/flag_anon-flag4-build-signature.patch"
             },
             "os2web/os2web_hjemmeside": {
                 "Remove unused os2web_borgerdk dependency": "./patches/os2web_hjemmeside-remove-borgerdk-dependency.patch"
+            },
+            "drupal/user_delete_reassign": {
+                "Drupal 11 compatibility from upstream MR !6": "./patches/user_delete_reassign-drupal11-mr6.patch",
+                "Drupal 11 follow-up: preserve role filtering and use NodeBulkUpdate": "./patches/user_delete_reassign-drupal11-followup.patch"
+            },
+            "drupal/file_management": {
+                "Drupal 11 and PHP 8.4 compatibility": "./patches/file_management-drupal11.patch"
+            },
+            "drupal/popular_search_keywords": {
+                "Drupal 11 compatibility": "./patches/popular_search_keywords-drupal11.patch"
+            },
+            "drupal/anonymous_subscriptions": {
+                "Drupal 11 and PHP 8.4 compatibility": "./patches/anonymous_subscriptions-drupal11-php84.patch"
+            },
+            "bellcom/fds_base_theme": {
+                "Drupal 11 compatibility": "./patches/fds_base_theme-drupal11.patch"
             }
         }
     }

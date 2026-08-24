@@ -1,0 +1,13 @@
+diff --git a/popular_search_keywords.info.yml b/popular_search_keywords.info.yml
+--- a/popular_search_keywords.info.yml
++++ b/popular_search_keywords.info.yml
+@@ -1,8 +1,7 @@
+ name: Popular Search Keywords
+ description: "This module provides a block with a list of the popular search keywords in the site."
+ type: module
+-core: 8.x
+-core_version_requirement: ^8 || ^9 || ^10
++core_version_requirement: ^10.3 || ^11
+ package: Search
+
+ dependencies:

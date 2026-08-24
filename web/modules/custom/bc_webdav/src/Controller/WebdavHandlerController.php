@@ -3,11 +3,10 @@
 namespace Drupal\bc_webdav\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Laminas\Diactoros\Response\JsonResponse;
-use Laminas\Diactoros\Response\HtmlResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileExists;
 
 Class WebdavHandlerController extends ControllerBase {
 
@@ -64,7 +63,7 @@ Class WebdavHandlerController extends ControllerBase {
 
     }
 
-    return new HtmlResponse($html);
+    return new Response($html);
 
   }
 
@@ -88,7 +87,7 @@ Class WebdavHandlerController extends ControllerBase {
         if (file_exists($config->folder) && is_writable($config->folder) && !file_exists($config->folder . '/' . $file_name)) {
 
           $file_system = \Drupal::service('file_system');
-          $file_system->copy($file_uri, $config->folder . '/' . $file_name, FileSystemInterface::EXISTS_REPLACE);
+          $file_system->copy($file_uri, $config->folder . '/' . $file_name, FileExists::Replace);
 
           if (file_exists($config->folder . '/' . $file_name)) {
             $html = '<script> alert(" ready "); </script>';
@@ -111,7 +110,7 @@ Class WebdavHandlerController extends ControllerBase {
       }
     }
 
-    return new HtmlResponse($html);
+    return new Response($html);
 
   }
 
@@ -157,7 +156,7 @@ Class WebdavHandlerController extends ControllerBase {
       }
     }
 
-    return new HtmlResponse($html);
+    return new Response($html);
   }
 
 
@@ -179,7 +178,7 @@ Class WebdavHandlerController extends ControllerBase {
     else if ($action === 'edit') return $this->editFile($fileId);
     else if ($action === 'history') return $this->historyFile($fileId);
 
-    return new HtmlResponse('');
+    return new Response('');
   }
 
 

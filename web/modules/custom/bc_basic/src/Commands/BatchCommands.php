@@ -62,6 +62,7 @@ Class BatchCommands extends DrushCommands
     echo "new node id " . $new->id() . "\n";
 
     $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('uid', $user->id())
       ->execute();
 

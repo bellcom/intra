@@ -1,0 +1,22 @@
+--- a/fds_base_theme.theme
++++ b/fds_base_theme.theme
+@@ -128,7 +128,7 @@
+     if ($fields_target_ids = $paragraph->get('field_background_color')->getValue()) {
+ 
+       if (isset($fields_target_ids[0]['target_id']) && $tid = $fields_target_ids[0]['target_id']) {
+-        $taxonomy_term = Term::load($tid);
++        $taxonomy_term = \Drupal\taxonomy\Entity\Term::load($tid);
+ 
+         if ($fields_background_color = $taxonomy_term->get('field_machine_name')->getValue()) {
+           $variables['attributes']['class'][] = 'paragraph--background-color-' . $fields_background_color[0]['value'];
+--- a/theme-settings.php
++++ b/theme-settings.php
+@@ -523,7 +523,7 @@
+   global $base_url;
+ 
+   $validators = array('file_validate_is_image' => array());
+-  $file = file_save_upload('footer_logo_upload', $validators, "public://", NULL, FileSystemInterface::EXISTS_REPLACE);
++  $file = file_save_upload('footer_logo_upload', $validators, "public://", NULL, \Drupal\Core\File\FileExists::Replace);
+   if (is_array($file)) {
+     $file=array_pop($file);
+ 

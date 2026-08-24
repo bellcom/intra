@@ -1,0 +1,118 @@
+--- a/anonymous_subscriptions.install
++++ b/anonymous_subscriptions.install
+@@ -142,7 +142,7 @@
+     return;
+   }
+ 
+-  $dir = drupal_get_path('module', 'anonymous_subscriptions');
++  $dir = \Drupal::service('extension.list.module')->getPath('anonymous_subscriptions');
+   $fileStorage = new FileStorage($dir . '/config/install');
+   $config = $fileStorage->read('views.view.anonymous_subscriptions');
+ 
+--- a/src/DefaultService.php
++++ b/src/DefaultService.php
+@@ -158,7 +158,7 @@
+       '#theme' => 'anonymous_subscriptions_message',
+       '#message' => $body,
+     ];
+-    $htmlBody = \Drupal::service('renderer')->renderPlain($renderable);
++    $htmlBody = \Drupal::service('renderer')->renderInIsolation($renderable);
+ 
+     $this->sendMail([
+       'to' => $subscription->email->value,
+@@ -190,7 +190,7 @@
+       '#theme' => 'anonymous_subscriptions_message',
+       '#message' => $body,
+     ];
+-    $htmlBody = \Drupal::service('renderer')->renderPlain($renderable);
++    $htmlBody = \Drupal::service('renderer')->renderInIsolation($renderable);
+ 
+     $this->sendMail([
+       'to' => $subscription->email->value,
+@@ -444,7 +444,7 @@
+    *
+    * @throws \Drupal\Core\Theme\MissingThemeDependencyException
+    */
+-  private function buildEmailItem($subject, $body, NodeInterface $subjectNode, $email, Subscription $subscription = NULL) {
++  private function buildEmailItem($subject, $body, NodeInterface $subjectNode, $email, ?Subscription $subscription = NULL) {
+     // Rendering content.
+     $renderable = [
+       '#theme' => 'anonymous_subscriptions_notification_email',
+@@ -454,7 +454,7 @@
+       '#unsubscribe_all_url' => ($subscription) ? $this->getUnsubscribeUrl($subscription, TRUE) : '',
+     ];
+ 
+-    $htmlBody = \Drupal::service('renderer')->renderPlain($renderable);
++    $htmlBody = \Drupal::service('renderer')->renderInIsolation($renderable);
+ 
+     return [
+       'to' => $email,
+--- a/src/Form/SubscribeNodeForm.php
++++ b/src/Form/SubscribeNodeForm.php
+@@ -71,7 +71,7 @@
+   /**
+    * Title callback.
+    */
+-  public function getTitle(NodeInterface $node = NULL) {
++  public function getTitle(?NodeInterface $node = NULL) {
+     return $node ? $this->t('Subscription on @title', [
+       '@title' => $node->getTitle(),
+     ]) : '';
+@@ -80,7 +80,7 @@
+   /**
+    * {@inheritdoc}
+    */
+-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
++  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $node = NULL) {
+     if (empty($node)) {
+       throw new NotFoundHttpException();
+     }
+@@ -230,6 +230,7 @@
+     $page = $form_state->getValue('page');
+     /** @var \Drupal\node\NodeInterface $node */
+     $nid = $form_state->get('nid');
++    $node = $nid ? Node::load($nid) : NULL;
+     $verification_required = $this->settings->get('anonymous_subscriptions_verify');
+     $new_subscriptions = FALSE;
+ 
+@@ -298,7 +299,7 @@
+         unset($tids[$term->id()]);
+       }
+       $this->messenger()->addStatus($this->t('Email address @email already subscribed for taxonomy terms: @terms Creating of new subscriptions was these terms skipped.', [
+-        '@terms' => Markup::create(\Drupal::service('renderer')->renderPlain($subscribed_terms_names)),
++        '@terms' => Markup::create(\Drupal::service('renderer')->renderInIsolation($subscribed_terms_names)),
+       ]));
+     }
+ 
+--- a/src/Form/SubscribeTaxonomyTermsForm.php
++++ b/src/Form/SubscribeTaxonomyTermsForm.php
+@@ -137,7 +137,7 @@
+       }
+       $this->messenger()->addStatus($this->t('Email address @email already subscribed for taxonomy terms: @terms Creating of new subscriptions was these terms skipped.', [
+         '@email' => $email,
+-        '@terms' => Markup::create(\Drupal::service('renderer')->renderPlain($subscribed_terms_names)),
++        '@terms' => Markup::create(\Drupal::service('renderer')->renderInIsolation($subscribed_terms_names)),
+       ]));
+     }
+ 
+--- a/src/Form/SubscriptionCancelForm.php
++++ b/src/Form/SubscriptionCancelForm.php
+@@ -63,8 +63,8 @@
+   /**
+    * {@inheritdoc}
+    */
+-  public function buildForm(array $form, FormStateInterface $form_state, Subscription $subscription = NULL, $code = NULL) {
+-    if (strcmp($subscription->code->value, $code) === 0) {
++  public function buildForm(array $form, FormStateInterface $form_state, ?Subscription $subscription = NULL, $code = NULL) {
++    if ($subscription && strcmp($subscription->code->value, $code) === 0) {
+       $this->subscription = $subscription;
+       $form = parent::buildForm($form, $form_state);
+       $form['description'] = [
+@@ -81,6 +81,7 @@
+       $url = Url::fromRoute('<front>');
+       $response = new RedirectResponse($url->toString());
+       $response->send();
++      return $form;
+     }
+   }
+ 

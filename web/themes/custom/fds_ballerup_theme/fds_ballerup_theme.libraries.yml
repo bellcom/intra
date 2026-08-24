@@ -17,4 +17,3 @@ javascripts:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/modernizr

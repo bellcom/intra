@@ -48,7 +48,10 @@ class ASEForm extends ConfigFormBase {
       '#default_value' => array()
     );
 
-    $nids = \Drupal::entityQuery('node')->condition('type','group')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type','group')
+      ->execute();
     $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
     foreach ( $nodes AS $node ) {
       $form['form']['group_notification']['#options'][$node->id()] = $node->getTitle();
@@ -77,6 +80,7 @@ class ASEForm extends ConfigFormBase {
       $userStorage = \Drupal::entityTypeManager()->getStorage('user');
       $query = $userStorage->getQuery();
       $uids = $query
+        ->accessCheck(FALSE)
         ->condition('status', '1')
         ->execute();
 
@@ -88,6 +92,7 @@ class ASEForm extends ConfigFormBase {
 
         // get all active news
         $nids = \Drupal::entityQuery('node')
+          ->accessCheck(FALSE)
           ->condition('type','os2web_news')
           ->condition('status', 1)
           ->execute();

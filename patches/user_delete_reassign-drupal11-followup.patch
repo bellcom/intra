@@ -1,0 +1,43 @@
+diff --git a/src/Form/UserDeleteReassignConfigForm.php b/src/Form/UserDeleteReassignConfigForm.php
+index 600c3a4..1988620 100644
+--- a/src/Form/UserDeleteReassignConfigForm.php
++++ b/src/Form/UserDeleteReassignConfigForm.php
+@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Html;
+ use Drupal\Core\Form\ConfigFormBase;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\user\Entity\Role;
++use Drupal\user\RoleInterface;
+ 
+ /**
+  * Configure user delete reassign settings for this site.
+@@ -38,6 +39,7 @@ class UserDeleteReassignConfigForm extends ConfigFormBase {
+     foreach (Role::loadMultiple() as $id => $role) {
+       $roles[$id] = Html::escape($role->label());
+     }
++    unset($roles[RoleInterface::ANONYMOUS_ID]);
+ 
+     $form['role_filter'] = [
+       '#type' => 'checkboxes',
+diff --git a/user_delete_reassign.module b/user_delete_reassign.module
+index eb2e806..c27f7c5 100644
+--- a/user_delete_reassign.module
++++ b/user_delete_reassign.module
+@@ -117,12 +117,16 @@ function user_delete_reassign_user_cancel($edit, $account, $method) {
+         return FALSE;
+       }
+       $new_user = User::load($edit['user_cancel_reassign_to']);
+-      Drupal::moduleHandler()->loadInclude('node', 'inc', 'node.admin');
+       $nodes = \Drupal::entityQuery('node')
+         ->accessCheck(FALSE)
+         ->condition('uid', $account->id())
+         ->execute();
+-      node_mass_update($nodes, ['uid' => $new_user->id()], NULL, TRUE);
++      \Drupal::service(\Drupal\node\NodeBulkUpdate::class)->process(
++        $nodes,
++        ['uid' => $new_user->id()],
++        NULL,
++        TRUE
++      );
+       // Assign old revisions to the same user.
+       \Drupal::database()->update('node_field_revision')
+         ->fields(['uid' => $new_user->id()])

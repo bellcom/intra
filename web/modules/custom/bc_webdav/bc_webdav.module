@@ -85,66 +85,265 @@ function bc_webdav_theme_suggestions_alter(array &$suggestions, array &$variable
 
 
 /**
+ * Short grace period while Office/LibreOffice starts and obtains its DAV lock.
+ */
+const BC_WEBDAV_LOCK_START_GRACE = 15;
+
+/**
+ * Old orphan cleanup timeout.
+ */
+const BC_WEBDAV_ORPHAN_TIMEOUT = 1800;
+
+/**
+ * Return current WebDAV lock state for a working file.
+ *
+ * Possible values:
+ * - locked
+ * - unlocked
+ * - unknown
+ */
+function bc_webdav_get_lock_state($config, string $file_name): string {
+  $base_url = trim((string) $config->get('url'));
+
+  if ($base_url === '') {
+    return 'unknown';
+  }
+
+  $url = rtrim($base_url, '/') . '/' . rawurlencode($file_name);
+
+  $options = [
+    'headers' => [
+      'Depth' => '0',
+      'Content-Type' => 'application/xml; charset=utf-8',
+    ],
+    'body' => '<?xml version="1.0" encoding="utf-8"?>'
+      . '<D:propfind xmlns:D="DAV:">'
+      . '<D:prop><D:lockdiscovery/></D:prop>'
+      . '</D:propfind>',
+    'http_errors' => FALSE,
+    'allow_redirects' => FALSE,
+    'connect_timeout' => 3,
+    'timeout' => 5,
+  ];
+
+  // Server-side lock discovery may use the shared WebDAV account.
+  // This is independent of what authentication method desktop clients use.
+  $username = trim(
+    (string) \Drupal::state()->get('bc_webdav.webdav_username', '')
+  );
+
+  $password = (string) \Drupal::state()
+    ->get('bc_webdav.webdav_password', '');
+
+  if ($username !== '' && $password !== '') {
+    $options['auth'] = [$username, $password];
+  }
+
+  try {
+    $response = \Drupal::httpClient()
+      ->request('PROPFIND', $url, $options);
+  }
+  catch (\Throwable $e) {
+    \Drupal::logger('bc_webdav')->warning(
+      'WebDAV lock discovery failed for @file: @message',
+      [
+        '@file' => $file_name,
+        '@message' => $e->getMessage(),
+      ]
+    );
+
+    return 'unknown';
+  }
+
+  if (!in_array($response->getStatusCode(), [200, 207], TRUE)) {
+    return 'unknown';
+  }
+
+  $body = (string) $response->getBody();
+
+  if (
+    preg_match(
+      '/<(?:[A-Za-z_][A-Za-z0-9_.-]*:)?activelock(?:\s|>)/i',
+      $body
+    )
+  ) {
+    return 'locked';
+  }
+
+  return 'unlocked';
+}
+
+/**
+ * Import a finished WebDAV working copy into Drupal.
+ */
+function bc_webdav_import_working_file(string $filename): bool {
+  if (!is_file($filename)) {
+    return FALSE;
+  }
+
+  $base = basename($filename);
+  $dir = dirname($filename);
+  $sidecar = $dir . '/id.' . $base;
+
+  if (!is_file($sidecar)) {
+    return FALSE;
+  }
+
+  $metadata = trim((string) file_get_contents($sidecar));
+
+  if (!preg_match('/^(\d+):(\d+)$/', $metadata, $matches)) {
+    return FALSE;
+  }
+
+  $fid = (int) $matches[1];
+  $uid = (int) $matches[2];
+
+  if ($fid <= 0) {
+    return FALSE;
+  }
+
+  $file = \Drupal::entityTypeManager()
+    ->getStorage('file')
+    ->load($fid);
+
+  if (!$file || $file->getFilename() !== $base) {
+    return FALSE;
+  }
+
+  $data = file_get_contents($filename);
+
+  if ($data === FALSE) {
+    return FALSE;
+  }
+
+  try {
+    $repository = \Drupal::service('file.repository');
+
+    $result = $repository->writeData(
+      $data,
+      $file->getFileUri(),
+      FileExists::Replace
+    );
+
+    $result->save();
+  }
+  catch (\Throwable $e) {
+    \Drupal::logger('bc_webdav')->error(
+      'Could not import WebDAV file @file: @message',
+      [
+        '@file' => $base,
+        '@message' => $e->getMessage(),
+      ]
+    );
+
+    return FALSE;
+  }
+
+  if (is_file($filename) && !unlink($filename)) {
+    return FALSE;
+  }
+
+  if (is_file($sidecar) && !unlink($sidecar)) {
+    return FALSE;
+  }
+
+  try {
+    \Drupal::database()
+      ->insert('bc_webdav_log')
+      ->fields([
+        'fid' => $fid,
+        'uid' => $uid,
+        'action' => 'update',
+      ])
+      ->execute();
+  }
+  catch (\Throwable $e) {
+    \Drupal::logger('bc_webdav')->warning(
+      'File @file was imported but history logging failed: @message',
+      [
+        '@file' => $base,
+        '@message' => $e->getMessage(),
+      ]
+    );
+  }
+
+  return TRUE;
+}
+
+/**
  * Implements hook_cron().
  */
 function bc_webdav_cron() {
+  $config = \Drupal::config('bc_webdav.settings');
 
-  $config = (object) \Drupal::config('bc_webdav.settings')->get();
-  if ($config->enabled && !empty($config->folder)) {
-
-    foreach( glob($config->folder . '/*') as $filename) {
-      if (!preg_match('/id./', $filename)) {
-
-        $base = basename($filename);
-        $dir = dirname($filename);
-
-        $lastmodified = filemtime($filename);
-        // waite at least 30 min before update
-        if (time() < ($lastmodified + 1800)) {
-          continue;
-        }
-
-        if (!file_exists($dir . '/id.' . $base)) {
-          unlink($filename);
-        } else {
-
-          [$FileId, $UserId] = explode(":", file_get_contents($dir . '/id.' . $base));
-
-          if (is_int(intval($FileId)) && is_int(intval($UserId))) {
-
-            $files = \Drupal::entityTypeManager()
-              ->getStorage('file')
-              ->loadByProperties(['fid' => intval($FileId)]);
-
-            if (!empty($files)) {
-
-              $file = reset($files);
-              if ($file->label() === $base) {
-
-                $fileRepository = \Drupal::service('file.repository');
-                $result = $fileRepository->writeData(file_get_contents($filename), $file->uri->value, FileExists::Replace);
-                $result->save();
-
-                unlink($filename);
-
-                $account = \Drupal\user\Entity\User::load(intval($UserId));
-
-                $connection = \Drupal::service('database');
-                $connection->insert('bc_webdav_log')
-                  ->fields([
-                    'fid' => $file->id(),
-                    'uid' => $account->id(),
-                    'action' => 'update'
-                  ])
-                  ->execute();
-
-              }
-            } else unlink($filename);
-          } else unlink($filename);
-        }
-
-      }
-    }
+  if (!$config->get('enabled') || !$config->get('folder')) {
+    return;
   }
 
+  $folder = rtrim((string) $config->get('folder'), '/');
+
+  if (!is_dir($folder)) {
+    return;
+  }
+
+  foreach (glob($folder . '/*') ?: [] as $filename) {
+    if (!is_file($filename)) {
+      continue;
+    }
+
+    $base = basename($filename);
+
+    if (str_starts_with($base, 'id.')) {
+      continue;
+    }
+
+    $sidecar = $folder . '/id.' . $base;
+
+    // Orphaned working file without session metadata:
+    // retain the old 30 minute cleanup as failsafe.
+    if (!is_file($sidecar)) {
+      $mtime = filemtime($filename);
+
+      if (
+        $mtime !== FALSE
+        && time() >= ($mtime + BC_WEBDAV_ORPHAN_TIMEOUT)
+      ) {
+        unlink($filename);
+      }
+
+      continue;
+    }
+
+    $started = filemtime($sidecar);
+
+    if ($started === FALSE) {
+      continue;
+    }
+
+    $age = max(0, time() - $started);
+
+    $lock_state = bc_webdav_get_lock_state(
+      $config,
+      $base
+    );
+
+    // Office/LibreOffice still owns the file.
+    if ($lock_state === 'locked') {
+      continue;
+    }
+
+    // Never import when the server could not determine lock state.
+    if ($lock_state === 'unknown') {
+      continue;
+    }
+
+    // Prevent race between Drupal creating the file and the desktop client
+    // obtaining its initial DAV LOCK.
+    if ($age < BC_WEBDAV_LOCK_START_GRACE) {
+      continue;
+    }
+
+    // DAV server answered successfully and no active lock exists.
+    bc_webdav_import_working_file($filename);
+  }
 }

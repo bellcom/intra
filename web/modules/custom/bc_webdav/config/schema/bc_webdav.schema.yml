@@ -1,0 +1,49 @@
+bc_webdav.settings:
+  type: config_object
+  label: 'Bellcom WebDAV settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enabled'
+    url:
+      type: string
+      label: 'WebDAV URL'
+    folder:
+      type: string
+      label: 'Local WebDAV folder'
+    ext:
+      type: string
+      label: 'Editable extensions'
+    right_og:
+      type: boolean
+      label: 'Rights by organic groups membership'
+    auth_method:
+      type: string
+      label: 'Authentication method'
+    os_windows_enabled:
+      type: boolean
+      label: 'Windows enabled'
+    os_windows_program:
+      type: string
+      label: 'Windows application'
+    os_windows_custom_handler:
+      type: string
+      label: 'Windows custom URI handler'
+    os_linux_enabled:
+      type: boolean
+      label: 'Linux enabled'
+    os_linux_program:
+      type: string
+      label: 'Linux application'
+    os_linux_custom_handler:
+      type: string
+      label: 'Linux custom URI handler'
+    os_mac_enabled:
+      type: boolean
+      label: 'macOS enabled'
+    os_mac_program:
+      type: string
+      label: 'macOS application'
+    os_mac_custom_handler:
+      type: string
+      label: 'macOS custom URI handler'

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00cb23125d26bb2a6f65109b4cde04e8",
+    "content-hash": "9ec156cb3611c6bcd461eb0d2857932f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -14011,6 +14011,18 @@
             "time": "2026-07-04T14:30:18+00:00"
         },
         {
+            "name": "noli42/chosen",
+            "version": "3.1.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/noli42/chosen/releases/download/3.1.4/chosen-assets-v3.1.4.zip"
+            },
+            "type": "drupal-library",
+            "extra": {
+                "installer-name": "chosen"
+            }
+        },
+        {
             "name": "os2core/os2core",
             "version": "dev-drupal11",
             "source": {
@@ -14072,12 +14084,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OS2web/os2web.git",
-                "reference": "9b7146420aa4008afe143c467d19ba9aa653d571"
+                "reference": "9fdd19865210f5f6027c3713dd74a19909eec165"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OS2web/os2web/zipball/9b7146420aa4008afe143c467d19ba9aa653d571",
-                "reference": "9b7146420aa4008afe143c467d19ba9aa653d571",
+                "url": "https://api.github.com/repos/OS2web/os2web/zipball/9fdd19865210f5f6027c3713dd74a19909eec165",
+                "reference": "9fdd19865210f5f6027c3713dd74a19909eec165",
                 "shasum": ""
             },
             "require": {
@@ -14101,7 +14113,7 @@
                 "issues": "https://github.com/OS2web/os2web/issues",
                 "source": "https://github.com/OS2web/os2web/tree/drupal11"
             },
-            "time": "2026-08-25T13:33:48+00:00"
+            "time": "2026-08-25T14:29:48+00:00"
         },
         {
             "name": "os2web/os2web_contact",
@@ -14201,12 +14213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OS2web/os2web_hjemmeside.git",
-                "reference": "f5e6be5df79ec67f3542255bff834214befca375"
+                "reference": "c8f3a0000c7c741aff9ac41ebab2fcbb73791edb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OS2web/os2web_hjemmeside/zipball/f5e6be5df79ec67f3542255bff834214befca375",
-                "reference": "f5e6be5df79ec67f3542255bff834214befca375",
+                "url": "https://api.github.com/repos/OS2web/os2web_hjemmeside/zipball/c8f3a0000c7c741aff9ac41ebab2fcbb73791edb",
+                "reference": "c8f3a0000c7c741aff9ac41ebab2fcbb73791edb",
                 "shasum": ""
             },
             "require": {
@@ -14233,7 +14245,7 @@
                 "issues": "https://github.com/OS2web/os2web_hjemmeside/issues",
                 "source": "https://github.com/OS2web/os2web_hjemmeside/tree/drupal10"
             },
-            "time": "2026-08-25T13:34:28+00:00"
+            "time": "2026-08-25T14:31:19+00:00"
         },
         {
             "name": "os2web/os2web_kle",

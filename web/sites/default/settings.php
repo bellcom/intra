@@ -850,3 +850,10 @@ if (file_exists($app_root . '/' . $site_path . '/os2web_logging.watchdog_setting
   include $app_root . '/' . $site_path . '/os2web_logging.watchdog_settings.php';
 }
 
+/**
+ * Disable client-side HTML5 validation.
+ *
+ * Drupal 12 disables this by default. Test Drupal Form API validation
+ * behaviour during the Drupal 11 upgrade.
+ */
+$settings['enable_html5_validation'] = FALSE;

@@ -4,6 +4,21 @@
     "type": "project",
     "license": "EUPL-1.2",
     "repositories": {
+        "chosen_library": {
+            "type": "package",
+            "package": {
+                "name": "noli42/chosen",
+                "version": "3.1.4",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "chosen"
+                },
+                "dist": {
+                    "url": "https://github.com/noli42/chosen/releases/download/3.1.4/chosen-assets-v3.1.4.zip",
+                    "type": "zip"
+                }
+            }
+        },
         "os2core": {
             "type": "vcs",
             "url": "git@github.com:bellcom/os2core.git"
@@ -71,19 +86,6 @@
             "type": "vcs",
             "url": "https://github.com/bellcom/fds_base_theme"
         },
-        "2": {
-            "type": "package",
-            "package": {
-                "name": "harvesthq/chosen",
-                "version": "1.8.7",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/harvesthq/chosen-package.git",
-                    "type": "git",
-                    "reference": "v1.8.7"
-                }
-            }
-        },
         "3": {
             "type": "package",
             "package": {
@@ -138,6 +140,7 @@
         "drupal/flag": "5.0.3 as 4.0.999",
         "drupal/flag_anon": "1.x-dev@dev",
         "drupal/flag_lists": "^4.0.5",
+        "drupal/honeypot": "^2.2",
         "drupal/jquery_ui_datepicker": "^2.1",
         "drupal/jquery_ui_menu": "^2.0",
         "drupal/jquery_ui_slider": "^2.1",
@@ -193,6 +196,7 @@
         "drush/drush": "^13",
         "league/flysystem-webdav": "^3.0",
         "mglaman/drupal-check": "^1.1",
+        "noli42/chosen": "3.1.4",
         "os2core/os2core": "dev-drupal11",
         "os2web/os2web": "dev-drupal11",
         "os2web/os2web_contact": "dev-drupal10",
@@ -298,6 +302,9 @@
             },
             "os2web/os2web_hjemmeside": {
                 "Remove unused os2web_borgerdk dependency": "./patches/os2web_hjemmeside-remove-borgerdk-dependency.patch"
+            },
+            "drupal/media_directories": {
+                "Allow Media Directories Browser on Drupal 10.2+": "./patches/media_directories-browser-drupal10.patch"
             },
             "drupal/user_delete_reassign": {
                 "Drupal 11 compatibility from upstream MR !6": "./patches/user_delete_reassign-drupal11-mr6.patch",

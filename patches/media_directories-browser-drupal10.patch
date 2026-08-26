@@ -1,0 +1,12 @@
+diff --git a/modules/media_directories_browser/media_directories_browser.info.yml b/modules/media_directories_browser/media_directories_browser.info.yml
+--- a/modules/media_directories_browser/media_directories_browser.info.yml
++++ b/modules/media_directories_browser/media_directories_browser.info.yml
+@@ -1,7 +1,7 @@
+ name: Media Directories Browser
+ description: Vue.js media browser with directory organization for Media Directories
+ type: module
+-core_version_requirement: ^11 || ^12
++core_version_requirement: ^10.2 || ^11 || ^12
+ dependencies:
+   - media_directories:media_directories
+   - drupal:media

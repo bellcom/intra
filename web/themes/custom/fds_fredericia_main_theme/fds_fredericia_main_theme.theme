@@ -50,7 +50,10 @@ function fds_fredericia_main_theme_preprocess_page(array &$variables) {
   $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
   $variables['theme_settings']['footer']['footer_show_latest_content'] = theme_get_setting('footer_show_latest_content');
   $variables['theme_settings']['footer']['footer_image'] = theme_get_setting('footer_image_choice');
-  $variables['theme_settings']['footer']['footer_image_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString(theme_get_setting('footer_image_path'));
+  $footer_image_path = theme_get_setting('footer_image_path');
+  $variables['theme_settings']['footer']['footer_image_url'] = $footer_image_path
+    ? \Drupal::service('file_url_generator')->generateAbsoluteString($footer_image_path)
+    : '';
   $variables['theme_settings']['branding']['branding_toggle'] = theme_get_setting('branding_toggle');
   $variables['theme_settings']['branding']['branding_text'] = theme_get_setting('branding_text');
 

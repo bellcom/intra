@@ -1,0 +1,19 @@
+--- a/ai_vdb_provider_sqlite.module
++++ b/ai_vdb_provider_sqlite.module
+@@ -103,7 +103,15 @@
+  * TRUE if the field cardinality is not 1, FALSE otherwise.
+  */
+ function ai_vdb_provider_sqlite_is_field_multiple($field) {
+-    $field_definition = $field->getDataDefinition()->getFieldDefinition();
++    $data_definition = $field->getDataDefinition();
++
++    // Search API processor properties such as AddURLProperty do not expose
++    // getFieldDefinition(). Treat these computed properties as single-valued.
++    if (!method_exists($data_definition, 'getFieldDefinition')) {
++      return FALSE;
++    }
++
++    $field_definition = $data_definition->getFieldDefinition();
+     if ($field_definition instanceof BaseFieldDefinition) {
+       $field_cardinality = $field_definition->getCardinality();
+     }

@@ -114,6 +114,8 @@
         "drupal/aggregator": "^2.2",
         "drupal/ai": "^1.4",
         "drupal/ai_provider_openai": "^1.2",
+        "drupal/ai_search": "^1.3@alpha",
+        "drupal/ai_vdb_provider_sqlite": "^1.4",
         "drupal/anonymous_subscriptions": "dev-drupal10",
         "drupal/block_title_link": "^1.1",
         "drupal/block_visibility_groups": "^2.0",
@@ -255,10 +257,15 @@
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "@remove-deprecated-ai-search-submodule"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "@remove-deprecated-ai-search-submodule"
+        ],
+        "remove-deprecated-ai-search-submodule": [
+            "if [ -d web/modules/contrib/ai/modules/ai_search ]; then rm -rf web/modules/contrib/ai/modules/ai_search && echo 'Removed deprecated ai/modules/ai_search submodule (superseded by drupal/ai_search package)'; fi"
         ]
     },
     "extra": {

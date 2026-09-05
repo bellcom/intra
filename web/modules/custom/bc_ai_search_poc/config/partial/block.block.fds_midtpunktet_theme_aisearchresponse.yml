@@ -1,0 +1,28 @@
+uuid: 8aa672e5-3f58-4d79-9005-b85602f67f07
+langcode: da
+status: true
+dependencies:
+  module:
+    - ai_search_block
+    - block_title_link
+  theme:
+    - fds_midtpunktet_theme
+third_party_settings:
+  block_title_link:
+    title_link_url: ''
+    link_title: ''
+    title_link_target: ''
+    title_link_enable: 0
+id: fds_midtpunktet_theme_aisearchresponse
+theme: fds_midtpunktet_theme
+region: header__below
+weight: -13
+provider: null
+plugin: ai_search_block_response
+settings:
+  id: ai_search_block_response
+  label: 'AI søge svar'
+  label_display: visible
+  provider: ai_search_block
+  response_target_id: ai-search-block-response
+visibility: {  }

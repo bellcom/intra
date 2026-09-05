@@ -1,0 +1,30 @@
+uuid: 23b12914-1558-4ca9-8639-e565f7cbc74e
+langcode: da
+status: true
+dependencies:
+  module:
+    - ai_search
+    - ai_vdb_provider_sqlite
+id: ai_search_poc
+name: 'AI Search POC'
+description: ''
+backend: search_api_ai_search
+backend_config:
+  chat_model: openai__gpt-4.1-mini
+  database: sqlite
+  database_settings:
+    database_name: ai_search_poc
+    collection: intranet_poc
+    metric: cosine_similarity
+  embeddings_engine: openai__text-embedding-3-small
+  embeddings_engine_configuration:
+    set_dimensions: false
+    dimensions: 1536
+  embedding_strategy: contextual_chunks
+  embedding_strategy_configuration:
+    chunk_size: '500'
+    chunk_min_overlap: '100'
+    contextual_content_max_percentage: '30'
+    skip_moderation: false
+  embedding_strategy_details: ''
+  include_raw_embedding_vector: false

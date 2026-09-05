@@ -1,0 +1,4 @@
+db_path: 'private://vdb'
+_core:
+  default_config_hash: cZakR0nFdYncAZAjIKk5nOOtYODd3b1gxUJAiTc2Cq8
+ext_file: vec0.so

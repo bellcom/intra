@@ -1,0 +1,252 @@
+--- a/src/AiSearchBlockHelper.php
++++ b/src/AiSearchBlockHelper.php
+@@ -229,6 +229,7 @@
+   ): JsonResponse|StreamedResponse|string {
+     $entity_list = [];
+     $rendered_entities = [];
++    $source_links = [];
+     if ($this->configuration['render_mode'] === 'chunks') {
+       foreach ($result_items as $result) {
+         $chunk = $result->getExtraData('content');
+@@ -280,12 +281,18 @@
+         $markdown = $this->converter->convert((string) $rendered);
+         $markdown = $this->cleanupMarkdown($markdown, $entity);
+ 
+-        // Get the node URL.
+-        $node_url = $entity->toUrl('canonical', ['absolute' => TRUE])->toString();
++        // Build a deterministic same-site source link. The LLM only gets
++        // a source ID; Drupal remains responsible for the actual URL.
++        $node_url = $entity->toUrl('canonical')->toString();
++        $source_label = (string) $entity->label();
++        $source_id = $entity_type . '/' . $entity_id;
++        $source_links[$source_id] = '<li><a href="' .
++          \Drupal\Component\Utility\Html::escape($node_url) . '">' .
++          \Drupal\Component\Utility\Html::escape($source_label) . '</a></li>';
+ 
+         // Format the node content with header and footer.
+         $formatted_node = "\n>>>>>> BEGIN ENTITY {$entity_id} <<<<<<<<\n";
+-        $formatted_node .= "ENTITY_URL:  {$node_url}\n\n";
++        $formatted_node .= "SOURCE_ID: {$source_id}\n\n";
+         $formatted_node .= "ENTITY CONTENT:\n\n";
+         $formatted_node .= "{$markdown}\n\n";
+         $formatted_node .= ">>>>>> END ENTITY {$entity_id} <<<<<<<<";
+@@ -373,7 +380,8 @@
+           $response,
+           'message',
+           $message,
+-          $entity_ids
++          $entity_ids,
++          $source_links
+         );
+       }
+ 
+@@ -381,7 +389,10 @@
+       $output = $provider->chat($input, $ai_model_to_use, ['ai_search_block']);
+       /** @var \Drupal\ai\OperationType\Chat\ChatMessage $chatOutput */
+       $chatOutput = $output->getNormalized();
+-      $response = $chatOutput->getText() . "\n";
++      $response = $this->finalizeResponse(
++        $chatOutput->getText() . "\n",
++        $source_links,
++      );
+       $entity_ids = array_keys($entity_list);
+       $this->logResponse($response, $message, $entity_ids);
+ 
+@@ -391,7 +402,10 @@
+       $output = $provider->chat($input, $ai_model_to_use, ['ai_search_block']);
+       /** @var \Drupal\ai\OperationType\Chat\ChatMessage $chatOutput */
+       $chatOutput = $output->getNormalized();
+-      $response = $chatOutput->getText() . "\n";
++      $response = $this->finalizeResponse(
++        $chatOutput->getText() . "\n",
++        $source_links,
++      );
+       $entity_ids = array_keys($entity_list);
+       $this->logResponse($response, $message, $entity_ids);
+ 
+@@ -935,6 +949,64 @@
+   }
+ 
+   /**
++   * Build verified source links from the source IDs selected by the LLM.
++   */
++  private function buildSourcesHtml(
++    string $response,
++    array $source_links,
++  ): string {
++    if (!preg_match('/<!--\s*SOURCES:\s*([^>]*)-->/i', $response, $matches)) {
++      return '';
++    }
++
++    $raw_ids = trim($matches[1]);
++    if ($raw_ids === '') {
++      return '';
++    }
++
++    $links = [];
++    foreach (explode(',', $raw_ids) as $raw_id) {
++      $source_id = trim($raw_id);
++      if ($source_id === '' || !isset($source_links[$source_id])) {
++        continue;
++      }
++      $links[$source_id] = $source_links[$source_id];
++    }
++
++    if ($links === []) {
++      return '';
++    }
++
++    return "\n<h3>Kilder</h3>\n<ul>\n" .
++      implode("\n", $links) .
++      "\n</ul>";
++  }
++
++  /**
++   * Remove the internal source-selection marker from an LLM response.
++   */
++  private function stripSourceMarker(string $response): string {
++    return preg_replace(
++      '/<!--\s*SOURCES:\s*[^>]*-->/i',
++      '',
++      $response,
++    ) ?? $response;
++  }
++
++  /**
++   * Finish a non-streamed response with verified source links.
++   */
++  private function finalizeResponse(
++    string $response,
++    array $source_links,
++  ): string {
++    $sources_html = $this->buildSourcesHtml($response, $source_links);
++    $response = $this->stripSourceMarker($response);
++
++    return rtrim($response) . $sources_html . "\n";
++  }
++
++  /**
+    * Streams back the response so it comes to the frontend nice and fluid.
+    *
+    * @param array|\Drupal\ai\OperationType\Chat\StreamedChatMessageIteratorInterface $parts
+@@ -949,30 +1021,102 @@
+    * @return \Symfony\Component\HttpFoundation\StreamedResponse
+    *   The stream with the response.
+    */
+-  private function streamBackResponse($parts, $type, $prompt, $result_items) {
+-    return new StreamedResponse(function () use ($type, $parts, $prompt, $result_items) {
++  private function streamBackResponse(
++    $parts,
++    $type,
++    $prompt,
++    $result_items,
++    array $source_links = [],
++  ) {
++    return new StreamedResponse(function () use (
++      $type,
++      $parts,
++      $prompt,
++      $result_items,
++      $source_links,
++    ) {
+       $log_output = '';
+-      foreach ($parts as $part) {
+-        $item = [];
+-        $item['in_html'] = FALSE;
+-        $item['log_id'] = $this->logId;
+-        if ($type == 'string') {
+-          $item['answer_piece'] = $part;
++
++      $emit = function (string $piece): void {
++        if ($piece === '') {
++          return;
+         }
+-        else {
+-          $item['answer_piece'] = $part->getText();
++
++        $item = [
++          'in_html' => FALSE,
++          'log_id' => $this->logId,
++          'answer_piece' => $piece,
++        ];
++
++        echo Json::encode($item) . '|§|';
++
++        if (ob_get_level() > 0) {
++          ob_flush();
+         }
+-        $out = Json::encode($item);
+-        $log_output .= $item['answer_piece'];
+-        unset($item);
+-        echo $out . '|§|';
+-        ob_flush();
+         flush();
+-        if ($type == 'string') {
+-          usleep(50000);
++      };
++
++      // Errors and other plain strings do not contain source selection.
++      if ($source_links === []) {
++        foreach ($parts as $part) {
++          $piece = $type === 'string' ? $part : $part->getText();
++          $log_output .= $piece;
++          $emit($piece);
++
++          if ($type === 'string') {
++            usleep(50000);
++          }
+         }
++
++        $this->logResponse($log_output, $prompt, $result_items);
++        return;
+       }
+-      $this->logResponse($log_output, $prompt, $result_items);
++
++      // Keep enough trailing data buffered to detect a marker even when
++      // "<!--SOURCES:" is split across multiple streamed chunks.
++      $marker_prefix = '<!--SOURCES:';
++      $keep_length = strlen($marker_prefix) - 1;
++      $pending = '';
++      $marker_found = FALSE;
++
++      foreach ($parts as $part) {
++        $piece = $type === 'string' ? $part : $part->getText();
++        $log_output .= $piece;
++        $pending .= $piece;
++
++        if ($marker_found) {
++          continue;
++        }
++
++        $position = strpos($pending, $marker_prefix);
++        if ($position !== FALSE) {
++          $visible = substr($pending, 0, $position);
++          $emit($visible);
++
++          // Everything from the internal marker onward remains hidden.
++          $pending = substr($pending, $position);
++          $marker_found = TRUE;
++          continue;
++        }
++
++        if (strlen($pending) > $keep_length) {
++          $visible_length = strlen($pending) - $keep_length;
++          $visible = substr($pending, 0, $visible_length);
++          $pending = substr($pending, $visible_length);
++          $emit($visible);
++        }
++      }
++
++      // If the model failed to emit a marker, do not lose the buffered tail.
++      if (!$marker_found) {
++        $emit($pending);
++      }
++
++      $sources_html = $this->buildSourcesHtml($log_output, $source_links);
++      $emit($sources_html);
++
++      $visible_log = $this->stripSourceMarker($log_output) . $sources_html;
++      $this->logResponse($visible_log, $prompt, $result_items);
+     }, 200, [
+       'Cache-Control' => 'no-cache, must-revalidate',
+       'Content-Type' => 'text/event-stream',

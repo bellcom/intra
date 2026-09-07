@@ -1,0 +1,14 @@
+search_api_index: ai_intranet_poc
+hetzner:
+  intern_backup_key: ''
+  produktion_key: ''
+  test_key: ''
+  udvikling_key: ''
+  backups_key: ''
+  konsoleh_key: ''
+drupal7:
+  base_url: ''
+  username: ''
+  password_key: ''
+  source: kunde
+url_sources: ''

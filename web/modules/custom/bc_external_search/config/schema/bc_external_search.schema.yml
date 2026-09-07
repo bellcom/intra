@@ -1,0 +1,48 @@
+bc_external_search.settings:
+  type: config_object
+  label: 'BC External Search settings'
+  mapping:
+    search_api_index:
+      type: string
+      label: 'Search API index'
+    hetzner:
+      type: mapping
+      label: 'Hetzner settings'
+      mapping:
+        intern_backup_key:
+          type: string
+          label: '0. Internt + backup key ID'
+        produktion_key:
+          type: string
+          label: '1. Produktion key ID'
+        test_key:
+          type: string
+          label: '2. Test key ID'
+        udvikling_key:
+          type: string
+          label: '3. Udvikling key ID'
+        backups_key:
+          type: string
+          label: 'Backups key ID'
+        konsoleh_key:
+          type: string
+          label: 'konsoleH key ID'
+    drupal7:
+      type: mapping
+      label: 'Drupal 7 customer source'
+      mapping:
+        base_url:
+          type: string
+          label: 'Base URL'
+        username:
+          type: string
+          label: 'Username'
+        password_key:
+          type: string
+          label: 'Password key ID'
+        source:
+          type: string
+          label: 'Source name'
+    url_sources:
+      type: text
+      label: 'Configured URL/crawl sources'

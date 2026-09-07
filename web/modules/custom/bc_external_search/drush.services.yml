@@ -1,0 +1,10 @@
+services:
+  bc_external_search.commands:
+    class: Drupal\bc_external_search\Commands\ExternalSearchCommands
+    arguments:
+      - '@bc_external_search.hetzner_importer'
+      - '@bc_external_search.drupal7_customer_importer'
+      - '@bc_external_search.url_importer'
+      - '@bc_external_search.import_manager'
+    tags:
+      - { name: drush.command }

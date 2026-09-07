@@ -1,0 +1,4 @@
+administer bc external search:
+  title: 'Administer BC External Search'
+  description: 'Configure and run imports from external search sources.'
+  restrict access: true

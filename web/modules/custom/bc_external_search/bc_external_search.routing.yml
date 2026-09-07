@@ -1,0 +1,7 @@
+bc_external_search.settings:
+  path: '/admin/config/search/bc-external-search'
+  defaults:
+    _form: '\Drupal\bc_external_search\Form\SettingsForm'
+    _title: 'BC External Search'
+  requirements:
+    _permission: 'administer bc external search'

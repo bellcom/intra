@@ -1,0 +1,27 @@
+services:
+  logger.channel.bc_external_search:
+    parent: logger.channel_base
+    arguments: ['bc_external_search']
+
+  bc_external_search.document_storage:
+    class: Drupal\bc_external_search\Service\ExternalDocumentStorage
+    arguments: ['@entity_type.manager', '@datetime.time', '@logger.channel.bc_external_search']
+
+  bc_external_search.page_extractor:
+    class: Drupal\bc_external_search\Service\PageExtractor
+
+  bc_external_search.url_importer:
+    class: Drupal\bc_external_search\Service\UrlImporter
+    arguments: ['@http_client', '@bc_external_search.page_extractor', '@bc_external_search.document_storage', '@logger.channel.bc_external_search']
+
+  bc_external_search.hetzner_importer:
+    class: Drupal\bc_external_search\Service\HetznerImporter
+    arguments: ['@http_client', '@config.factory', '@key.repository', '@bc_external_search.document_storage', '@logger.channel.bc_external_search']
+
+  bc_external_search.drupal7_customer_importer:
+    class: Drupal\bc_external_search\Service\Drupal7CustomerImporter
+    arguments: ['@http_client', '@config.factory', '@key.repository', '@bc_external_search.page_extractor', '@bc_external_search.document_storage', '@logger.channel.bc_external_search']
+
+  bc_external_search.import_manager:
+    class: Drupal\bc_external_search\Service\ImportManager
+    arguments: ['@config.factory', '@bc_external_search.hetzner_importer', '@bc_external_search.drupal7_customer_importer', '@bc_external_search.url_importer']

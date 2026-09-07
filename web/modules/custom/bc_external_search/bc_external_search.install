@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for BC External Search.
+ */
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\link\LinkItemInterface;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_install().
+ */
+function bc_external_search_install(): void {
+  $type = NodeType::load('bc_external_search_document');
+  if (!$type) {
+    $type = NodeType::create([
+      'type' => 'bc_external_search_document',
+      'name' => 'External search document',
+      'description' => 'Imported external data used by BC External Search.',
+      'new_revision' => FALSE,
+      'preview_mode' => 0,
+      'display_submitted' => FALSE,
+    ]);
+    $type->save();
+  }
+
+  $fields = [
+    'field_bc_ext_kind' => [
+      'type' => 'string',
+      'label' => 'Source type',
+      'storage_settings' => ['max_length' => 64],
+      'required' => TRUE,
+    ],
+    'field_bc_ext_source' => [
+      'type' => 'string',
+      'label' => 'Source',
+      'storage_settings' => ['max_length' => 190],
+      'required' => TRUE,
+    ],
+    'field_bc_ext_id' => [
+      'type' => 'string',
+      'label' => 'External ID',
+      'storage_settings' => ['max_length' => 512],
+      'required' => TRUE,
+    ],
+    'field_bc_ext_url' => [
+      'type' => 'link',
+      'label' => 'External URL',
+      'storage_settings' => [],
+      'field_settings' => [
+        'link_type' => LinkItemInterface::LINK_EXTERNAL,
+        'title' => DRUPAL_DISABLED,
+      ],
+      'required' => FALSE,
+    ],
+    'field_bc_ext_summary' => [
+      'type' => 'text_long',
+      'label' => 'Summary',
+      'storage_settings' => [],
+      'required' => FALSE,
+    ],
+    'field_bc_ext_content' => [
+      'type' => 'text_long',
+      'label' => 'Search content',
+      'storage_settings' => [],
+      'required' => TRUE,
+    ],
+    'field_bc_ext_raw' => [
+      'type' => 'text_long',
+      'label' => 'Raw source data',
+      'storage_settings' => [],
+      'required' => FALSE,
+    ],
+    'field_bc_ext_imported' => [
+      'type' => 'datetime',
+      'label' => 'Last imported',
+      'storage_settings' => ['datetime_type' => 'datetime'],
+      'required' => FALSE,
+    ],
+  ];
+
+  foreach ($fields as $field_name => $definition) {
+    $storage = FieldStorageConfig::loadByName('node', $field_name);
+    if (!$storage) {
+      $storage = FieldStorageConfig::create([
+        'field_name' => $field_name,
+        'entity_type' => 'node',
+        'type' => $definition['type'],
+        'settings' => $definition['storage_settings'],
+        'cardinality' => 1,
+      ]);
+      $storage->save();
+    }
+
+    $field = FieldConfig::loadByName('node', 'bc_external_search_document', $field_name);
+    if (!$field) {
+      $field = FieldConfig::create([
+        'field_storage' => $storage,
+        'bundle' => 'bc_external_search_document',
+        'label' => $definition['label'],
+        'required' => $definition['required'],
+        'settings' => $definition['field_settings'] ?? [],
+      ]);
+      $field->save();
+    }
+  }
+
+  $view_display = EntityViewDisplay::load('node.bc_external_search_document.default');
+  if (!$view_display) {
+    $view_display = EntityViewDisplay::create([
+      'targetEntityType' => 'node',
+      'bundle' => 'bc_external_search_document',
+      'mode' => 'default',
+      'status' => TRUE,
+    ]);
+  }
+  $view_display
+    ->setComponent('field_bc_ext_summary', [
+      'type' => 'text_default',
+      'label' => 'hidden',
+      'weight' => 0,
+    ])
+    ->setComponent('field_bc_ext_content', [
+      'type' => 'text_default',
+      'label' => 'hidden',
+      'weight' => 1,
+    ])
+    ->setComponent('field_bc_ext_url', [
+      'type' => 'link',
+      'label' => 'above',
+      'weight' => 2,
+    ])
+    ->setComponent('field_bc_ext_source', [
+      'type' => 'string',
+      'label' => 'inline',
+      'weight' => 3,
+    ])
+    ->setComponent('field_bc_ext_imported', [
+      'type' => 'datetime_default',
+      'label' => 'inline',
+      'weight' => 4,
+    ])
+    ->removeComponent('field_bc_ext_kind')
+    ->removeComponent('field_bc_ext_id')
+    ->removeComponent('field_bc_ext_raw')
+    ->save();
+
+  $form_display = EntityFormDisplay::load('node.bc_external_search_document.default');
+  if (!$form_display) {
+    $form_display = EntityFormDisplay::create([
+      'targetEntityType' => 'node',
+      'bundle' => 'bc_external_search_document',
+      'mode' => 'default',
+      'status' => TRUE,
+    ]);
+  }
+  $form_display
+    ->setComponent('title', ['type' => 'string_textfield', 'weight' => 0])
+    ->setComponent('field_bc_ext_kind', ['type' => 'string_textfield', 'weight' => 1])
+    ->setComponent('field_bc_ext_source', ['type' => 'string_textfield', 'weight' => 2])
+    ->setComponent('field_bc_ext_id', ['type' => 'string_textfield', 'weight' => 3])
+    ->setComponent('field_bc_ext_url', ['type' => 'link_default', 'weight' => 4])
+    ->setComponent('field_bc_ext_summary', ['type' => 'text_textarea', 'weight' => 5])
+    ->setComponent('field_bc_ext_content', ['type' => 'text_textarea', 'weight' => 6])
+    ->setComponent('field_bc_ext_raw', ['type' => 'text_textarea', 'weight' => 7])
+    ->setComponent('field_bc_ext_imported', ['type' => 'datetime_default', 'weight' => 8])
+    ->save();
+}

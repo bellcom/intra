@@ -1,0 +1,12 @@
+name: 'BC External Search'
+type: module
+description: 'Imports external Bellcom data sources into Drupal nodes so they can be indexed by Search API and AI Search.'
+package: Bellcom
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:text
+  - drupal:link
+  - drupal:datetime
+  - key:key
+  - search_api:search_api

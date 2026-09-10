@@ -298,7 +298,7 @@
                 "Add option to reset other facets on value change": "https://www.drupal.org/files/issues/2023-01-25/3190289-22-reroll.patch"
             },
             "drupal/flag_anon": {
-                "Flag 4 build method signature compatibility": "./patches/flag_anon-flag4-build-signature.patch"
+                "3097962 - PHP Fatal error: Declaration of Drupal\\flag_anon\\FlagAnonLinkBuilder::build($entity_type_id, $entity_id, $flag_id)": "https://www.drupal.org/files/issues/2025-01-29/flag_anon-fatal-php-error-3097962-9.patch"
             },
             "os2web/os2web_hjemmeside": {
                 "Remove unused os2web_borgerdk dependency": "./patches/os2web_hjemmeside-remove-borgerdk-dependency.patch"

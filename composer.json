@@ -311,7 +311,7 @@
                 "Drupal 11 follow-up: preserve role filtering and use NodeBulkUpdate": "./patches/user_delete_reassign-drupal11-followup.patch"
             },
             "drupal/file_management": {
-                "Drupal 11 and PHP 8.4 compatibility": "./patches/file_management-drupal11.patch"
+                "3430563 - Automated Drupal 11 compatibility fixes for file_management": "https://www.drupal.org/files/issues/2026-01-28/file_management-3430563-d11-compatibility-11.patch"
             },
             "drupal/popular_search_keywords": {
                 "Drupal 11 compatibility": "./patches/popular_search_keywords-drupal11.patch"

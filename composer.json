@@ -307,8 +307,7 @@
                 "Allow Media Directories Browser on Drupal 10.2+": "./patches/media_directories-browser-drupal10.patch"
             },
             "drupal/user_delete_reassign": {
-                "Drupal 11 compatibility from upstream MR !6": "./patches/user_delete_reassign-drupal11-mr6.patch",
-                "Drupal 11 follow-up: preserve role filtering and use NodeBulkUpdate": "./patches/user_delete_reassign-drupal11-followup.patch"
+                "3584655 - Drupal 11 compatibility fixes": "https://git.drupalcode.org/project/user_delete_reassign/-/merge_requests/6.diff"
             },
             "drupal/file_management": {
                 "3430563 - Automated Drupal 11 compatibility fixes for file_management": "https://www.drupal.org/files/issues/2026-01-28/file_management-3430563-d11-compatibility-11.patch"

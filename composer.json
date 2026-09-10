@@ -112,7 +112,7 @@
         "drupal/action": "^0.2",
         "drupal/admin_audit_trail": "^1.0",
         "drupal/aggregator": "^2.2",
-        "drupal/anonymous_subscriptions": "dev-drupal10",
+        "drupal/anonymous_subscriptions": "dev-drupal11",
         "drupal/block_title_link": "^1.1",
         "drupal/block_visibility_groups": "^2.0",
         "drupal/calendar": "^1.0@beta",
@@ -315,10 +315,6 @@
             },
             "drupal/popular_search_keywords": {
                 "Drupal 11 compatibility": "./patches/popular_search_keywords-drupal11.patch"
-            },
-            "drupal/anonymous_subscriptions": {
-                "Drupal 11 and PHP 8.4 compatibility": "./patches/anonymous_subscriptions-drupal11-php84.patch",
-                "Drupal 11 ConfigFormBase typed config manager compatibility": "./patches/anonymous_subscriptions-drupal11-settingsform.patch"
             },
             "bellcom/fds_base_theme": {
                 "Drupal 11 compatibility": "./patches/fds_base_theme-drupal11.patch"

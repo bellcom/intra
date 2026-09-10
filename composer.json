@@ -320,7 +320,7 @@
                 "Drupal 11 compatibility": "./patches/fds_base_theme-drupal11.patch"
             },
             "drupal/search_api_synonym": {
-                "Remove obsolete Drupal Console command for Drupal 11": "./patches/search_api_synonym-remove-drupal-console.patch"
+                "3542593 - Fix dependency on Drupal Console, pages crash when there's no Drupal Console in the project\n": "https://git.drupalcode.org/project/search_api_synonym/-/merge_requests/32.diff"
             }
         }
     }

@@ -24,6 +24,7 @@
 # Ignore config files. Accordingly to bussines requirements we should not store
 # configuration files in git.
 /config/
+/simplesamlphp/
 
 # Ignore SimpleTest multi-site environment.
 /web/sites/simpletest

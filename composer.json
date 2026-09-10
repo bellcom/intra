@@ -314,7 +314,7 @@
                 "3430563 - Automated Drupal 11 compatibility fixes for file_management": "https://www.drupal.org/files/issues/2026-01-28/file_management-3430563-d11-compatibility-11.patch"
             },
             "drupal/popular_search_keywords": {
-                "Drupal 11 compatibility": "./patches/popular_search_keywords-drupal11.patch"
+                "Drupal 11 compatibility": "https://git.drupalcode.org/project/popular_search_keywords/-/merge_requests/12.diff"
             },
             "bellcom/fds_base_theme": {
                 "Drupal 11 compatibility": "./patches/fds_base_theme-drupal11.patch"

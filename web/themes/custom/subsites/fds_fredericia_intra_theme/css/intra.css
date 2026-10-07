@@ -4,3 +4,8 @@
  * Templates, global CSS and JS are inherited from fds_fredericia_main_theme.
  * Put intra-only styling in this file.
  */
+
+/* Default footer background until Color module is available. */
+footer {
+  background-color: #00335b;
+}

@@ -32,3 +32,9 @@ regions:
 
 libraries:
   - fds_fredericia_intra_theme/styles
+
+libraries-override:
+  fds_fredericia_main_theme/styles:
+    css:
+      theme:
+        dist/stylesheets/stylesheet.css: dist/stylesheets/stylesheet.css

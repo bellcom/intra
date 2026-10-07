@@ -5,7 +5,22 @@
  * Put intra-only styling in this file.
  */
 
-/* Default footer background until Color module is available. */
+/**
+ * TEMPORARY Color fallbacks — remove when Color module works.
+ *
+ * Hardcoded locations (search "TEMPORARY Color fallbacks"):
+ * - css/intra.css (this file): footer + primary backgrounds
+ * - css/hero.css: hero link bar (odd) + link text color
+ * - dist/stylesheets/stylesheet.css must keep Color placeholders
+ *   (#feffff primary, #d1d3d4 footer) so Color can rewrite them later.
+ */
 footer {
   background-color: #00335b;
+}
+
+.entity-default--os2web-wrapper.background-color--primary,
+.paragraph--type--os2web-box-paragraph.background-color--primary.box,
+.spotbox--background-color-primary,
+.spotbox--image.spotbox--background-color-primary {
+  background-color: #00335b !important;
 }

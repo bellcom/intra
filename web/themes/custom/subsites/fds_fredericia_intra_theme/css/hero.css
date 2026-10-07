@@ -89,7 +89,7 @@ body:has(.paragraph--type--hero) header {
 .paragraph--type--hero .hero-list-links {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 2.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -97,7 +97,7 @@ body:has(.paragraph--type--hero) header {
 
 @media only screen and (max-width: 768px) {
   .paragraph--type--hero .hero-list-links {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -111,8 +111,9 @@ body:has(.paragraph--type--hero) header {
   display: none;
 }
 
+/* TEMPORARY Color fallback — remove when Color works (see css/intra.css). */
 .paragraph--type--hero .hero-list-links li:nth-child(odd) a::before {
-  background-color: #feffff;
+  background-color: #00335b;
 }
 
 .paragraph--type--hero .hero-list-links li:nth-child(even) a::before {
@@ -126,11 +127,13 @@ body:has(.paragraph--type--hero) header {
   justify-content: center;
   min-height: 80px;
   align-items: center;
+  /* TEMPORARY brand text color until Color works (see css/intra.css). */
   color: #00335b;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 16px;
+  font-weight: bold;
   position: relative;
   transition: 0.25s ease;
   padding: 0 15px;

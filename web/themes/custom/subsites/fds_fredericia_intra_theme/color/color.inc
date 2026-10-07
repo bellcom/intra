@@ -18,6 +18,10 @@ $info = [
   ],
 
   // Pre-defined color schemes.
+  // Default values MUST match unique placeholders in stylesheet.css (Color
+  // replaces by hex). Desired intranet look (#00335b) is hardcoded in
+  // css/intra.css + css/hero.css until Color works — then remove those and
+  // set primary/footer to #00335b via the Color UI (or an extra scheme).
   'schemes' => [
     'default' => [
       'title' => t('Standard (default)'),
@@ -27,7 +31,7 @@ $info = [
         'background_color__secondary' => '#eae3c0',
         'background_color__tertiary' => '#066cc5',
         'background_color__navigation' => '#fffeff',
-        'background_color__footer_primary' => '#00335b',
+        'background_color__footer_primary' => '#d1d3d4',
         'background_color__button' => '#c30a32',
         'background_color__button_hover' => '#e6032f',
         'color__link' => '#c40a32',

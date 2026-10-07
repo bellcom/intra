@@ -7,5 +7,28 @@ logo: logo.png
 base theme: fds_fredericia_main_theme
 package: OS2web
 
+regions:
+  header__logo: 'Header - logo'
+  header__top_navigation: 'Header - top navigation'
+  header__main_navigation: 'Header - main navigation'
+  header__megamenu_navigation: 'Header - Megamenu'
+  header__selfservice: 'Header - Selvbetjening'
+  header__below: 'Header - below'
+  banner_search: 'Banner search'
+  alert_banner: 'Alert banner'
+  small_search: 'Small search'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Venstre sidepanel'
+  sidebar_second: 'Højre sidepanel'
+  featured_bottom_first: 'Featured bottom first'
+  footer__latest_content: 'Footer - latest content'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  embedded_code: 'Embedded code'
+
 libraries:
   - fds_fredericia_intra_theme/styles

@@ -9,15 +9,17 @@
     <div class="row layout--hidden-on-sections">
 
 
-      {% set has_sidebar_first = page.sidebar_first|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
-			{% set has_sidebar_second = page.sidebar_second|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
-			{% set has_main_content = page.content|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+      {# Sidebars are disabled on the front page for the intranet theme. #}
+      {% set has_sidebar_first = not is_front and page.sidebar_first|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+      {% set has_sidebar_second = not is_front and page.sidebar_second|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
+      {% set has_main_content = page.content|render|striptags("<drupal-render-placeholder>")|trim is not empty %}
 
       {%
         set content_classes = [
           has_sidebar_first and has_sidebar_second ? 'col-12 col-md-4 content-column',
           has_sidebar_first is empty and has_sidebar_second  ? 'col-12 col-lg-8 content-column',
           has_sidebar_first and has_sidebar_second is empty ? 'col-12 col-lg-8 content-column',
+          not has_sidebar_first and not has_sidebar_second ? 'col-12 content-column',
         ]
       %}
 

@@ -220,7 +220,8 @@ function fds_fredericia_main_theme_form_system_theme_settings_alter(&$form, Drup
     '#default_value' => $theme_settings->get('banner_image'),
     '#upload_location' => 'public://fds_fredericia_main_theme/images/',
     '#upload_validators' => [
-      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'FileExtension' => ['extensions' => 'png gif jpg jpeg webp'],
+      'FileIsImage' => [],
     ],
   ];
   $form['placeholder_images'] = [
@@ -230,7 +231,8 @@ function fds_fredericia_main_theme_form_system_theme_settings_alter(&$form, Drup
     '#default_value' => $theme_settings->get('placeholder_images'),
     '#upload_location' => 'public://fds_fredericia_main_theme/images/',
     '#upload_validators' => [
-      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'FileExtension' => ['extensions' => 'png gif jpg jpeg webp'],
+      'FileIsImage' => [],
     ],
     '#multiple' => TRUE, // Allow multiple file uploads
   ];
@@ -257,18 +259,16 @@ function fds_fredericia_main_theme_form_system_theme_settings_alter(&$form, Drup
 
 
 function fds_base_theme_footer_image_validate($element, FormStateInterface $form_state)  {
-    global $base_url;
-
-    $validators = array('file_validate_is_image' => array());
-    $file = file_save_upload('footer_image_upload', $validators, "public://", NULL, FileSystemInterface::EXISTS_REPLACE);
-    if (is_array($file)) {
-        $file = array_pop($file);
-        $file->status = FILE_STATUS_PERMANENT;
-        $file->save();
-
-        $uri = $file->getFileUri();
-        $form_state->setValue('footer_image_path', $uri);
-    }
+  $validators = [
+    'FileExtension' => ['extensions' => 'png gif jpg jpeg webp'],
+    'FileIsImage' => [],
+  ];
+  $file = file_save_upload('footer_image_upload', $validators, 'public://', 0, FileSystemInterface::EXISTS_REPLACE);
+  if ($file) {
+    $file->setPermanent();
+    $file->save();
+    $form_state->setValue('footer_image_path', $file->getFileUri());
+  }
 }
 
 function fds_fredericia_main_theme_custom_theme_settings_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {

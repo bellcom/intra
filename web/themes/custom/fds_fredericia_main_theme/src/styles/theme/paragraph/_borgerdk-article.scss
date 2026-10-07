@@ -21,9 +21,123 @@
 // --------------------------------------------------
 
 .paragraph--type--os2web-borgerdk-article {
+  margin: 80px 0;
 
   .field--name-byline {
     margin-bottom: $grid-gutter-width / 2;
+  }
+  .field--type-os2web-borgerdk-article-reference {
+    .field__item {
+      .accordion {
+        .has-selfservice-links {
+
+          .selfservice-links {
+            display: none;
+          }
+          .accordion-button {
+            .field--name-title {
+              max-width: 75%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .bdk-selfservice {
+    margin: 25px 0;
+
+    .show-more-button-selfservice {
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: transparent;
+      font-weight: 700;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .field--name-pre-text {
+    .field__item {
+      h1 {
+        margin: 0 0 2.8rem 0;
+        color: #00335b;
+      }
+
+      h2, h3, h4, h5, h6, p {
+        color: #00335b;
+      }
+    }
+  }
+  article {
+    .field--name-header {
+      .field__item {
+        p {
+          color: #00335b;
+        }
+      }
+    }
+  }
+  .field--name-byline {
+    .field__item {
+      p {
+        color: #00335b;
+      }
+    }
+  }
+  .field--name-post-text {
+    .field__item {
+      h1, h2, h3, h4, h5, h6, p {
+        color: #00335b;
+      }
+    }
+  }
+}
+
+
+.selvbetjening-borgerdk-link {
+  background-color: transparent;
+  color: white;
+  display: block;
+  text-decoration: none;
+  padding: 10px 20px;
+  position: relative;
+  border-bottom: 1px solid white;
+
+  &:hover i {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  &:hover .spotbox__content .field--name-title h3 {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+  .spotbox__content {
+    .field--name-title {
+      h3 {
+        margin: 0;
+        color: white;
+        font-weight: normal;
+      }
+    }
+  }
+  i {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: .3s ease;
+    font-size: 18px;
   }
 }
 

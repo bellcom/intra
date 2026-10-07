@@ -6,10 +6,27 @@
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
+{% set banner_height_type = content.field_banner_type_height[0]['#markup'] == '500px' ? '500px' : '350px' %}
+{% set align_value = paragraph.field_os2web_align_content.value %}
+
+
+{# Prioritize the direct background image, fallback to Media field if unset #}
+{% set final_background_image = background_image %}
+{% if final_background_image is empty and paragraph.field_os2web_banner_media.entity %}
+  {% set media_item = paragraph.field_os2web_banner_media.entity %}
+  {% if media_item.field_media_image is not empty %}
+    {% set final_background_image = file_url(media_item.field_media_image.entity.fileuri) %}
+  {% endif %}
+{% endif %}
+
 {% block paragraph %}
-  <div class="banner__image-outer" {% if background_image %} style="background-image: url({{ background_image }})" {% endif %}>
+  <div class="banner__image-outer {% if paragraph.field_hide_image_mobile.value == true %} mobile-hide {% endif %}" {% if final_background_image %} style="background-image: url({{ final_background_image }}); min-height: {{ banner_height_type }};" {% endif %}>
     <div {{ attributes.addClass(classes) }}>
-      <div class="container">
+      <div class="container" {% if align_value == 'left' %}
+        style="justify-content: flex-start;"
+      {% elseif align_value == 'right' %}
+        style="justify-content: flex-end;"
+        {% endif %}>
         {% block content %}
           {% if paragraph.field_os2web_banner_heading.value or paragraph.field_os2web_banner_subheading.value or paragraph.field_os2web_banner_body.value %}
 
@@ -32,10 +49,33 @@
                   {{ content.field_os2web_banner_links }}
                 </div>
                   {% endif %}
-            {% endif %}
           </div>
+          {% endif %}
         {% endblock %}
       </div>
     </div>
   </div>
+  {% if paragraph.field_os2web_banner_heading.value or paragraph.field_os2web_banner_subheading.value or paragraph.field_os2web_banner_body.value %}
+
+    <div class="banner-box-mobile">
+      {% if paragraph.field_os2web_banner_heading.value %}
+        <div class="banner-headings-wrapper">
+          <div class="banner-heading">{{ content.field_os2web_banner_heading }}</div>
+          {% if paragraph.field_os2web_banner_subheading.value %}
+            <span class="banner-subheading">{{ content.field_os2web_banner_subheading }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if paragraph.field_os2web_banner_body.value %}
+        <div class="banner-body">
+          {{ content.field_os2web_banner_body }}
+        </div>
+      {% endif %}
+      {% if paragraph.field_os2web_banner_links.value %}
+        <div class="banner-actions">
+          {{ content.field_os2web_banner_links }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
 {% endblock paragraph %}

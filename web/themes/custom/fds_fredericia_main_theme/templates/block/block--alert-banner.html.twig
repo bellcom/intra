@@ -1,0 +1,92 @@
+<div class="status-bar-wrapper" style="
+{% set background_color = '' %}
+    {% if content.field_status_banner_color[0]['#markup'] == 'Rød' %}
+      {% set background_color = '#A51D38' %}
+      {% set text_color = "#ffffff" %}
+    {% elseif content.field_status_banner_color[0]['#markup'] == 'Gul' %}
+      {% set background_color = '#f2ef96' %}
+      {% set text_color = "#000000" %}
+    {% elseif content.field_status_banner_color[0]['#markup'] == 'Grøn' %}
+      {% set background_color = '#3e8346' %}
+      {% set text_color = "#ffffff" %}
+    {% endif %}
+  background-color: {{ background_color }};
+  color: {{ text_color }};
+  ">
+  <div class="container {% if content.field_status_banner_color[0]['#markup'] == 'Grøn' %} green-text {% elseif content.field_status_banner_color[0]['#markup'] == 'Rød' %} red-text {% elseif content.field_status_banner_color[0]['#markup'] == 'Gul' %} yellow-text {% endif %}">
+    {{ content.body }}
+    <div class="close-status-bar">
+      <button class="close-button" aria-label="Luk Banner">
+        {% if content.field_status_banner_color[0]['#markup'] == 'Gul' %}
+          {% include '@fds_fredericia_main_theme/src/images/svg-icons/close.svg' with { close_icon_color: '#000000'  } %}
+        {% else %}
+          {% include '@fds_fredericia_main_theme/src/images/svg-icons/close.svg' with { close_icon_color: '#ffffff'  } %}
+        {% endif %}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="reopen-btn-wrapper">
+  <button class="reopen-button"><i class="fa-solid fa-circle-info"></i>
+  </button>
+</div>
+
+<script>
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var closeButton = document.querySelector('.close-button');
+    var reopenButton = document.querySelector('.reopen-button');
+
+    var banner = document.querySelector('.status-bar-wrapper');
+    var isBannerClosed = getCookie('banner_closed');
+
+    if (isBannerClosed) {
+      banner.classList.add('initial-closed'); // Add class to disable transition on initial load when closed
+      banner.style.maxHeight = '0px';
+      reopenButton.style.opacity = '1';
+      reopenButton.style.visibility = 'visible';
+      reopenButton.classList.add('visible');
+    } else {
+      banner.style.maxHeight = '';
+      banner.style.marginBottom = '0';
+      banner.classList.remove('initial-closed');
+
+      reopenButton.style.opacity = '0';
+      reopenButton.style.visibility = 'hidden';
+      reopenButton.classList.remove('visible');
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', function () {
+        banner.style.maxHeight = "0px";
+        document.cookie = 'banner_closed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+        reopenButton.style.visibility = 'visible';
+        reopenButton.style.opacity = '1';
+        reopenButton.classList.add('visible');
+      });
+    }
+
+    if (reopenButton) {
+      reopenButton.addEventListener('click', function () {
+        document.cookie = 'banner_closed=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        banner.style.maxHeight = '';
+        banner.classList.add('reopening'); // Add class to enable transition on reopening
+        reopenButton.style.opacity = '0';
+        reopenButton.style.visibility = 'hidden';
+        reopenButton.classList.remove('visible');
+
+        // Remove the reopening class after the animation duration
+
+      });
+    }
+
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+  });
+
+
+</script>

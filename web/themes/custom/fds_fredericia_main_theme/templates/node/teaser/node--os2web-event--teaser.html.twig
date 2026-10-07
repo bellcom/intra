@@ -8,7 +8,7 @@
   view_mode ? view_mode|clean_class,
 ]
 %}
-<a href="{{ node.field_os2web_event_url.value }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}" title="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}">
+<a href="{{ path('entity.node.canonical', {'node': node.id}) }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}" title="{{ 'Læs mere om' | trans }} {{ node.field_o2web_event_resume.value | raw }}">
   <div class="entity-{{ view_mode|clean_class }}__image">
     {{ content.field_os2web_evnet_image }}
   </div>

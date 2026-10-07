@@ -16,10 +16,11 @@
  */
 #}
 {% set entity = elements['#os2web_borgerdk_selfservice'] %}
+  <a target="_blank" href="{{ entity.selfserviceUrl.value }}" title="{{ entity.label.value }}" class="spotbox spotbox--button selvbetjening-borgerdk-link" {{ attributes }}>
+    <div class="spotbox__content">
+      {{ content.title }}
+      {{ content.description }}
+    </div>
+    <i class="fa-solid fa-arrow-right-long"></i>
+  </a>
 
-<a target="_blank" href="{{ entity.selfserviceUrl.value }}" title="{{ entity.label.value }}" class="spotbox spotbox--button" {{ attributes }}>
-  <div class="spotbox__content">
-    {{ content.title }}
-    {{ content.description }}
-  </div>
-</a>

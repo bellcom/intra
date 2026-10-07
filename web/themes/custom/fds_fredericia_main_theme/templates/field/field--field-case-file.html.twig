@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a file field.
+ */
+#}
+{% for item in items %}
+  <div{{ attributes.addClass('field__item') }}>
+    {% if item.content['#file'] is defined %}
+      {% set file = item.content['#file'] %}
+      {% set mime_type = file.getMimeType()|split('/')|last %}
+      
+      <span class="file file--mime-{{ mime_type }} file--{{ mime_type }}">
+        <span class="file file--mime-application-{{ mime_type }} file--application-{{ mime_type }}">
+          {% if file.getEntity() and file.getEntity().hasField('field_document_title') and not file.getEntity().field_document_title.isEmpty() %}
+            {{ item.content|without('title')|merge({'#title': file.getEntity().field_document_title.value}) }}
+          {% else %}
+            {{ item.content }}
+          {% endif %}
+        </span>
+      </span>
+    {% else %}
+      {{ item.content }}
+    {% endif %}
+  </div>
+{% endfor %} 

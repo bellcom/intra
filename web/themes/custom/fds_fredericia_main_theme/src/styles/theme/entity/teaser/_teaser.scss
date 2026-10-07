@@ -60,7 +60,7 @@ a.entity-teaser {
     h2 {
       margin-top: 22px;
       margin-bottom: 11px;
-      font-size: 28px;
+      font-size: 1.75rem;
       color: $background_color__default;
       cursor: pointer;
       * {
@@ -72,13 +72,13 @@ a.entity-teaser {
     }
   }
   .field--type-datetime {
-    font-size: 16px;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.42857;
   }
   .field--type-body {
     margin-top: 0;
-    font-size: 16px;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.42857;
   }
@@ -97,6 +97,77 @@ a.entity-teaser {
     }
   }
 }
+
+.page-teaser, .news-teaser {
+  display: block;
+  box-shadow: 0 2px 20px rgba(0,0,0,.16078);
+  text-decoration: none;
+  color: black;
+  min-height: 200px;
+  transition: 0.3s;
+  position: relative;
+
+  &:visited {
+    color: black;
+    text-decoration: none;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 3px 20px rgba(0,0,0,.21569);
+  }
+
+  &:hover .fa-solid {
+    transform: translateY(-50%) translateX(5px);
+  }
+
+  .fa-solid {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    background-color: #00335b;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    transition: 0.3s;
+  }
+
+
+  .page-teaser-body, .news-teaser-body {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .field--name-field-os2web-page-heading, .field--name-field-os2web-news-heading {
+      h2, h3 {
+        margin: 0;
+      }
+    }
+    .page-teaser-text, .news-teaser-text {
+      max-width: 90%;
+    }
+    .my-breadcrumbs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .breadcrumb-item {
+        color: #494641;
+        background-color: #ebebeb;
+        font-weight: 600;
+        padding: 5px 8px;
+      }
+    }
+  }
+}
+
+
 
 // --------------------------------------------------
 // Variants

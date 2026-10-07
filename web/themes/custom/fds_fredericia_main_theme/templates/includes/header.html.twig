@@ -1,4 +1,4 @@
-{% if theme_settings.external_links.link1_url and theme_settings.external_links.link1_label is not empty %}
+{#{% if theme_settings.external_links.link1_url and theme_settings.external_links.link1_label is not empty %}
 <div class="custom-external-links-banner">
   <div class="container custom-external-links-inner">
   <select class="custom-external-links-select">
@@ -38,7 +38,7 @@
   <button class="custom-external-links-button">Gå til hjemmesiden</button>
   </div>
 </div>
-{% endif %}
+{% endif %}#}
 <header class="d-print-none">
   <div class="custom-header">
     <div class="custom-header-row custom-header-row--meta">
@@ -46,13 +46,9 @@
         <div class="flexy-row">
           {{ page.header__logo }}
 
-          <div class="d-none d-lg-block">
+          <div class="d-none d-lg-block desktop-top-navigation">
             {{ page.header__top_navigation }}
           </div>
-           {# <div class="flexy-row font-resize-row">
-            <button class="visible-sm js-decrease-font-size">A-</button>
-            <button class="visible-sm js-increase-font-size">A+</button>
-          </div> #}
           <div class="top-search-wrapper">
             <div class="top-search-inner-wrapper">
               {{ page.small_search }}
@@ -68,14 +64,24 @@
             <button class="megamenu-close"><span class="close-text">Luk</span><i class="fa-solid fa-xmark"></i></button>
             <div class="megamenu-inner-wrapper">
               {{ page.header__megamenu_navigation }}
+              <div class="top-navigation-megamenu-mobile">
+                {{ page.header__top_navigation }}
+              </div>
+              <div class="megamenu-selvbetjening">
+                {{ page.header__selfservice }}
+              </div>
             </div>
           </div>
 
           <div class="search-megamenu-btns-wrapper">
+            <div class="font-size-changer">
+              <button class="visible-sm js-decrease-font-size">A-</button>
+              <button class="visible-sm js-increase-font-size">A+</button>
+            </div>
             <div class="search-btn-wrapper">
               <button id="nav-search" class="search-btn">
                 <span>Søg</span>
-                <i class="fa-solid fa-magnifying-glass" style="color: #e82f4c;"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
 
@@ -89,16 +95,19 @@
                 </div>
               </button>
             </div>
-            <button class="custom-external-links-toggle"><span>Øvrige hjemmesider</span><i class="fa-solid fa-globe"></i></button>
+{#            <button class="custom-external-links-toggle"><span>Øvrige hjemmesider</span><i class="fa-solid fa-globe"></i></button>#}
           </div>
         </div>
       </div>
     </div>
-    {% if node.field_status_banner_reference.entity and node.field_status_banner_reference.entity.field_status_banner_color.value is not empty %}
+    {% if node.field_status_banner_reference.entity and node.field_status_banner_reference.entity.field_status_banner_color.value is not empty and node.field_status_banner_reference.entity.isPublished() %}
+      <div class="container status-banner-open-btn-wrapper">
+        <button class="status-banner-open-btn" data-banner-id="{{ node.id }}"><span>Vis information</span><i class="fa-solid fa-circle-info"></i></button>
+      </div>
 
-      <div data-node-id="{{ node.id }}" class="status-banner" style="{% if node.field_status_banner_reference.entity.field_status_banner_color.value == 'alert' %} background-color: #e82f4c;
+      <div data-node-id="{{ node.id }}" data-banner-id="{{ node.id }}" class="status-banner" style="{% if node.field_status_banner_reference.entity.field_status_banner_color.value == 'alert' %} background-color: #A51D38;
         {% elseif node.field_status_banner_reference.entity.field_status_banner_color.value == 'warning' %} background-color: #f2ef96;
-        {% elseif node.field_status_banner_reference.entity.field_status_banner_color.value == 'alright' %}background-color: #007200; {% endif  %}">
+        {% elseif node.field_status_banner_reference.entity.field_status_banner_color.value == 'alright' %}background-color: #3e8346; {% endif  %}">
         <div class="container">
           <div class="status-banner-heading" style="{% if node.field_status_banner_reference.entity.field_status_banner_color.value in ['alert', 'alright'] %} color: white; {% else %} color:black; {% endif %}">
             {{ node.field_status_banner_reference.entity.field_status_heading.value }}
@@ -112,22 +121,38 @@
     {% endif %}
     {{ page.alert_banner }}
     {{ page.banner_search }}
-    {% if page.header__main_navigation is not empty %}
+    {#{% if page.header__main_navigation is not empty %}
     <div class="custom-header-row custom-header-row--desktop-navigation d-none d-lg-flex">
       <div class="container">
         <div class="flexy-row">
-          {{ page.header__main_navigation }}
+          {{ page.header__below }}
           <div class="flexy-spacer"></div>
         </div>
       </div>
     </div>
-    {% endif %}
+    {% endif %}#}
+    <div class="custom-header custom-header--static">
+      <div class="custom-header__inner">
+        <div class="container">
+          <!-- Begin - below -->
+          {{ page.header__below }}
+          <!-- End - below -->
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
 
 
 {{ page.featured_top }}
+
+{#<div class="default-banner-wrapper">#}
+{#  <div class="default-banner">#}
+{#    <img src="{{ base_path ~ directory }}/src/images/fredericia-banner.png" />#}
+{#  </div>#}
+
+{#</div>#}
 
 {% if not is_front %}
   <div class="section section--breadcrumb-bar d-print-none layout--hidden-on-sections">

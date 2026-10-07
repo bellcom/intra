@@ -14,8 +14,26 @@ javascripts:
     'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js': { type: external }
     js/tns.js: {}
     js/slideshow.js: {}
+    js/accordion.js: {}
     dist/javascripts/app.js: {}
     'https://cdhsign.dk/cdh_player.js': { type: external }
+
+navigate_back:
+  version: 1.2
+  js:
+    js/navigate-back.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+swiper:
+  version: 1.x
+  css:
+    theme:
+      'https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css': { type: external, minified: true }
+  js:
+    'https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js': { type: external, minified: true }
   dependencies:
     - core/drupal
     - core/jquery

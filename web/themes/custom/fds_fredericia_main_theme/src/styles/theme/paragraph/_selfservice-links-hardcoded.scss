@@ -48,6 +48,72 @@
   }
 }
 
+.selvbetjening-labels {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 80px 0;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  .selvbetjening-links {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      transition: .3s;
+      padding: 10px 20px;
+      border-bottom: 1px solid white;
+      justify-content: space-between;
+
+      &:hover {
+        text-decoration: underline;
+
+        span {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      &.hidden-link {
+        display: none;
+      }
+
+      span {
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: .4s;
+        margin-left: 20px;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .show-more-btn-selfservice-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 10px 20px;
+    .show-more-btn-selfservice {
+      background-color: transparent;
+      border: 0;
+      width: fit-content;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------

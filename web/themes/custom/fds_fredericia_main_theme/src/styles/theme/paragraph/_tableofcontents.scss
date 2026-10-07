@@ -1,19 +1,20 @@
-.toc-outer-wrapper {
+.entity-default--tableofcontents {
   display: flex;
-  font-family: "Poppins", sans-serif;
-  margin-top: 50px;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 80px;
+  margin-top: 40px;
 
   @media only screen and (max-width: 1200px) {
     flex-direction: column;
     max-width: 1000px;
     padding: 0 30px;
-    margin: 0 auto;
+    margin-top: 40px;
   }
 
   @media only screen and (max-width: 992px)  {
     max-width: 700px;
-    margin: 0 auto;
     padding: 0;
+    margin-top: 40px;
   }
 
   @media only screen and (max-width: 768px) {
@@ -23,15 +24,17 @@
 
   .toc-inner-wrapper {
     width: 20%;
-    padding: 0 25px;
+    padding: 25px;
     position: sticky;
     top: 20px;
     height: fit-content;
     overflow-y: auto;
+    margin-right: 25px;
+    background-color: #00335b;
 
     @media only screen and (max-width: 1200px) {
       width: 100%;
-      padding: 0;
+      padding: 0 25px;
       position: static;
       top: 0;
       overflow: auto;
@@ -40,15 +43,16 @@
     .toc-heading {
       text-transform: uppercase;
       font-size: 18px;
-      color: #183D60;
+      color:  white;
       font-weight: 600;
+      margin: 0;
     }
 
     ul {
       li {
         padding-left: 0;
         a {
-          color: #183D60;
+          color:  white;
           font-size: 16px;
           font-weight: 400;
           text-decoration: none;
@@ -56,6 +60,10 @@
           &.active {
             font-weight: 700;
 
+          }
+
+          &:hover {
+            text-decoration: underline;
           }
         }
         &:before {
@@ -75,13 +83,19 @@
       width: 100%;
     }
     .anchor {
+
+      margin-bottom: 40px;
       .content-heading {
         font-weight: 600;
         font-size: 3rem;
-        color: #183D60;
+        color:  #00335B;
+        margin: 0 0 10px 0;
       }
-      p, h3, h4, h5, h6 {
-        color: #2c3e50;
+      p, h3, h4, h5, h6, ul, li {
+        color:  #00335B;
+      }
+      h2, h3, h4, h5, h6 {
+        margin: 0 0 10px 0;
       }
     }
   }

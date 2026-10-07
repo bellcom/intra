@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Theme override teaser display of os2web_person_information node type.
+ *
+ * @see Original template core/themes/classy/templates/content/node.html.twig
+ */
+#}
+{%
+  set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes)|without('role') }}>
+
+   <div class="pi-image">
+     {{ content.field_os2web_pi_image }}
+   </div>
+
+  {{ title_prefix }}
+  <span class="pi-name">{{ label }}</span>
+  {{ title_suffix }}
+
+   <div class="pi-role">
+     {{ content.field_os2web_pi_role }}
+   </div>
+
+  <div class="pi-party">
+    {{ content.field_os2web_pi_party }}
+  </div>
+
+  <div class="pi-description">
+    {{ content.body }}
+  </div>
+
+
+
+</article>

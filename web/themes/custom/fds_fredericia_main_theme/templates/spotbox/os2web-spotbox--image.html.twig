@@ -1,32 +1,17 @@
-{#
-/**
- * @file os2web_spotbox.html.twig
- * Default theme implementation to present OS2Web Spotbox data.
- *
- * This template is used when viewing OS2Web Spotbox pages.
- *
- *
- * Available variables:
- * - content: A list of content items. Use 'content' to print all content, or
- * - attributes: HTML attributes for the container element.
- * - spotbox_type: spotbox type value.
- * - background_color: background color type primary, secondary etc.
- * - spotbox_url: link field URL value.
- * - spotbox_heading: link field title value
- *
- * @see template_preprocess_os2web_spotbox()
- *
- * @ingroup themeable
- */
-#}
 {% set classes = [
   'spotbox',
   'spotbox--' ~ spotbox_type,
   background_color ? ('spotbox--background-color-' ~ background_color),
 ] %}
+
+
 <a href="{{ spotbox_url }}" {{ attributes.addClass(classes) }}>
   <div class="spotbox__image">
+    {% if content.field_os2web_spotbox_bg_image is not empty %}
     {{ content.field_os2web_spotbox_bg_image }}
+    {% else %}
+    <img src="{{ file_url(content.field_os2web_spotbox_media_img.entity.field_media_image.entity.uri.value) }}" alt="{{ content.field_os2web_spotbox_media_img.entity.field_media_image.alt }}">
+    {% endif %}
   </div>
   <div class="spotbox__content">
     <div class="spotbox__arrow">
@@ -38,6 +23,5 @@
     <div class="spotbox__link_text">
       {{ content.field_os2web_spotbox_link_text }}
     </div>
-
   </div>
 </a>

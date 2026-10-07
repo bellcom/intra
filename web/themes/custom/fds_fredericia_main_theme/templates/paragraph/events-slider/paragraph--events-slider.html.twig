@@ -1,0 +1,162 @@
+{% if content %}
+  <div class="events-slider">
+    <div class="eventkalender-link">
+      <a href="https://www.visitfredericia.dk/events" target="_blank">Se alle begivenheder<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+    {% if paragraph.field_show_recent_events.value %}
+      {% if latest_events %}
+        <div class="swiper-events">
+          <div class="swiper-wrapper">
+            {% for node in latest_events %}
+              <div class="swiper-slide event-item">
+                <div class="event-item swiper-slide">
+                  {# Display fields from the event content type #}
+                  <a class="event-image-link" href="{{ node.field_os2web_event_url.value }}" target="_blank">
+                    <div class="event-image">
+                      <img src="{{ file_url(node.field_os2web_evnet_image.entity.fileuri) }}" alt="{{ node.field_os2web_evnet_image.alt }}" />
+                    </div>
+                  </a>
+                  <div class="event-date">
+                    {% if node.field_os2web_event_start_date %}
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                      {{ node.field_os2web_event_start_date.value|date("d/m/Y H:i") }}
+                    {% endif %}
+                  </div>
+                  <a class="event-heading-link" href="{{ node.field_os2web_event_url.value }}" target="_blank">
+                    <h2>{{ node.label }}</h2>
+                  </a>
+                  <div class="event-resume">
+                    {% if node.field_os2web_event_resume is defined and node.field_os2web_event_resume.value is not empty %}
+                      {% set resume_text = node.field_os2web_event_resume.value|striptags %}
+                      {% if resume_text|length > 100 %}
+                        {{ resume_text|slice(0, 100) ~ '...' }}
+                      {% else %}
+                        {{ resume_text }}
+                      {% endif %}
+                    {% else %}
+                      Resume kommer...
+                    {% endif %}
+                  </div>
+                  <div class="event-link">
+                    <a href="{{ node.field_os2web_event_url.value }}" target="_blank">Læs mere<svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <g fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                          <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                          <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                        </g>
+                      </svg></a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="handpicked-events swiper-events">
+        <div class="swiper-wrapper">
+        {% for item in paragraph.field_event_ref %}
+          <div class="event-item swiper-slide">
+            {# Display fields from the event content type #}
+            <a class="event-image-link" href="{{ item.entity.field_os2web_event_url.value }}" target="_blank">
+              <div class="event-image">
+                <img src="{{ file_url(item.entity.field_os2web_evnet_image.entity.fileuri) }}" alt="{{ item.entity.field_os2web_evnet_image.alt }}" />
+              </div>
+            </a>
+            <div class="event-date">
+              {% if item.entity.field_os2web_event_start_date %}
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                {{ item.entity.field_os2web_event_start_date.value|date("d/m/Y H:i") }}
+              {% endif %}
+            </div>
+            <a class="event-heading-link" href="{{ item.entity.field_os2web_event_url.value }}" target="_blank">
+              <h2>{{ item.entity.label }}</h2>
+            </a>
+            <div class="event-resume">
+              {% if item.entity.field_os2web_event_resume is defined and item.entity.field_os2web_event_resume.value is not empty %}
+                {% set resume_text = item.entity.field_os2web_event_resume.value|striptags %}
+                {% if resume_text|length > 100 %}
+                  {{ resume_text|slice(0, 100) ~ '...' }}
+                {% else %}
+                  {{ resume_text }}
+                {% endif %}
+              {% else %}
+                Resume kommer...
+              {% endif %}
+            </div>
+            <div class="event-link">
+              <a class="event-readmore" href="{{ item.entity.field_os2web_event_url.value }}" target="_blank">Læs mere<svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <g fill="none" stroke="#00335b" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                    <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                    <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                  </g>
+                </svg></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+  </div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper = new Swiper('.swiper-events', {
+      // Optional parameters
+      slidesPerView: 1,
+      spaceBetween: 10,
+      observer: true,
+      observeParents: true,
+      // Responsive breakpoints
+      breakpoints: {
+        992: {
+          slidesPerView: 4,
+          spaceBetween: 15
+        }
+      },
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+
+
+  // Find all news heading links and read more links
+  const headingEventLinks = document.querySelectorAll('.event-heading-link');
+  const readMoreEventLinks = document.querySelectorAll('.event-readmore');
+
+  const handleHover = (event, entering) => {
+    // Find the closest news-card parent
+    const eventCard = event.target.closest('.event-item');
+    if (!eventCard) return;
+
+    // Find the image inside this news-card
+    const img = eventCard.querySelector('.event-image img');
+    if (!img) return;
+
+    // Add or remove the hover class based on entering or leaving
+    if (entering) {
+      img.classList.add('hover-effect');
+    } else {
+      img.classList.remove('hover-effect');
+    }
+  };
+
+  // Add event listeners for both mouseenter and mouseleave
+  headingEventLinks.forEach(link => {
+    link.addEventListener('mouseenter', (event) => handleHover(event, true));
+    link.addEventListener('mouseleave', (event) => handleHover(event, false));
+  });
+
+  readMoreEventLinks.forEach(link => {
+    link.addEventListener('mouseenter', (event) => handleHover(event, true));
+    link.addEventListener('mouseleave', (event) => handleHover(event, false));
+  });
+</script>

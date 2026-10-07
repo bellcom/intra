@@ -24,7 +24,7 @@ html {
   line-height: $base-line-height;
 }
 * {
-  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 html body {
   line-height: $base-line-height;
@@ -38,7 +38,7 @@ h5, .h5,
 h6, .h6 {
   margin-top: 30px;
 
-  font-family: "Poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   color: $color-text;
   line-height: 1.1;
@@ -97,6 +97,15 @@ p, .body-text {
       margin-left: -($shift-side);
       margin-right: -($shift-side);
     }
+  }
+}
+
+.field--name-field-os2web-page-description {
+
+  margin-bottom: 80px;
+
+  * {
+    color: #00335B !important;
   }
 }
 

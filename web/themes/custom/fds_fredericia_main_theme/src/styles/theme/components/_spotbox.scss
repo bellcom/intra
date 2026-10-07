@@ -20,19 +20,21 @@
 // Styling
 // --------------------------------------------------
 
-.entity-default--os2web-spotbox-reference {
-  margin: 20px 0;
+
+.entity-default--os2web-spotbox-reference, .entity-default--os2web-spotbox {
+  margin: 0 0 80px 0;
   .field--name-field-os2web-spotbox-reference-h {
     h2 {
       text-transform: uppercase;
-      color: #00335b;
+      color: $background_color__default;
       font-weight: 700;
     }
   }
 
-  .field--name-field-os2web-spotbox-reference {
+  .field--name-field-os2web-spotbox-reference, .field--name-field-os2web-spotbox {
     display: flex;
-    gap: 20px;
+    gap: 2.8rem;
+    flex-wrap: wrap;
 
     @media only screen and (max-width: 992px) {
       flex-direction: column;
@@ -48,10 +50,124 @@
       }
     }
 
+    .spotbox--image {
+      display: flex;
+      line-height: 0;
+      text-decoration: none;
+      height: 100%;
+
+      &.spotbox--background-color-transparent {
+        background-color: transparent;
+
+        .spotbox__heading {
+          h3 {
+            color: black;
+          }
+        }
+        .spotbox__link_text {
+          .field--name-field-os2web-spotbox-link-text {
+            color: black;
+
+          }
+        }
+        .spotbox__arrow svg {
+          fill: black;
+        }
+      }
+      &.spotbox--background-color-primary {
+        background-color: $background_color__primary !important;
+        color: white;
+      }
+      &.spotbox--background-color-secondary {
+        background-color: $background_color__secondary !important;
+        color: white;
+      }
+      &.spotbox--background-color-tertiary {
+        background-color: #196620 !important;
+        color: white;
+      }
+
+      &:hover .spotbox__arrow {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      @media only screen and (max-width: 540px) {
+        flex-direction: column;
+      }
+      .spotbox__image {
+        width: 30%;
+        height: 100%;
+
+        @media only screen and (max-width: 540px) {
+          width: 100%;
+        }
+
+        .field--name-field-os2web-spotbox-bg-image {
+          height: 100%;
+          display: flex;
+          img {
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .spotbox__content {
+      line-height: 1;
+      width: 70%;
+      padding: 5px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+
+      @media only screen and (max-width: 540px) {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .spotbox__arrow {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: .3s ease;
+
+
+        svg {
+          fill: white;
+        }
+      }
+
+      .spotbox__heading {
+        h3 {
+          text-transform: uppercase;
+          color: white;
+          font-weight: 700;
+          margin: 0;
+        }
+      }
+      .spotbox__link_text {
+        .field--name-field-os2web-spotbox-link-text {
+          color: white;
+          height: auto;
+          min-height: auto;
+          box-shadow: none;
+
+          p {
+            color: white;
+          }
+
+        }
+      }
+    }
+
 
     .field__item {
       min-height: 150px;
-      width: 100%;
+      flex: 45%;
       .spotbox--image {
         display: flex;
         line-height: 0;
@@ -85,7 +201,7 @@
           color: white;
         }
         &.spotbox--background-color-tertiary {
-          background-color: $background_color__tertiary !important;
+          background-color: #196620 !important;
           color: white;
         }
 
@@ -175,7 +291,7 @@
 
   .field--name-field-os2web-spotbox-link-text {
     box-shadow: none !important;
-    font-size: 20px;
+    font-size: 1.5rem;
     padding: 20px 0;
 
   }
@@ -189,11 +305,11 @@
       font-weight: 600;
       display: flex;
       align-items: center;
-      font-size: 20px;
+      font-size: 1.6rem;
 
       i {
         margin-left: 15px;
-        color: #e82f4c;
+        color: $background_color__primary;
         font-size: 24px;
       }
     }

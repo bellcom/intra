@@ -1,0 +1,89 @@
+{##}
+{#/**#}
+{# * @file#}
+{# * Default theme implementation to display up to two levels of menu links: top-level and their immediate children.#}
+{# */#}
+{##}
+{#{% import _self as menu %}#}
+
+{#{{ menu.menu_links(items, attributes, 0) }}#}
+
+{#{% macro menu_links(items, attributes, menu_level) %}#}
+{#  <ul{{ attributes.addClass(['menu', 'menu-level-' ~ menu_level]) }}>#}
+{#    {% for key, item in items %}#}
+{#      {% if key|first != '#' %}#}
+{#        {% set menu_item_classes = [#}
+{#          'menu-item',#}
+{#          item.is_expanded ? 'menu-item--expanded' : '',#}
+{#          item.is_collapsed ? 'menu-item--collapsed' : '',#}
+{#          item.in_active_trail ? 'menu-item--active-trail' : '',#}
+{#        ] %}#}
+
+{#        <li{{ item.attributes.addClass(menu_item_classes) }}>#}
+{#          {{ link(item.title, item.url) }}#}
+{#          #}{# Adjust the logic to conditionally render the content for top-level items only #}
+{#          {% if menu_level == 0 %}#}
+{#            {% if item.below %}#}
+{#              #}{# Directly render the second level without further recursion #}
+{#              <ul{{ attributes.addClass(['menu', 'menu-level-1']) }}>#}
+{#                {% for child_key, child_item in item.below %}#}
+{#                  {% if child_key|first != '#' %}#}
+{#                    <li{{ child_item.attributes.addClass(menu_item_classes) }}>#}
+{#                      {{ link(child_item.title, child_item.url) }}#}
+{#                    </li>#}
+{#                  {% endif %}#}
+{#                {% endfor %}#}
+{#              </ul>#}
+{#            {% endif %}#}
+{#          {% endif %}#}
+{#        </li>#}
+{#      {% endif %}#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{#{% endmacro %}#}
+
+{#
+/**
+ * @file
+ * Default theme implementation to display up to two levels of menu links: top-level and their immediate children.
+ */
+#}
+{% import _self as menu %}
+
+{{ menu.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {# Dynamically set classes based on menu level #}
+  {% set levelClass = 'menu-level-' ~ menu_level %}
+  <ul{{ attributes.addClass(['menu', levelClass]) }}>
+    {% for key, item in items %}
+      {% if key|first != '#' %}
+        {% set menu_item_classes = [
+          'menu-item',
+          item.is_expanded ? 'menu-item--expanded' : '',
+          item.is_collapsed ? 'menu-item--collapsed' : '',
+          item.in_active_trail ? 'menu-item--active-trail' : '',
+        ] %}
+
+        <li{{ item.attributes.addClass(menu_item_classes) }}>
+          {{ link(item.title, item.url) }}
+          {# Adjust the logic to conditionally render the content for top-level items only #}
+          {% if menu_level == 0 and item.below %}
+            {# For second level, we manually adjust classes instead of trying to clone attributes #}
+            <ul class="menu menu-level-1">
+              {% for child_key, child_item in item.below %}
+                {% if child_key|first != '#' %}
+                  <li{{ child_item.attributes.addClass(menu_item_classes) }}>
+                    {{ link(child_item.title, child_item.url) }}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+

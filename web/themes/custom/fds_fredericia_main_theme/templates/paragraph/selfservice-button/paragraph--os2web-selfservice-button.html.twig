@@ -1,0 +1,13 @@
+{# Check if the field has any referenced content #}
+{% if paragraph.field_selvbetjening_reference|length > 0 %}
+  <div class="your-paragraph-wrapper">
+    {% for item in paragraph.field_selvbetjening_reference %}
+      {# Access the title and description fields of the referenced entity #}
+      <div class="your-referenced-content">
+        <h2>{{ item.entity.label }}</h2> {# Display the title field #}
+        <p>{{ item.entity.body.summary }}</p> {# Display the description field #}
+        {# You can customize the markup and styling as needed #}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

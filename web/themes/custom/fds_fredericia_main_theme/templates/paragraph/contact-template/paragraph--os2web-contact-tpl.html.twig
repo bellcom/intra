@@ -1,6 +1,13 @@
 {# #}
 
-<div class="contact-template-wrapper">
+{% set bgColorClass = '' %}
+{% if paragraph.field_cnt_bg.value == 'lightblue' %}
+  {% set bgColorClass = 'bg-lightblue' %}
+{% elseif paragraph.field_cnt_bg.value == 'white' %}
+  {% set bgColorClass = 'bg-white' %}
+{% endif %}
+
+<div class="contact-template-wrapper {{ bgColorClass }}">
 
     <div class="container">
 
@@ -70,7 +77,7 @@
             </div>
             <div class="phone-info">
               <h3 class="info-heading">Ring til os</h3>
-              <a href="tel:{{ paragraph.field_contact_tlf.value }}">{{ content.field_contact_tlf }}</a>
+              <a href="tel:{{ content.field_contact_tlf.value }}">{{ content.field_contact_tlf }}</a>
             </div>
           </div>
 
@@ -101,7 +108,7 @@
 
           {% endif %}
 
-          {% if paragraph.field_vigtig_info is not empty %}
+          {% if paragraph.field_vigtig_info is not empty or paragraph.field_info_heading is not empty %}
 
           <div class="contact-template-warning {% if paragraph.field_cnt_monday.value is empty
             and paragraph.field_cnt_tuesday.value is empty
@@ -120,7 +127,7 @@
             </div>
 
             <div class="warning-info">
-              <h3 class="info-heading">Vigtig info</h3>
+              <h3 class="info-heading">{{ content.field_info_heading }}</h3>
               {{ content.field_vigtig_info }}
             </div>
           </div>

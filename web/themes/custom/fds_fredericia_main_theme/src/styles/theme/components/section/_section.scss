@@ -39,7 +39,7 @@
 .section--latest {
   padding-top: 5px;
   padding-bottom: 20px;
-  background-color: $background_color__footer_secondary;
+  background-color: $background_color__default;
 
   &, p {
     color: #fff;
@@ -104,9 +104,9 @@
 
 .section--breadcrumb-bar {
   padding: 0;
+  margin-top: 35px;
 }
 .section--social-icon-teasers {
-  border-top: 1px solid #e6e6e6;
 
   background-color: #fff;
 }
@@ -117,7 +117,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url('../images/Volden.jpg');
     min-height: 450px;
     display: flex;
     align-items: center;
@@ -176,7 +175,7 @@ body {
             outline: none;
 
             &:focus {
-              border: 2px solid #e82f4c;
+              border: 2px solid $background_color__primary;
             }
           }
         }
@@ -191,7 +190,7 @@ body {
             background-size: 20px 20px;
             width: 70px;
             height: 70px;
-            background-color: #e82f4c;
+            background-color: $background_color__primary;
             background-repeat: no-repeat;
             right: 0;
             text-indent: -9999px;

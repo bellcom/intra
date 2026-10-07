@@ -3250,14 +3250,14 @@ jQuery(document).ready(function(){
     tns({
       container: bannerSelector,
       items: 1,
-      autoplay: true,
+      autoplay: false,
       autoplayHoverPause: true,
       autoplayButtonOutput: false,
       gutter: 32,
       rewind: false,
       nav: true,
       speed: 600,
-      controls: false
+      controls: true
     });
   }
 
@@ -3272,14 +3272,14 @@ jQuery(document).ready(function(){
         tns({
           container: container,
           items: 1,
-          autoplay: true,
+          autoplay: false,
           autoplayHoverPause: true,
           autoplayButtonOutput: false,
           gutter: 32,
           rewind: false,
           nav: true,
           speed: 600,
-          controls: false
+          controls: true
         });
       }
     });
@@ -3328,11 +3328,13 @@ jQuery(document).ready(function(){
 })();
 
 
-
+document.addEventListener('DOMContentLoaded', function () {
   var closeBtns = document.querySelectorAll('.status-banner-close-btn');
+
   for (var i = 0; i < closeBtns.length; i++) {
     closeBtns[i].addEventListener('click', function () {
       var statusBanner = this.closest('.status-banner');
+
       if (statusBanner) {
         statusBanner.style.display = 'none';
 
@@ -3341,21 +3343,46 @@ jQuery(document).ready(function(){
 
         // Store the closed state in local storage
         localStorage.setItem('status_banner_' + nodeId, 'closed');
+
+      }
+    });
+  }
+
+  var openBtns = document.querySelectorAll('.status-banner-open-btn');
+
+  for (var j = 0; j < openBtns.length; j++) {
+    openBtns[j].addEventListener('click', function () {
+      var bannerId = this.getAttribute('data-banner-id');
+      var statusBanner = document.querySelector('.status-banner[data-banner-id="' + bannerId + '"]');
+
+      if (statusBanner) {
+        statusBanner.style.display = 'block'; // Display the banner
+
+        var nodeId = statusBanner.getAttribute('data-node-id');
+
+        // Remove the 'closed' state from localStorage
+        localStorage.removeItem('status_banner_' + nodeId);
+
       }
     });
   }
 
   // Check local storage for closed banners
   var banners = document.querySelectorAll('.status-banner');
-  for (var i = 0; i < banners.length; i++) {
-    var banner = banners[i];
+
+  for (var k = 0; k < banners.length; k++) {
+    var banner = banners[k];
     var nodeId = banner.getAttribute('data-node-id');
     var bannerState = localStorage.getItem('status_banner_' + nodeId);
 
     if (bannerState === 'closed') {
       banner.style.display = 'none';
+    } else {
+      banner.style.block = 'block'; // Or set to your desired display value for open banners
     }
+
   }
+});
 
 
 
@@ -3436,29 +3463,29 @@ jQuery(document).ready(function(){
 //   };
 // })(jQuery, Drupal);
 
-function customExternalLinks() {
-  var banner = document.querySelector('.custom-external-links-banner');
-  var button = document.querySelector('.custom-external-links-toggle');
-
-  banner.style.display = 'none'; // Hide the banner initially
-
-  button.addEventListener('click', function () {
-    banner.style.display = banner.style.display === 'none' ? 'flex' : 'none'; // Toggle the visibility of the banner on button click
-  });
-
-  var customExternalLinksButton = document.querySelector('.custom-external-links-button');
-  customExternalLinksButton.addEventListener('click', function () {
-    var selectElement = document.querySelector('.custom-external-links-select');
-    var url = selectElement.value;
-    if (url) {
-      window.open(url, '_blank');
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  customExternalLinks();
-});
+// /*function customExternalLinks() {
+//   var banner = document.querySelector('.custom-external-links-banner');
+//   var button = document.querySelector('.custom-external-links-toggle');
+//
+//   banner.style.display = 'none'; // Hide the banner initially
+//
+//   button.addEventListener('click', function () {
+//     banner.style.display = banner.style.display === 'none' ? 'flex' : 'none'; // Toggle the visibility of the banner on button click
+//   });
+//
+//   var customExternalLinksButton = document.querySelector('.custom-external-links-button');
+//   customExternalLinksButton.addEventListener('click', function () {
+//     var selectElement = document.querySelector('.custom-external-links-select');
+//     var url = selectElement.value;
+//     if (url) {
+//       window.open(url, '_blank');
+//     }
+//   });
+// }
+//
+// document.addEventListener('DOMContentLoaded', function () {
+//   customExternalLinks();
+// });*/
 
 
 
@@ -3524,13 +3551,13 @@ document.addEventListener('DOMContentLoaded', function () {
   if (showMoreButton && hiddenLinks) {
     showMoreButton.addEventListener('click', function () {
       if (hiddenLinks.style.display === 'none') {
-        hiddenLinks.style.display = 'flex';
+        hiddenLinks.style.display = 'grid';
         showMoreButtonContent.textContent = 'Skjul';
         showMoreButton.classList.remove('fa-plus');
         showMoreButton.classList.add('fa-minus');
       } else {
         hiddenLinks.style.display = 'none';
-        showMoreButtonContent.textContent = 'Se flere muligheder';
+        showMoreButtonContent.textContent = 'Vis flere';
         showMoreButton.classList.remove('fa-minus');
         showMoreButton.classList.add('fa-plus');
       }
@@ -3606,4 +3633,219 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const sliderWidth = 100 * slides.length;
   slidesContainer.style.width = `${sliderWidth}%`;
+});
+
+
+(function ($) {
+  $(document).ready(function () {
+    $(".toggle-btn").click(function () {
+      var $this = $(this);
+      $(".cta-btn-content .cta-link.hidden").toggle(); // toggles the visibility of hidden links
+
+      // Toggle the button text
+      if ($this.text() === "+ Vis flere") {
+        $this.text("- Skjul");
+      } else {
+        $this.text("+ Vis flere");
+      }
+    });
+  });
+})(jQuery);
+
+document.addEventListener('DOMContentLoaded', function() {
+  let showMoreButton = document.querySelector('.show-more-btn-selfservice');
+
+  if (showMoreButton) {
+    showMoreButton.addEventListener('click', function() {
+      let hiddenLinks = document.querySelectorAll('.hidden-link');
+
+      hiddenLinks.forEach(function(link) {
+        // Check the current display status and toggle accordingly
+        if (link.style.display === 'flex') {
+          link.style.display = 'none';
+        } else {
+          link.style.display = 'flex';
+        }
+      });
+
+      // Toggle button text
+      showMoreButton.textContent = showMoreButton.textContent === '+ Vis flere' ? '- Skjul' : '+ Vis flere';
+    });
+  }
+});
+
+// Reposition icon inside menu.
+(function() {
+  var menuItems = document.querySelectorAll('.region-header__below .menu-item');
+
+  for(var i = 0; i < menuItems.length; i++) {
+    var menuItem = menuItems[i];
+    var link = menuItem.querySelector('a:first-child');
+    var iconImg = menuItem.querySelector('.field--name-field-os2web-icon');
+
+    if (link === null || iconImg === null) {
+      continue;
+    }
+
+    link.insertAdjacentElement('afterbegin', iconImg);
+  }
+})();
+
+// Toggle subnavigation.
+(function() {
+  function reposition() {
+    var header = document.querySelector('.custom-header--static');
+
+    var menuLevel0 = document.querySelector('.region-header__below .menu-level-0');
+    var menuLevel0Height = menuLevel0 !== null ? menuLevel0.offsetHeight : 0;
+
+    var menuLevel1 = document.querySelector('.region-header__below .menu-level-0 > li.show-subnavigation .menu-level-1');
+    var menuLevel1Height = menuLevel1 !== null ? menuLevel1.offsetHeight : 0;
+
+    header.style.marginBottom = ((menuLevel0Height / 2) + menuLevel1Height) + 'px';
+  }
+
+  function scroll() {
+    var menuLevel0 = document.querySelector('.region-header__below .menu-level-0');
+
+    menuLevel0.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleToggle(event) {
+    event.preventDefault();
+
+    var element = this;
+    var currentListItem = element.parentElement;
+    var listItems = document.querySelectorAll('.region-header__below .menu-level-0 > li.show-subnavigation');
+
+    // Remove "show submenu" class from all list items.
+    for (var i = 0; i < listItems.length; i++) {
+      var listItem = listItems[i];
+
+      if (currentListItem.isSameNode(listItem)) break; // Make toggle possible, so we can click on the element and remove the subnavigation as well.
+
+      listItem.classList.remove('show-subnavigation');
+    }
+
+    // Add "show submenu" to current list item.
+    currentListItem.classList.toggle('show-subnavigation');
+
+    // Reposition.
+    reposition();
+
+    // Scroll to menu level 0.
+    scroll();
+  }
+
+  var links = document.querySelectorAll('.region-header__below .menu-level-0 > li > a');
+
+  for (var i = 0; i < links.length; i++) {
+    var link = links[i];
+
+    link.addEventListener('click', handleToggle);
+  }
+})();
+
+
+(function ($, Drupal) {
+  Drupal.behaviors.myFooterBehaviour = {
+    attach: function (context, settings) {
+      $('body', context).once('footerToggle').each(function () {
+        if ($(this).has('footer.footer-alternativ-wrapper').length) {
+          $('footer.d-print-none').css('display', 'none');
+        }
+      });
+    }
+  };
+})(jQuery, Drupal);
+
+(function ($, Drupal) {
+  Drupal.behaviors.showDefaultBannerBehavior = {
+    attach: function (context, settings) {
+      $('body', context).once('bannerToggle').each(function () {
+        if (!$(this).has('#block-fds-fredericia-main-theme-paragraph-banner').length &&
+          !$(this).has('#block-fds-fredericia-main-theme-os2web-search-os2web-search-page-banner-search').length) {
+          $('.default-banner-wrapper').css('display', 'block');
+        }
+      });
+    }
+  };
+})(jQuery, Drupal);
+
+document.addEventListener('DOMContentLoaded', function() {
+  var showMoreButtons = document.querySelectorAll('.show-more-button-selfservice');
+  showMoreButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var moreItemsWrapper = this.previousElementSibling;
+      if (moreItemsWrapper.style.display === 'none') {
+        moreItemsWrapper.style.display = 'block';
+        this.textContent = '- Skjul';
+      } else {
+        moreItemsWrapper.style.display = 'none';
+        this.textContent = '+ Vis flere';
+      }
+    });
+  });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to toggle submenu visibility and prevent default only for top-level links
+  function toggleSubmenu(event) {
+    // Check if the clicked element is directly within a menu-level-0 item
+    if (this.closest('.region-header__megamenu-navigation .menu-item--expanded, .region-header__megamenu-navigation .menu-item--collapsed') && !this.closest('.region-header__megamenu-navigation .menu-level-1')) {
+      event.preventDefault(); // Prevent default link behavior only for top-level links
+
+      // Toggle the display of the direct child UL (the submenu)
+      const submenu = this.nextElementSibling; // Assumes submenu UL is the next sibling
+      if (submenu && submenu.classList.contains('menu-level-1')) {
+        submenu.style.display = submenu.style.display === 'flex' ? 'none' : 'flex';
+
+        // Optional: Toggle classes for expanded/collapsed state
+        this.parentElement.classList.toggle('menu-item--expanded');
+        this.parentElement.classList.toggle('menu-item--collapsed');
+      }
+    }
+  }
+
+  // Apply event listeners if in mobile view
+  function applyEventListeners() {
+    const topLevelLinks = document.querySelectorAll('.region-header__megamenu-navigation .menu-item--expanded > a, .region-header__megamenu-navigation .menu-item--collapsed > a');
+    topLevelLinks.forEach(function(link) {
+      link.removeEventListener('click', toggleSubmenu); // Remove existing event listeners to avoid duplicates
+      link.addEventListener('click', toggleSubmenu);
+    });
+  }
+
+  if (window.innerWidth <= 760) {
+    applyEventListeners();
+  }
+
+  // Handle window resizing
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 760) {
+      applyEventListeners();
+    } else {
+      // Optionally, revert any inline styles applied to submenus when resizing above 760px
+      document.querySelectorAll('.region-header__megamenu-navigation .menu-level-1').forEach(function(submenu) {
+        submenu.style.display = ''; // Reset display style
+      });
+    }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const fileLinks = document.querySelectorAll('.file a');
+
+  fileLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+      this.parentElement.classList.add('hovered');
+    });
+
+    link.addEventListener('mouseleave', function() {
+      this.parentElement.classList.remove('hovered');
+    });
+  });
 });

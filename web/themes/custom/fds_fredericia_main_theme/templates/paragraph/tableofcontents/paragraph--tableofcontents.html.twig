@@ -3,9 +3,9 @@
   {% set contents = paragraph.field_toc_content %}
   {% set anchorIds = []  %}
 
-  <div class="toc-outer-wrapper">
+  <div {{ attributes}}>
     <div class="toc-inner-wrapper">
-    <h2 class="toc-heading">Indholdsfortegnelse</h2>
+    <h2 class="toc-heading">Indhold</h2>
 
     <ul>
       {% for key in titles|keys %}
@@ -25,20 +25,17 @@
     </div>
     <div class="toc-content-wrapper">
 
-    {% for key in contents|keys %}
-      {% set content = contents[key] %}
-      {% if content.value is not empty %}
-        {# Generate a unique anchor ID for each content #}
-        {% set anchorId = 'toc-anchor-' ~ loop.index0 %}
-        {% set anchorIds = anchorIds|merge([anchorId]) %}
 
-        {# Render the anchor paragraph with the corresponding anchor ID #}
-        <div id="{{ anchorId }}" class="anchor">
-          <h2 class="content-heading">{{ titles[key].value }}</h2>
-          {{ content.value|raw }}
-        </div>
-      {% endif %}
-    {% endfor %}
+
+      {% for key, item in processed_contents %}
+        {% if item.value is not empty %}
+          {% set anchorId = 'toc-anchor-' ~ key %}
+          <div id="{{ anchorId }}" class="anchor">
+            <h2 class="content-heading">{{ titles[key].value }}</h2>
+            {{ item.value|raw }}
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 

@@ -2,12 +2,31 @@
 {% block paragraph %}
 
 
-{% set image = content.field_os2web_bannertxt_image[0]['#item'].entity %}
-  {% set image_url = file_url(image.uri.value) %}
+  {% set direct_image_url = null %}
+  {% set media_image_url = null %}
+
+  {# Check for direct image and extract URL if available #}
+  {% if content.field_os2web_bannertxt_image is not empty %}
+    {% set direct_image_file = content.field_os2web_bannertxt_image[0]['#item'].entity %}
+    {% if direct_image_file %}
+      {% set direct_image_url = file_url(direct_image_file.uri.value) %}
+    {% endif %}
+  {% endif %}
+
+  {# Check for media image and extract URL if direct image is not available #}
+  {% if direct_image_url is null and paragraph.field_os2web_bannertxt_media.entity %}
+    {% set media_entity = paragraph.field_os2web_bannertxt_media.entity %}
+    {% if media_entity.field_media_image %}
+      {% set media_image_url = file_url(media_entity.field_media_image.entity.fileuri) %}
+    {% endif %}
+  {% endif %}
+
+  {# Determine which image URL to use #}
+  {% set image_url = direct_image_url ?: media_image_url %}
 
 
-<div class="banner__text-outer" style=" background-image: url({{ image_url }});">
-  <div class="slider" style=" background-image: url({{ image_url }});">
+<div class="banner__text-outer" style="background-image: url({{ image_url }});">
+  <div class="slider">
     <div class="slider-overlay"></div>
     <div class="slides-container">
       {% if content.field_os2web_bannertxt_heading_1|render is not empty %}

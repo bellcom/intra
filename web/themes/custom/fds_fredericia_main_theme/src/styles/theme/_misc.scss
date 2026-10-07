@@ -13,8 +13,31 @@
 // Styling
 // --------------------------------------------------
 
+.field--name-field-os2web-accordion-heading {
+  h2 {
+    color: #00335b;
+  }
+}
+
+.webform-button--submit {
+  background-color: #00335b !important;
+}
+
+.entity-default--os2web-wrapper.background-color--primary {
+  background-color: $background_color__primary;
+}
+
+.entity-default--os2web-wrapper.background-color--secondary {
+  background-color: $background_color__secondary;
+}
+
+.entity-default--os2web-wrapper.background-color--tertiary {
+  background-color: $background_color__tertiary;
+}
+
 body {
   background-color: #fff;
+  overflow-x: hidden !important;
 }
 
 // Increased specificity to win over base theme.
@@ -46,12 +69,35 @@ body .container-fluid {
         }
 
         .field--name-field-os2web-simple-text-body {
-          h1 {
-            color: #00315b;
+          h1,h2,h3,h4,h5,h6 {
+            color: #00335b;
             margin-bottom: 15px !important;
             margin-top: 0 !important;
           }
+          p {
+            color: #00335b !important;
+          }
         }
+      }
+    }
+  }
+}
+
+.field--name-field-os2web-simple-text-body {
+  h1,h2,h3,h4,h5,h6 {
+    color: #00335b;
+    margin-bottom: 15px !important;
+    margin-top: 0 !important;
+  }
+  p {
+    color: #00335b !important;
+  }
+  ul {
+    li {
+      color: #00335b;
+
+      &:before {
+        color: $color__bullets;
       }
     }
   }
@@ -94,7 +140,7 @@ body a {
 //}
 
 .region-content {
-  padding-bottom: 40px;
+  padding: 0;
 }
 
 svg.mailto {
@@ -140,7 +186,7 @@ body .page-container {
   padding-top: 0;
   padding-bottom: 0;
   &.page-container-front {
-    margin-bottom: 10px;
+
     .paragraph--type--os2web-news-block {
       margin-top: 60px;
     }
@@ -234,17 +280,7 @@ body .page-container {
 }
 .region-sidebar-second {
   .block-fieldblock {
-    background-color: $color-white;
-    padding: 0!important;
     h2 {
-      padding: 40px 10px;
-      font-size: 1.9rem;
-      margin: 0;
-      font-weight: 400;
-      @include media-breakpoint-up(md) {
-        padding: 40px;
-        font-size: 2.4rem;
-      }
       color: $color-black;
     }
     .field--name-field-link-til-andet-indhold,
@@ -417,12 +453,12 @@ body .page-container {
 .layout-sidebar-right,
 // .layout-content
 {
-  padding-top: $grid-gutter-width;
+  padding: 40px 0;
 }
 .layout-sidebar-right {
-  padding-top: 10px;
+  padding: 10px 0;
   @include media($sm) {
-    padding-top: $grid-gutter-width;
+    padding: 40px 0;
   };
 }
 .layout-content.entity-teaser--os2web-event-wrapper {
@@ -535,36 +571,14 @@ body .page-container {
   border-color: $background_color__default;
   color: $color-white;
   transition: all 0.3s ease;
-  &:hover {
-    background-color: $background_color__secondary;
-    border-color: $background_color__secondary;
-  }
 }
-.button.button-secondary {
-  background-color: $background_color__secondary;
-  border-color: $background_color__secondary;
-  color: $color-white;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: $background_color__default;
-    border-color: $background_color__default;
-  }
-}
+
 
 .button--rounded {
   padding-left: 30px;
   padding-right: 30px;
 
   border-radius: 30px;
-}
-
-.background-color--secondary {
-  color: #fff !important;
-  background-color: $background_color__secondary !important;
-}
-.background-color--tertiary {
-  color: #fff !important;
-  background-color: $background_color__tertiary !important;
 }
 
 // Remove max-width on all text elements.
@@ -599,7 +613,6 @@ body {
 }
 a:not([class]) {
   text-decoration: none;
-  color: $color__link;
   font-weight: 400;
   &:hover {
     text-decoration: underline;
@@ -614,7 +627,7 @@ a:not([class]) {
 
 .block-page-title-block {
   h1 {
-    font-size: 32px;
+    font-size: 2rem;
     margin: 0;
     padding: 0;
     color: inherit;
@@ -629,6 +642,60 @@ a:not([class]) {
   font-size: 0.8em !important;
 }
 
+.field--name-field-media-video-file {
+  video {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.paragraph--type--os2web-files-paragraph {
+  margin-bottom: 80px;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.paragraph--type--os2web-3-columns {
+  .row {
+    padding: 25px 0;
+  }
+}
+
+.hearings-back {
+  background-color: #00335b;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 700;
+  transition: .3s;
+
+  &:hover {
+    background-color: rgba(0, 51, 91, 0.9);
+    color: white;
+  }
+  &:visited {
+    color: white;
+  }
+}
+
+.box-hearings {
+  color: #00335b;
+  margin-bottom: 2.8rem;
+  .box__body-hearings {
+    .row-hearings {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.boost-trigger-button {
+  right: 60px !important;
+}
 
 // --------------------------------------------------
 // Responsive

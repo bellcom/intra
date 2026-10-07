@@ -11,14 +11,14 @@
 
 <a href="{{ url }}" {{ attributes.addClass(classes) }}>
   <div class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date">
-    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__month">
-      {{ timestamp | date('M') }}
+    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__title">
+      {{ 'Frist' | trans }}
     </span>
     <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__date">
       {{ timestamp | date('d') }}
     </span>
-    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__title">
-      {{ 'Frist' | trans }}
+    <span class="entity-{{ view_mode|clean_class }}--{{ node.bundle|clean_class }}__date__month">
+      {{ timestamp | date('M') }}
     </span>
   </div>
 

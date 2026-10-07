@@ -19,22 +19,47 @@
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
+
+.field--name-field-os2web-paragraphs {
+  .field__item {
+    .banner__image-outer {
+      margin-bottom: 80px;
+
+      @media only screen and (max-width: 640px) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
 .banner__image-outer {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 500px;
+  min-height: 350px;
   display: flex;
   align-items: flex-end;
   padding: 20px 0;
+
+  @media only screen and (max-width: 640px) {
+    min-height: 150px !important;
+  }
+
+  &.mobile-hide {
+    @media only screen and (max-width: 640px) {
+      display: none;
+    }
+  }
 
   .entity-default--os2web-banner-paragraph {
     background-color: transparent;
     width: 100%;
 
     .container {
+      display: flex;
       .banner-box {
-        background-color: rgba(255,255,255,0.6);
+        background-color: rgba(255,255,255,0.9);
         width: 500px;
         padding: 30px;
         display: flex;
@@ -44,6 +69,7 @@
 
         @media only screen and (max-width: 640px) {
           width: 100%;
+          display: none;
         }
 
         .banner-headings-wrapper {
@@ -69,17 +95,102 @@
           ul {
             padding: 0;
             margin: 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
 
             li {
               padding: 0;
               margin: 0;
 
+              &.red-link-class {
+                a {
+                  background-color: #9D0425;
+                  color: white;
+                  border-color: #9D0425;
+
+
+                  &:hover {
+                    background-color: rgba(157, 4, 37, 0.9);
+                    border-color: rgba(157, 4, 37, 0.9);
+                  }
+                }
+              }
+              &.lightred-link-class {
+                a {
+                  background-color: #F3E7E7;
+                  color: #9d0425;
+                  border-color: #F3E7E7;
+
+
+                  &:hover {
+                    background-color: rgba(243, 231, 231, 0.9);
+                    border-color: rgba(243, 231, 231, 0.9);
+                  }
+                }
+              }
+              &.blue-link-class {
+                a {
+                  background-color: #00335B;
+                  color: #fff;
+                  border-color: #00335B;
+
+
+                  &:hover {
+                    background-color: rgba(0, 51, 91, 0.9);
+                    border-color: rgba(0, 51, 91, 0.9);
+                  }
+                }
+              }
+              &.lightblue-link-class {
+                a {
+                  background-color: #aabfcf;
+                  color: #00335B;
+                  border-color: #aabfcf;
+
+
+                  &:hover {
+                    background-color: rgba(170, 191, 207, 0.9);
+                    border-color: rgba(170, 191, 207, 0.9);
+                  }
+                }
+              }
+
               a {
-                background-color: #353535;
+                background-color: $background_color__button;
                 color: white;
-                border-radius: 50px;
+                border-radius: 4px;
                 font-weight: normal;
-                border-color: #353535;
+                border-color: $background_color__button;
+                transition: .3s ease;
+                font-weight: 600;
+                position: relative;
+                padding-right: 50px;
+
+                &:not(.ext):after {
+                  content: '\f0a9';
+                  position: absolute;
+                  display: inline-block;
+                  top: 50%;
+                  right: 15px;
+                  transform: translateY(-50%);
+                  font-family: "FontAwesome";
+                }
+
+                &.ext:after {
+                  content: '\f35d';
+                  position: absolute;
+                  display: inline-block;
+                  top: 50%;
+                  right: 15px;
+                  transform: translateY(-50%);
+                  font-family: "FontAwesome";
+                }
+
+                &:hover {
+                  background-color: $background_color__button_hover;
+                  border-color: $background_color__button_hover;
+                }
 
               }
 
@@ -95,6 +206,153 @@
 
   }
 
+}
+
+.banner-box-mobile {
+  background-color: rgba(255,255,255,0.9);
+  width: 100%;
+  padding: 30px;
+  flex-direction: column;
+  gap: 10px;
+  display: none;
+
+  @media only screen and (max-width: 640px) {
+    width: 100%;
+    display: flex;
+  }
+
+  .banner-headings-wrapper {
+    .banner-heading {
+      .field--name-field-os2web-banner-heading {
+        h2 {
+          font-weight: bold;
+          color: #00335b;
+          margin: 0;
+          padding: 0;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .banner-body {
+    .field--name-field-os2web-banner-body {
+      p {
+        color: #00335b;
+        font-size: 14px;
+      }
+    }
+  }
+  .banner-actions {
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      li {
+        padding: 0;
+        margin: 0;
+
+        &.red-link-class {
+          a {
+            background-color: #9D0425;
+            color: white;
+            border-color: #9D0425;
+
+
+            &:hover {
+              background-color: rgba(157, 4, 37, 0.9);
+              border-color: rgba(157, 4, 37, 0.9);
+            }
+          }
+        }
+        &.lightred-link-class {
+          a {
+            background-color: #F3E7E7;
+            color: #9d0425;
+            border-color: #F3E7E7;
+
+
+            &:hover {
+              background-color: rgba(243, 231, 231, 0.9);
+              border-color: rgba(243, 231, 231, 0.9);
+            }
+          }
+        }
+        &.blue-link-class {
+          a {
+            background-color: #00335B;
+            color: #fff;
+            border-color: #00335B;
+
+
+            &:hover {
+              background-color: rgba(0, 51, 91, 0.9);
+              border-color: rgba(0, 51, 91, 0.9);
+            }
+          }
+        }
+        &.lightblue-link-class {
+          a {
+            background-color: #aabfcf;
+            color: #00335B;
+            border-color: #aabfcf;
+
+
+            &:hover {
+              background-color: rgba(170, 191, 207, 0.9);
+              border-color: rgba(170, 191, 207, 0.9);
+            }
+          }
+        }
+
+        a {
+          background-color: $background_color__button;
+          color: white;
+          border-radius: 4px;
+          font-weight: normal;
+          border-color: $background_color__button;
+          transition: .3s ease;
+          font-weight: 600;
+          position: relative;
+          padding-right: 50px;
+          font-size: 14px;
+
+          &:not(.ext):after {
+            content: '\f0a9';
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            font-family: "FontAwesome";
+          }
+
+          &.ext:after {
+            content: '\f35d';
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            font-family: "FontAwesome";
+          }
+
+          &:hover {
+            background-color: $background_color__button_hover;
+            border-color: $background_color__button_hover;
+          }
+
+        }
+
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
 }
 .banner__text-outer {
   background-position: center;
@@ -225,7 +483,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e82f4c;
+  background-color: $background_color__primary;
   border: none;
   cursor: pointer;
   transition: 0.3s ease;
@@ -294,7 +552,7 @@
             border-radius: 50px;
           }
            &:hover {
-             background-color: #e82f4c;
+             background-color: $background_color__primary;
              color: white;
            }
 
@@ -317,6 +575,25 @@
 }
 
 
+.default-banner-wrapper {
+  display: none;
+  overflow: hidden;
+  height: 350px;
+
+  @media only screen and (992px) {
+    height: 200px;
+  }
+  .default-banner {
+    width: 100%;
+    height: 100%;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
 
 
 

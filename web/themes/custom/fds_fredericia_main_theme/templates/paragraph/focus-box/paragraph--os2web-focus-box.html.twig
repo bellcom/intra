@@ -1,4 +1,21 @@
+
 {#  #}
+{% macro link_color_class(color_value) %}
+  {% if color_value == 'red_focusbox_link' %}
+    {{ 'red-link-class' }}
+  {% elseif color_value == 'lightred_focusbox_link' %}
+    {{ 'lightred-link-class' }}
+  {% elseif color_value == 'blue_focusbox_link' %}
+    {{ 'blue-link-class' }}
+  {% elseif color_value == 'lightblue_focusbox_link' %}
+    {{ 'lightblue-link-class' }}
+  {% else %}
+    {{ '' }}
+  {% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
 <div class="sidebar-accordion-wrapper">
   <div class="sidebar-accordion__inner-wrapper">
     <div class="sidebar">
@@ -11,23 +28,20 @@
           </span>
             <i class="fa-solid fa-chevron-right"></i>
             <div class="sidebar-body" style="display: none;">
-              <h3>{{ content.field_focusbox_heading_1 }}</h3>
               {% if paragraph.field_focusbox_body_1 is not empty %}
-              <div class="sidebar-product-description">
-                {{ content.field_focusbox_body_1 }}
-              </div>
-              {% endif %}
-              {% if paragraph.field_focusbox_link_1 is not empty %}
-              <div class="sidebar-product-btn">
-                <a href="{{ paragraph.field_focusbox_link_1.0.url }}"><span>{{ paragraph.field_focusbox_link_1.0.title }}</span></a>
-              </div>
+                <a href="{{ paragraph.field_focusbox_link_1.0.url }}" class="{{ macros.link_color_class(paragraph.field_focusbox_link_color_1.value) }}">
+                  <div class="sidebar-product-description">
+                    {{ content.field_focusbox_body_1 }}
+                  </div>
+                </a>
               {% endif %}
               {% if paragraph.field_focusbox_image_1 is not empty %}
-                <div class="sidebar-product-image">
-                  <img src="{{ file_url(paragraph.field_focusbox_image_1.entity.uri.value) }}" alt="Sidebar Image">
-                </div>
+{#                <div class="sidebar-product-image">#}
+{#                  <img src="{{ file_url(paragraph.field_focusbox_image_1.entity.uri.value) }}" alt="Sidebar Image">#}
+{#                </div>#}
 
-              <div class="sidebar-overlay"></div>
+                {{ content.field_focusbox_image_1 }}
+
 
               {% endif %}
 
@@ -44,25 +58,23 @@
           </span>
             <i class="fa-solid fa-chevron-right"></i>
             <div class="sidebar-body" style="display: none;">
-              <h3>{{ content.field_focusbox_heading_2 }}</h3>
               {% if paragraph.field_focusbox_body_2 is not empty %}
-                <div class="sidebar-product-description">
-                  {{ content.field_focusbox_body_2 }}
-                </div>
-              {% endif %}
-              {% if paragraph.field_focusbox_link_2 is not empty %}
-                <div class="sidebar-product-btn">
-                  <a href="{{ paragraph.field_focusbox_link_2.0.url }}"><span>{{ paragraph.field_focusbox_link_2.0.title }}</span></a>
-                </div>
+                <a href="{{ paragraph.field_focusbox_link_2.0.url }}" class="{{ macros.link_color_class(paragraph.field_focusbox_link_color_2.value) }}">
+                  <div class="sidebar-product-description">
+                    {{ content.field_focusbox_body_2 }}
+                  </div>
+                </a>
               {% endif %}
               {% if paragraph.field_focusbox_image_2 is not empty %}
-                <div class="sidebar-product-image">
-                  <img src="{{ file_url(paragraph.field_focusbox_image_2.entity.uri.value) }}" alt="Sidebar Image">
-                </div>
+{#                <div class="sidebar-product-image">#}
+{#                  <img src="{{ file_url(paragraph.field_focusbox_image_2.entity.uri.value) }}" alt="Sidebar Image">#}
+{#                </div>#}
 
-                <div class="sidebar-overlay"></div>
+                {{ content.field_focusbox_image_2 }}
+
 
               {% endif %}
+
             </div>
           </li>
 
@@ -76,25 +88,23 @@
           </span>
             <i class="fa-solid fa-chevron-right"></i>
             <div class="sidebar-body" style="display: none;">
-              <h3>{{ content.field_focusbox_heading_3 }}</h3>
               {% if paragraph.field_focusbox_body_3 is not empty %}
-                <div class="sidebar-product-description">
-                  {{ content.field_focusbox_body_3 }}
-                </div>
-              {% endif %}
-              {% if paragraph.field_focusbox_link_3 is not empty %}
-                <div class="sidebar-product-btn">
-                  <a href="{{ paragraph.field_focusbox_link_3.0.url }}"><span>{{ paragraph.field_focusbox_link_3.0.title }}</span></a>
-                </div>
+                <a href="{{ paragraph.field_focusbox_link_3.0.url }}" class="{{ macros.link_color_class(paragraph.field_focusbox_link_color_3.value) }}">
+                  <div class="sidebar-product-description">
+                    {{ content.field_focusbox_body_3 }}
+                  </div>
+                </a>
               {% endif %}
               {% if paragraph.field_focusbox_image_3 is not empty %}
-                <div class="sidebar-product-image">
-                  <img src="{{ file_url(paragraph.field_focusbox_image_3.entity.uri.value) }}" alt="Sidebar Image">
-                </div>
+{#                <div class="sidebar-product-image">#}
+{#                  <img src="{{ file_url(paragraph.field_focusbox_image_3.entity.uri.value) }}" alt="Sidebar Image">#}
+{#                </div>#}
 
-                <div class="sidebar-overlay"></div>
+                {{ content.field_focusbox_image_3 }}
+
 
               {% endif %}
+
             </div>
           </li>
 
@@ -108,25 +118,23 @@
           </span>
             <i class="fa-solid fa-chevron-right"></i>
             <div class="sidebar-body" style="display: none;">
-              <h3>{{ content.field_focusbox_heading_4 }}</h3>
               {% if paragraph.field_focusbox_body_4 is not empty %}
-                <div class="sidebar-product-description">
-                  {{ content.field_focusbox_body_4 }}
-                </div>
-              {% endif %}
-              {% if paragraph.field_focusbox_link_4 is not empty %}
-                <div class="sidebar-product-btn">
-                  <a href="{{ paragraph.field_focusbox_link_4.0.url }}"><span>{{ paragraph.field_focusbox_link_4.0.title }}</span></a>
-                </div>
+                <a href="{{ paragraph.field_focusbox_link_4.0.url }}" class="{{ macros.link_color_class(paragraph.field_focusbox_link_color_4.value) }}">
+                  <div class="sidebar-product-description">
+                    {{ content.field_focusbox_body_4 }}
+                  </div>
+                </a>
               {% endif %}
               {% if paragraph.field_focusbox_image_4 is not empty %}
-                <div class="sidebar-product-image">
-                  <img src="{{ file_url(paragraph.field_focusbox_image_4.entity.uri.value) }}" alt="Sidebar Image">
-                </div>
+{#                <div class="sidebar-product-image">#}
+{#                  <img src="{{ file_url(paragraph.field_focusbox_image_4.entity.uri.value) }}" alt="Sidebar Image">#}
+{#                </div>#}
 
-                <div class="sidebar-overlay"></div>
+                {{ content.field_focusbox_image_4 }}
+
 
               {% endif %}
+
             </div>
           </li>
 
@@ -140,25 +148,22 @@
           </span>
             <i class="fa-solid fa-chevron-right"></i>
             <div class="sidebar-body" style="display: none;">
-              <h3>{{ content.field_focusbox_heading_5 }}</h3>
               {% if paragraph.field_focusbox_body_5 is not empty %}
-                <div class="sidebar-product-description">
-                  {{ content.field_focusbox_body_5 }}
-                </div>
-              {% endif %}
-              {% if paragraph.field_focusbox_link_5 is not empty %}
-                <div class="sidebar-product-btn">
-                  <a href="{{ paragraph.field_focusbox_link_5.0.url }}"><span>{{ paragraph.field_focusbox_link_5.0.title }}</span></a>
-                </div>
+                <a href="{{ paragraph.field_focusbox_link_5.0.url }}" class="{{ macros.link_color_class(paragraph.field_focusbox_link_color_5.value) }}">
+                  <div class="sidebar-product-description">
+                    {{ content.field_focusbox_body_5 }}
+                  </div>
+                </a>
               {% endif %}
               {% if paragraph.field_focusbox_image_5 is not empty %}
-                <div class="sidebar-product-image">
-                  <img src="{{ file_url(paragraph.field_focusbox_image_5.entity.uri.value) }}" alt="Sidebar Image">
-                </div>
+{#                <div class="sidebar-product-image">#}
+{#                  <img src="{{ file_url(paragraph.field_focusbox_image_5.entity.uri.value) }}" alt="Sidebar Image">#}
+{#                </div>#}
 
-                <div class="sidebar-overlay"></div>
+                {{ content.field_focusbox_image_5 }}
 
               {% endif %}
+
             </div>
           </li>
 
@@ -180,31 +185,37 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var sidebarItems = document.querySelectorAll('.sidebar-item');
-    var boxContent = document.querySelector('.box-content');
 
-    sidebarItems.forEach(function(item) {
-      item.addEventListener('click', function() {
-        var bodyText = item.querySelector('.sidebar-body').innerHTML;
-        boxContent.innerHTML = bodyText;
-        boxContent.style.display = 'flex';
+    var accordions = document.querySelectorAll('.sidebar-accordion-wrapper');
 
-        var activeItems = document.querySelectorAll('.sidebar-item.active');
-        activeItems.forEach(function(activeItem) {
-          if (activeItem !== item) {
-            activeItem.classList.remove('active');
-          }
+    accordions.forEach(function(accordion) {
+      var sidebarItems = accordion.querySelectorAll('.sidebar-item');
+      var boxContent = accordion.querySelector('.box-content');
+
+      sidebarItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          var bodyText = item.querySelector('.sidebar-body').innerHTML;
+          boxContent.innerHTML = bodyText;
+          boxContent.style.display = 'flex';
+
+          var activeItems = accordion.querySelectorAll('.sidebar-item.active');
+          activeItems.forEach(function(activeItem) {
+            if (activeItem !== item) {
+              activeItem.classList.remove('active');
+            }
+          });
+
+          item.classList.add('active');
         });
-
-        item.classList.add('active');
       });
+
+      var firstSidebarItem = accordion.querySelector('.sidebar-item');
+      if(firstSidebarItem) {
+        firstSidebarItem.classList.add('active');
+        boxContent.innerHTML = firstSidebarItem.querySelector('.sidebar-body').innerHTML;
+        boxContent.style.display = 'flex';
+      }
     });
-
-    var firstSidebarItem = document.querySelector('.sidebar-item');
-    firstSidebarItem.classList.add('active');
-    boxContent.innerHTML = firstSidebarItem.querySelector('.sidebar-body').innerHTML;
-    boxContent.style.display = 'flex';
   });
-
 
 </script>

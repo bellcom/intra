@@ -1,0 +1,11 @@
+name: 'Designsystem.dk - Fredericia Intra'
+type: theme
+description: 'Intranet theme for Fredericia. Subtheme of fds_fredericia_main_theme.'
+core_version_requirement: ^10 || ^11
+screenshot: screenshot.png
+logo: logo.png
+base theme: fds_fredericia_main_theme
+package: OS2web
+
+libraries:
+  - fds_fredericia_intra_theme/styles

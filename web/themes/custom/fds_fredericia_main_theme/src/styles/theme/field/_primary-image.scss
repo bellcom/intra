@@ -20,7 +20,33 @@
 // Styling
 // --------------------------------------------------
 .field--name-field-os2web-page-primaryimage {
-  margin: 0px -40px 0px;
+  margin: 0 0 40px 0;
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.field--name-field-os2web-page-media-img {
+  margin: 0 0 40px 0;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.field--name-field-os2web-news-primaryimage {
+  margin: 0 0 40px 0;
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.field--name-field-os2web-news-media-img {
+  margin: 0 0 40px 0;
+
   img {
     display: block;
     width: 100%;
@@ -34,17 +60,6 @@
 // Responsive
 // --------------------------------------------------
 
-@media only screen and (max-width: 992px) {
-  .field--name-field-os2web-page-primaryimage {
-    margin: 0px -20px 0px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .field--name-field-os2web-page-primaryimage {
-    margin: 0px -10px 0px;
-  }
-}
 
 // Mobile - and up
 @include media-breakpoint-up(xs) {}

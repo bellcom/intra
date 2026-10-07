@@ -1,5 +1,5 @@
 <div class="banner-content-links-wrapper">
-  <div class="container">
+  <div class="banner-content-links__inner-wrapper">
     {% set totalLinks = paragraph.field_content_page_link|length %}
     {% set maxVisibleLinks = 8 %}
     {% set showMoreButton = totalLinks > maxVisibleLinks %}
@@ -26,7 +26,7 @@
         {% endfor %}
       </div>
       <div class="show-more-button-wrapper">
-        <button class="fa-plus show-more-button"><span class="show-more-button-content">Se flere muligheder</span></button>
+        <button class="fa-plus show-more-button"><span class="show-more-button-content">Vis flere</span></button>
       </div>
     {% endif %}
   </div>

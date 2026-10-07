@@ -35,14 +35,14 @@
   margin-bottom: -20px;
 
   button {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
 
     border-width: 1px;
-    border-color: $background_color__default;
+    border-color: $background_color__primary;
 
     &.tns-nav-active {
-      background-color: $background_color__default;
+      background-color: $background_color__primary;
       opacity: 0.8;
     }
 
@@ -58,7 +58,7 @@ $controls-size: 20px;
     display: flex;
     position: absolute;
 
-    z-index: 100;
+    z-index: 9;
 
     top: 50%;
     margin-top: -15px;
@@ -72,10 +72,10 @@ $controls-size: 20px;
 
     font-size: 0;
     border-radius: 100%;
-    border: 1px solid #e82f4c;
+    border: none;
 
     color: #fff;
-    background-color: #e82f4c;
+    background-color: transparent;
 
     &:before {
       display: inline-block;
@@ -85,7 +85,7 @@ $controls-size: 20px;
     }
 
     &[data-controls="prev"] {
-      left: -30px;
+      left: 5px;
 
       &:before {
         content: "\f104";
@@ -93,13 +93,23 @@ $controls-size: 20px;
     }
 
     &[data-controls="next"] {
-      right: -30px;
+      right: 5px;
 
       &:before {
         content: "\f105";
       }
     }
   }
+}
+
+.field--name-field-os2web-slideshow-image, .field--name-field-os2web-slideshow-media-img {
+  margin-bottom: 80px;
+}
+
+.tns-item img {
+  width: 100%;
+  aspect-ratio: 620 / 414;
+  object-fit: cover;
 }
 
 // --------------------------------------------------
@@ -131,20 +141,20 @@ $controls-size: 20px;
     button {
       margin-top: -20px;
 
-      height: calc(#{$controls-size} + 10px);
-      width: calc(#{$controls-size} + 10px);;
+      height: calc(#{$controls-size} + 20px);
+      width: calc(#{$controls-size} + 20px);;
 
       &:before {
-        font-size: $controls-size;
+        font-size: 30px;
       }
 
-      // &[data-controls="prev"] {
-      //   left: -20px;
-      // }
+       &[data-controls="prev"] {
+         left: 15px;
+       }
 
-      // &[data-controls="next"] {
-      //   right: -20px;
-      // }
+       &[data-controls="next"] {
+         right: 15px;
+       }
     }
   }
 }

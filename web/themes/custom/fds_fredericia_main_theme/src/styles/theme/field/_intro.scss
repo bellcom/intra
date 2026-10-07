@@ -28,12 +28,17 @@
   }
 }
 .field--name-field-os2web-news-intro {
-  margin-bottom: 20px;
+  margin-bottom: 2.8rem;
 }
 .field--name-field-os2web-page-intro {
+  margin-bottom: 2.8rem;
   p {
-    font-size: 20px;
-    color: #2c3d50;
+    color: #00335b;
+    font-size: 2rem;
+
+    strong {
+      font-weight: 400;
+    }
   }
 }
 // --------------------------------------------------

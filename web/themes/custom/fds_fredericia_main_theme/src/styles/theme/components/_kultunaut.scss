@@ -1,0 +1,49 @@
+.nautdata {
+  #nautcontent {
+
+    .nautblock {
+      padding: 0 !important;
+      display: flex;
+      flex-direction: column-reverse;
+
+      div:first-child {
+        .nautevent {
+
+          .jdLtLB {
+            margin: 0;
+          }
+          .buyticket {
+            display: flex !important;
+            align-items: center;
+            background-color: #00335b !important;
+            color: white !important;
+          }
+          .eventdate {
+            &:after {
+              content: '\f073';
+              font-family: "FontAwesome";
+              font-size:18px;
+              margin-left: 15px;
+            }
+            img {
+              display: none;
+            }
+          }
+        }
+      }
+      div:nth-child(2):not(.eventdate) {
+        padding-bottom: 50px;
+      }
+    }
+  }
+}
+
+.kultunaut-wrapper {
+  margin: 0 0 80px 0;
+
+  h2 {
+    margin: 0;
+    color: #00335b;
+    font-weight: 700;
+  }
+}

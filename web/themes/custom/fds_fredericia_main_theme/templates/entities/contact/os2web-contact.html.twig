@@ -1,3 +1,4 @@
+{#
 {% set modalId = 'modal-' ~ random() %}
 
 <div{{ attributes.addClass('os2web_contact os2web-contact') }}>
@@ -49,3 +50,407 @@
   </div>
 {% endif %}
 
+
+
+#}
+{% set bgColorClass = '' %}
+{% if contact.field_contact_bg.value == 'lightblue' %}
+  {% set bgColorClass = 'bg-lightblue' %}
+{% elseif node.field_contact_bg.value == 'white' %}
+  {% set bgColorClass = 'bg-white' %}
+{% endif %}
+
+{% set modalId = 'modal-' ~ random() %}
+
+
+
+<div class="contact-template-wrapper {{ bgColorClass }}">
+
+  <div class="container">
+
+    <div class="contact-template-heading">
+      <h2>Kontakt</h2>
+    </div>
+
+    <div class="inner-contact-wrapper">
+
+
+      <div class="contact-col-1 {% if contact.field_cnt_monday.value is empty
+        and contact.field_cnt_tuesday.value is empty
+        and contact.field_cnt_wednesday.value is empty
+        and contact.field_cnt_thursday.value is empty
+        and contact.field_cnt_friday.value is empty
+        and contact.field_cnt_phone_monday.value is empty
+        and contact.field_cnt_phone_tuesday.value is empty
+        and contact.field_cnt_phone_wednesday.value is empty
+        and contact.field_cnt_phone_thursday.value is empty
+        and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2
+{% endif %} ">
+
+        {% if contact.field_contact_location.value or contact.field_contact_address.value is not empty %}
+
+          <div class="contact-template-address {% if contact.field_cnt_monday.value is empty
+            and contact.field_cnt_tuesday.value is empty
+            and contact.field_cnt_wednesday.value is empty
+            and contact.field_cnt_thursday.value is empty
+            and contact.field_cnt_friday.value is empty
+            and contact.field_cnt_phone_monday.value is empty
+            and contact.field_cnt_phone_tuesday.value is empty
+            and contact.field_cnt_phone_wednesday.value is empty
+            and contact.field_cnt_phone_thursday.value is empty
+            and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon address-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="address-info">
+              <h3 class="info-heading">{{ content.field_contact_location }}</h3>
+              <div class="info-content">
+                {{ content.field_contact_address }}
+              </div>
+            </div>
+          </div>
+
+        {% endif %}
+
+        {% if contact.field_contact_tlf is not empty %}
+
+          <div class="contact-template-phone {% if contact.field_cnt_monday.value is empty
+            and contact.field_cnt_tuesday.value is empty
+            and contact.field_cnt_wednesday.value is empty
+            and contact.field_cnt_thursday.value is empty
+            and contact.field_cnt_friday.value is empty
+            and contact.field_cnt_phone_monday.value is empty
+            and contact.field_cnt_phone_tuesday.value is empty
+            and contact.field_cnt_phone_wednesday.value is empty
+            and contact.field_cnt_phone_thursday.value is empty
+            and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon phone-icon">
+              <i class="fa-solid fa-phone-flip"></i>
+            </div>
+            <div class="phone-info">
+              <h3 class="info-heading">Ring til os</h3>
+              <a href="tel:{{ content.field_contact_tlf.value }}">{{ content.field_contact_tlf }}</a>
+            </div>
+          </div>
+
+        {% endif %}
+
+        {% if contact.field_contact_mail is not empty %}
+
+          <div class="contact-template-mail {% if contact.field_cnt_monday.value is empty
+            and contact.field_cnt_tuesday.value is empty
+            and contact.field_cnt_wednesday.value is empty
+            and contact.field_cnt_thursday.value is empty
+            and contact.field_cnt_friday.value is empty
+            and contact.field_cnt_phone_monday.value is empty
+            and contact.field_cnt_phone_tuesday.value is empty
+            and contact.field_cnt_phone_wednesday.value is empty
+            and contact.field_cnt_phone_thursday.value is empty
+            and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon mail-icon">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="mail-info">
+              <h3 class="info-heading">Skriv til os</h3>
+              {{ content.field_contact_mail }}
+            </div>
+          </div>
+
+        {% endif %}
+
+        {% if contact.field_vigtig_info is not empty or contact.field_info_heading is not empty %}
+
+          <div class="contact-template-warning {% if contact.field_cnt_monday.value is empty
+            and contact.field_cnt_tuesday.value is empty
+            and contact.field_cnt_wednesday.value is empty
+            and contact.field_cnt_thursday.value is empty
+            and contact.field_cnt_friday.value is empty
+            and contact.field_cnt_phone_monday.value is empty
+            and contact.field_cnt_phone_tuesday.value is empty
+            and contact.field_cnt_phone_wednesday.value is empty
+            and contact.field_cnt_phone_thursday.value is empty
+            and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon warning-icon">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+
+            <div class="warning-info">
+              <h3 class="info-heading">{{ content.field_info_heading }}</h3>
+              {{ content.field_vigtig_info }}
+            </div>
+          </div>
+
+        {% endif %}
+
+        {% if contact.field_os2web_contact_surname is not empty or contact.field_os2web_contact_firstname is not empty %}
+
+          <div class="contact-template-person {% if contact.field_cnt_monday.value is empty
+            and contact.field_cnt_tuesday.value is empty
+            and contact.field_cnt_wednesday.value is empty
+            and contact.field_cnt_thursday.value is empty
+            and contact.field_cnt_friday.value is empty
+            and contact.field_cnt_phone_monday.value is empty
+            and contact.field_cnt_phone_tuesday.value is empty
+            and contact.field_cnt_phone_wednesday.value is empty
+            and contact.field_cnt_phone_thursday.value is empty
+            and contact.field_cnt_phone_friday.value is empty %}
+  no-col-2-item
+{% endif %}">
+            <div class="contact-template-icon user-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="contact-person-info">
+
+              {% if contact.field_os2web_contact_heading is not empty %}
+              <div class="contact-person-heading">{{ content.field_os2web_contact_heading }}</div>
+              {% endif %}
+
+              {% if contact.field_os2web_contact_firstname is not empty or contact.field_os2web_contact_surname is not empty %}
+              <div class="contact-person-name">
+                {{ content.field_os2web_contact_firstname }} {{ content.field_os2web_contact_surname }}
+              </div>
+              {% endif %}
+
+              {% if contact.field_os2web_contact_job_title is not empty or contact.field_os2web_contact_job_task is not empty %}
+              <div class="contact-person-job">
+                {% if contact.field_os2web_contact_job_title is not empty %}
+                <div class="job-title">
+                  {{ content.field_os2web_contact_job_title }}
+                </div>
+                {% endif %}
+                {% if contact.field_os2web_contact_job_task is not empty %}
+                <div class="job-task">
+                  {{ content.field_os2web_contact_job_task }}
+                </div>
+                {% endif %}
+              </div>
+              {% endif %}
+
+              {% if contact.field_os2web_contact_email is not empty %}
+              <div class="contact-person-email">
+                 <span>E-mail:</span>
+                  {{ content.field_os2web_contact_email }}
+              </div>
+              {% endif %}
+
+              {% if contact.field_os2web_contact_main_phone is not empty %}
+              <div class="contact-person-phone">
+                <span>Telefonnummer:</span>
+                {{ content.field_os2web_contact_main_phone }}
+              </div>
+              {% endif %}
+
+            </div>
+
+
+
+
+          </div>
+
+        {% endif %}
+
+        {% if contact.field_os2web_contact_modal.value and  contact.field_os2web_contact_modal_butt.value %}
+          <button data-micromodal-trigger="{{ modalId }}" class="contact-modal-btn button button-primary">
+            {{ content.field_os2web_contact_modal_butt }}
+          </button>
+        {% endif %}
+
+      </div>
+
+
+      {% if contact.field_cnt_monday.value or contact.field_cnt_tuesday.value or contact.field_cnt_wednesday.value or contact.field_cnt_thursday.value or contact.field_cnt_friday.value or contact.field_cnt_phone_monday.value or contact.field_cnt_phone_tuesday.value or contact.field_cnt_phone_wednesday.value or contact.field_cnt_phone_thursday.value or contact.field_cnt_phone_friday.value is not empty  %}
+        <div class="contact-col-2">
+
+          {% if contact.field_cnt_monday.value or contact.field_cnt_tuesday.value or contact.field_cnt_wednesday.value or contact.field_cnt_thursday.value or contact.field_cnt_friday.value is not empty %}
+
+            <div class="opening-hours">
+              <h3 class="info-heading">Åbningstider</h3>
+
+              <div class="opening-hours-days">
+
+                {% if contact.field_cnt_monday is not empty %}
+
+                  <div class="monday">
+                    <span class="day">Mandag</span>
+                    <span>{{ content.field_cnt_monday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_tuesday is not empty %}
+
+                  <div class="tuesday">
+                    <span class="day">Tirsdag</span>
+                    <span>{{ content.field_cnt_tuesday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_wednesday is not empty %}
+
+                  <div class="wednesday">
+                    <span class="day">Onsdag</span>
+                    <span>{{ content.field_cnt_wednesday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_thursday is not empty %}
+
+                  <div class="thursday">
+                    <span class="day">Torsdag</span>
+                    <span>{{ content.field_cnt_thursday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_friday is not empty %}
+
+                  <div class="friday">
+                    <span class="day">Fredag</span>
+                    <span>{{ content.field_cnt_friday }}</span>
+                  </div>
+
+                {% endif %}
+
+              </div>
+            </div>
+          {% endif %}
+
+          {% if contact.field_cnt_phone_monday.value or contact.field_cnt_phone_tuesday.value or contact.field_cnt_phone_wednesday.value or contact.field_cnt_phone_thursday.value or contact.field_cnt_phone_friday.value is not empty %}
+            <div class="phone-opening-hours">
+              <h3 class="info-heading">Telefontider</h3>
+
+              <div class="phone-opening-hours-days">
+
+                {% if contact.field_cnt_phone_monday is not empty %}
+
+                  <div class="monday">
+                    <span class="day">Mandag</span>
+                    <span>{{ content.field_cnt_phone_monday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_phone_tuesday is not empty %}
+
+                  <div class="tuesday">
+                    <span class="day">Tirsdag</span>
+                    <span>{{ content.field_cnt_phone_tuesday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_phone_wednesday is not empty %}
+
+                  <div class="wednesday">
+                    <span class="day">Onsdag</span>
+                    <span>{{ content.field_cnt_phone_wednesday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_phone_thursday is not empty %}
+
+                  <div class="thursday">
+                    <span class="day">Torsdag</span>
+                    <span>{{ content.field_cnt_phone_thursday }}</span>
+                  </div>
+
+                {% endif %}
+
+                {% if contact.field_cnt_phone_friday is not empty %}
+
+                  <div class="friday">
+                    <span class="day">Fredag</span>
+                    <span>{{ content.field_cnt_phone_friday }}</span>
+                  </div>
+
+                {% endif %}
+
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+
+    </div>
+
+    {% if contact.field_os2web_contact_modal.value %}
+      <div class="modal micromodal-slide" id="{{ modalId }}" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close></div>
+          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="{{ modalId }}-title">
+
+            <img class="modal-watermark" alt="Fredericia Kommune Watermark" src="{{ base_path ~ directory }}/dist/images/logo-fredericia.png">
+
+            {% if contact.field_os2web_contact_modal_head.value %}
+              <header class="modal__header">
+
+                <h2 class="modal__title" id="{{ modalId }}-title">
+                  {{ content.field_os2web_contact_modal_head }}
+                </h2>
+
+                <button class="modal__close" aria-label="{{ 'Close' | trans }}" data-micromodal-close></button>
+              </header>
+            {% endif %}
+
+            <main class="modal__content">
+              {{ content.field_os2web_contact_modal_body }}
+            </main>
+
+            <footer class="modal__footer">
+              <button class="button button-primary close-modal-btn" data-micromodal-close aria-label="{{ 'Close this window' | trans }}">
+                {{ 'Close' | trans }}
+              </button>
+            </footer>
+          </div>
+      </div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+<script>
+
+  // Function to toggle modal open class
+  function toggleModal(isOpen) {
+    const modal = document.querySelector('.micromodal-slide');
+    if (modal) {
+      if (isOpen) {
+        modal.classList.add('is-open');
+      } else {
+        modal.classList.remove('is-open');
+      }
+    }
+  }
+
+  // Attach event listener to the open modal button
+  const openBtn = document.querySelector('.contact-modal-btn');
+  if (openBtn) {
+    openBtn.addEventListener('click', function () {
+      toggleModal(true);
+    });
+  }
+
+  // Attach event listeners to all close modal triggers
+  const closeBtns = document.querySelectorAll('.modal__close, .close-modal-btn, .modal__overlay');
+  closeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      toggleModal(false);
+    });
+  });
+
+</script>

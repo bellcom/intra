@@ -7,6 +7,10 @@ use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\file\Entity\File;
+use Drupal\Core\Datetime\DrupalDateTime;
+
+
 
 /**
  * Implements hook_theme_suggestions_page().
@@ -23,6 +27,11 @@ function fds_fredericia_main_theme_theme_suggestions_block_alter(array &$suggest
  * Implements hook_preprocess_block().
  */
 function fds_fredericia_main_theme_preprocess_block(&$variables) {
+
+if ($variables['elements']['#id'] == 'fds_fredericia_main_theme_indholdfield_ext_links') {
+        $variables['selfservice_link_text'] = theme_get_setting('selfservice_link_text');
+        $variables['selfservice_link_url'] = theme_get_setting('selfservice_link_url');
+    }
 
   if ($variables['elements']['#id'] == 'fds_fredericia_main_theme_indholdfield') {
     $node = $variables['content']['field']['#object'];
@@ -41,6 +50,21 @@ function fds_fredericia_main_theme_preprocess_block(&$variables) {
     }
   }
 
+    $variables['theme_settings'] = \Drupal::config('fds_fredericia_main_theme.settings')->get();
+    if (!empty($variables['theme_settings']['banner_image'][0])) {
+        // Load the file entity using the file ID.
+        $banner_image_id = $variables['theme_settings']['banner_image'][0];
+        $banner_image_file = File::load($banner_image_id);
+
+        if ($banner_image_file) {
+          // Get the URL of the file.
+          $banner_image_url = $banner_image_file->createFileUrl();
+
+          // Pass the URL to the Twig template.
+          $variables['banner_image_url'] = $banner_image_url;
+        }
+      }
+
 }
 
 /**
@@ -50,10 +74,7 @@ function fds_fredericia_main_theme_preprocess_page(array &$variables) {
   $variables['theme_settings'] = _fds_base_theme_collect_theme_settings();
   $variables['theme_settings']['footer']['footer_show_latest_content'] = theme_get_setting('footer_show_latest_content');
   $variables['theme_settings']['footer']['footer_image'] = theme_get_setting('footer_image_choice');
-  $footer_image_path = theme_get_setting('footer_image_path');
-  $variables['theme_settings']['footer']['footer_image_url'] = $footer_image_path
-    ? \Drupal::service('file_url_generator')->generateAbsoluteString($footer_image_path)
-    : '';
+  $variables['theme_settings']['footer']['footer_image_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString(theme_get_setting('footer_image_path'));
   $variables['theme_settings']['branding']['branding_toggle'] = theme_get_setting('branding_toggle');
   $variables['theme_settings']['branding']['branding_text'] = theme_get_setting('branding_text');
 
@@ -129,9 +150,9 @@ function fds_fredericia_main_theme_form_search_form_alter(&$form, FormStateInter
 }
 
 /**
- * Implements template_preprocess_swiftmailer().
+ * Implements template_preprocess_symfony_mailer_lite_email().
  */
-function fds_fredericia_main_theme_preprocesfos_swiftmailer(&$variables) {
+function fds_fredericia_main_theme_preprocess_symfony_mailer_lite_email(&$variables) {
   global $base_url;
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $theme = \Drupal::theme()->getActiveTheme();
@@ -170,7 +191,7 @@ function fds_fredericia_main_theme_preprocess_anonymous_subscriptions_notificati
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
     $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
   }
 }
@@ -195,7 +216,7 @@ function fds_fredericia_main_theme_preprocess_anonymous_subscriptions_message(ar
   if (!empty($theme_settings['language_logo']['header_logo__' . $language])) {
     $file = File::load($theme_settings['language_logo']['header_logo__' . $language]);
     if (!empty($file)) {
-      $variables['logo_url'] = file_create_url($file->getFileUri());
+      $variables['logo_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
   }
   $subscription = $variables['subscription'];
@@ -246,8 +267,11 @@ function fds_fredericia_main_theme_preprocess_node(array &$variables) {
 
   $node = $variables['node'];
   $view_mode = $variables['elements']['#view_mode'];
+  if ($variables['view_mode'] == 'teaser' && $variables['node']->getType() == 'os2web_page' || $variables['node']->getType() == 'os2web_news')  {
+          $variables['menu_hierarchy'] = fds_fredericia_main_theme_get_menu_hierarchy_for_node($variables['node']);
+      }
 
-  if ($view_mode == 'teaser' && $node->getType() == 'os2web_page') {
+  if ($view_mode == 'teaser' && $node->getType() == 'os2web_page' || $node->getType() == 'os2web_news') {
     $routeName = $node->toUrl()->getRouteName();
     $routeParameters = $node->toUrl()->getRouteParameters();
     $route = Drupal::service('router.route_provider')->getRouteByName($routeName);
@@ -294,6 +318,52 @@ function fds_fredericia_main_theme_preprocess_node(array &$variables) {
   $variables['#lastupdated'] = time();
 
 
+  // Check for the specific content type.
+    if ($node->bundle() === 'os2web_hearings_hearing_case') {
+      // Prepare attached documents.
+      if ($node->hasField('field_os2web_hearings_attac_doc') && !$node->field_os2web_hearings_attac_doc->isEmpty()) {
+        $attached_docs = $node->field_os2web_hearings_attac_doc->referencedEntities();
+        $variables['attached_documents'] = [];
+        foreach ($attached_docs as $doc) {
+          $variables['attached_documents'][] = \Drupal::service('file_url_generator')->generateAbsoluteString($doc->getFileUri());
+        }
+      }
+
+      // Prepare referenced entities.
+      if ($node->hasField('field_hoering_doc_ref') && !$node->field_hoering_doc_ref->isEmpty()) {
+        $referenced_entities = $node->field_hoering_doc_ref->referencedEntities();
+        $variables['referenced_documents'] = [];
+        foreach ($referenced_entities as $referenced_entity) {
+          $view_builder = \Drupal::entityTypeManager()->getViewBuilder($referenced_entity->getEntityTypeId());
+          $variables['referenced_documents'][] = $view_builder->view($referenced_entity, 'default'); // Adjust view mode as necessary
+        }
+      }
+    }
+
+
+
+}
+
+function fds_fredericia_main_theme_get_menu_hierarchy_for_node($node) {
+    $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+    $breadcrumbs = [];
+
+    // Get the menu link for the node
+    $menu_links = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node->id()], 'main');
+
+    foreach ($menu_links as $link) {
+        while ($link && ($parentId = $link->getParent())) {
+            $parentLink = $menu_link_manager->createInstance($parentId);
+            if ($parentLink) {
+                $breadcrumbs[] = $parentLink->getTitle();
+                $link = $parentLink; // Update $link to the parent for the next iteration
+            } else {
+                break; // Exit the loop if no parent link is found
+            }
+        }
+    }
+
+    return array_reverse($breadcrumbs); // Reverse to get the correct order
 }
 
 /**
@@ -374,8 +444,9 @@ function fds_fredericia_main_theme_preprocess_paragraph(&$variables) {
     // Fetch the latest news articles of the "os2web_news" type.
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'os2web_news')
-      ->sort('created', 'DESC')
-      ->range(0, 3);
+      ->sort('field_os2web_news_article_date', 'DESC')
+      ->range(0, 9)
+      ->accessCheck(TRUE);
     $nids = $query->execute();
 
     // Load the article entities.
@@ -470,8 +541,327 @@ function fds_fredericia_main_theme_preprocess_paragraph(&$variables) {
     }
   }
 
+  $theme_settings = \Drupal::config('fds_fredericia_main_theme.settings');
+  $variables['placeholder_images_urls'] = [];
+
+  if ($placeholder_image_fids = $theme_settings->get('placeholder_images')) {
+    foreach ($placeholder_image_fids as $fid) {
+      $file = \Drupal\file\Entity\File::load($fid);
+      if ($file) {
+        $variables['placeholder_images_urls'][] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
+      }
+    }
+  }
+
+  if ($paragraph->bundle() === 'os2web_files_paragraph') {
+      // Check and prepare ESDH Documents.
+      if ($paragraph->hasField('field_case_reference') && !$paragraph->field_case_reference->isEmpty()) {
+        $case_node = $paragraph->field_case_reference->entity;
+
+        if ($case_node && $case_node->hasField('field_case_documents') && !$case_node->field_case_documents->isEmpty()) {
+          $document_ids = $case_node->field_case_documents->getValue();
+          $documents = [];
+          foreach ($document_ids as $id) {
+            $document_node = \Drupal\node\Entity\Node::load($id['target_id']);
+            if ($document_node) {
+              $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+              $documents[] = $view_builder->view($document_node, 'paragraph_display');
+            }
+          }
+          $variables['esdh_documents'] = $documents;
+        }
+      }
+
+      // Prepare the file field for rendering.
+      if ($paragraph->hasField('field_os2web_files_files') && !$paragraph->field_os2web_files_files->isEmpty()) {
+        $file_entities = $paragraph->field_os2web_files_files->referencedEntities();
+        $variables['os2web_files'] = [];
+        foreach ($file_entities as $file) {
+          $variables['os2web_files'][] = [
+            '#theme' => 'file_link',
+            '#file' => $file,
+          ];
+        }
+      }
+
+      // Prepare the media field for rendering.
+      if ($paragraph->hasField('field_os2web_files_media') && !$paragraph->field_os2web_files_media->isEmpty()) {
+        $media_entities = $paragraph->field_os2web_files_media->referencedEntities();
+        $variables['os2web_media_files'] = [];
+        foreach ($media_entities as $media) {
+          $view_builder = \Drupal::entityTypeManager()->getViewBuilder('media');
+          $variables['os2web_media_files'][] = $view_builder->view($media, 'default');
+        }
+      }
+
+      if ($paragraph->hasField('field_document_reference') && !$paragraph->field_document_reference->isEmpty()) {
+          $referenced_entities = $paragraph->field_document_reference->referencedEntities();
+          $variables['field_document_reference_items'] = [];
+          foreach ($referenced_entities as $referenced_entity) {
+              $view_builder = \Drupal::entityTypeManager()->getViewBuilder($referenced_entity->getEntityTypeId());
+              $variables['field_document_reference_items'][] = $view_builder->view($referenced_entity, 'default');
+          }
+      }
+    }
+
+    if ($paragraph->bundle() === 'edoc_filer') {
+        // Check and prepare ESDH Documents.
+        if ($paragraph->hasField('field_sagsreference') && !$paragraph->field_sagsreference->isEmpty()) {
+            $case_node = $paragraph->field_sagsreference->entity;
+
+            if ($case_node && $case_node->hasField('field_case_documents') && !$case_node->field_case_documents->isEmpty()) {
+                $document_ids = $case_node->field_case_documents->getValue();
+                $documents = [];
+                foreach ($document_ids as $id) {
+                    $document_node = \Drupal\node\Entity\Node::load($id['target_id']);
+                    if ($document_node) {
+                        $document_rendered = false;
+
+                        // Get the document title
+                        $document_title = '';
+                        if ($document_node->hasField('field_document_title') && !$document_node->field_document_title->isEmpty()) {
+                            $document_title = $document_node->field_document_title->value;
+                        }
+
+                        // Get the file from the document and create custom render array
+                        if ($document_node->hasField('field_case_file') && !$document_node->field_case_file->isEmpty()) {
+                            $file = $document_node->field_case_file->entity;
+                            if ($file && $file->getFileUri()) {
+                                // Create a completely custom render array with direct link
+                                $uri = $file->getFileUri();
+                                $display_title = !empty($document_title) ? $document_title : $file->getFilename();
+
+                                $documents[] = [
+                                    '#type' => 'link',
+                                    '#title' => $display_title,
+                                    '#url' => \Drupal\Core\Url::fromUri(\Drupal::service('file_url_generator')->generateAbsoluteString($uri)),
+                                    '#attributes' => [
+                                        'target' => '_blank',
+                                        'class' => ['file-link'],
+                                    ],
+                                    '#cache' => [
+                                        'tags' => $document_node->getCacheTags(),
+                                    ],
+                                ];
+                                $document_rendered = true;
+                            }
+                        }
+
+                        // Fallback to normal rendering ONLY IF the document was not already rendered as a link.
+                                    if (!$document_rendered) {
+                                        $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+                                        $rendered_document = $view_builder->view($document_node, 'paragraph_display');
+
+                                        if (!empty($rendered_document)) {
+                                            $documents[] = $rendered_document;
+                                        }
+                                    }
+                    }
+                }
+                $variables['esdh_documents'] = $documents;
+            }
+        }
+
+        // Check and prepare field_doc_reference items.
+        if ($paragraph->hasField('field_doc_reference') && !$paragraph->field_doc_reference->isEmpty()) {
+            $referenced_entities = $paragraph->field_doc_reference->referencedEntities();
+            $variables['field_document_reference_items'] = [];
+            foreach ($referenced_entities as $referenced_entity) {
+                $view_builder = \Drupal::entityTypeManager()->getViewBuilder($referenced_entity->getEntityTypeId());
+                $rendered_item = $view_builder->view($referenced_entity, 'default');
+                if (!empty($rendered_item)) {
+                    $variables['field_document_reference_items'][] = $rendered_item;
+                }
+            }
+        }
+    }
+
+
 }
+
 
 function fds_fredericia_main_theme_preprocess(&$variables, $hook) {
     $variables['base_path'] = base_path();
+}
+
+
+function fds_fredericia_main_theme_preprocess_field(&$variables) {
+  if ($variables['element']['#bundle'] == 'os2web_banner_paragraph' && $variables['element']['#field_name'] == 'field_os2web_banner_links') {
+    $paragraph = $variables['element']['#object'];
+    if ($paragraph->hasField('field_banner_link_color') && !$paragraph->get('field_banner_link_color')->isEmpty()) {
+      $link_color_value = $paragraph->get('field_banner_link_color')->getString();
+      switch ($link_color_value) {
+        case 'red_link':
+          $variables['link_color_class'] = 'red-link-class';
+          break;
+        case 'lightred_link':
+          $variables['link_color_class'] = 'lightred-link-class';
+          break;
+        case 'blue_link':
+          $variables['link_color_class'] = 'blue-link-class';
+          break;
+        case 'lightblue_link':
+          $variables['link_color_class'] = 'lightblue-link-class';
+          break;
+      }
+    }
+  }
+}
+
+function fds_fredericia_main_theme_preprocess_paragraph__os2web_focus_box(array &$variables) {
+  $paragraph = $variables['paragraph'];
+
+  for ($i = 1; $i <= 5; $i++) {
+    $colorFieldName = "field_focusbox_link_color_" . $i;
+
+    if ($paragraph->hasField($colorFieldName) && !$paragraph->get($colorFieldName)->isEmpty()) {
+      $link_color_value = $paragraph->get($colorFieldName)->getString();
+      $variables["link_color_value_$i"] = $link_color_value;
+    }
+  }
+}
+
+function fds_fredericia_main_theme_preprocess_paragraph__tableofcontents(array &$variables) {
+  $paragraph = $variables['paragraph'];
+  $original_contents = $paragraph->get('field_toc_content')->getValue();
+
+  // Loop through each item to process any media entities.
+  foreach ($original_contents as $key => &$content_item) {
+    // Check if there's a media entity placeholder in the text.
+    if (strpos($content_item['value'], '<drupal-entity') !== FALSE) {
+      $dom = new \DOMDocument();
+      @$dom->loadHTML(mb_convert_encoding($content_item['value'], 'HTML-ENTITIES', 'UTF-8'), LIBXML_NOERROR | LIBXML_NOWARNING);
+
+      // Locate and replace each <drupal-entity> tag.
+      foreach ($dom->getElementsByTagName('drupal-entity') as $entity_tag) {
+        $uuid = $entity_tag->getAttribute('data-entity-uuid');
+
+        // Load and render the media entity.
+        $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $uuid);
+        if ($media) {
+          $view_builder = \Drupal::entityTypeManager()->getViewBuilder('media');
+          $render_output = $view_builder->view($media, 'default'); // make sure you use a valid view mode
+          $rendered_media = \Drupal::service('renderer')->renderRoot($render_output)->__toString();
+
+          // Replace the placeholder with rendered output.
+          $entity_tag->nodeValue = '';
+          $cdata = $dom->createCDATASection($rendered_media);
+          $entity_tag->appendChild($cdata);
+        }
+      }
+      $content_item['value'] = $dom->saveHTML();
+    }
+  }
+  $variables['processed_contents'] = $original_contents;
+}
+
+
+function fds_fredericia_main_theme_preprocess_block__fds_fredericia_main_theme_os2web_search_os2web_search_page_content(array &$variables) {
+  $block_id = 'fds_fredericia_main_theme_os2web_search_type_facet';
+
+  $block = \Drupal\block\Entity\Block::load($block_id);
+  if ($block) {
+    $block_content = \Drupal::entityTypeManager()
+      ->getViewBuilder('block')
+      ->view($block);
+
+    $variables['facet_block'] = $block_content;
+  }
+  else {
+    $variables['facet_block'] = [];
+  }
+}
+
+function fds_fredericia_main_theme_preprocess_text_formatted(array &$variables) {
+  $text = $variables['text']['#text'];
+
+  if (strpos($text, '<drupal-entity') !== FALSE) {
+    $dom = new \DOMDocument();
+    @$dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'), LIBXML_NOERROR | LIBXML_NOWARNING);
+
+    // Locate and replace each <drupal-entity> tag.
+    foreach ($dom->getElementsByTagName('drupal-entity') as $entity_tag) {
+      $uuid = $entity_tag->getAttribute('data-entity-uuid');
+
+      // Load and render the media entity.
+      $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $uuid);
+      if ($media) {
+        $view_builder = \Drupal::entityTypeManager()->getViewBuilder('media');
+        $render_output = $view_builder->view($media, 'default'); // Make sure you use a valid view mode.
+        $rendered_media = \Drupal::service('renderer')->renderRoot($render_output)->__toString();
+
+        // Replace the placeholder with rendered output.
+        $entity_tag->nodeValue = '';
+        $cdata = $dom->createCDATASection($rendered_media);
+        $entity_tag->appendChild($cdata);
+      }
+    }
+    $variables['text']['#text'] = $dom->saveHTML();
+  }
+}
+
+/**
+ * Fetches the latest published nodes of the "events" content type.
+ *
+ * @param int $limit
+ *   The number of nodes to fetch.
+ *
+ * @return \Drupal\node\NodeInterface[]
+ *   An array of node entities.
+ */
+function fds_fredericia_main_theme_fetch_latest_events($limit = 4) {
+  // Get the current date in a format that Drupal can compare against stored dates
+  $current_date = new DrupalDateTime('now');
+  // Format to match the storage format of your date field
+  $current_date_string = $current_date->format('Y-m-d\TH:i:s');
+
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck()
+    ->condition('status', 1) // Only published nodes
+    ->condition('type', 'os2web_event') // Your specific content type machine name
+    // Ensure we only get events that haven't started yet
+    ->condition('field_os2web_event_start_date', $current_date_string, '>=')
+    ->sort('field_os2web_event_start_date', 'ASC') // Sort by event start date, soonest first
+    ->range(0, $limit); // Limit the number of results
+  $nids = $query->execute();
+
+  return Node::loadMultiple($nids);
+}
+
+function fds_fredericia_main_theme_preprocess_paragraph__events_slider(&$variables) {
+  // Fetch the latest events and add them to the variables.
+  $variables['latest_events'] = fds_fredericia_main_theme_fetch_latest_events();
+}
+
+/**
+ * Implements hook_preprocess_paragraph__news_section().
+ */
+function fds_fredericia_main_theme_preprocess_paragraph__news_section(&$variables) {
+  // Assuming you're checking for a selected taxonomy term.
+  $term_id = $variables['paragraph']->field_news_section_ref->target_id;
+
+  // Query for news nodes tagged with this term.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck()
+    ->condition('status', 1)
+    ->condition('type', 'os2web_news')
+    ->condition('field_os2web_news_section', $term_id)
+    ->range(0, 9) // Adjust as needed.
+    ->sort('field_os2web_news_article_date', 'DESC');
+  $nids = $query->execute();
+
+  // Load the node objects.
+  $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+
+  // Pass the node objects to the template.
+  $variables['latest_news_articles'] = $nodes;
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function fds_fredericia_main_theme_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  if ($variables['element']['#field_name'] == 'field_case_file') {
+    $suggestions[] = 'field__field_case_file';
+  }
 }

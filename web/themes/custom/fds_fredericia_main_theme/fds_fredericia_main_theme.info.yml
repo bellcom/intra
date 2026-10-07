@@ -1,7 +1,8 @@
 name: 'Designsystem.dk - Fredericia'
 type: theme
 description: 'Theme for Fredericia.'
-core_version_requirement: ^10 || ^11
+core: 8.x
+core_version_requirement: ^9 || ^10 || ^11
 screenshot: screenshot.png
 logo: logo.png
 base theme: fds_base_theme
@@ -12,6 +13,8 @@ regions:
   header__top_navigation: 'Header - top navigation'
   header__main_navigation: 'Header - main navigation'
   header__megamenu_navigation: 'Header - Megamenu'
+  header__selfservice: 'Header - Selvbetjening'
+  header__below: 'Header - below'
   banner_search: 'Banner search'
   alert_banner: 'Alert banner'
   small_search: 'Small search'
@@ -25,14 +28,31 @@ regions:
   footer__latest_content: 'Footer - latest content'
   footer_first: 'Footer first'
   footer_second: 'Footer second'
+  footer_third: 'Footer third'
   embedded_code: 'Embedded code'
+
+theme-settings:
+  banner_image:
+    label: 'Banner Search Billede'
+    description: 'Upload et billede for banner search sektionen.'
+    type: image
+    default_value: null
+  placeholder_image:
+    label: 'Placeholder Image'
+    description: 'Upload et billede som skal være placeholder for news cards visningen.'
+    type: image
+    default_value: null
 
 libraries:
   - 'fds_fredericia_main_theme/fonts'
   - 'fds_fredericia_main_theme/styles'
   - 'fds_fredericia_main_theme/javascripts'
+  - 'fds_fredericia_main_theme/swiper'
+  - 'fds_fredericia_main_theme/navigate_back'
 
-# libraries-override:
-#   fds_base_theme/javascripts:
-#     js:
-#       js/slideshow.js: js/slideshow.js
+libraries-override:
+   fds_base_theme/javascripts:
+     js:
+       js/slideshow.js: js/slideshow.js
+       js/accordion.js: js/accordion.js
+       js/micro-modal.js: js/micro-modal.js

@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file
+ * Preprocess and alter hooks for Fredericia Intra.
+ *
+ * Shared logic lives in fds_fredericia_main_theme. Add intranet-specific
+ * hooks here when they should not apply to the main site theme.
+ */

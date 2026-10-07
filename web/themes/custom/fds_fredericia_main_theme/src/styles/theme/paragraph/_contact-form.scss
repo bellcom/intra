@@ -20,6 +20,18 @@
 // Styling
 // --------------------------------------------------
 
+
+.form-type-tel {
+  display: flex;
+  flex-direction: column;
+
+  .form-tel {
+    padding: 8px 20px;
+    border: 1px solid #000;
+    border-radius: 4px;
+  }
+}
+
 .paragraph--type--os2web-contact-form {
 
   .form-input,

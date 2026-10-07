@@ -1,0 +1,73 @@
+
+{% set image_position_class = content.field_fifty_fifty_layout[0]['#markup'] == 'Billede højre/Tekst venstre' ? 'image-right' : 'image-left' %}
+{% set text_position_class = content.field_fifty_fifty_text_layout[0]['#markup'] == 'Center tekst alignment' ? 'text-align-center' : 'text-align-left' %}
+{% set selectedColor = content.field_fifty_fifty_bg_color['#items'].getString() %}
+{% set selectedButtonColor = content.field_fifty_fifty_btn_color['#items'].getString() %}
+
+{% set remove_bottom_margin = paragraph.field_remove_bottom_margin.value %}
+{% set margin_class = remove_bottom_margin ? 'no-bottom-margin' : '' %}
+
+{% set color_map = {
+  'bg_blue': '#00335b',
+  'bg_lightblue': '#aabfcf',
+  'bg_red': '#9d0425',
+  'bg_lightred': '#f3e7e7',
+  'bg_green': '#3e8346',
+  'bg_lightgreen': '#dce6d9',
+  'bg_black': '#000',
+  'bg_lightblack': '#333'
+} %}
+
+{% set text_color_map = {
+  'bg_blue': 'text-side-white',
+  'bg_lightblue': 'text-side-black',
+  'bg_red': 'text-side-white',
+  'bg_lightred': 'text-side-black',
+  'bg_green': 'text-side-white',
+  'bg_lightgreen': 'text-side-black',
+  'bg_black': 'text-side-white',
+  'bg_lightblack': 'text-side-white'
+} %}
+
+{% set button_color_classes = {
+  'btn_blue': 'button-blue',
+  'btn_lightblue': 'button-lightblue',
+  'btn_red': 'button-red',
+  'btn_lightred': 'button-lightred',
+  'btn_black': 'button-black'
+} %}
+
+{% set background_color = color_map[selectedColor]|default('#ffffff') %}
+{% set text_color_class = text_color_map[selectedColor]|default('text-side-black') %}
+{% set button_class = button_color_classes[selectedButtonColor]|default('button-default') %}
+
+
+
+<div class="paragraph-50-50-wrapper {{ image_position_class }} {{ margin_class }}">
+  {% if paragraph.field_fifty_fifty_image is not empty %}
+  <div class="image-side">
+      {{ content.field_fifty_fifty_image }}
+  </div>
+  {% endif %}
+  {% if paragraph.field_fifty_fifty_video is not empty and paragraph.field_fifty_fifty_image is empty %}
+  <div class="image-side">
+    {{ content.field_fifty_fifty_video }}
+  </div>
+  {% endif %}
+  {% if paragraph.field_fifty_fifty_iframe is not empty and paragraph.field_fifty_fifty_image is empty and paragraph.field_fifty_fifty_video is empty %}
+  <div class="image-side">
+    {{ content.field_fifty_fifty_iframe }}
+  </div>
+  {% endif %}
+  <div style="background-color: {{ background_color }};" class="text-side {{ text_position_class }} {{ text_color_class }}">
+    <h2>{{ content.field_fifty_fifty_heading }}</h2>
+    <div class="paragraph-50-50-description">
+      {{ content.field_fifty_fifty_desc }}
+    </div>
+    {% if content.field_fifty_fifty_link %}
+      <div class="cta-buttons {{ text_position_class }} {{ button_class }}">
+        {{ content.field_fifty_fifty_link }}
+      </div>
+    {% endif %}
+  </div>
+</div>

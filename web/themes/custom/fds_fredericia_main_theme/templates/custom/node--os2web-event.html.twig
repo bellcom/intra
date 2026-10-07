@@ -99,7 +99,61 @@
   {% endif %}
 
   <div{{ content_attributes.addClass('node__content') }}>
-    {{ content }}
+    <div class="banner-event-fk">
+      <div class="banner-event-image">
+        {{ content.field_os2web_evnet_image }}
+      </div>
+      <div class="banner-event-info">
+        <h1>{{ label }}</h1>
+        <a class="event-link" href="{{ content.field_os2web_event_url[0]['#context'].value }}"><i class="fa fa-external-link" aria-hidden="true"></i>
+          Vis begivenhedsside</a>
+        {% if content.field_event_location is not empty %}
+        <div class="event-location">
+          <i class="fa fa-map-pin" aria-hidden="true"></i>
+          {{ content.field_event_location }}
+        </div>
+        {% endif %}
+        <div class="event-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          {{ content.field_os2web_event_start_date }}
+        </div>
+        {% if content.field_os2web_event_kategori is not empty %}
+        <div class="event-category">
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          {% set categories = [] %}
+          {% for key, item in content.field_os2web_event_kategori %}
+            {% if key|first != '#' %}
+              {% set categories = categories|merge([item]) %}
+            {% endif %}
+          {% endfor %}
+          <div class="event-category-items">
+          {% for item in categories %}
+            <a href="{{ path(item['#url'].routeName, item['#url'].routeParameters) }}">{{ item['#title'] }}</a>
+            {% if not loop.last %}<span class="event-category-seperator">, &nbsp;</span> {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="event-content-section">
+
+      <h2>{{ label }}</h2>
+
+      {% if content.field_os2web_event_resume|render|striptags|trim is not empty %}
+      <div class="event-resume">
+        {{ content.field_os2web_event_resume }}
+      </div>
+      {% endif %}
+
+      <div class="event-body">
+        {{ content.body }}
+      </div>
+
+    </div>
+
+
   </div>
 
 </article>

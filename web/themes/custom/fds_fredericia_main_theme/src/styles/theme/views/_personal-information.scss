@@ -1,0 +1,58 @@
+
+.paragraph--type--os2web-pi {
+  margin: 80px 0;
+}
+
+
+.view-os2web-pi {
+  .view-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media only screen and (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+    .views-row {
+      article {
+        gap: 10px;
+
+        .pi-image {
+          .field--name-field-os2web-pi-image {
+            img {
+              border-radius: 12px;
+              box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            }
+          }
+        }
+        .pi-name {
+          .field--name-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #00335b;
+          }
+        }
+        .pi-role {
+          .field--name-field-os2web-pi-role {
+            background-color: #00335b;
+            width: fit-content;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+          }
+        }
+        .pi-party {
+          .field--name-field-os2web-pi-party {
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}

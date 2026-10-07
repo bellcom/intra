@@ -1,0 +1,90 @@
+{% set total_files_count =
+  (esdh_documents|default([])|length) +
+  (os2web_files|default([])|length) +
+  (os2web_media_files|default([])|length) +
+  (field_document_reference_items|default([])|length) %} {# Adjust this logic based on your actual structure #}
+
+{% if content.field_os2web_files_heading|render|striptags|trim is not empty %}
+  <h2>{{ content.field_os2web_files_heading }}</h2>
+{% else %}
+  <h2 class="files-default-heading">Bilag</h2>
+{% endif %}
+
+<div class="documents-wrapper files-wrapper">
+  {% set file_index = 0 %}
+
+  {# Render ESDH Documents if any #}
+  {% if esdh_documents %}
+    <div class="esdh-documents">
+      {% for document in esdh_documents %}
+        <div class="document-item {{ file_index > 2 ? 'hidden' : '' }}">{{ document }}</div>
+        {% set file_index = file_index + 1 %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Render items from field_document_reference if any #}
+  {% if field_document_reference_items %}
+    <div class="directly-referenced-documents">
+      {% for item in field_document_reference_items %}
+        <div class="document-item {{ file_index > 2 ? 'hidden' : '' }}">
+          {{ item }}
+        </div>
+        {% set file_index = file_index + 1 %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Render file uploads if any #}
+  {% if os2web_files %}
+    <div class="os2web-files">
+      {% for file in os2web_files %}
+        <div class="file-item {{ file_index > 2 ? 'hidden' : '' }}">{{ file }}</div>
+        {% set file_index = file_index + 1 %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Render media file uploads if any #}
+  {% if os2web_media_files %}
+    <div class="os2web-media-files">
+      {% for media in os2web_media_files %}
+        <div class="media-item {{ file_index > 2 ? 'hidden' : '' }}">{{ media }}</div>
+        {% set file_index = file_index + 1 %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+{% if total_files_count > 3 %}
+  <button id="show-more-files">+ Vis flere</button>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const showMoreButton = document.getElementById('show-more-files');
+    let isExpanded = false; // Keep track of the state
+
+    if (showMoreButton) {
+      showMoreButton.addEventListener('click', function() {
+        const elements = document.querySelectorAll('.files-wrapper .document-item, .files-wrapper .file-item, .files .media-item, .files-wrapper .directly-referenced-documents .document-item  ');
+        if (isExpanded) {
+          // Hide elements by re-adding 'hidden' class
+          elements.forEach(function(element, index) {
+            if (index > 2) { // Only hide elements that are beyond the first 3
+              element.classList.add('hidden');
+            }
+          });
+          showMoreButton.innerText = '+ Vis flere';
+        } else {
+          // Show all elements by removing 'hidden' class
+          elements.forEach(element => element.classList.remove('hidden'));
+          showMoreButton.innerText = '- Skjul';
+        }
+        isExpanded = !isExpanded; // Toggle the expanded state
+      });
+    }
+  });
+</script>
+
+

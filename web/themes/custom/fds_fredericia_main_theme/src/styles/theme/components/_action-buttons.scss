@@ -53,8 +53,9 @@
     border: 0;
   }
 }
-.js-decrease-font-size {
-  margin-left: 25px;
+.js-decrease-font-size, .js-increase-font-size {
+  border: none;
+  background-color: transparent;
 }
 html[style*="font-size: 10px"] .js-decrease-font-size,
 html[style*="font-size: 20px"] .js-increase-font-size
@@ -74,7 +75,7 @@ html[style*="font-size: 20px"] .js-increase-font-size
     @supports not (hyphens: auto) {
       word-break: break-all;
     }
-    
+
   }
 }
 

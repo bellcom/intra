@@ -32,10 +32,12 @@
     'block-' ~ plugin_id|clean_class,
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
-  <div class="section--banner-search">
-    <div class="container">
 
+<div{{ attributes.addClass(classes) }}>
+  <div class="section--banner-search" {% if banner_image_url %}
+    style="background-image: url('{{ banner_image_url }}')"
+    {% endif %}>
+    <div class="container">
       {% block content %}
         {{ content }}
       {% endblock %}

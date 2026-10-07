@@ -8,9 +8,9 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
 
-      <div class="row">
+      <div class="fredericia-menu-link-wrapper">
         {% for menu_link in _context['#menu_links'] %}
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          {#<div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="box box--section-link">
                 <div class="box__heading" >
                     {% set rendered_content = menu_link.content.field_os2web_icon|render %}
@@ -30,10 +30,45 @@
                 {% endif %}
               </div>
             </div>
-          </div>
+          </div>#}
+          <a href="{{ menu_link.url }}" class="fredericia-menu-link__inner-wrapper">
+
+            <div class="fredericia-box-arrow">
+              {% include '@fds_fredericia_main_theme/src/images/svg-icons/arrow-right.svg' %}
+            </div>
+            <div class="fredericia-box fredericia-box--section-link">
+
+              <div class="fredericia-box__body">
+                <span>{{ menu_link.title }}</span>
+
+                {% if paragraph.field_os2web_menu_links_show_int.value %}
+                  <div class="intro-text">
+                      {{ menu_link['intro_text'] }}
+                  </div>
+                {% endif %}
+
+
+              </div>
+            </div>
+          </a>
         {% endfor %}
       </div>
 
     {% endblock %}
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var characterLimit = 110;
+      var introTextElements = document.querySelectorAll('.intro-text');
+
+      introTextElements.forEach(function(el) {
+        var text = el.textContent || el.innerText;
+        if (text.length > characterLimit) {
+          var truncated = text.substring(0, characterLimit) + '…';
+          el.textContent = truncated;
+        }
+      });
+    });
+  </script>
+
 {% endblock paragraph %}

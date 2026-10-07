@@ -48,6 +48,78 @@
   }
 }
 
+#block-fds-fredericia-main-theme-indholdfield-ext-links {
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 2px 20px rgba(0,0,0,.16078);
+
+  h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    color: #00335b;
+  }
+  .field--name-field-selfbetjening-ref {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .field__item {
+      a {
+        transition: 0.3s;
+        text-decoration: none;
+        &:after {
+          content: '\f178';
+          font-family: "FontAwesome";
+          margin-left: 15px;
+          display: inline-block;
+          opacity: 0;
+          transition: 0.3s;
+          transform: translateX(-3px);
+        }
+        &:visited {
+          color: #00335b;
+        }
+
+        &:hover:after {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .go-to-all-selfservice {
+    background-color: #00335b;
+    color: white;
+    border-radius: 4px;
+    font-weight: 600;
+    border-color: #00335b;
+    transition: .3s ease;
+    position: relative;
+    padding: 5px 50px 5px 10px;
+    text-decoration: none;
+    width: fit-content;
+
+    &:after {
+      content: '\f0a9';
+      position: absolute;
+      display: inline-block;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      font-family: "FontAwesome";
+    }
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------

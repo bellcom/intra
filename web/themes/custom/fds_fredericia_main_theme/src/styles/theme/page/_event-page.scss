@@ -1,0 +1,164 @@
+.banner-event-fk {
+  display: flex;
+  max-height: 500px;
+  min-height: 400px;
+  overflow: hidden;
+
+  @media only screen and (max-width: 992px) {
+    max-height: none;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .banner-event-image {
+    width: 65%;
+
+    @media only screen and (max-width: 992px) {
+      width: 100%;
+      max-height: 400px;
+    }
+
+    .field--name-field-os2web-evnet-image {
+      height: 100%;
+
+      img {
+        height: 100%;
+      }
+    }
+
+  }
+
+  .banner-event-info {
+    width: 35%;
+    background-color: #00335b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media only screen and (max-width: 992px) {
+      width: 100%;
+    }
+
+    h1 {
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .event-link {
+      display: flex;
+      background-color: white;
+      width: fit-content;
+      align-items: center;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #00335b;
+      border-radius: 50px;
+      font-size: 13px;
+      gap: 5px;
+      transition: .3s;
+
+      &:hover {
+        background-color: #f7f7f7;
+      }
+
+    }
+
+    .event-location {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+
+      i {
+        color: white;
+      }
+
+      .field--name-field-event-location {
+        p, h1, h2, h3, h4, h5, h6, span, strong {
+          color: white;
+        }
+      }
+    }
+
+    .event-date {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      i {
+        color: white;
+      }
+
+      .field--name-field-os2web-event-start-date {
+        time {
+          color: white;
+        }
+      }
+
+
+    }
+
+    .event-category {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+
+      i {
+        color: white;
+      }
+
+      .event-category-items {
+        display: flex;
+        flex-wrap: wrap;
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &:visited {
+            color: white;
+          }
+        }
+        .event-category-seperator {
+          color: white;
+        }
+      }
+    }
+
+
+  }
+}
+
+.event-content-section {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #00325b;
+    margin: 0;
+  }
+
+  .event-resume {
+    color: #00325b;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .event-body {
+    .field--name-body {
+      h1, h2, h3, h4, h5, h6, p, strong, span {
+        color: #00325b;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+
+}

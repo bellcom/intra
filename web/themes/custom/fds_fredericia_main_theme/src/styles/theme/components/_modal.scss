@@ -22,9 +22,19 @@
 
 .modal {
 
+  .modal__overlay {
+    animation: none !important;
+  }
+
   .modal__container {
     min-width: 330px;
     padding: 15px;
+    animation: none !important;
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    z-index: 9999;
+    transform: translateX(50%) translateY(-50%);
     .modal__header {
       .modal__title {
         font-size: 3.2rem;
@@ -35,6 +45,27 @@
       border: 0;
       background-color: unset;
     }
+    .modal-watermark {
+      position: absolute;
+      max-width: 200px;
+      right: 10px;
+      bottom: 10px;
+      opacity: .6;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.contact-modal-btn {
+  width: fit-content;
+  margin-left: 70px;
+
+  @media only screen and (max-width: 992px) {
+    margin-left: 0;
+    align-self: center;
   }
 }
 

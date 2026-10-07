@@ -8,22 +8,30 @@
   view_mode ? view_mode|clean_class,
 ]
 %}
-<a href="{{ url }}" {{ attributes.addClass(classes) }} aria-label="{{ 'Read more about' | trans }} {{ node.field_os2web_page_heading.value }}">
+{% set descriptionRendered = content.field_os2web_page_description|render %}
+{% set descriptionText = descriptionRendered|striptags|trim|replace({'&#13;': ''}) %}
+{% set introText = content.field_os2web_page_intro|render|trim %}
 
-{#  <div class="entity-{{ view_mode|clean_class }}__image">#}
-{#    {{ content.field_os2web_page_primaryimage }}#}
-{#  </div>#}
+{% set pageTeaserText = introText is empty ? descriptionText : introText %}
 
-  <div class="entity-{{ view_mode|clean_class }}__body">
+
+
+
+
+<a href="{{ url }}" class="page-teaser" aria-label="{{ 'Read more about' | trans }} {{ node.field_os2web_page_heading.value }}">
+  <i class="fa-solid fa-arrow-right"></i>
+  <div class="page-teaser-body">
     {{ content.field_os2web_page_heading }}
-    {% set text = content.field_os2web_page_description | render %}
-    <div class="field field--type-body">
-      {{ text | striptags }}
+    <div class="page-teaser-text">
+      {{ pageTeaserText | striptags }}
     </div>
+    {% if menu_hierarchy %}
+      <div class="my-breadcrumbs">
+        {% for item in menu_hierarchy %}
+          <div class="breadcrumb-item">{{ item }}</div>
+          {% if not loop.last %} {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 </a>
-{% if breadcrumb %}
-  <div class="block-system-breadcrumb-block-search-result">
-    {% include 'breadcrumb.html.twig' %}
-  </div>
-{% endif %}

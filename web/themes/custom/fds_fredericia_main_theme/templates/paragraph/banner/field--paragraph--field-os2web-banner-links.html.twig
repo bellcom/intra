@@ -10,12 +10,12 @@
   {% if multiple %}
     <ul>
       {% for item in items %}
-        <li{{ item.attributes.addClass('field__item') }}>{{ item.content }}</li>
+        <li{{ item.attributes.addClass('field__item', link_color_class) }}>{{ item.content }}</li>
       {% endfor %}
     </ul>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, 'field__item', link_color_class) }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% else %}
@@ -25,7 +25,7 @@
     <ul>
       {% endif %}
       {% for item in items %}
-        <li{{ item.attributes.addClass('field__item') }}>{{ item.content }}</li>
+        <li{{ item.attributes.addClass('field__item', link_color_class) }}>{{ item.content }}</li>
       {% endfor %}
       {% if multiple %}
     </ul>

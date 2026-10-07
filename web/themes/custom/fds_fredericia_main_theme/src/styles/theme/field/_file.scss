@@ -20,9 +20,116 @@
 // Styling
 // --------------------------------------------------
 
-.file {
-
+.field--name-field-edoc-heading {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #00335b;
+  margin: 0 0 20px 0;
 }
+
+.field--name-field-os2web-files-heading {
+  h2 {
+    color: #00335b;
+    margin: 0 0 20px 0;
+  }
+}
+
+
+.files-default-heading {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #00335b;
+  margin: 0 0 20px 0;
+}
+
+#show-more-files {
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #00335b;
+  margin-top: 10px;
+  width: fit-content;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#show-more-files-edoc {
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #00335b;
+  margin-top: 10px;
+  width: fit-content;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.documents-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 80px;
+
+  .esdh-documents, .directly-referenced-documents, .os2web-files, .os2web-media-files {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .field--name-field-document-reference {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
+
+.document-item .file {
+  background-image: none !important;
+  padding-left: 0;
+  width: 100%;
+}
+
+.document-item a {
+  display: inline-block;
+  background-image: none;
+  padding: 12px 50px 12px 12px;
+  border-radius: 3px;
+  position: relative;
+  background-color: white;
+  color: #00335b;
+  text-transform: capitalize;
+  font-weight: normal;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid #ddd;
+  transition: .3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  &:visited {
+      color: #00335b;
+  }
+  &:hover {
+    color: white;
+    background-color: #00335b;
+  }
+
+
+  &:after {
+      content: '\f019';
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: "FontAwesome";
+      font-size: 22px;
+      position: absolute;
+    }
+  }
 
 .field--type-file {
 
@@ -31,8 +138,6 @@
     display: flex;
     flex-wrap: wrap;
 
-    margin-right: ($grid-gutter-width / -4);
-    margin-left: ($grid-gutter-width / -4);
   }
 
   > .field__items > .field__item,
@@ -42,12 +147,86 @@
     position: relative;
     width: 100%;
     min-height: 1px; // Prevent columns from collapsing when empty
-    padding-right: ($grid-gutter-width / 4);
-    padding-left: ($grid-gutter-width / 4);
 
     @include grid-col(12, 12);
   }
 }
+
+.entity-paragraph-display--esdh-document, .entity-default--esdh-document {
+  h2 {
+    display: none;
+  }
+  .node__meta {
+    display: none;
+  }
+}
+
+.hearings-edoc-wrapper {
+  h2 {
+    color: #00335b;
+    margin: 0 0 20px 0;
+  }
+  .field--name-field-hoering-doc-ref {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+
+.hearings-documents {
+  h2 {
+    color: #00335b;
+    margin: 0 0 20px 0;
+  }
+  .attached-documents {
+    a {
+      display: flex;
+      background-image: none;
+      padding: 12px;
+      border-radius: 3px;
+      position: relative;
+      background-color: white;
+      color: #00325b;
+      text-transform: capitalize;
+      font-weight: 700;
+      font-size: 14px;
+      width: 100%;
+      border: 1px solid #dddddd;
+      -webkit-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      font-weight: normal;
+
+      &:after {
+        content: "\f019";
+        right: 20px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        font-family: "FontAwesome";
+        font-size: 22px;
+        position: absolute;
+      }
+    }
+  }
+
+  .referenced-documents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+#show-more-files-hearings {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: rgb(0, 50, 91);
+  margin-top: 10px;
+  width: fit-content;
+}
+
+
 
 // --------------------------------------------------
 // Variants

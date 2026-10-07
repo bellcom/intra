@@ -24,3 +24,15 @@ footer {
 .spotbox--image.spotbox--background-color-primary {
   background-color: #00335b !important;
 }
+
+/* Full-bleed main content (no 1200px .container lock). */
+.page-container > #main-content.container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.page-container > #main-content.container > .row {
+  margin-left: 0;
+  margin-right: 0;
+}

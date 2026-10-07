@@ -1,0 +1,150 @@
+/**
+ * Hero paragraph (paragraph type: hero) — styling aligned with fds_fic_theme.
+ */
+
+body:has(.paragraph--type--hero) header {
+  padding-bottom: 0;
+}
+
+.paragraph--type--hero {
+  background-size: cover;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  position: relative;
+}
+
+.paragraph--type--hero .hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.paragraph--type--hero .hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  padding: 0 30px;
+  width: 100%;
+  margin-top: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.paragraph--type--hero .hero-heading {
+  margin-top: 0;
+  padding: 0;
+  font-size: 58px;
+  color: #fff;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .paragraph--type--hero .hero-heading {
+    font-size: 42px;
+  }
+}
+
+.paragraph--type--hero .hero-heading .field--name-field-hero-heading {
+  font-size: 58px;
+}
+
+@media only screen and (max-width: 768px) {
+  .paragraph--type--hero .hero-heading .field--name-field-hero-heading {
+    font-size: 42px;
+  }
+}
+
+.paragraph--type--hero .hero-subheading {
+  color: #fff;
+  font-size: 20px;
+}
+
+.paragraph--type--hero .hero-links-wrapper {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.paragraph--type--hero .hero-list-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .paragraph--type--hero .hero-list-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.paragraph--type--hero .hero-list-links li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.paragraph--type--hero .hero-list-links li::before {
+  display: none;
+}
+
+.paragraph--type--hero .hero-list-links li:nth-child(odd) a::before {
+  background-color: #feffff;
+}
+
+.paragraph--type--hero .hero-list-links li:nth-child(even) a::before {
+  background-color: #eae3c0;
+}
+
+.paragraph--type--hero .hero-list-links a {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 80px;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+  font-size: 24px;
+  position: relative;
+  transition: 0.25s ease;
+  padding: 0 40px 0 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .paragraph--type--hero .hero-list-links a {
+    font-size: 20px;
+  }
+}
+
+.paragraph--type--hero .hero-list-links a::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transition: height 0.25s ease;
+  height: 0;
+}
+
+.paragraph--type--hero .hero-list-links a:hover::before,
+.paragraph--type--hero .hero-list-links a.is-highlighted::before {
+  height: 10px;
+}
+
+.paragraph--type--hero .hero-list-links a::after {
+  content: "\f054";
+  position: absolute;
+  right: 15px;
+  font-family: FontAwesome;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}

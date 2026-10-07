@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Paragraph template for the "Hero" paragraph type (from fds_fic_theme).
+ *
+ * Requires paragraph fields:
+ * - field_background_image
+ * - field_hero_heading
+ * - field_hero_subheading
+ * - field_referenced_link (references entities with field_single_link, field_highlight)
+ */
+#}
+
+{% set background_image_url = '' %}
+{% if content.field_background_image.0['#item'] is defined %}
+  {% set background_image_url = file_url(content.field_background_image.0['#item'].entity.uri.value) %}
+{% endif %}
+
+<div
+  class="paragraph paragraph--type--hero"
+  {% if background_image_url %}
+    style="background-image: url('{{ background_image_url }}');"
+  {% endif %}
+>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content-wrapper">
+    {% if content.field_hero_heading is not empty %}
+      <h2 class="hero-heading">{{ content.field_hero_heading }}</h2>
+    {% endif %}
+
+    {% if content.field_hero_subheading is not empty %}
+      <div class="hero-subheading">{{ content.field_hero_subheading }}</div>
+    {% endif %}
+
+    <div class="hero-links-wrapper">
+      <ul class="hero-list-links">
+        {% for item in paragraph.field_referenced_link %}
+          {% set sub_entity = item.entity %}
+          {% set link_item = sub_entity.field_single_link.0 %}
+          {% if link_item %}
+            {% set url = link_item.getUrl().toString() %}
+            {% set is_highlighted = (sub_entity.field_highlight.value == '1') %}
+            <li>
+              <a href="{{ url }}" class="{% if is_highlighted %}is-highlighted{% endif %}">
+                {{ link_item.title|default(url) }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -2,3 +2,4 @@ styles:
   css:
     theme:
       css/intra.css: {}
+      css/hero.css: {}

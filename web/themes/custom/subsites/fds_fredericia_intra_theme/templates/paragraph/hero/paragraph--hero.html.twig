@@ -16,8 +16,12 @@
   {% set background_image_url = file_url(content.field_background_image.0['#item'].entity.uri.value) %}
 {% endif %}
 
+{% set has_heading = paragraph.field_hero_heading.value is not empty %}
+{% set has_subheading = paragraph.field_hero_subheading.value is not empty %}
+{% set links_only = not has_heading and not has_subheading %}
+
 <div
-  class="paragraph paragraph--type--hero"
+  class="paragraph paragraph--type--hero{% if links_only %} paragraph--type--hero--links-only{% endif %}"
   {% if background_image_url %}
     style="background-image: url('{{ background_image_url }}');"
   {% endif %}
@@ -25,11 +29,11 @@
   <div class="hero-overlay"></div>
 
   <div class="hero-content-wrapper">
-    {% if content.field_hero_heading is not empty %}
+    {% if has_heading %}
       <h2 class="hero-heading">{{ content.field_hero_heading }}</h2>
     {% endif %}
 
-    {% if content.field_hero_subheading is not empty %}
+    {% if has_subheading %}
       <div class="hero-subheading">{{ content.field_hero_subheading }}</div>
     {% endif %}
 

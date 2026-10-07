@@ -1,5 +1,5 @@
 /**
- * Hero paragraph (paragraph type: hero) — styling aligned with fds_fic_theme.
+ * Hero paragraph (paragraph type: hero) — styling for Fredericia Intra.
  */
 
 body:has(.paragraph--type--hero) header {
@@ -14,6 +14,11 @@ body:has(.paragraph--type--hero) header {
   justify-content: center;
   background-position: center;
   position: relative;
+}
+
+.paragraph--type--hero.paragraph--type--hero--links-only {
+  min-height: 0;
+  height: auto;
 }
 
 .paragraph--type--hero .hero-overlay {
@@ -34,6 +39,10 @@ body:has(.paragraph--type--hero) header {
   margin-top: 100px;
   position: relative;
   z-index: 1;
+}
+
+.paragraph--type--hero.paragraph--type--hero--links-only .hero-content-wrapper {
+  margin-top: 0;
 }
 
 .paragraph--type--hero .hero-heading {
@@ -68,6 +77,12 @@ body:has(.paragraph--type--hero) header {
 .paragraph--type--hero .hero-links-wrapper {
   width: 100%;
   margin-top: 50px;
+}
+
+.paragraph--type--hero.paragraph--type--hero--links-only .hero-links-wrapper {
+  margin-top: 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .paragraph--type--hero .hero-list-links {
@@ -107,15 +122,16 @@ body:has(.paragraph--type--hero) header {
   background-color: #fff;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   min-height: 80px;
   align-items: center;
-  color: #000;
+  color: #00335b;
+  text-align: center;
   text-decoration: none;
   font-size: 24px;
   position: relative;
   transition: 0.25s ease;
-  padding: 0 40px 0 15px;
+  padding: 0 15px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -137,14 +153,4 @@ body:has(.paragraph--type--hero) header {
 .paragraph--type--hero .hero-list-links a:hover::before,
 .paragraph--type--hero .hero-list-links a.is-highlighted::before {
   height: 10px;
-}
-
-.paragraph--type--hero .hero-list-links a::after {
-  content: "\f054";
-  position: absolute;
-  right: 15px;
-  font-family: FontAwesome;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
 }

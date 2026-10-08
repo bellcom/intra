@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Three columns at 25% / 50% / 25% (intranet).
+ *
+ * Create paragraph type with machine name: intra_columns_25_50_25
+ * Label e.g. "3 kolonner (25/50/25)"
+ *
+ * Required fields (Paragraphs entity reference revisions, unlimited or 1):
+ * - field_intra_column_left   (venstre, 25%)
+ * - field_intra_column_center (midten, 50%)
+ * - field_intra_column_right  (højre, 25%)
+ *
+ * Allow the same child paragraph types as on "2 columns" / page builder.
+ */
+#}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  'intra-columns-25-50-25',
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="intra-columns-25-50-25__row">
+        <div class="intra-columns-25-50-25__col intra-columns-25-50-25__col--left">
+          {{ content.field_intra_column_left }}
+        </div>
+        <div class="intra-columns-25-50-25__col intra-columns-25-50-25__col--center">
+          {{ content.field_intra_column_center }}
+        </div>
+        <div class="intra-columns-25-50-25__col intra-columns-25-50-25__col--right">
+          {{ content.field_intra_column_right }}
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -9,7 +9,7 @@
  * TEMPORARY Color fallbacks — remove when Color module works.
  *
  * Hardcoded locations (search "TEMPORARY Color fallbacks"):
- * - css/intra.css (this file): footer + primary backgrounds
+ * - css/intra.css (this file): footer + primary + Fokus box active/hover
  * - css/hero.css: hero link bar (odd) + link text color
  * - dist/stylesheets/stylesheet.css must keep Color placeholders
  *   (#feffff primary, #d1d3d4 footer) so Color can rewrite them later.
@@ -23,6 +23,34 @@ footer {
 .spotbox--background-color-primary,
 .spotbox--image.spotbox--background-color-primary {
   background-color: #00335b !important;
+}
+
+/* Fokus box: active/hover uses Color primary placeholder (#feffff) without Color. */
+.sidebar-accordion-wrapper .sidebar-list .sidebar-item:hover {
+  background-color: #2a4f75;
+  color: #fff;
+  border-color: #2a4f75;
+}
+
+.sidebar-accordion-wrapper .sidebar-list .sidebar-item.active {
+  background-color: #00335b;
+  color: #fff;
+  border-color: #00335b;
+}
+
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item p,
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item h2,
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item h3,
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item h4,
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item h5,
+.sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item h6,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item p,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item h2,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item h3,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item h4,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item h5,
+.sidebar-content .sidebar-box .box-content a.lightblue-link-class .sidebar-product-description .field__item h6 {
+  color: inherit;
 }
 
 /* Full-bleed main content (no 1200px .container lock). */

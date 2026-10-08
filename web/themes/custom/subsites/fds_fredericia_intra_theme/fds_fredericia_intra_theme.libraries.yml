@@ -3,3 +3,4 @@ styles:
     theme:
       css/intra.css: {}
       css/hero.css: {}
+      css/columns-25-50-25.css: {}

@@ -1,0 +1,26 @@
+/**
+ * Paragraph: intra_columns_25_50_25 — 25% / 50% / 25% layout.
+ */
+
+.intra-columns-25-50-25 {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.intra-columns-25-50-25__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: start;
+}
+
+.intra-columns-25-50-25__col {
+  min-width: 0;
+}
+
+@media only screen and (max-width: 992px) {
+  .intra-columns-25-50-25__row {
+    grid-template-columns: 1fr;
+  }
+}

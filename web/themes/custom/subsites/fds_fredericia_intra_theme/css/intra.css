@@ -9,7 +9,7 @@
  * TEMPORARY Color fallbacks — remove when Color module works.
  *
  * Hardcoded locations (search "TEMPORARY Color fallbacks"):
- * - css/intra.css (this file): footer + primary + Fokus box active/hover
+ * - css/intra.css (this file): footer + primary + Fokus box active
  * - css/hero.css: hero link bar (odd) + link text color
  * - dist/stylesheets/stylesheet.css must keep Color placeholders
  *   (#feffff primary, #d1d3d4 footer) so Color can rewrite them later.
@@ -25,17 +25,25 @@ footer {
   background-color: #00335b !important;
 }
 
-/* Fokus box: active/hover uses Color primary placeholder (#feffff) without Color. */
-.sidebar-accordion-wrapper .sidebar-list .sidebar-item:hover {
-  background-color: #2a4f75;
-  color: #fff;
-  border-color: #2a4f75;
+/* Fokus box: no color change on hover; active = #00335b + white text. */
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item:hover:not(.active) {
+  background-color: #F5F7F9;
+  color: inherit;
+  border-color: #eceae8;
 }
 
-.sidebar-accordion-wrapper .sidebar-list .sidebar-item.active {
-  background-color: #00335b;
-  color: #fff;
-  border-color: #00335b;
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active,
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active:hover {
+  background-color: #00335b !important;
+  color: #fff !important;
+  border-color: #00335b !important;
+}
+
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active,
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active *,
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active:hover,
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active:hover * {
+  color: #fff !important;
 }
 
 .sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item p,

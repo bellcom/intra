@@ -21,6 +21,17 @@
   min-width: 0;
 }
 
+.intra-columns-25-50-25__col .field__items,
+.intra-columns-25-50-25__col > .field {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.intra-columns-25-50-25__col .paragraph {
+  margin-bottom: 0;
+}
+
 @media only screen and (max-width: 992px) {
   .intra-columns-25-50-25__row {
     grid-template-columns: 1fr;

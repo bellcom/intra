@@ -5,6 +5,8 @@
 .intra-columns-25-50-25 {
   width: 100%;
   margin-bottom: 2rem;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .intra-columns-25-50-25__row {

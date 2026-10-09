@@ -1,0 +1,43 @@
+/**
+ * Paragraph: operations-message (Driftbesked) — boxed layout.
+ */
+
+.paragraph--type--operations-message .field--name-field-messages .views-element-container {
+  background-color: #f3f8fc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.paragraph--type--operations-message .viewsreference--view-title {
+  background-color: #00335b;
+  color: #fff;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.paragraph--type--operations-message .view-operations-message .view-content {
+  padding: 0.75rem 1.25rem 1.25rem;
+}
+
+.paragraph--type--operations-message .view-operations-message .views-row {
+  margin: 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 51, 91, 0.12);
+}
+
+.paragraph--type--operations-message .view-operations-message .views-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.paragraph--type--operations-message .view-operations-message .views-field-title a {
+  color: #00335b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.paragraph--type--operations-message .view-operations-message .views-field-title a:hover {
+  text-decoration: underline;
+}

@@ -15,7 +15,7 @@
  *   (#feffff primary, #d1d3d4 footer) so Color can rewrite them later.
  */
 footer {
-  background-color: #00335b;
+  background-color: #00335b !important;
 }
 
 .entity-default--os2web-wrapper.background-color--primary,

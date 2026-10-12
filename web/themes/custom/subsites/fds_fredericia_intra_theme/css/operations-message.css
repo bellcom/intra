@@ -1,14 +1,16 @@
 /**
- * Paragraph: operations-message (Driftbesked) — boxed layout.
+ * Boxed views paragraphs: operations-message + organic-groups.
  */
 
-.paragraph--type--operations-message .field--name-field-messages .views-element-container {
+.paragraph--type--operations-message .field--name-field-messages .views-element-container,
+.paragraph--type--organic-groups .field--name-field-data .views-element-container {
   background-color: #f3f8fc;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
 
-.paragraph--type--operations-message .viewsreference--view-title {
+.paragraph--type--operations-message .viewsreference--view-title,
+.paragraph--type--organic-groups .viewsreference--view-title {
   background-color: #00335b;
   color: #fff;
   margin: 0;
@@ -19,27 +21,32 @@
   text-transform: uppercase;
 }
 
-.paragraph--type--operations-message .view-operations-message .view-content {
+.paragraph--type--operations-message .view-operations-message .view-content,
+.paragraph--type--organic-groups .view .view-content {
   padding: 0.75rem 1.25rem 1.25rem;
 }
 
-.paragraph--type--operations-message .view-operations-message .views-row {
+.paragraph--type--operations-message .view-operations-message .views-row,
+.paragraph--type--organic-groups .view .views-row {
   margin: 0;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(0, 51, 91, 0.12);
 }
 
-.paragraph--type--operations-message .view-operations-message .views-row:last-child {
+.paragraph--type--operations-message .view-operations-message .views-row:last-child,
+.paragraph--type--organic-groups .view .views-row:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
 
-.paragraph--type--operations-message .view-operations-message .views-field-title a {
+.paragraph--type--operations-message .view-operations-message .views-field-title a,
+.paragraph--type--organic-groups .view .views-field-title a {
   color: #00335b;
   text-decoration: none;
   font-weight: 500;
 }
 
-.paragraph--type--operations-message .view-operations-message .views-field-title a:hover {
+.paragraph--type--operations-message .view-operations-message .views-field-title a:hover,
+.paragraph--type--organic-groups .view .views-field-title a:hover {
   text-decoration: underline;
 }

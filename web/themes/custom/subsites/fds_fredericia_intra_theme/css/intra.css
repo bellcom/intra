@@ -25,7 +25,15 @@ footer {
   background-color: #00335b !important;
 }
 
-/* Fokus box: no color change on hover; active = #00335b + white text. */
+/* Fokus box: sizing + no color change on hover; active = #00335b + white text. */
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item {
+  padding: 10px 20px;
+}
+
+.sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item .sidebar-heading-text {
+  font-size: 16px;
+}
+
 .sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item:hover:not(.active) {
   background-color: #F5F7F9;
   color: inherit;
@@ -44,6 +52,10 @@ footer {
 .sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active:hover,
 .sidebar-accordion-wrapper .sidebar-accordion__inner-wrapper .sidebar .sidebar-list .sidebar-item.active:hover * {
   color: #fff !important;
+}
+
+.sidebar-content .sidebar-box .box-content a .sidebar-product-description {
+  font-size: 14px;
 }
 
 .sidebar-content .sidebar-box .box-content a.lightred-link-class .sidebar-product-description .field__item p,

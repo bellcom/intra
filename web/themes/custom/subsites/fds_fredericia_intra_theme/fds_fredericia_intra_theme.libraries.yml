@@ -5,3 +5,4 @@ styles:
       css/hero.css: {}
       css/columns-25-50-25.css: {}
       css/operations-message.css: {}
+      css/content-layout.css: {}

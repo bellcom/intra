@@ -75,14 +75,14 @@ footer {
   color: inherit;
 }
 
-/* Full-bleed main content (no 1200px .container lock). */
-.page-container > #main-content.container {
+/* Full-bleed main content on front page only (hero etc.). */
+.page-container-front > #main-content.container {
   max-width: none;
   padding-left: 0;
   padding-right: 0;
 }
 
-.page-container > #main-content.container > .row {
+.page-container-front > #main-content.container > .row {
   margin-left: 0;
   margin-right: 0;
 }

@@ -1,0 +1,83 @@
+/**
+ * Content-page layout (from Midtpunktet skeleton).
+ * Used on non-front pages via .row-no-flex in page.html.twig.
+ */
+
+.row-no-flex {
+  margin: 0;
+  width: 100%;
+}
+
+.row-no-flex::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row-no-flex .sideblock-venstre,
+.row-no-flex .hovedindhold-hojre,
+.row-no-flex .hovedindhold-venstre,
+.row-no-flex .sideblock-hojre {
+  width: 100%;
+  float: none;
+  display: block;
+}
+
+.page-container-not-front .content-main {
+  padding: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .row-no-flex .sideblock-venstre {
+    width: 32.45%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    display: inline;
+  }
+
+  .row-no-flex .hovedindhold-hojre {
+    width: 58.94%;
+    float: right;
+    margin-left: 1.52905%;
+    margin-right: 0;
+    display: inline;
+  }
+
+  .row-no-flex .hovedindhold-venstre {
+    width: 58.94%;
+    float: left;
+    margin-left: 0;
+    margin-right: 1.52905%;
+    display: inline;
+  }
+
+  .row-no-flex .sideblock-hojre {
+    min-width: 320px;
+    width: 58.94%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    display: inline;
+  }
+}
+
+@media (min-width: 1200px) {
+  .row-no-flex .sideblock-hojre {
+    min-width: 320px;
+    width: 32.45%;
+    float: right;
+    margin-left: auto;
+    margin-right: 0;
+    display: inline;
+  }
+}
+
+@media print {
+  .row-no-flex .hovedindhold-venstre,
+  .row-no-flex .hovedindhold-hojre {
+    width: 100% !important;
+    float: none !important;
+  }
+}

@@ -37,6 +37,31 @@
   padding: 0 !important;
 }
 
+/* Group / node content: headline + body. */
+.page-container-not-front .node__content .field--name-field-headline {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0 0.85rem;
+  color: #00335b;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  border-bottom: 3px solid #00335b;
+}
+
+@media (min-width: 768px) {
+  .page-container-not-front .node__content .field--name-field-headline {
+    font-size: 2.5rem;
+    padding: 0.75rem 0 1rem;
+  }
+}
+
+.page-container-not-front .node__content .field--name-body {
+  margin: 0;
+  padding: 1rem 0 1.5rem;
+  color: #333;
+  line-height: 1.6;
+}
+
 .page-container-not-front .box__heading,
 .page-container-not-front .box__heading .h4,
 .page-container-not-front .box__heading h1,
@@ -81,14 +106,138 @@
 
 .page-container-not-front .layout-sidebar-left ul,
 .page-container-not-front .layout-sidebar-right ul {
-  margin: 0;
-  padding-left: 0;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  list-style: none !important;
 }
 
 .page-container-not-front .layout-sidebar-left li,
-.page-container-not-front .layout-sidebar-right li {
+.page-container-not-front .layout-sidebar-right li,
+.page-container-not-front .item-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* "Tilføj indhold" create-content block — white card, dark text, blue dividers. */
+.page-container-not-front .block-bc-og-create-content-block,
+.page-container-not-front .block-bc-og-extension {
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > h2,
+.page-container-not-front .block-bc-og-create-content-block > .h4,
+.page-container-not-front .block-bc-og-extension > h2,
+.page-container-not-front .block-bc-og-extension > .h4 {
+  background-color: #fff !important;
+  color: #000 !important;
+  margin: 0 !important;
+  padding: 0.75rem 1.25rem !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  border-bottom: 2px solid #00335b;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > ul,
+.page-container-not-front .block-bc-og-extension > ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > ul > li,
+.page-container-not-front .block-bc-og-extension > ul > li {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: 1px solid #00335b;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > ul > li:last-child,
+.page-container-not-front .block-bc-og-extension > ul > li:last-child {
+  border-bottom: 0;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > ul > li > a,
+.page-container-not-front .block-bc-og-extension > ul > li > a {
+  display: block;
+  padding: 0.65rem 1.25rem;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-container-not-front .block-bc-og-create-content-block > ul > li > a:hover,
+.page-container-not-front .block-bc-og-extension > ul > li > a:hover {
+  background-color: rgba(0, 51, 91, 0.06);
+  color: #00335b;
+  text-decoration: underline;
+}
+
+/* OG recent group blocks (Filer, Links, etc.) — Fredericia look. */
+.page-container-not-front .block-og-recent-group-content {
+  margin-bottom: 1.5rem;
+  background-color: #f3f8fc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.page-container-not-front .block-og-recent-group-content > h2,
+.page-container-not-front .block-og-recent-group-content > .h4 {
+  background-color: #00335b !important;
+  color: #fff !important;
+  margin: 0 !important;
+  padding: 0.75rem 1.25rem !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list {
   margin: 0;
-  padding: 0;
+  padding: 0.5rem 0;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: 1px solid rgba(0, 51, 91, 0.12);
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list li:last-child {
+  border-bottom: 0;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list li::before {
+  display: none !important;
+  content: none !important;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list a {
+  display: block;
+  padding: 0.65rem 1.25rem;
+  color: #00335b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-container-not-front .block-og-recent-group-content .item-list a:hover {
+  background-color: rgba(0, 51, 91, 0.06);
+  text-decoration: underline;
+}
+
+.page-container-not-front .block-og-recent-group-content .go-to-all-selfservice:empty {
+  display: none;
 }
 
 /* Sidenav: Fredericia primary (#00335b) + white text. */

@@ -75,6 +75,14 @@ footer {
   color: inherit;
 }
 
+/* Override Drupal/classy default list indent. */
+.item-list ul,
+.item-list li {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  list-style: none !important;
+}
+
 /* Hide li::before everywhere, except in WYSIWYG text fields. */
 li::before {
   content: none !important;

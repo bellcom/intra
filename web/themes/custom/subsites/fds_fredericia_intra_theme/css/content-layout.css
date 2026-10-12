@@ -136,9 +136,9 @@
   color: #000 !important;
   margin: 0 !important;
   padding: 0.75rem 1.25rem !important;
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  text-transform: none;
   border-bottom: 2px solid #00335b;
 }
 
@@ -191,10 +191,10 @@
   color: #fff !important;
   margin: 0 !important;
   padding: 0.75rem 1.25rem !important;
-  font-size: 1rem !important;
+  font-size: 1.2rem !important;
   font-weight: 700 !important;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
 }
 
 .page-container-not-front .block-og-recent-group-content .item-list {

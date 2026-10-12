@@ -79,26 +79,6 @@
   padding-bottom: 0 !important;
 }
 
-.page-container-not-front .layout-sidebar-left ul,
-.page-container-not-front .layout-sidebar-right ul {
-  margin: 0;
-  padding-left: 0;
-}
-
-.page-container-not-front .layout-sidebar-left li,
-.page-container-not-front .layout-sidebar-right li {
-  margin: 0;
-  padding-left: 0;
-}
-
-/* Room for ::before arrow icons without overlapping text. */
-.page-container-not-front .layout-sidebar-left .sidenav-list > li > a,
-.page-container-not-front .layout-sidebar-right .sidenav-list > li > a,
-.page-container-not-front .layout-sidebar-left .related-links li a,
-.page-container-not-front .layout-sidebar-right .related-links li a {
-  padding: 12px 50px 12px 15px !important;
-}
-
 /* Sidenav: Fredericia primary (#00335b) + white text. */
 .page-container-not-front .sidenav-list {
   border: 0;

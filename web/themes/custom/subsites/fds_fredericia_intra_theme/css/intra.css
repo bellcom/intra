@@ -75,6 +75,26 @@ footer {
   color: inherit;
 }
 
+/* Hide li::before everywhere, except in WYSIWYG text fields. */
+li::before {
+  content: none !important;
+  display: none !important;
+}
+
+.field--type-text-long li::before,
+.field--type-text-with-summary li::before,
+.field--text-long li::before,
+.field--text-with-summary li::before,
+.text-formatted li::before,
+.accordion-content li::before {
+  content: "■" !important;
+  display: block !important;
+  position: absolute;
+  left: 5px;
+  top: -1px;
+  font-size: 2rem;
+}
+
 /* Full-bleed main content on front page only (hero etc.). */
 .page-container-front > #main-content.container {
   max-width: none;

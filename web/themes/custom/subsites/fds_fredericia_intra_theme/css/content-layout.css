@@ -79,6 +79,18 @@
   padding-bottom: 0 !important;
 }
 
+.page-container-not-front .layout-sidebar-left ul,
+.page-container-not-front .layout-sidebar-right ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.page-container-not-front .layout-sidebar-left li,
+.page-container-not-front .layout-sidebar-right li {
+  margin: 0;
+  padding: 0;
+}
+
 /* Sidenav: Fredericia primary (#00335b) + white text. */
 .page-container-not-front .sidenav-list {
   border: 0;
@@ -115,8 +127,8 @@
 }
 
 .page-container-not-front .sidenav-list > li > a:before {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  color: #fff !important;
+  display: none !important;
+  content: none !important;
 }
 
 .page-container-not-front .sidenav-sub_list {
@@ -130,10 +142,6 @@
 
 .page-container-not-front .sidenav-sub_list > li > a {
   color: #fff !important;
-}
-
-.page-container-not-front .sidenav-sub_list > li:before {
-  color: #aabfcf !important;
 }
 
 .row-no-flex {

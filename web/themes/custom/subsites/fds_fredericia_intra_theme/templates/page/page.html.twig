@@ -55,11 +55,7 @@
           {% if has_sidebar_second %}
             <aside class="{{ sidebar_second_classes|join(' ') }}">
               <div class="layout-sidebar-right">
-                <div class="box">
-                  <div class="box__body">
-                    {{ page.sidebar_second }}
-                  </div>
-                </div>
+                {{ page.sidebar_second }}
               </div>
             </aside>
           {% endif %}

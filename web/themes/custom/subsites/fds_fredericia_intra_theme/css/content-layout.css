@@ -10,33 +10,73 @@
 }
 
 /*
- * Sidebar box wrapper: Midtpunktet uses .box > .box__body with padding: 0.
- * Fredericia main adds large paddings on .box__body — reset those here.
+ * Reset ALL heading styles on content pages.
+ * Fredericia sets margin-top: 30px on h1–h6 / .h1–.h6 globally,
+ * plus negative side margins on page titles — clear all of that.
  */
-.page-container-not-front .layout-sidebar-right > .box {
-  margin-bottom: 0;
+.page-container-not-front h1,
+.page-container-not-front h2,
+.page-container-not-front h3,
+.page-container-not-front h4,
+.page-container-not-front h5,
+.page-container-not-front h6,
+.page-container-not-front .h1,
+.page-container-not-front .h2,
+.page-container-not-front .h3,
+.page-container-not-front .h4,
+.page-container-not-front .h5,
+.page-container-not-front .h6 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.page-container-not-front .field--name-field-os2web-page-heading h1,
+.page-container-not-front .field--name-field-os2web-news-heading h1 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+}
+
+.page-container-not-front .box__heading,
+.page-container-not-front .box__heading .h4,
+.page-container-not-front .box__heading h1,
+.page-container-not-front .box__heading h2,
+.page-container-not-front .box__heading h3,
+.page-container-not-front .box__heading h4,
+.page-container-not-front .box__heading h5,
+.page-container-not-front .box__heading h6 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Reset Fredericia sidebar spacing that fights Midtpunktet proportions. */
+.page-container-not-front .layout-sidebar-left,
+.page-container-not-front .layout-sidebar-right {
+  padding: 0 !important;
+}
+
+.page-container-not-front .layout-sidebar-left .box,
+.page-container-not-front .layout-sidebar-right .box,
+.page-container-not-front .layout-sidebar-left .box__body,
+.page-container-not-front .layout-sidebar-right .box__body,
+.page-container-not-front .layout-sidebar-left .box__heading,
+.page-container-not-front .layout-sidebar-right .box__heading {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0;
   background-color: transparent;
   box-shadow: none;
 }
 
-.page-container-not-front .layout-sidebar-right > .box > .box__body {
-  padding: 0 !important;
-  min-height: 0;
-}
-
-.page-container-not-front .layout-sidebar-left,
-.page-container-not-front .layout-sidebar-right {
-  padding: 0;
-}
-
-.page-container-not-front .layout-sidebar-left .sidenav-list > li,
-.page-container-not-front .layout-sidebar-right .sidenav-list > li {
-  margin: 0;
-}
-
-.page-container-not-front .layout-sidebar-left .sidenav-list > li > a,
-.page-container-not-front .layout-sidebar-right .sidenav-list > li > a {
-  padding: 10px 15px;
+/* Kill first/last-child padding injected by main theme. */
+.page-container-not-front .layout-sidebar-right > .box > .box__body > .region > *:first-child,
+.page-container-not-front .layout-sidebar-right > .box > .box__body > .region > *:last-child,
+.page-container-not-front .layout-sidebar-right .box__body > *:first-child,
+.page-container-not-front .layout-sidebar-right .box__body > *:last-child,
+.page-container-not-front .layout-sidebar-left .box__body > *:first-child,
+.page-container-not-front .layout-sidebar-left .box__body > *:last-child {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .page-container-not-front .layout-sidebar-left ul,
@@ -47,8 +87,73 @@
 
 .page-container-not-front .layout-sidebar-left li,
 .page-container-not-front .layout-sidebar-right li {
-  margin-left: 0;
+  margin: 0;
   padding-left: 0;
+}
+
+/* Room for ::before arrow icons without overlapping text. */
+.page-container-not-front .layout-sidebar-left .sidenav-list > li > a,
+.page-container-not-front .layout-sidebar-right .sidenav-list > li > a,
+.page-container-not-front .layout-sidebar-left .related-links li a,
+.page-container-not-front .layout-sidebar-right .related-links li a {
+  padding: 12px 50px 12px 15px !important;
+}
+
+/* Sidenav: Fredericia primary (#00335b) + white text. */
+.page-container-not-front .sidenav-list {
+  border: 0;
+}
+
+.page-container-not-front .sidenav-list > li {
+  background-color: #00335b !important;
+  border-top: 1px solid #2a4f75 !important;
+  border-left: 0 !important;
+  color: #fff !important;
+}
+
+.page-container-not-front .sidenav-list > li:first-child {
+  border-top: 0 !important;
+}
+
+.page-container-not-front .sidenav-list > li > a,
+.page-container-not-front .sidenav-list > li.active > a,
+.page-container-not-front .sidenav-list > li.current > a {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+.page-container-not-front .sidenav-list > li:hover,
+.page-container-not-front .sidenav-list > li.active,
+.page-container-not-front .sidenav-list > li.current {
+  background-color: #2a4f75 !important;
+}
+
+.page-container-not-front .sidenav-list > li > a:hover,
+.page-container-not-front .sidenav-list > li > a:focus {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+.page-container-not-front .sidenav-list > li > a:before {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+}
+
+.page-container-not-front .sidenav-sub_list {
+  background-color: #002744 !important;
+}
+
+.page-container-not-front .sidenav-sub_list > li {
+  background-color: transparent !important;
+  border-top: 0 !important;
+}
+
+.page-container-not-front .sidenav-sub_list > li > a {
+  color: #fff !important;
+}
+
+.page-container-not-front .sidenav-sub_list > li:before {
+  color: #aabfcf !important;
 }
 
 .row-no-flex {

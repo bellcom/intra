@@ -3,6 +3,54 @@
  * Used on non-front pages via .row-no-flex in page.html.twig.
  */
 
+/* Hide node meta (author/date) on content pages. */
+.page-container-not-front .node__meta,
+.page-container-not-front .entity-full .node__meta {
+  display: none !important;
+}
+
+/*
+ * Sidebar box wrapper: Midtpunktet uses .box > .box__body with padding: 0.
+ * Fredericia main adds large paddings on .box__body — reset those here.
+ */
+.page-container-not-front .layout-sidebar-right > .box {
+  margin-bottom: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.page-container-not-front .layout-sidebar-right > .box > .box__body {
+  padding: 0 !important;
+  min-height: 0;
+}
+
+.page-container-not-front .layout-sidebar-left,
+.page-container-not-front .layout-sidebar-right {
+  padding: 0;
+}
+
+.page-container-not-front .layout-sidebar-left .sidenav-list > li,
+.page-container-not-front .layout-sidebar-right .sidenav-list > li {
+  margin: 0;
+}
+
+.page-container-not-front .layout-sidebar-left .sidenav-list > li > a,
+.page-container-not-front .layout-sidebar-right .sidenav-list > li > a {
+  padding: 10px 15px;
+}
+
+.page-container-not-front .layout-sidebar-left ul,
+.page-container-not-front .layout-sidebar-right ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.page-container-not-front .layout-sidebar-left li,
+.page-container-not-front .layout-sidebar-right li {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 .row-no-flex {
   margin: 0;
   width: 100%;

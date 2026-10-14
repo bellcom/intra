@@ -33,6 +33,13 @@
   border-bottom: 1px solid rgba(0, 51, 91, 0.12);
 }
 
+.paragraph--type--organic-groups .view .views-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
 .paragraph--type--operations-message .view-operations-message .views-row:last-child,
 .paragraph--type--organic-groups .view .views-row:last-child {
   border-bottom: 0;
@@ -40,13 +47,33 @@
 }
 
 .paragraph--type--operations-message .view-operations-message .views-field-title a,
-.paragraph--type--organic-groups .view .views-field-title a {
+.paragraph--type--organic-groups .view .group-name-title {
   color: #00335b;
   text-decoration: none;
   font-weight: 500;
 }
 
 .paragraph--type--operations-message .view-operations-message .views-field-title a:hover,
-.paragraph--type--organic-groups .view .views-field-title a:hover {
+.paragraph--type--organic-groups .view .group-name-title:hover {
   text-decoration: underline;
+}
+
+.paragraph--type--organic-groups .view .subscribe-group-btn {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 0.35rem 0.85rem;
+  background-color: #00335b;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.paragraph--type--organic-groups .view .subscribe-group-btn:hover {
+  background-color: #002644;
+  color: #fff;
+  text-decoration: none;
 }

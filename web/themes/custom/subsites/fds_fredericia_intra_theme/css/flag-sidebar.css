@@ -22,6 +22,16 @@
   margin: 0;
 }
 
+.flag-sidebar-block .sidebar-block::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 20px;
+  height: 140%;
+  transform: translateY(-50%);
+}
+
 .flag-sidebar-block .sidebar-bookmark-icon,
 .flag-sidebar-block .sidebar-shortcut-icon,
 .flag-sidebar-block .sidebar-unread-icon {
@@ -57,6 +67,9 @@
 .flag-sidebar-block .sidebar-block.is-open .sidebar-bookmark-icon,
 .flag-sidebar-block .sidebar-block.is-open .sidebar-shortcut-icon,
 .flag-sidebar-block .sidebar-block.is-open .sidebar-unread-icon,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-bookmark-icon,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-shortcut-icon,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-unread-icon,
 .flag-sidebar-block .sidebar-bookmark-icon:focus-visible,
 .flag-sidebar-block .sidebar-shortcut-icon:focus-visible,
 .flag-sidebar-block .sidebar-unread-icon:focus-visible {
@@ -110,17 +123,6 @@
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
 
-.flag-sidebar-block .sidebar-bookmark-list::before,
-.flag-sidebar-block .sidebar-shortcut-list::before,
-.flag-sidebar-block .sidebar-unread-list::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -16px;
-  width: 16px;
-  height: 100%;
-}
-
 .flag-sidebar-block .sidebar-block:hover .sidebar-bookmark-list,
 .flag-sidebar-block .sidebar-block:hover .sidebar-shortcut-list,
 .flag-sidebar-block .sidebar-block:hover .sidebar-unread-list,
@@ -129,7 +131,10 @@
 .flag-sidebar-block .sidebar-block:focus-within .sidebar-unread-list,
 .flag-sidebar-block .sidebar-block.is-open .sidebar-bookmark-list,
 .flag-sidebar-block .sidebar-block.is-open .sidebar-shortcut-list,
-.flag-sidebar-block .sidebar-block.is-open .sidebar-unread-list {
+.flag-sidebar-block .sidebar-block.is-open .sidebar-unread-list,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-bookmark-list,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-shortcut-list,
+.flag-sidebar-block .sidebar-block.is-hover .sidebar-unread-list {
   max-height: none;
   opacity: 1;
   visibility: visible;

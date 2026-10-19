@@ -25,6 +25,24 @@
           });
         });
 
+        root.querySelectorAll('.sidebar-block').forEach((block) => {
+          let closeTimer;
+
+          const setHover = (isHovered) => {
+            window.clearTimeout(closeTimer);
+            if (isHovered) {
+              block.classList.add('is-hover');
+              return;
+            }
+            closeTimer = window.setTimeout(() => {
+              block.classList.remove('is-hover');
+            }, 400);
+          };
+
+          block.addEventListener('mouseenter', () => setHover(true));
+          block.addEventListener('mouseleave', () => setHover(false));
+        });
+
         document.addEventListener('click', (event) => {
           if (!root.contains(event.target)) {
             closeAll();

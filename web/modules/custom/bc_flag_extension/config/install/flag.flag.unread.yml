@@ -5,7 +5,8 @@ dependencies:
     - node
 id: unread
 label: unread
-bundles: []
+bundles:
+  - os2web_page
 entity_type: node
 global: false
 flag_short: 'Tilføj til ulæste'

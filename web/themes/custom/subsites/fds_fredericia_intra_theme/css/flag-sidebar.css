@@ -242,6 +242,12 @@
   }
 }
 
+.node .flag-bookmarks,
+.node .flag-shortcut,
+.node .flag-unread {
+  display: none;
+}
+
 .flag-actions-bar {
   position: fixed;
   left: 50%;

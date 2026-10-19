@@ -18,3 +18,49 @@ function fds_fredericia_intra_theme_preprocess_page(array &$variables) {
     $variables['page']['sidebar_second'] = [];
   }
 }
+
+/**
+ * Implements hook_page_bottom().
+ *
+ * Flag links are only printed by templates that output the whole content
+ * render array. Group pages and other custom node templates skip them.
+ * Build the three actions here so every node page can show them.
+ */
+function fds_fredericia_intra_theme_page_bottom(array &$page_bottom) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node instanceof \Drupal\node\NodeInterface) {
+    return;
+  }
+
+  $flag_service = \Drupal::service('flag');
+  $links = [];
+
+  foreach (['bookmarks', 'shortcut', 'unread'] as $flag_id) {
+    $flag = $flag_service->getFlagById($flag_id);
+    if (!$flag || !$flag->status()) {
+      continue;
+    }
+
+    $bundles = $flag->getBundles();
+    if ($bundles && !in_array($node->bundle(), $bundles, TRUE)) {
+      continue;
+    }
+
+    $links[$flag_id] = $flag->getLinkTypePlugin()->getAsFlagLink($flag, $node, 'full');
+  }
+
+  if (!$links) {
+    return;
+  }
+
+  $page_bottom['fredericia_flag_actions'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['flag-actions-source', 'flag-actions-bar'],
+    ],
+    'links' => $links,
+    '#cache' => [
+      'contexts' => ['route', 'user'],
+    ],
+  ];
+}

@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for Bellcom Flag extension.
+ */
+
+/**
+ * Allow bookmark, shortcut and unread flags on every node type.
+ */
+function bc_flag_extension_update_8001() {
+  $flag_storage = \Drupal::entityTypeManager()->getStorage('flag');
+
+  foreach (['bookmarks', 'shortcut', 'unread'] as $flag_id) {
+    $flag = $flag_storage->load($flag_id);
+    if (!$flag) {
+      continue;
+    }
+    $flag->set('bundles', []);
+    $flag->save();
+  }
+}

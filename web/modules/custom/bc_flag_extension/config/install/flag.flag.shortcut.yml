@@ -5,8 +5,7 @@ dependencies:
     - node
 id: shortcut
 label: shortcut
-bundles:
-  - os2web_page
+bundles: []
 entity_type: node
 global: false
 flag_short: 'Tilføj genvej'

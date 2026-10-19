@@ -6,3 +6,9 @@ styles:
       css/columns-25-50-25.css: {}
       css/operations-message.css: {}
       css/content-layout.css: {}
+      css/flag-sidebar.css: {}
+  js:
+    js/flag-sidebar.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

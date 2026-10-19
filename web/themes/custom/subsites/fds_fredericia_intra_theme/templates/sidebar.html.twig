@@ -1,0 +1,60 @@
+{% set classes = [
+  "flag-sidebar-block",
+] %}
+
+{% if config.enabled %}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {% if config.bookmark %}
+  <div class="sidebar-block sidebar-bookmark">
+    <button type="button" class="sidebar-bookmark-icon" aria-expanded="false" aria-controls="flag-sidebar-bookmarks">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 3.2l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.2l-4.7 2.45.9-5.23-3.8-3.7 5.25-.76L12 3.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span class="visually-hidden">Mine bogmærker</span>
+    </button>
+    <div class="sidebar-bookmark-list" id="flag-sidebar-bookmarks">
+      <div class="headline">Mine bogmærker</div>
+      <ul class="sidebar-bookmark-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if config.shortcut %}
+  <div class="sidebar-block sidebar-shortcut">
+    <button type="button" class="sidebar-shortcut-icon" aria-expanded="false" aria-controls="flag-sidebar-shortcuts">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 5l-8.5 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M10 6H6.5A1.5 1.5 0 005 7.5v10A1.5 1.5 0 006.5 19h10a1.5 1.5 0 001.5-1.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="visually-hidden">Smutveje</span>
+    </button>
+    <div class="sidebar-shortcut-list" id="flag-sidebar-shortcuts">
+      <div class="headline">Smutveje</div>
+      <ul class="sidebar-shortcut-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if config.unread %}
+  <div class="sidebar-block sidebar-unread">
+    <button type="button" class="sidebar-unread-icon" aria-expanded="false" aria-controls="flag-sidebar-unread">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6 9.5a6 6 0 1112 0c0 4.2 1.4 5.5 1.4 5.5H4.6S6 13.7 6 9.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M10 18.2a2.2 2.2 0 004 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="unread-number">0</span>
+      <span class="visually-hidden">Ulæste beskeder</span>
+    </button>
+    <div class="sidebar-unread-list" id="flag-sidebar-unread">
+      <div class="headline">Du har <span class="unread-number">0</span> ulæste beskeder</div>
+      <ul class="sidebar-unread-list-ul"></ul>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endif %}

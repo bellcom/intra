@@ -1,0 +1,236 @@
+/**
+ * Fredericia intranet override for the shared flag sidebar
+ * (bogmærker, smutveje, ulæste). Markup classes stay compatible
+ * with bc_flag_extension/js/sidebar.js.
+ */
+
+.flag-sidebar-block {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 302;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flag-sidebar-block .sidebar-block {
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.flag-sidebar-block .sidebar-bookmark-icon,
+.flag-sidebar-block .sidebar-shortcut-icon,
+.flag-sidebar-block .sidebar-unread-icon {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e6e1d8;
+  border-radius: 16px;
+  background: #fff;
+  color: #00335b;
+  box-shadow: 0 10px 24px rgba(0, 51, 91, 0.14);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.flag-sidebar-block .sidebar-bookmark-icon svg,
+.flag-sidebar-block .sidebar-shortcut-icon svg,
+.flag-sidebar-block .sidebar-unread-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.flag-sidebar-block .sidebar-block:hover .sidebar-bookmark-icon,
+.flag-sidebar-block .sidebar-block:hover .sidebar-shortcut-icon,
+.flag-sidebar-block .sidebar-block:hover .sidebar-unread-icon,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-bookmark-icon,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-shortcut-icon,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-unread-icon,
+.flag-sidebar-block .sidebar-bookmark-icon:focus-visible,
+.flag-sidebar-block .sidebar-shortcut-icon:focus-visible,
+.flag-sidebar-block .sidebar-unread-icon:focus-visible {
+  background: #00335b;
+  color: #fff;
+  border-color: #00335b;
+  outline: none;
+}
+
+.flag-sidebar-block .sidebar-unread-icon .unread-number {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  left: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #c30a32;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flag-sidebar-block .sidebar-bookmark-list,
+.flag-sidebar-block .sidebar-shortcut-list,
+.flag-sidebar-block .sidebar-unread-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 12px);
+  width: min(340px, calc(100vw - 96px));
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e6e1d8;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 51, 91, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.flag-sidebar-block .sidebar-bookmark-list::before,
+.flag-sidebar-block .sidebar-shortcut-list::before,
+.flag-sidebar-block .sidebar-unread-list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -16px;
+  width: 16px;
+  height: 100%;
+}
+
+.flag-sidebar-block .sidebar-block:hover .sidebar-bookmark-list,
+.flag-sidebar-block .sidebar-block:hover .sidebar-shortcut-list,
+.flag-sidebar-block .sidebar-block:hover .sidebar-unread-list,
+.flag-sidebar-block .sidebar-block:focus-within .sidebar-bookmark-list,
+.flag-sidebar-block .sidebar-block:focus-within .sidebar-shortcut-list,
+.flag-sidebar-block .sidebar-block:focus-within .sidebar-unread-list,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-bookmark-list,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-shortcut-list,
+.flag-sidebar-block .sidebar-block.is-open .sidebar-unread-list {
+  max-height: none;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+.flag-sidebar-block .headline {
+  height: auto;
+  margin: 0;
+  padding: 16px 18px;
+  background: #00335b;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flag-sidebar-block .headline .unread-number {
+  position: static;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  margin: 0 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: inherit;
+}
+
+.flag-sidebar-block ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  max-height: min(360px, 60vh);
+}
+
+.flag-sidebar-block .bookmark-item-link,
+.flag-sidebar-block .shortcut-item-link,
+.flag-sidebar-block .unread-item-link,
+.flag-sidebar-block .unread-read-all {
+  display: block;
+  margin: 0;
+  padding: 12px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #00335b;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+.flag-sidebar-block .unread-read-all {
+  color: #c30a32;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.flag-sidebar-block .bookmark-item-link:hover,
+.flag-sidebar-block .shortcut-item-link:hover,
+.flag-sidebar-block .unread-item-link:hover,
+.flag-sidebar-block .unread-read-all:hover,
+.flag-sidebar-block .bookmark-item-link:focus-visible,
+.flag-sidebar-block .shortcut-item-link:focus-visible,
+.flag-sidebar-block .unread-item-link:focus-visible,
+.flag-sidebar-block .unread-read-all:focus-visible {
+  background: #f5f7f9;
+  color: #00335b;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-decoration: none;
+  outline: none;
+}
+
+.flag-sidebar-block .unread-read-all:hover,
+.flag-sidebar-block .unread-read-all:focus-visible {
+  color: #c30a32;
+}
+
+@media only screen and (max-width: 740px) {
+  .flag-sidebar-block {
+    right: 12px;
+    gap: 8px;
+  }
+
+  .flag-sidebar-block .sidebar-bookmark-icon,
+  .flag-sidebar-block .sidebar-shortcut-icon,
+  .flag-sidebar-block .sidebar-unread-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+}

@@ -37,6 +37,24 @@
           }
         });
       });
+
+      once('fredericia-flag-actions', '.node--view-mode-full', context).forEach((node) => {
+        const flags = node.querySelectorAll('.flag-bookmarks, .flag-shortcut, .flag-unread');
+        if (!flags.length) {
+          return;
+        }
+
+        let bar = document.querySelector('.flag-actions-bar');
+        if (!bar) {
+          bar = document.createElement('div');
+          bar.className = 'flag-actions-bar';
+          document.body.appendChild(bar);
+        }
+
+        flags.forEach((flag) => {
+          bar.appendChild(flag);
+        });
+      });
     },
   };
 })(Drupal, once);

@@ -1,0 +1,132 @@
+.view-people-search .view-header {
+  margin-bottom: 24px;
+}
+
+.view-people-search .view-header h2 {
+  margin: 0;
+  color: #00335b;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.view-people-search .view-header h2:empty {
+  display: none;
+}
+
+.view-people-search .view-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.view-people-search .phone-book {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  column-gap: 24px;
+  row-gap: 12px;
+  margin: 0;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid #e6e1d8;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 51, 91, 0.08);
+}
+
+.view-people-search .views-field-field-brugerbillede {
+  grid-column: 1;
+  grid-row: 1 / span 12;
+  margin: 0;
+}
+
+.view-people-search .views-field-field-brugerbillede img {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid #e6e1d8;
+}
+
+.view-people-search .phone-book > .views-field:not(.views-field-field-brugerbillede) {
+  grid-column: 2;
+  margin: 0;
+}
+
+.view-people-search .views-field-display-name,
+.view-people-search .views-field-field-displayname,
+.view-people-search .views-field-field-title {
+  display: block;
+}
+
+.view-people-search .views-field-display-name .views-label,
+.view-people-search .views-field-field-displayname .views-label,
+.view-people-search .views-field-field-title .views-label {
+  display: none;
+}
+
+.view-people-search .views-field-display-name .field-content,
+.view-people-search .views-field-field-displayname .field-content {
+  color: #00335b;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.view-people-search .views-field-field-title .field-content {
+  color: #00335b;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.view-people-search .phone-book > .views-field:not(.views-field-field-brugerbillede):not(.views-field-display-name):not(.views-field-field-displayname):not(.views-field-field-title) {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: baseline;
+  padding-top: 8px;
+  border-top: 1px solid #f0eeeb;
+}
+
+.view-people-search .views-label {
+  color: #6c6c6c;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.view-people-search .field-content,
+.view-people-search .field-content a {
+  color: #00335b;
+  font-size: 15px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.view-people-search .field-content a:hover {
+  text-decoration: underline;
+}
+
+.view-people-search .views-field-roles,
+.view-people-search .views-field-login,
+.view-people-search .views-field-access,
+.view-people-search .views-field-field-vis-telefon-i-email-signat {
+  display: none;
+}
+
+@media only screen and (max-width: 740px) {
+  .view-people-search .phone-book {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .view-people-search .views-field-field-brugerbillede,
+  .view-people-search .phone-book > .views-field:not(.views-field-field-brugerbillede) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .view-people-search .phone-book > .views-field:not(.views-field-field-brugerbillede):not(.views-field-display-name):not(.views-field-field-displayname):not(.views-field-field-title) {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

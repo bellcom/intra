@@ -7,8 +7,10 @@ styles:
       css/operations-message.css: {}
       css/content-layout.css: {}
       css/flag-sidebar.css: {}
+      css/people-search.css: {}
   js:
     js/flag-sidebar.js: {}
+    js/people-search.js: {}
   dependencies:
     - core/drupal
     - core/once

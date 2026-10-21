@@ -118,11 +118,13 @@ li::before {
 .region-header__top-navigation {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .region-header__top-navigation .views-exposed-form .form--inline {
   display: flex;
   align-items: center;
+  gap: 8px;
   margin: 0;
 }
 

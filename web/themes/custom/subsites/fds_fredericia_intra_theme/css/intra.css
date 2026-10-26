@@ -162,6 +162,64 @@ li::before {
   color: #00335b !important;
 }
 
+.paragraph--type--os2web-link-list {
+  margin: 0 0 24px;
+  padding: 8px 8px 12px;
+  background: #fff;
+  border: 1px solid #e6e1d8;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 51, 91, 0.08);
+}
+
+.paragraph--type--os2web-link-list .field--name-field-os2web-link-list-heading {
+  margin: 0;
+  padding: 16px 16px 8px;
+  color: #00335b;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.paragraph--type--os2web-link-list .field--name-field-os2web-link-list-link {
+  margin: 0;
+}
+
+.paragraph--type--os2web-link-list .field__item {
+  margin: 0;
+}
+
+.paragraph--type--os2web-link-list .field__item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  color: #00335b;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.paragraph--type--os2web-link-list .field__item a::after {
+  content: "\f105";
+  flex: 0 0 auto;
+  color: #00335b;
+  font-family: FontAwesome;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.paragraph--type--os2web-link-list .field__item a:hover,
+.paragraph--type--os2web-link-list .field__item a:focus {
+  background: #f5f7f9;
+  color: #00335b;
+  text-decoration: none;
+}
+
 .search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-1,
 .search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-2,
 .search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-3 {

@@ -156,3 +156,14 @@ li::before {
   border: 0;
   border-radius: 8px;
 }
+
+.breadcrumb li i,
+.breadcrumb li i::before {
+  color: #00335b;
+}
+
+.search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-1,
+.search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-2,
+.search-megamenu-btns-wrapper .megamenu-burger-button-wrapper .burger-btn .bar-wrapper .bar-3 {
+  background-color: #00335b;
+}

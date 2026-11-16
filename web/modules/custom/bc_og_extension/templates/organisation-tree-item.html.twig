@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * One department in the organisation tree.
+ *
+ * Available variables:
+ * - title: Department title.
+ * - url: URL of the department group.
+ * - members: List of members, each with name and url.
+ * - children: Render arrays for departments under this one.
+ */
+#}
+<li class="organisation-tree__department">
+  <details class="organisation-tree__node">
+    <summary class="organisation-tree__summary">
+      <a href="{{ url }}">{{ title }}</a>
+    </summary>
+    {% if members %}
+      <ul class="organisation-tree__members">
+        {% for member in members %}
+          <li class="organisation-tree__member">
+            <a href="{{ member.url }}">{{ member.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if children %}
+      <ul class="organisation-tree">
+        {% for child in children %}
+          {{ child }}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </details>
+</li>

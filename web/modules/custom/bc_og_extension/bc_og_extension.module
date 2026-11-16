@@ -148,6 +148,19 @@ function bc_og_extension_theme($existing, $type, $theme, $path) {
       'template' => 'views-view-unformatted--organic-groups--latest-groups-block',
       'base hook' => 'view'
     ),
+    'organisation_tree' => array(
+      'variables' => array(
+        'items' => array(),
+      ),
+    ),
+    'organisation_tree_item' => array(
+      'variables' => array(
+        'title' => '',
+        'url' => '',
+        'members' => array(),
+        'children' => array(),
+      ),
+    ),
   );
 
 }

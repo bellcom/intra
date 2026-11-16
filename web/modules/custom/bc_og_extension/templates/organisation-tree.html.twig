@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Nested department tree.
+ *
+ * Available variables:
+ * - items: Render arrays for the root departments.
+ */
+#}
+{% if items %}
+  <ul class="organisation-tree">
+    {% for item in items %}
+      {{ item }}
+    {% endfor %}
+  </ul>
+{% endif %}

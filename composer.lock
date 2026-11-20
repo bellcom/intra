@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b14c7531ff878d563dbf4ab62ee13115",
+    "content-hash": "81058f405a7e6da5c70bc87d9e07f049",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4576,6 +4576,52 @@
             }
         },
         {
+            "name": "drupal/externalauth",
+            "version": "2.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/externalauth.git",
+                "reference": "2.0.15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/externalauth-2.0.15.zip",
+                "reference": "2.0.15",
+                "shasum": "20fe35b605b4c137505d6f3c882690e53f31cd5d"
+            },
+            "require": {
+                "drupal/core": "^10.1 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.15",
+                    "datestamp": "1790861291",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Decabooter",
+                    "homepage": "https://www.drupal.org/u/svendecabooter",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Helper module to authenticate users using an external site / service and storing identification details",
+            "homepage": "https://drupal.org/project/externalauth",
+            "support": {
+                "source": "https://git.drupalcode.org/project/externalauth",
+                "issues": "https://www.drupal.org/project/issues/externalauth"
+            }
+        },
+        {
             "name": "drupal/extlink",
             "version": "2.0.5",
             "source": {
@@ -6328,6 +6374,81 @@
             }
         },
         {
+            "name": "drupal/key",
+            "version": "1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/key.git",
+                "reference": "8.x-1.23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/key-8.x-1.23.zip",
+                "reference": "8.x-1.23",
+                "shasum": "275ad00d2f369685741ed395c5384f6f589db4a5"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11 || ^12"
+            },
+            "require-dev": {
+                "drush/drush": ">=9"
+            },
+            "suggest": {
+                "drush/drush": ">=11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.23",
+                    "datestamp": "1793686862",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": ">=9"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "cellar door",
+                    "homepage": "https://www.drupal.org/user/658076"
+                },
+                {
+                    "name": "crashtest_",
+                    "homepage": "https://www.drupal.org/user/261457"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "nerdstein",
+                    "homepage": "https://www.drupal.org/user/1557710"
+                },
+                {
+                    "name": "rlhawk",
+                    "homepage": "https://www.drupal.org/user/352283"
+                }
+            ],
+            "description": "Provides the ability to manage site-wide keys",
+            "homepage": "http://drupal.org/project/key",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/key",
+                "issues": "http://drupal.org/project/key"
+            }
+        },
+        {
             "name": "drupal/libraries",
             "version": "4.1.1",
             "source": {
@@ -6454,6 +6575,40 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/linkit",
                 "issues": "http://drupal.org/project/linkit"
+            }
+        },
+        {
+            "name": "drupal/mailer_transport",
+            "version": "2.0.2",
+            "require": {
+                "drupal/core": "^10.3 || ^11",
+                "drupal/symfony_mailer": "^2"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.2",
+                    "datestamp": "1784974467",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "adamps",
+                    "homepage": "https://www.drupal.org/user/2650563"
+                }
+            ],
+            "description": "Configuration UI for Symfony Mailer Transports",
+            "homepage": "https://www.drupal.org/project/symfony_mailer",
+            "support": {
+                "source": "https://git.drupalcode.org/project/symfony_mailer"
             }
         },
         {
@@ -10071,6 +10226,121 @@
             }
         },
         {
+            "name": "drupal/symfony_mailer",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/symfony_mailer.git",
+                "reference": "2.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/symfony_mailer-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "abf2c701aac43d73157b9d935155b25d0dc878e5"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11",
+                "drupal/mailer_transport": "*",
+                "html2text/html2text": "^4.0.1",
+                "symfony/mailer": "^6.0 || ^7.0",
+                "tijsverkoyen/css-to-inline-styles": "^2.2"
+            },
+            "require-dev": {
+                "drupal/commerce": "^3",
+                "drupal/mailer_policy": "*",
+                "drupal/simplenews": "^4.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.2",
+                    "datestamp": "1784974467",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^11"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "adamps",
+                    "homepage": "https://www.drupal.org/user/2650563"
+                }
+            ],
+            "description": "Mailer Plus",
+            "homepage": "https://www.drupal.org/project/symfony_mailer",
+            "support": {
+                "source": "https://git.drupalcode.org/project/symfony_mailer"
+            }
+        },
+        {
+            "name": "drupal/symfony_mailer_ms_graph",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/symfony_mailer_ms_graph.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/symfony_mailer_ms_graph-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "7c16d5b432bda894a24f498d32b73bf8d0ce596e"
+            },
+            "require": {
+                "drupal/core": "^10.1 || ^11 || ^12",
+                "drupal/key": "^1.22",
+                "drupal/mailer_transport": "*",
+                "drupal/symfony_mailer": "^2.0",
+                "symfony/http-client": "^6.4"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1790856175",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\symfony_mailer_ms_graph\\": "src/"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "kabeermsn",
+                    "homepage": "https://www.drupal.org/user/3604231"
+                },
+                {
+                    "name": "mugesh.s",
+                    "homepage": "https://www.drupal.org/user/3728005"
+                }
+            ],
+            "description": "Microsoft Graph email transport for Symfony Mailer, supporting Application and Delegated authentication, backed by the Key module and Drupal State API.",
+            "homepage": "https://www.drupal.org/project/symfony_mailer_ms_graph",
+            "support": {
+                "source": "https://git.drupalcode.org/project/symfony_mailer_ms_graph"
+            }
+        },
+        {
             "name": "drupal/tamper",
             "version": "1.0.0",
             "source": {
@@ -11985,6 +12255,44 @@
                 }
             ],
             "time": "2025-12-05T14:53:09+00:00"
+        },
+        {
+            "name": "html2text/html2text",
+            "version": "4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtibben/html2text.git",
+                "reference": "3b443cbe302b52eb5806a21a9dbd79524203970a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtibben/html2text/zipball/3b443cbe302b52eb5806a21a9dbd79524203970a",
+                "reference": "3b443cbe302b52eb5806a21a9dbd79524203970a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4|^9.0"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance",
+                "symfony/polyfill-mbstring": "If you can't install ext-mbstring"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Html2Text\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Converts HTML to formatted plain text",
+            "support": {
+                "issues": "https://github.com/mtibben/html2text/issues",
+                "source": "https://github.com/mtibben/html2text/tree/4.3.2"
+            },
+            "time": "2024-08-20T02:43:29+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -16538,6 +16846,75 @@
             "time": "2026-11-03T21:47:07+00:00"
         },
         {
+            "name": "symfony/css-selector",
+            "version": "v7.4.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "4cdbb4a575111d771791339a9d5231155918f699"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/4cdbb4a575111d771791339a9d5231155918f699",
+                "reference": "4cdbb4a575111d771791339a9d5231155918f699",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Converts CSS selectors to XPath expressions",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/css-selector/tree/v7.4.22"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-10-18T14:39:27+00:00"
+        },
+        {
             "name": "symfony/dependency-injection",
             "version": "v7.4.23",
             "source": {
@@ -17144,6 +17521,186 @@
                 }
             ],
             "time": "2026-11-02T10:56:49+00:00"
+        },
+        {
+            "name": "symfony/http-client",
+            "version": "v6.4.50",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client.git",
+                "reference": "ede6aedd50f56088b6114038884a586a4c6c7054"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/ede6aedd50f56088b6114038884a586a4c6c7054",
+                "reference": "ede6aedd50f56088b6114038884a586a4c6c7054",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/log": "^1|^2|^3",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/http-client-contracts": "~3.4.4|^3.5.2",
+                "symfony/polyfill-php83": "^1.29",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "php-http/discovery": "<1.15",
+                "symfony/http-foundation": "<6.3"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "1.0",
+                "symfony/http-client-implementation": "3.0"
+            },
+            "require-dev": {
+                "amphp/amp": "^2.5",
+                "amphp/http-client": "^4.2.1",
+                "amphp/http-tunnel": "^1.0",
+                "amphp/socket": "^1.1",
+                "guzzlehttp/promises": "^1.4|^2.0",
+                "nyholm/psr7": "^1.0",
+                "php-http/httplug": "^1.0|^2.0",
+                "psr/http-client": "^1.0",
+                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/messenger": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/stopwatch": "^5.4|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpClient\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "http"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/http-client/tree/v6.4.50"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-04T08:16:31+00:00"
+        },
+        {
+            "name": "symfony/http-client-contracts",
+            "version": "v3.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "f9f94260f787446c6fd430b2ae1969fe41ae1ba8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/f9f94260f787446c6fd430b2ae1969fe41ae1ba8",
+                "reference": "f9f94260f787446c6fd430b2ae1969fe41ae1ba8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\HttpClient\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to HTTP clients",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/http-client-contracts/tree/v3.8.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-10-04T15:04:25+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -19630,6 +20187,61 @@
                 }
             ],
             "time": "2026-11-04T08:27:22+00:00"
+        },
+        {
+            "name": "tijsverkoyen/css-to-inline-styles",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
+                "reference": "f0292ccf0ec75843d65027214426b6b163b48b41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/f0292ccf0ec75843d65027214426b6b163b48b41",
+                "reference": "f0292ccf0ec75843d65027214426b6b163b48b41",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": "^7.4 || ^8.0",
+                "symfony/css-selector": "^5.4 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^8.5.21 || ^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TijsVerkoyen\\CssToInlineStyles\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tijs Verkoyen",
+                    "email": "css_to_inline_styles@verkoyen.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
+            "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
+            "support": {
+                "issues": "https://github.com/tijsverkoyen/CssToInlineStyles/issues",
+                "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.4.0"
+            },
+            "time": "2025-12-02T11:56:42+00:00"
         },
         {
             "name": "twig/html-extra",
@@ -24216,75 +24828,6 @@
                 }
             ],
             "time": "2026-11-01T07:00:22+00:00"
-        },
-        {
-            "name": "symfony/css-selector",
-            "version": "v7.4.22",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/css-selector.git",
-                "reference": "4cdbb4a575111d771791339a9d5231155918f699"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/4cdbb4a575111d771791339a9d5231155918f699",
-                "reference": "4cdbb4a575111d771791339a9d5231155918f699",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\CssSelector\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Jean-François Simon",
-                    "email": "jeanfrancois.simon@sensiolabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Converts CSS selectors to XPath expressions",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.4.22"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-10-18T14:39:27+00:00"
         },
         {
             "name": "symfony/dom-crawler",
